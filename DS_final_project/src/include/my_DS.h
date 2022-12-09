@@ -3,7 +3,9 @@
 #include <sstream>
 #include <string>
 #include <climits>
-
+#define station_max_num 1000 //暫時設定的，不然要把整個map都跑過一次才知道 = =
+#define bike_max_num 10000
+#define user_max_num 100000
 using namespace std;
 
 // A structure to represent a
@@ -24,20 +26,12 @@ typedef struct AdjList
     struct AdjListNode *head;
 } adjList;
 
-class my_station //!
-{
-public:
-    int *electric = new int[101]; // will be the pointer point to its min heap, 101th record the heap size
-    int *lady = new int[101];
-    int *road = new int[101];
-};
-
 // Structure to represent a min heap node
-struct MinHeapNode
+typedef struct MinHeapNode
 {
     int v;
     int dist;
-};
+} MNode;
 
 // Structure to represent a min heap
 struct MinHeap
@@ -51,7 +45,7 @@ struct MinHeap
 
     // This is needed for decreaseKey()
     int *pos;
-    struct MinHeapNode **array;
+    MNode **array;
 };
 
 // A class for Min Heap
@@ -83,10 +77,10 @@ public:
 
     //!
     struct MinHeap *createMinHeap(int capacity);
-    struct MinHeapNode *newMinHeapNode(int v,
-                                       int dist);
-    void swapMinHeapNode(struct MinHeapNode **a,
-                         struct MinHeapNode **b);
+    MNode *newMinHeapNode(int v,
+                          int dist);
+    void swapMinHeapNode(MNode **a,
+                         MNode **b);
     void minHeapify(struct MinHeap *minHeap,
                     int idx);
     void decreaseKey(struct MinHeap *minHeap,
@@ -98,14 +92,24 @@ public:
     void MinHeapify(int i);
 
     // to extract(remove + return) the root which is the minimum element
-    struct MinHeapNode *my_MinHeap::extractMin(struct MinHeap *
-                                                   minHeap);
+    MNode *my_MinHeap::extractMin(struct MinHeap *
+                                      minHeap);
     bool isInMinHeap(struct MinHeap *minHeap, int v);
     int isEmpty(struct MinHeap *minHeap);
     void printArr(int dist[], int n);
     void printHeapSort(ofstream &ofs);
 
     void dijkstra(Graph &Dgraph, int src);
+};
+
+class my_station //! 每個station可能有多少種type的車?
+//只能從bike_info中得知
+{
+public:
+    MNode **MNode_ptr;
+    //    MNode *electric = new MNode[101]; // will be the pointer point to its min heap, 101th record the heap size
+    // MNode *lady = new MNode[101];
+    // MNode *road = new MNode[101];
 };
 
 class Graph

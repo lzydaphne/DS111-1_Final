@@ -8,10 +8,10 @@ class my_data
 public:
     int get_station_num();
     Graph *read_map();
-    my_station **read_station();
+    my_station **read_bike();
     void read_bike_info();
-    // void read_fee();
     int read_user();
+
     // for fee
     int discount[3]; // electric, lady, road
     int regular[3];
@@ -27,9 +27,7 @@ private:
     int num_end_station; //車站的數字表示法
     int distance;        // required time between stations
     //* for station
-    int station_id;
-    int station_num = 0;
-    string bike_type;
+    int station_num = 0; //總站數
     //* for user
     int user_num = 0;
     int start_time;
@@ -37,4 +35,11 @@ private:
     //* for bike info
     float depreciation;
     int rental_limit;
+    int count_bike_type = 0;
+    //* for bike
+    string bike_type;
+    int bike_id;
+    string station_id;
+    int rental_price;
+    int rental_count;
 };

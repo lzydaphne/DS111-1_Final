@@ -1,7 +1,5 @@
 #include "my_data.h"
 
-#define station_max_num 1000 //暫時設定的，不然要把整個map都跑過一次才知道 = =
-
 /*
  todo 目前計算站數，是直接掃過一次map，有沒有更快的方法?
 */
@@ -108,21 +106,19 @@ void my_data::read_bike_info()
     else
     {
         ifs >> depreciation >> rental_limit;
-
         string s;
-        while (ifs >>)
+        while (std::getline(ifs, s))
         {
-            user_num++;
+            count_bike_type++;
         }
     }
     ifs.close();
-    return user_num;
+    return;
 }
 
-/*
-my_station **my_data::read_station()
+my_station **my_data::read_bike()
 {
-    ifstream ifs("./test_case/station.txt", ios::in);
+    ifstream ifs("../../testcases/case1/bike.txt", ios::in);
     if (!ifs.is_open())
     {
         cout << "Failed to open station file.\n";
@@ -130,14 +126,30 @@ my_station **my_data::read_station()
     }
     else
     {
-        my_station **station_ptr = new my_station *[station_num]; // station_ptr point to an array, and the array will store each station's object pointer
-        while (ifs >> station_id >> num_elec >> num_lady >> num_road)
+        //! 把bike station建好
+        my_station *stations_ptr;
+        for (int i = 0; i < station_num; i++)
         {
-            // add bikes_id into priority queue (inplemented by min heap) respectively
-            my_station *ms = new my_station();
-            my_MinHeap mm_elec(ms->electric, 0); // sent in a pointer point to its min heap (there will be multiple min heap), and the initial heap size
-            my_MinHeap mm_lady(ms->lady, 0);
-            my_MinHeap mm_road(ms->road, 0);
+            my_station station_ptr;
+            stations_ptr[i] = station_ptr;
+            for (int j = 0; j < count_bike_type; j++)
+            {
+                station_ptr.MNode_ptr[j] = new MNode[bike_max_num];
+            }
+        };
+
+        for (int i = 0; i < ; i++)
+        {
+            /* code */
+        }
+
+        while (ifs >> bike_type >> bike_id >> station_id >> rental_price >> rental_count)
+        {
+            // sent in a pointer point to its min heap (there will be multiple min heap), and the initial heap size
+
+            // my_MinHeap mm_elec(ms->electric, 0);
+            // my_MinHeap mm_lady(ms->lady, 0);
+            // my_MinHeap mm_road(ms->road, 0);
             for (int i = 0; i < num_elec; i++)
             {
                 mm_elec.insertKey(station_id * 100 + i);
@@ -157,6 +169,7 @@ my_station **my_data::read_station()
     }
 }
 
+/*
 void my_data::read_fee()
 {
     ifstream ifs("./test_case/fee.txt", ios::in);
