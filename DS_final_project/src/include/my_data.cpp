@@ -127,41 +127,24 @@ my_station **my_data::read_bike()
     else
     {
         //! 把bike station建好
-        my_station *stations_ptr;
+        my_MinHeap **stations_ptr;
         for (int i = 0; i < station_num; i++)
         {
-            my_station station_ptr;
+            my_MinHeap *station_ptr;
             stations_ptr[i] = station_ptr;
             for (int j = 0; j < count_bike_type; j++)
             {
-                station_ptr.MNode_ptr[j] = new MNode[bike_max_num];
+                station_ptr[j].harr = new MNode[bike_max_num];
             }
         };
 
-        for (int i = 0; i < ; i++)
-        {
-            /* code */
-        }
-
         while (ifs >> bike_type >> bike_id >> station_id >> rental_price >> rental_count)
         {
-            // sent in a pointer point to its min heap (there will be multiple min heap), and the initial heap size
+            int num_bike_type = stoi(bike_type.erase(0, 1));
+            int num_station_id = stoi(station_id.erase(0, 1));
 
-            // my_MinHeap mm_elec(ms->electric, 0);
-            // my_MinHeap mm_lady(ms->lady, 0);
-            // my_MinHeap mm_road(ms->road, 0);
-            for (int i = 0; i < num_elec; i++)
-            {
-                mm_elec.insertKey(station_id * 100 + i);
-            }
-            for (int i = 0; i < num_lady; i++)
-            {
-                mm_lady.insertKey(station_id * 100 + i);
-            }
-            for (int i = 0; i < num_road; i++)
-            {
-                mm_road.insertKey(station_id * 100 + i);
-            }
+            stations_ptr[num_bike_type].insertKey();
+
             station_ptr[station_id - 1] = ms; // station id start from 0, storing the station's object pointer
         }
         ifs.close();

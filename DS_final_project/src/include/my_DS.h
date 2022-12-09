@@ -32,11 +32,10 @@ typedef struct MinHeapNode
     int v;
     int dist;
 } MNode;
-
+/*
 // Structure to represent a min heap
-struct MinHeap
+typedef struct MinHeap
 {
-
     // Number of heap nodes present currently
     int size;
 
@@ -46,17 +45,17 @@ struct MinHeap
     // This is needed for decreaseKey()
     int *pos;
     MNode **array;
-};
-
+} MHeap;
+*/
 // A class for Min Heap
 class my_MinHeap
 {
-    int *harr;          // pointer to array of elements in heap
-    int capacity = 100; // maximum possible size of min heap
-    int heap_size = 0;  // Current number of elements in min heap
 public:
+    MNode *harr;                 // pointer to array of elements in heap
+    int capacity = bike_max_num; // maximum possible size of min heap
+    int heap_size = 0;           // Current number of elements in min heap
     // Constructor
-    my_MinHeap(int *bike_type, int my_heap_size)
+    my_MinHeap(MNode *bike_type, int my_heap_size)
     {
         harr = bike_type;
         heap_size = my_heap_size;
@@ -66,19 +65,22 @@ public:
     int left(int i) { return (2 * i + 1); }  // to get index of left child of node at index i
     int right(int i) { return (2 * i + 2); } // to get index of right child of node at index i
 
-    int getMin() { return harr[0]; } // Returns the minimum key (key at root) from min heap
+    MNode getMin() { return harr[0]; } // Returns the minimum key (key at root) from min heap
 
-    void swap(int *x, int *y)
+    void swap(MNode *x, MNode *y)
     {
-        int temp = *x;
+        MNode temp = *x;
         *x = *y;
         *y = temp;
     }
 
     //!
-    struct MinHeap *createMinHeap(int capacity);
+    my_MinHeap *createMinHeap(int capacity);
     MNode *newMinHeapNode(int v,
                           int dist);
+
+    void insertKey(int key);
+
     void swapMinHeapNode(MNode **a,
                          MNode **b);
     void minHeapify(struct MinHeap *minHeap,
@@ -106,7 +108,7 @@ class my_station //! 每個station可能有多少種type的車?
 //只能從bike_info中得知
 {
 public:
-    MNode **MNode_ptr;
+    my_MinHeap *MHeap_ptr;
     //    MNode *electric = new MNode[101]; // will be the pointer point to its min heap, 101th record the heap size
     // MNode *lady = new MNode[101];
     // MNode *road = new MNode[101];

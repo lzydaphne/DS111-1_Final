@@ -122,11 +122,11 @@ void my_MinHeap::dijkstra(Graph &Dgraph, int src)
 
 //! ------------------- Min Heap -------------------
 
-struct MinHeap *my_MinHeap::createMinHeap(int capacity)
+my_MinHeap *my_MinHeap::createMinHeap(int capacity)
 {
-    struct MinHeap *minHeap =
-        (struct MinHeap *)
-            malloc(sizeof(struct MinHeap));
+    my_MinHeap *minHeap =
+        (my_MinHeap *)
+            malloc(sizeof(my_MinHeap));
     minHeap->pos = (int *)malloc(
         capacity * sizeof(int));
     minHeap->size = 0;
@@ -138,8 +138,8 @@ struct MinHeap *my_MinHeap::createMinHeap(int capacity)
     return minHeap;
 }
 
-struct MinHeapNode *my_MinHeap::newMinHeapNode(int v,
-                                               int dist)
+MNode *my_MinHeap::newMinHeapNode(int v,
+                                  int dist)
 {
     struct MinHeapNode *minHeapNode =
         (struct MinHeapNode *)
@@ -148,6 +148,31 @@ struct MinHeapNode *my_MinHeap::newMinHeapNode(int v,
     minHeapNode->dist = dist;
     return minHeapNode;
 }
+
+//! -------------------------------
+
+void my_MinHeap::insertKey(int key)
+{
+    if (heap_size == capacity)
+    {
+        cout << "\nOverflow: Could not insertKey\n";
+        return;
+    }
+
+    // First insert the new key at the end
+    heap_size++;
+    int i = heap_size - 1;
+    harr[i] = k;
+
+    // Fix the min heap property if it is violated
+    while (i != 0 && harr[parent(i)] > harr[i])
+    {
+        swap(&harr[i], &harr[parent(i)]);
+        i = parent(i);
+    }
+
+    harr[100] = heap_size;
+};
 
 // A utility function to swap two
 // nodes of min heap.
@@ -159,6 +184,7 @@ void my_MinHeap::swapMinHeapNode(struct MinHeapNode **a,
     *a = *b;
     *b = t;
 }
+
 void my_MinHeap::minHeapify(struct MinHeap *minHeap,
                             int idx)
 {
