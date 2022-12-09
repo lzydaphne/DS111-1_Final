@@ -11,6 +11,7 @@ void basic(string selectedCase)
     int user_num = read_data.read_user();
     int station_num = read_data.get_station_num();
     int revenue_1 = 0;
+
     /*
         string path = "./testcases/" + selectedCase + "/bike_info.txt";
         string line;

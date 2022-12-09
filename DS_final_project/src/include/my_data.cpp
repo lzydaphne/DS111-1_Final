@@ -1,6 +1,6 @@
 #include "my_data.h"
 
-#define station_max_num 100 //暫時設定的，不然要把整個map都跑過一次才知道 = =
+#define station_max_num 1000 //暫時設定的，不然要把整個map都跑過一次才知道 = =
 
 /*
  todo 目前計算站數，是直接掃過一次map，有沒有更快的方法?
@@ -77,6 +77,7 @@ Graph *my_data::read_map()
 
 int my_data::read_user()
 {
+    //	ios::in=>檔案open為輸入模式(istream default)
     ifstream ifs("../../testcases/case1/user.txt", ios::in);
     if (!ifs.is_open())
     {
@@ -87,6 +88,29 @@ int my_data::read_user()
     {
         string s;
         while (std::getline(ifs, s))
+        {
+            user_num++;
+        }
+    }
+    ifs.close();
+    return user_num;
+}
+
+void my_data::read_bike_info()
+{
+    //	ios::in=>檔案open為輸入模式(istream default)
+    ifstream ifs("../../testcases/case1/bike_info.txt", ios::in);
+    if (!ifs.is_open())
+    {
+        cout << "Failed to open user file.\n";
+        return;
+    }
+    else
+    {
+        ifs >> depreciation >> rental_limit;
+
+        string s;
+        while (ifs >>)
         {
             user_num++;
         }
