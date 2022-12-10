@@ -25,6 +25,12 @@
     "string": "cpp",
     "system_error": "cpp",
     "type_traits": "cpp",
-    "typeinfo": "cpp"
+    "typeinfo": "cpp",
+    "xstring": "cpp",
+    "memory": "cpp",
+    "tuple": "cpp",
+    "utility": "cpp",
+    "chrono": "cpp",
+    "xutility": "cpp"
   }
 }

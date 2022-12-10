@@ -44,10 +44,10 @@ void Graph::displayEdges()
 }
 // ! -----------------------------------------------------
 
-int Graph::dijkstra(Graph &Dgraph, int src, int dest)
+int *&Graph::dijkstra(int src, int dest)
 {
     // Get the number of vertices in graph
-    int V = Dgraph.n;
+    int V = n;
 
     // dist values used to pick minimum weight edge in cut
     int *dist = new int[V];
@@ -84,7 +84,7 @@ int Graph::dijkstra(Graph &Dgraph, int src, int dest)
         int u = minHeapNode->v;
 
         // Traverse through all adjacent vertices of u (the extracted vertex) and update their distance values
-        struct AdjListNode *pCrawl = Dgraph.bike_graph_List[u].head;
+        struct AdjListNode *pCrawl = bike_graph_List[u].head;
         // struct AdjListNode *pCrawl = graph->array[u].head;
         while (pCrawl != NULL)
         {
@@ -104,7 +104,7 @@ int Graph::dijkstra(Graph &Dgraph, int src, int dest)
             pCrawl = pCrawl->next;
         }
     }
-    return dist[dest];
+    return dist;
 
     // print the calculated shortest distances
     // printArr(dist, V);
@@ -258,9 +258,9 @@ void graph_MinHeap::printArr(int dist[], int n)
         printf("%d \t\t %d\n", i, dist[i]);
 }*/
 
-//! -------------------bike_MinHeap-------------------
+//! -------------------bike_MaxHeap-------------------
 
-void bike_MinHeap::insertKey(BMNode &newNode)
+void bike_MaxHeap::insertKey(BMNode &newNode)
 {
     if (this->heap_size == capacity)
     {
@@ -275,59 +275,77 @@ void bike_MinHeap::insertKey(BMNode &newNode)
     harr[i].id = newNode.id;
     harr[i].rental_count = newNode.rental_count;
     harr[i].rental_price = newNode.rental_price;
+    // MinHeapify(i);
 
-    // Fix the min heap property if it is violated
-    while (i != 0 && harr[parent(i)].rental_price > harr[i].rental_price)
+    // Fix the max heap property if it is violated
+    while (i != 0 && harr[parent(i)].rental_price < harr[i].rental_price)
     {
-        swap(&harr[i], &harr[parent(i)]);
+        BMNode_swap(&harr[i], &harr[parent(i)]);
         i = parent(i);
     }
 
     // harr[100] = heap_size;
 };
 
-void bike_MinHeap::MinHeapify(int i)
+void bike_MaxHeap::MaxHeapify(int i)
 {
     int l = left(i);
     int r = right(i);
-    int smallest = i;
-    if (l < heap_size && harr[l].rental_price < harr[i].rental_price)
-        smallest = l;
-    if (r < heap_size && harr[r].rental_price < harr[smallest].rental_price)
-        smallest = r;
-    if (smallest != i)
+    int largest = i;
+    if (l < heap_size && harr[l].rental_price > harr[i].rental_price)
+        largest = l;
+    if (r < heap_size && harr[r].rental_price > harr[largest].rental_price)
+        largest = r;
+
+    // 兩邊有相同的rental_price
+    if ((harr[l].rental_price == harr[r].rental_price) && (harr[l].id < harr[r].id))
+        largest = l;
+    else
+        largest = r;
+
+    if (largest != i)
     {
-        swap(&harr[i], &harr[smallest]);
-        MinHeapify(smallest);
+        BMNode_swap(&harr[i], &harr[largest]);
+        MaxHeapify(largest);
     }
 
     // harr[100] = heap_size;
 }
 
 // Method to remove minimum element (or root) from min heap
-int bike_MinHeap::extractMin()
+BMNode bike_MaxHeap::extractMax()
 {
+
+    // 如果沒有想要的車:
     if (heap_size <= 0)
-        return 10000;
+    {
+        BMNode tmp;
+        tmp.rental_price = -10;
+        return tmp;
+    }
     if (heap_size == 1)
     {
         // cout << "about to empty !!!!!!" << endl;
         heap_size--;
         // harr[100] = heap_size; // don't forget to update heap size
-        return harr[0].rental_price;
+        return harr[0];
     }
 
     // Store the minimum value, and remove it from heap
     BMNode root = harr[0];
+    /*
+        // 檢查returned_time < start_time
+        if (root.returned_time < )
+如果該root滿足 returned_time < start_time*/
     harr[0] = harr[heap_size - 1];
     heap_size--;
-    MinHeapify(0);
+    MaxHeapify(0);
 
     // harr[100] = heap_size;
-    return root.rental_price;
+    return root;
 }
 
-bool bike_MinHeap::isEmpty()
+bool bike_MaxHeap::isEmpty()
 {
     // cout << "heap size: " << heap_size << endl;
     if (heap_size == 0)
@@ -336,16 +354,19 @@ bool bike_MinHeap::isEmpty()
         return false;
 }
 
-void bike_MinHeap::printHeapSort(ofstream &ofs_)
+void bike_MaxHeap::printHeapSort(ofstream &ofs_)
 { // use reference to write the same output file in main
     // cout << "heap size: " << heap_size << endl;
-    int min;
+    // int max;
+    BMNode max;
     while (heap_size != 0)
     {
-        min = extractMin();
-        cout << min << " ";
-        ofs_ << min << " ";
+        max = extractMax();
+        cout << max.rental_price << " ";
+        ofs_ << max.rental_price << " ";
     }
     cout << endl;
     ofs_ << endl;
 }
+
+//! -------------------user-------------------

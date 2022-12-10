@@ -63,8 +63,9 @@ Graph *my_data::read_map()
             num_start_station = stoi(start_station.erase(0, 1)); //! remove first char;
             num_end_station = stoi(end_station.erase(0, 1));     //! remove first char;
 
-            graph_ptr->addEdge(num_start_station - 1, num_end_station - 1, distance); // station id start from 0
-            // cout << "start: "<< start_station-1 << " end: " << end_station-1 << " distance: " << distance << "\n";
+            graph_ptr->addEdge(num_start_station, num_end_station, distance); // station id start from 0
+
+            cout << "start: " << num_start_station - 1 << " end: " << num_end_station << " distance: " << distance << "\n";
         }
         // graph_ptr->print_graph();
         // cout << "min distance: " << graph_ptr->dijkstra(0, 5) << endl;
@@ -73,7 +74,7 @@ Graph *my_data::read_map()
     }
 }
 
-int my_data::read_user()
+int my_data::read_user_num()
 {
     //	ios::in=>檔案open為輸入模式(istream default)
     ifstream ifs("../../testcases/case1/user.txt", ios::in);
@@ -92,6 +93,62 @@ int my_data::read_user()
     }
     ifs.close();
     return user_num;
+}
+
+void my_data::read_user()
+{
+    ifstream ifs("../../testcases/case1/user.txt", ios::in);
+    if (!ifs.is_open())
+    {
+        cout << "Failed to open user file.\n";
+        return;
+    }
+    else
+    {
+        all_user_list = new UNode[user_num];
+
+        while (ifs >> user_ID >> AC_bike_type >> start_time >> end_time >> user_start_station >> user_end_station)
+        {
+
+            num_user_ID = stoi(user_ID.erase(0, 1));
+            num_user_start_station = stoi(user_start_station.erase(0, 1));
+            num_user_end_station = stoi(user_end_station.erase(0, 1));
+
+            arr_AC_bike_type = new int[count_bike_type];
+            stringstream ss;
+            ss.str(AC_bike_type);
+            while (ss.good())
+            {
+                string substr;
+                getline(ss, substr, ',');
+                arr_AC_bike_type[arr_index++] = stoi(substr.erase(0, 1));
+            }
+            // test cout
+            cout << "num_user_ID: " << num_user_ID << "\n"
+                 << "station_id: " << station_id << "\n"
+                 << "start_time: " << start_time << "\n"
+                 << "end_time: " << end_time << "\n"
+                 << "num_user_start_station: " << num_user_start_station << "\n"
+                 << "num_user_end_station: " << num_user_end_station
+                 << endl;
+
+            UNode newUNode;
+            newUNode.user_ID = num_user_ID;
+            newUNode.start_time = start_time;
+            newUNode.end_time = end_time;
+            newUNode.user_start_station = num_user_start_station;
+            newUNode.user_end_station = num_user_end_station;
+            // 確保進行deep copy
+            memcpy(newUNode.AC_bike_type, arr_AC_bike_type, arr_index + 1);
+            newUNode.len_AC = arr_index;
+            arr_index = 0; // 歸零
+
+            // 把UNode推到list中
+            all_user_list[all_user_list_idx++] = newUNode;
+        }
+    }
+    ifs.close();
+    return;
 }
 
 void my_data::read_bike_info()
@@ -116,7 +173,7 @@ void my_data::read_bike_info()
     return;
 }
 
-bike_MinHeap **my_data::read_bike()
+bike_MaxHeap **my_data::read_bike()
 {
     ifstream ifs("../../testcases/case1/bike.txt", ios::in);
     if (!ifs.is_open())
@@ -127,15 +184,12 @@ bike_MinHeap **my_data::read_bike()
     else
     {
         //! 把bike station建好
-        bike_MinHeap **stations_ptr;
+        bike_MaxHeap **stations_ptr;
         for (int i = 0; i < station_num; i++)
         {
-            bike_MinHeap *station_ptr;
+            bike_MaxHeap *station_ptr;
             stations_ptr[i] = station_ptr;
-            station_ptr = new bike_MinHeap[count_bike_type];
-
-            /*   for (int j = 0; j < count_bike_type; j++)
-                            station_ptr[j].harr = new MNode[bike_max_num];*/
+            station_ptr = new bike_MaxHeap[count_bike_type];
         };
 
         while (ifs >> bike_type >> bike_id >> station_id >> rental_price >> rental_count)
@@ -154,6 +208,78 @@ bike_MinHeap **my_data::read_bike()
         ifs.close();
         return stations_ptr;
     }
+}
+
+void my_data::merge(UNode *&arr, int p, int q, int r)
+{
+    // Create L ← A[p..q] and M ← A[q+1..r]
+    int n1 = q - p + 1;
+    int n2 = r - q;
+
+    UNode *L = new UNode[n1];
+    UNode *M = new UNode[n2];
+
+    for (int i = 0; i < n1; i++)
+        L[i] = arr[p + i];
+    for (int j = 0; j < n2; j++)
+        M[j] = arr[q + 1 + j];
+
+    // Maintain current index of sub-arrays and main array
+    int i, j, k;
+    i = 0;
+    j = 0;
+    k = p;
+
+    // Until we reach either end of either L or M, pick larger among
+    // elements L and M and place them in the correct position at A[p..r]
+    while (i < n1 && j < n2)
+    {
+        //* sort by start_time
+        if (L[i].start_time < M[j].start_time)
+            arr[k] = L[i++];
+        else if (L[i].start_time > M[j].start_time)
+            arr[k] = M[j++];
+        else
+        {
+            //* sort by user_id
+            if (L[i].user_ID <= M[j].user_ID)
+                arr[k] = L[i++];
+            else
+                arr[k] = M[j++];
+        }
+
+        k++;
+    }
+    // When we run out of elements in either L or M,
+    // pick up the remaining elements and put in A[p..r]
+    while (i < n1)
+        arr[k++] = L[i++];
+
+    while (j < n2)
+        arr[k++] = M[j++];
+}
+void my_data::mergeSort(UNode *&arr, int l, int r)
+{
+    if (l < r)
+    {
+        // m is the point where the array is divided into two subarrays
+        int m = l + (r - l) / 2;
+
+        mergeSort(arr, l, m);
+        mergeSort(arr, m + 1, r);
+
+        // Merge the sorted subarrays
+        merge(arr, l, m, r);
+    }
+}
+void my_data::sort_users()
+{
+    mergeSort(all_user_list, 0, user_num - 1);
+    /* cout << "Sorted array: \n";
+    for (int i = 0; i < size; i++)
+    cout << arr[i] << " ";
+  cout << endl;
+    */
 }
 
 /*
