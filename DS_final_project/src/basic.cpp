@@ -20,9 +20,10 @@ void basic(string selectedCase)
 
     read_data.read_user();
     //! ----------------------start--basic----------------------------
-    ofstream ofs_user, ofs_log;
+    ofstream ofs_user, ofs_log, ofs_status;
     ofs_user.open("user_result.txt", ios::out);
     ofs_log.open("transfer_log.txt", ios::out);
+    ofs_status.open("station_status.txt", ios::out);
     int idx = 0;
 
     // temp variable
@@ -57,18 +58,23 @@ void basic(string selectedCase)
         idx++;
 
         BMNode target;
+        int shortest_path;
         int find = 1; // 有找到符合目標的bike
-        // 不同的AC BIKE TYPE
+                      // 不同的AC BIKE TYPE
+
         for (int i = 0; i < tlen_AC; i++)
         {
-            int shortest_path = -1;
+            shortest_path = -1;
             target = basic_stations[tuser_start_station][i].extractMax();
 
-            if (target.rental_price < 0)
+            if (target.rental_price < 0 || target.rental_count < read_data.rental_limit)
+            {
                 find = 0;
+                continue;
+            }
             // cout << "this station doesn't have bike_type" << endl;
 
-            if (find && target.returned_time > tstart_time)
+            if (target.returned_time > tstart_time)
             {
                 // todo 待優化，這邊先以最保守的方式來拿記憶體空間
                 // 目的是，為了要暫時儲存不符合time資格的max node
@@ -91,48 +97,70 @@ void basic(string selectedCase)
                     basic_stations[tuser_start_station][i].insertKey(store_BMNode[j]);
 
                 tmp_idx = 0; // 歸零
+                if (!find)
+                    continue;
             }
 
-            if (find && target.rental_count < read_data.rental_limit)
+            // 確認上述條件都滿足才計算最短路徑
+            // 已經有紀錄了
+            if (!read_data.shortest_record[tuser_start_station][tuser_end_station])
             {
-                // 確認上述條件都滿足才計算最短路徑
-                // 已經有紀錄了
-                if (!read_data.shortest_record[tuser_start_station][tuser_end_station])
-                {
-                    read_data.shortest_record[tuser_start_station] = basic_graph.dijkstra(tuser_start_station, tuser_end_station);
-                }
-                shortest_path = read_data.shortest_record[tuser_start_station][tuser_end_station];
-
-                if (tstart_time + shortest_path > tend_time)
-                    find = 0;
+                read_data.shortest_record[tuser_start_station] = basic_graph.dijkstra(tuser_start_station, tuser_end_station);
             }
+            shortest_path = read_data.shortest_record[tuser_start_station][tuser_end_station];
 
-            //! start to output
-            stringstream ss;
-            ss << tuser_ID;
-            string user_id = "U" + ss.str();
-            if (find) // 有找到目標車車
+            if (tstart_time + shortest_path > tend_time)
             {
-                // 計算revenue
-                single_revenue = floor(shortest_path * target.rental_price);
-                basic_revenue += single_revenue;
-                target.rental_count++;
-                target.returned_time = read_data.start_time + shortest_path;
-                target.rental_price -= read_data.depreciation;
-
-                int bike_returned_time = tstart_time + shortest_path;
-                target.returned_time = bike_returned_time;
-
-                // output to user_result.txt
-                ofs_user
-                    << user_id << " " << 1 << " " << target.id << " " << tstart_time << " " << bike_returned_time << " " << single_revenue << endl;
-                ofs_log << target.id << " " << tuser_start_station << " " << tuser_end_station << " " << tstart_time << " " << bike_returned_time << " " << user_id << endl;
+                find = 0;
+                continue;
             }
-            else
+
+            //* 比較，不同bike_type之間最高的rental_price
+
+            BMNode compare;
+            if (tlen_AC > 1 && i == 0)
             {
-                ofs_user
-                    << user_id << " " << 0 << " " << 0 << " " << 0 << " " << 0 << " " << 0 << endl;
+                compare.bike_type = target.bike_type;
+                compare.id = target.id;
+                compare.rental_count = target.rental_count;
+                compare.rental_price = target.rental_price;
+                compare.returned_time = target.returned_time;
             }
+            else if (i != 0 && target.rental_price > compare.rental_price)
+            {
+                compare.bike_type = target.bike_type;
+                compare.id = target.id;
+                compare.rental_count = target.rental_count;
+                compare.rental_price = target.rental_price;
+                compare.returned_time = target.returned_time;
+                BMNode *ptr = &target;
+                *ptr = compare; // 把target指向compare
+            }
+        }
+
+        //! start to output
+        stringstream ss;
+        ss << tuser_ID;
+        string user_id = "U" + ss.str();
+        if (find) // 有找到目標車車
+        {
+
+            // 計算revenue
+            single_revenue = floor(shortest_path * target.rental_price);
+            basic_revenue += single_revenue;
+            target.rental_count++;
+            target.rental_price -= read_data.depreciation;
+            target.returned_time = tstart_time + shortest_path;
+
+            // output to user_result.txt
+            ofs_user
+                << user_id << " " << 1 << " " << target.id << " " << tstart_time << " " << target.returned_time << " " << single_revenue << endl;
+            ofs_log << target.id << " " << tuser_start_station << " " << tuser_end_station << " " << tstart_time << " " << target.returned_time << " " << user_id << endl;
+        }
+        else
+        {
+            ofs_user
+                << user_id << " " << 0 << " " << 0 << " " << 0 << " " << 0 << " " << 0 << endl;
         }
     }
 
