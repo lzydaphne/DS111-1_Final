@@ -3,7 +3,7 @@
 #include <sstream>
 #include <string>
 #include <climits>
-#define station_max_num 1000 //暫時設定的，不然要把整個map都跑過一次才知道 = =
+#define station_max_num 1000 // 暫時設定的，不然要把整個map都跑過一次才知道 = =
 #define bike_max_num 10000
 #define user_max_num 100000
 using namespace std;
@@ -21,98 +21,9 @@ typedef struct AdjListNode
 // an adjacency list
 typedef struct AdjList
 {
-
     // Pointer to head node of list
     struct AdjListNode *head;
 } adjList;
-
-// Structure to represent a min heap node
-typedef struct MinHeapNode
-{
-    int v;
-    int dist;
-} MNode;
-/*
-// Structure to represent a min heap
-typedef struct MinHeap
-{
-    // Number of heap nodes present currently
-    int size;
-
-    // Capacity of min heap
-    int capacity;
-
-    // This is needed for decreaseKey()
-    int *pos;
-    MNode **array;
-} MHeap;
-*/
-// A class for Min Heap
-class my_MinHeap
-{
-public:
-    MNode *harr;                 // pointer to array of elements in heap
-    int capacity = bike_max_num; // maximum possible size of min heap
-    int heap_size = 0;           // Current number of elements in min heap
-    // Constructor
-    my_MinHeap(MNode *bike_type, int my_heap_size)
-    {
-        harr = bike_type;
-        heap_size = my_heap_size;
-    }
-
-    int parent(int i) { return (i - 1) / 2; }
-    int left(int i) { return (2 * i + 1); }  // to get index of left child of node at index i
-    int right(int i) { return (2 * i + 2); } // to get index of right child of node at index i
-
-    MNode getMin() { return harr[0]; } // Returns the minimum key (key at root) from min heap
-
-    void swap(MNode *x, MNode *y)
-    {
-        MNode temp = *x;
-        *x = *y;
-        *y = temp;
-    }
-
-    //!
-    my_MinHeap *createMinHeap(int capacity);
-    MNode *newMinHeapNode(int v,
-                          int dist);
-
-    void insertKey(int key);
-
-    void swapMinHeapNode(MNode **a,
-                         MNode **b);
-    void minHeapify(struct MinHeap *minHeap,
-                    int idx);
-    void decreaseKey(struct MinHeap *minHeap,
-                     int v, int dist);
-    // Inserts a new key 'k'
-    void insertKey(int k);
-
-    // to heapify a subtree with the root at given index
-    void MinHeapify(int i);
-
-    // to extract(remove + return) the root which is the minimum element
-    MNode *my_MinHeap::extractMin(struct MinHeap *
-                                      minHeap);
-    bool isInMinHeap(struct MinHeap *minHeap, int v);
-    int isEmpty(struct MinHeap *minHeap);
-    void printArr(int dist[], int n);
-    void printHeapSort(ofstream &ofs);
-
-    void dijkstra(Graph &Dgraph, int src);
-};
-
-class my_station //! 每個station可能有多少種type的車?
-//只能從bike_info中得知
-{
-public:
-    my_MinHeap *MHeap_ptr;
-    //    MNode *electric = new MNode[101]; // will be the pointer point to its min heap, 101th record the heap size
-    // MNode *lady = new MNode[101];
-    // MNode *road = new MNode[101];
-};
 
 class Graph
 {
@@ -139,6 +50,7 @@ public:
     node *newAdjListNode(int dest, int weight);
 
     void addEdge(int source, int dest, int weight);
+    int dijkstra(Graph &Dgraph, int src, int dest);
 
     void displayEdges();
     // {
@@ -150,5 +62,104 @@ public:
     // }
 
     // friend void dijkstra(Graph &Dgraph, int src);
-    friend class my_MinHeap;
+    // friend class my_MinHeap;
+};
+
+//! ----------------------------graph-----------------------------
+// Structure to represent a min heap node
+typedef struct MinHeapNode
+{
+    int v;
+    int dist;
+} MNode;
+
+//! Structure to represent a min heap, for "graph"
+class graph_MinHeap
+{
+    // Number of heap nodes present currently
+    int size = 0;
+
+    // Capacity of min heap
+    int capacity;
+
+    // This is needed for decreaseKey()
+    int *pos;
+    MNode **array;
+
+public:
+    graph_MinHeap(int cap)
+    {
+        capacity = cap;
+        pos = new int[capacity];
+        array = new MNode *[capacity];
+    };
+    // MHeap *createMinHeap(int capacity);
+    MNode *newMinHeapNode(int v,
+                          int dist);
+
+    void swapMinHeapNode(MNode **a,
+                         MNode **b);
+    // to heapify a subtree with the root at given index
+    void minHeapify(int idx);
+    void decreaseKey(int v, int dist);
+
+    // to extract(remove + return) the root which is the minimum element
+    MNode *extractMin();
+    bool isInMinHeap(int v);
+    int isEmpty();
+    // void printArr(int dist[], int n);
+    // void printHeapSort(ofstream &ofs);
+    friend int Graph::dijkstra(Graph &Dgraph, int src, int dest);
+};
+
+//! ----------------------------
+//! A class for Min Heap，for "bike_type"
+typedef struct BMinHeapNode
+{
+    string bike_type;
+    int id;
+    int rental_price;
+    int rental_count;
+} BMNode;
+
+class bike_MinHeap
+{
+public:
+    int capacity = bike_max_num;             // maximum possible size of min heap
+    int heap_size = 0;                       // Current number of elements in min heap
+    BMNode *harr = new BMNode[bike_max_num]; // pointer to array of elements in heap
+    // int *pos = new int[capacity];            // 紀錄每個node的index
+
+    //! 不太需要constructor
+    // my_MinHeap(MNode *bike_type, int my_heap_size)
+
+    int parent(int i) { return (i - 1) / 2; }
+    int left(int i) { return (2 * i + 1); }  // to get index of left child of node at index i
+    int right(int i) { return (2 * i + 2); } // to get index of right child of node at index i
+    BMNode getMin() { return harr[0]; }      // Returns the minimum key (key at root) from min heap
+
+    void swap(BMNode *x, BMNode *y)
+    {
+        BMNode temp = *x;
+        *x = *y;
+        *y = temp;
+    }
+    //!
+
+    //* Inserts a new node "把整個bike_node都丟到heap中，方便比較rental_price和id"
+    void insertKey(BMNode &newNode);
+
+    // to heapify a subtree with the root at given index
+    void MinHeapify(int i);
+    int extractMin();
+
+    bool isEmpty();
+    void printHeapSort(ofstream &ofs);
+};
+
+class my_station //! 每個station可能有多少種type的車?
+// 只能從bike_info中得知
+{
+public:
+    bike_MinHeap *MHeap_ptr;
 };

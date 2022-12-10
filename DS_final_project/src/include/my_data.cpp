@@ -3,7 +3,7 @@
 /*
  todo 目前計算站數，是直接掃過一次map，有沒有更快的方法?
 */
-//計算站數
+// 計算站數
 int my_data::get_station_num()
 {
     ifstream ifs("../../testcases/case1/map.txt", ios::in);
@@ -43,7 +43,7 @@ int my_data::get_station_num()
     return station_num;
 }
 
-//建graph
+// 建graph
 Graph *my_data::read_map()
 {
     // read station data
@@ -127,15 +127,15 @@ my_station **my_data::read_bike()
     else
     {
         //! 把bike station建好
-        my_MinHeap **stations_ptr;
+        bike_MinHeap **stations_ptr;
         for (int i = 0; i < station_num; i++)
         {
-            my_MinHeap *station_ptr;
+            bike_MinHeap *station_ptr;
             stations_ptr[i] = station_ptr;
-            for (int j = 0; j < count_bike_type; j++)
-            {
-                station_ptr[j].harr = new MNode[bike_max_num];
-            }
+            station_ptr = new bike_MinHeap[count_bike_type];
+
+            /*   for (int j = 0; j < count_bike_type; j++)
+                            station_ptr[j].harr = new MNode[bike_max_num];*/
         };
 
         while (ifs >> bike_type >> bike_id >> station_id >> rental_price >> rental_count)
