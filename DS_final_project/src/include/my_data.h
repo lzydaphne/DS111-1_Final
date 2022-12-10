@@ -8,7 +8,7 @@ class my_data
 public:
     int get_station_num();
     Graph *read_map();
-    my_station **read_bike();
+    bike_MinHeap **read_bike();
     void read_bike_info();
     int read_user();
 
@@ -22,12 +22,12 @@ public:
 private:
     //* for map
     string start_station;
-    int num_start_station; //車站的數字表示法
+    int num_start_station; // 車站的數字表示法
     string end_station;
-    int num_end_station; //車站的數字表示法
+    int num_end_station; // 車站的數字表示法
     int distance;        // required time between stations
     //* for station
-    int station_num = 0; //總站數
+    int station_num = 0; // 總站數
     //* for user
     int user_num = 0;
     int start_time;

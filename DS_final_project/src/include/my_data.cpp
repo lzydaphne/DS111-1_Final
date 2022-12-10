@@ -116,7 +116,7 @@ void my_data::read_bike_info()
     return;
 }
 
-my_station **my_data::read_bike()
+bike_MinHeap **my_data::read_bike()
 {
     ifstream ifs("../../testcases/case1/bike.txt", ios::in);
     if (!ifs.is_open())
@@ -143,12 +143,16 @@ my_station **my_data::read_bike()
             int num_bike_type = stoi(bike_type.erase(0, 1));
             int num_station_id = stoi(station_id.erase(0, 1));
 
-            stations_ptr[num_bike_type].insertKey();
+            BMNode tmp;
+            tmp.bike_type = bike_type;
+            tmp.id = bike_id;
+            tmp.rental_price = rental_price;
+            tmp.rental_count = rental_count;
 
-            station_ptr[station_id - 1] = ms; // station id start from 0, storing the station's object pointer
+            stations_ptr[num_station_id][num_bike_type].insertKey(tmp);
         }
         ifs.close();
-        return station_ptr;
+        return stations_ptr;
     }
 }
 

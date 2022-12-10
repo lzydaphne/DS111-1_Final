@@ -143,8 +143,8 @@ MNode *graph_MinHeap::newMinHeapNode(int v,
 // A utility function to swap two
 // nodes of min heap.
 // Needed for min heapify
-void graph_MinHeap::swapMinHeapNode(struct MinHeapNode **a,
-                                    struct MinHeapNode **b)
+void graph_MinHeap::swapMinHeapNode(MNode **a,
+                                    MNode **b)
 {
     struct MinHeapNode *t = *a;
     *a = *b;
