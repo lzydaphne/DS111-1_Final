@@ -145,6 +145,7 @@ void my_data::read_user()
 
             // 把UNode推到list中
             all_user_list[all_user_list_idx++] = newUNode;
+            delete[] arr_AC_bike_type;
         }
     }
     ifs.close();

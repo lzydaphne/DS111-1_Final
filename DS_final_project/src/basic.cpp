@@ -97,6 +97,7 @@ void basic(string selectedCase)
                 // 再一一insert回去
                 for (int j = 0; j < tmp_idx; j++)
                     basic_stations[tuser_start_station][i].insertKey(store_BMNode[j]);
+                delete[] store_BMNode;
 
                 tmp_idx = 0; // 歸零
                 if (!find)
@@ -201,6 +202,8 @@ void basic(string selectedCase)
 
         delete[] Barr;
     }
+
+    delete[] read_data.shortest_record;
 
     /*
 string path = "./testcases/" + selectedCase + "/bike_info.txt";
