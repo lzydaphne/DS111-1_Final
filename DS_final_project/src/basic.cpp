@@ -36,9 +36,9 @@ void basic(string selectedCase)
     int tuser_end_station;
     int tarrive_time;
     // 每個user可以賺的錢
-    int single_revenue;
+    int single_revenue = 0;
 
-    //! 避免重複計算所以用2d array紀錄最短路徑
+    //! 避免重複計算所以用array紀錄最短路徑
     read_data.shortest_record = new int *[station_num];
     // 初始化為NULL
     for (int i = 0; i < station_num; i++)
@@ -72,6 +72,8 @@ void basic(string selectedCase)
                 find = 0;
                 continue;
             }
+
+            find = 1;
             // cout << "this station doesn't have bike_type" << endl;
 
             if (target.returned_time > tstart_time)
@@ -128,13 +130,10 @@ void basic(string selectedCase)
             }
             else if (i != 0 && target.rental_price > compare.rental_price)
             {
-                compare.bike_type = target.bike_type;
-                compare.id = target.id;
-                compare.rental_count = target.rental_count;
-                compare.rental_price = target.rental_price;
-                compare.returned_time = target.returned_time;
-                BMNode *ptr = &target;
-                *ptr = compare; // 把target指向compare
+                //* 把前面已經拿到，但發現rental_price比較小的bike放回去
+                basic_stations[tuser_start_station][i].insertKey(compare);
+                BMNode *ptr = &compare;
+                *ptr = target; // 把compare指向target
             }
         }
 
@@ -144,7 +143,6 @@ void basic(string selectedCase)
         string user_id = "U" + ss.str();
         if (find) // 有找到目標車車
         {
-
             // 計算revenue
             single_revenue = floor(shortest_path * target.rental_price);
             basic_revenue += single_revenue;
@@ -162,6 +160,46 @@ void basic(string selectedCase)
             ofs_user
                 << user_id << " " << 0 << " " << 0 << " " << 0 << " " << 0 << " " << 0 << endl;
         }
+    }
+
+    // output final bike inventory
+    stringstream ss;
+    for (int i = 0; i < read_data.station_num; i++)
+    {
+        ss << i;
+        string station_id = "S" + ss.str();
+
+        int station_size = 0;
+        int Barr_idx = 0;
+
+        for (int j = 0; j < read_data.count_bike_type; i++)
+            station_size += basic_stations[i][j].heap_size;
+
+        BMNode *Barr = new BMNode[station_size];
+        // 把單一station的bike都蒐集起來放在Barr
+        for (int k = 0; k < read_data.count_bike_type; k++)
+        {
+            //* Pointer arithmetic is done in units of the size of the pointer type.
+            BMNode *ptr;
+            ptr = basic_stations[i][k].harr;
+            while (ptr)
+            {
+                Barr[Barr_idx++] = *(ptr);
+                ptr++;
+            }
+        }
+        // 把單一station的bike用ID進行排序小到大
+        read_data.mergeSort(Barr, 0, station_size - 1);
+
+        for (int q = 0; q < station_size; q++)
+        {
+
+            cout << station_id << " " << Barr[q].id << " " << Barr[q].bike_type << " " << Barr[q].rental_price << " " << Barr[q].rental_count << endl;
+
+            ofs_status << station_id << " " << Barr[q].id << " " << Barr[q].bike_type << " " << Barr[q].rental_price << " " << Barr[q].rental_count << endl;
+        }
+
+        delete[] Barr;
     }
 
     /*

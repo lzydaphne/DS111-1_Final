@@ -26,9 +26,12 @@ public:
     void read_bike_info();
     int read_user_num();
     void read_user();
-    void sort_users();                            //* merge sort user by start_time
-    void mergeSort(UNode *&arr, int l, int r);    //* merge sort user by start_time
-    void merge(UNode *&arr, int p, int q, int r); //* merge sort user by start_time
+    void sort_users(); //* merge sort user by start_time
+    // void sort_bikes();                             //* merge sort bike by ID
+    void mergeSort(UNode *&arr, int l, int r);     //* merge sort user by start_time
+    void mergeSort(BMNode *&arr, int l, int r);    //* merge sort bike by ID
+    void merge(UNode *&arr, int p, int q, int r);  //* merge sort user by start_time
+    void merge(BMNode *&arr, int p, int q, int r); //* merge sort bike by ID
 
     //! for fee
     // int discount[3]; // electric, lady, road
