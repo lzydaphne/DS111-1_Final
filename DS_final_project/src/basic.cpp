@@ -37,6 +37,7 @@ void basic(string selectedCase)
     int tarrive_time;
     // 每個user可以賺的錢
     int single_revenue = 0;
+    int shortest_path;
 
     //! 避免重複計算所以用array紀錄最短路徑
     read_data.shortest_record = new int *[station_num];
@@ -57,14 +58,15 @@ void basic(string selectedCase)
         tarrive_time = read_data.all_user_list[idx].arrive_time;
         idx++;
 
-        BMNode target;
-        int shortest_path;
-        int find = 1; // 有找到符合目標的bike
-                      // 不同的AC BIKE TYPE
+        BMNode target; // 符合條件的bike_node
+        single_revenue = 0;
+        int find; // 有找到符合目標的bike
 
+        shortest_path = -1;
+        // 不同的AC BIKE TYPE
         for (int i = 0; i < tlen_AC; i++)
         {
-            shortest_path = -1;
+            find = 1;
             target = basic_stations[tuser_start_station][i].extractMax();
 
             if (target.rental_price < 0 || target.rental_count < read_data.rental_limit)
@@ -73,7 +75,6 @@ void basic(string selectedCase)
                 continue;
             }
 
-            find = 1;
             // cout << "this station doesn't have bike_type" << endl;
 
             if (target.returned_time > tstart_time)
@@ -104,7 +105,7 @@ void basic(string selectedCase)
                     continue;
             }
 
-            // 確認上述條件都滿足才計算最短路徑
+            //* 確認上述條件都滿足才計算最短路徑
             // 已經有紀錄了
             if (!read_data.shortest_record[tuser_start_station][tuser_end_station])
             {
@@ -202,6 +203,8 @@ void basic(string selectedCase)
 
         delete[] Barr;
     }
+    // test
+    cout << "basic_revenue: " << basic_revenue << endl;
 
     delete[] read_data.shortest_record;
 

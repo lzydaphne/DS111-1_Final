@@ -33,11 +33,6 @@ int my_data::get_station_num()
                 station_num++;
             }
         }
-        // string s;
-        // while (std::getline(ifs, s))
-        // {
-        //     edge_num++;
-        // }
     }
     ifs.close();
     return station_num;
