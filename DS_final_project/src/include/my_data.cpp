@@ -229,29 +229,29 @@ void my_data::read_bike()
             stations_ptr[num_station_id][num_bike_type].insertKey(tmp);
         }
         // test output
-        /*      for (int i = 0; i < station_num; i++)
+        for (int i = 0; i < station_num; i++)
+        {
+
+            // cout << "testtest, i: " << i << endl;
+            for (int j = 0; j < count_bike_type; j++)
+            {
+                float tmp = 0;
+
+                while ((tmp = stations_ptr[i][j].extractMax().rental_price) > 0)
                 {
-
-                    // cout << "testtest, i: " << i << endl;
-                    for (int j = 0; j < count_bike_type; j++)
-                    {
-                        float tmp = 0;
-
-                        while ((tmp = stations_ptr[i][j].extractMax().rental_price) > 0)
-                        {
-                            cout
-                                << "bike " << tmp << endl;
-                        }
-                        cout << "final: " << i << " " << j << " " << endl;
-                    }
-                }*/
+                    cout
+                        << "bike " << tmp << endl;
+                }
+                cout << "final: " << i << " " << j << " " << endl;
+            }
+        }
         // cout << "test0000" << endl;
         ifs.close();
         // cout << "test1111" << endl;
         basic_stations = stations_ptr;
         //  return stations_ptr;
     }
-    cout << "wwwwww" << endl;
+    // cout << "wwwwww" << endl;
 }
 
 void my_data::merge(UNode *&arr, int p, int q, int r)
