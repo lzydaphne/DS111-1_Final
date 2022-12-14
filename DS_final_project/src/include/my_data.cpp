@@ -102,7 +102,6 @@ void my_data::read_user()
 {
     string path = "./testcases/" + select + "/user.txt";
     ifstream ifs(path, ios::in);
-    cout << "test0.5" << endl;
     if (!ifs.is_open())
     {
         cout << "Failed to open user file.\n";
@@ -110,21 +109,14 @@ void my_data::read_user()
     }
     else
     {
-        cout << "test0" << endl;
         all_user_list = new UNode[user_num];
-        cout << "test1" << endl;
 
         while (ifs >> user_ID >> AC_bike_type >> start_time >> end_time >> user_start_station >> user_end_station)
         {
-            cout << "test1-1" << endl;
 
             num_user_ID = stoi(user_ID.erase(0, 1));
-            cout << "test1-11" << endl;
             num_user_start_station = stoi(user_start_station.erase(0, 1));
-            cout << "test1-12" << endl;
             num_user_end_station = stoi(user_end_station.erase(0, 1));
-
-            cout << "test1-2" << endl;
 
             arr_AC_bike_type = new int[count_bike_type];
             stringstream ss;
@@ -153,12 +145,16 @@ void my_data::read_user()
             newUNode.user_end_station = num_user_end_station;
             // 確保進行deep copy
             memcpy(newUNode.AC_bike_type, arr_AC_bike_type, arr_index + 1);
+            cout << "test33" << endl;
+
             newUNode.len_AC = arr_index;
             arr_index = 0; // 歸零
 
             // 把UNode推到list中
             all_user_list[all_user_list_idx++] = newUNode;
+            cout << "test44" << endl;
             delete[] arr_AC_bike_type;
+            cout << "test55" << endl;
         }
     }
     ifs.close();
@@ -244,13 +240,10 @@ void my_data::read_bike()
                 cout << "final: " << i << " " << j << " " << endl;
             }
         }
-        // cout << "test0000" << endl;
         ifs.close();
-        // cout << "test1111" << endl;
         basic_stations = stations_ptr;
         //  return stations_ptr;
     }
-    // cout << "wwwwww" << endl;
 }
 
 void my_data::merge(UNode *&arr, int p, int q, int r)
