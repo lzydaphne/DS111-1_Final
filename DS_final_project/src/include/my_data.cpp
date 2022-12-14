@@ -9,9 +9,10 @@ int my_data::get_station_num()
     string path = "../../testcases/" + select + "/map.txt";
     cout << "path: " << path;
     // string path = "../../testcases/case1/map.txt";
-    ifstream ifs(path, ios::in);
+    // ifstream ifs(path, ios::in);
+    ifstream ifs;
     // string file = "map.txt";
-    // ifs.open(file);
+    ifs.open(path);
     if (!ifs.is_open())
     {
         cout << "!!!!Failed to open station file.\n";
