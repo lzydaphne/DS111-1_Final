@@ -76,6 +76,7 @@ int my_data::read_user_num()
     ifstream ifs("../../testcases/case1/user.txt", ios::in);
     if (!ifs.is_open())
     {
+        cout << "gea" << endl;
         cout << "Failed to open user file.\n";
         return 0;
     }
