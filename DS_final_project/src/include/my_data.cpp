@@ -249,7 +249,7 @@ void my_data::read_bike()
         ifs.close();
         // cout << "test1111" << endl;
         basic_stations = stations_ptr;
-        cout << "ttt" << endl;
+        // cout << "ttt" << endl;
         //  return stations_ptr;
     }
 }

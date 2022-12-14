@@ -20,6 +20,7 @@ void basic(string selectedCase)
     Graph basic_graph;
     basic_graph = *(read_data.read_map()); // recieve  object's pointer of graph
     read_data.read_bike();
+    cout << "ttt" << endl;
 
     read_data.read_user();
     //! ----------------------start--basic----------------------------
