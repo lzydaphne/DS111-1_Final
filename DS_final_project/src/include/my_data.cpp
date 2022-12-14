@@ -6,7 +6,7 @@
 // 計算站數
 int my_data::get_station_num()
 {
-    string path = "../../testcases/" + select + "/map.txt";
+    string path = "./testcases/" + select + "/map.txt";
     cout << "path: " << path;
     // string path = "../../testcases/case1/map.txt";
     ifstream ifs(path, ios::in);
