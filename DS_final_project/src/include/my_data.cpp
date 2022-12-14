@@ -191,14 +191,14 @@ void my_data::read_bike_info()
     return;
 }
 
-bike_MaxHeap **my_data::read_bike()
+void my_data::read_bike()
 {
     string path = "./testcases/" + select + "/bike.txt";
     ifstream ifs(path, ios::in);
     if (!ifs.is_open())
     {
         cout << "Failed to open station file.\n";
-        return 0;
+        return;
     }
     else
     {
@@ -245,10 +245,11 @@ bike_MaxHeap **my_data::read_bike()
                         cout << "final: " << i << " " << j << " " << endl;
                     }
                 }*/
-        cout << "test0000" << endl;
+        // cout << "test0000" << endl;
         ifs.close();
-        cout << "test1111" << endl;
-        return stations_ptr;
+        // cout << "test1111" << endl;
+        basic_stations = stations_ptr;
+        //  return stations_ptr;
     }
 }
 
