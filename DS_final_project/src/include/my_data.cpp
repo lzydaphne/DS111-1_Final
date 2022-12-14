@@ -176,6 +176,7 @@ void my_data::read_bike_info()
             count_bike_type++;
         }
     }
+    cout << "count_bike_type: " << count_bike_type << endl;
     ifs.close();
     return;
 }
