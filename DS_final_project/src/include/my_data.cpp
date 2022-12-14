@@ -224,9 +224,12 @@ bike_MaxHeap **my_data::read_bike()
         {
             for (int j = 0; j < count_bike_type; i++)
             {
-
-                cout
-                    << "bike " << stations_ptr[i][j].extractMax().rental_price << endl;
+                int tmp;
+                while (tmp = stations_ptr[i][j].extractMax().rental_price)
+                {
+                    cout
+                        << "bike " << tmp << endl;
+                }
             }
         }
 
