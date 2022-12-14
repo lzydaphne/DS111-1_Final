@@ -233,7 +233,7 @@ bike_MaxHeap **my_data::read_bike()
                     cout
                         << "bike " << tmp << endl;
                 }
-                cout << "final: " << tmp << endl;
+                cout << "final: " << i << " " << j << " " << endl;
             }
             // cout << "testtest" << endl;
         }
