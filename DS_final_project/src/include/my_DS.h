@@ -4,9 +4,9 @@
 #include <string>
 #include <cstring>
 #include <climits>
-#define station_max_num 100 // 暫時設定的，不然要把整個map都跑過一次才知道 = =
-#define bike_max_num 1000
-#define user_max_num 10000
+#define station_max_num 1000 // 暫時設定的，不然要把整個map都跑過一次才知道 = =
+#define bike_max_num 10000
+#define user_max_num 100000
 using namespace std;
 
 // A structure to represent a

@@ -249,9 +249,9 @@ void my_data::read_bike()
         ifs.close();
         // cout << "test1111" << endl;
         basic_stations = stations_ptr;
-        // cout << "ttt" << endl;
         //  return stations_ptr;
     }
+    cout << "wwwwww" << endl;
 }
 
 void my_data::merge(UNode *&arr, int p, int q, int r)
