@@ -44,6 +44,7 @@ int my_data::get_station_num()
 Graph *my_data::read_map()
 {
     // read station data
+    cout << "select: " << select << endl;
     string path = "../../testcases/" + select + "/map.txt";
     ifstream ifs(path, ios::in);
     ifs.open(select);
