@@ -231,6 +231,7 @@ bike_MaxHeap **my_data::read_bike()
                         << "bike " << tmp << endl;
                 }
             }
+            cout << "testtest" << endl;
         }
 
         ifs.close();
