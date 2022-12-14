@@ -72,6 +72,7 @@ Graph *my_data::read_map()
 int my_data::read_user_num()
 {
     //	ios::in=>檔案open為輸入模式(istream default)
+    // ifstream ifs("../../testcases/case1/user.txt", ios::in);
     ifstream ifs("../../testcases/case1/user.txt", ios::in);
     if (!ifs.is_open())
     {
