@@ -222,6 +222,8 @@ bike_MaxHeap **my_data::read_bike()
 
         for (int i = 0; i < station_num; i++)
         {
+
+            cout << "testtest, i: " << i << endl;
             for (int j = 0; j < count_bike_type; j++)
             {
                 float tmp;
