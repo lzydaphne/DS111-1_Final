@@ -213,6 +213,16 @@ bike_MaxHeap **my_data::read_bike()
 
             stations_ptr[num_station_id][num_bike_type].insertKey(tmp);
         }
+        for (int i = 0; i < station_num; i++)
+        {
+            for (int j = 0; j < count_bike_type; i++)
+            {
+
+                cout
+                    << "bike " << stations_ptr[i][j].extractMax().rental_price << endl;
+            }
+        }
+
         ifs.close();
         return stations_ptr;
     }
