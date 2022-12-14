@@ -20,7 +20,7 @@ void basic(string selectedCase)
     Graph basic_graph;
     basic_graph = *(read_data.read_map()); // recieve  object's pointer of graph
     bike_MaxHeap **basic_stations = read_data.read_bike();
-    cout << "test0000" << endl;
+
     read_data.read_user();
     //! ----------------------start--basic----------------------------
     ofstream ofs_user, ofs_log, ofs_status;

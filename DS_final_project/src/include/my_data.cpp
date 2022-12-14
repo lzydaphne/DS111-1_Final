@@ -245,7 +245,7 @@ bike_MaxHeap **my_data::read_bike()
                         cout << "final: " << i << " " << j << " " << endl;
                     }
                 }*/
-
+        cout << "test0000" << endl;
         ifs.close();
         return stations_ptr;
     }
