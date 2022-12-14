@@ -64,7 +64,7 @@ Graph *my_data::read_map()
 
             graph_ptr->addEdge(num_start_station, num_end_station, distance); // station id start from 0
 
-            cout << "start: " << num_start_station - 1 << " end: " << num_end_station << " distance: " << distance << "\n";
+            cout << "start: " << num_start_station << " end: " << num_end_station << " distance: " << distance << "\n";
         }
         // graph_ptr->print_graph();
         // cout << "min distance: " << graph_ptr->dijkstra(0, 5) << endl;
@@ -81,19 +81,17 @@ int my_data::read_user_num()
     ifstream ifs(path, ios::in);
     if (!ifs.is_open())
     {
-        // cout << "gea" << endl;
         cout << "Failed to open user file.\n";
         return 0;
     }
     else
     {
         string s;
-        cout << "aa" << endl;
         while (std::getline(ifs, s))
         {
             // cout << "test" << endl;
             user_num++;
-            cout << "user_num:" << user_num << endl;
+            // cout << "user_num:" << user_num << endl;
         }
     }
     ifs.close();
