@@ -8,11 +8,7 @@ int my_data::get_station_num()
 {
     string path = "./testcases/" + select + "/map.txt";
     cout << "path: " << path;
-    // string path = "../../testcases/case1/map.txt";
     ifstream ifs(path, ios::in);
-    // ifstream ifs;
-    // string file = "map.txt";
-    // ifs.open(path);
     if (!ifs.is_open())
     {
         cout << "  !!!!Failed to open station file.\n";
@@ -49,7 +45,7 @@ Graph *my_data::read_map()
 {
     // read station data
     // cout << "select: " << select << endl;
-    string path = "../../testcases/" + select + "/map.txt";
+    string path = "./testcases/" + select + "/map.txt";
     string file = "map.txt";
     ifstream ifs(path, ios::in);
     ifs.open(file);
@@ -83,7 +79,7 @@ int my_data::read_user_num()
 {
     //	ios::in=>檔案open為輸入模式(istream default)
     // ifstream ifs("../../testcases/case1/user.txt", ios::in);
-    string path = "../../testcases/" + select + "/user.txt";
+    string path = "./testcases/" + select + "/user.txt";
     ifstream ifs(path, ios::in);
     string file = "user.txt";
     ifs.open(file);
@@ -107,7 +103,7 @@ int my_data::read_user_num()
 
 void my_data::read_user()
 {
-    string path = "../../testcases/" + select + "/user.txt";
+    string path = "./testcases/" + select + "/user.txt";
     ifstream ifs(path, ios::in);
     string file = "user.txt";
     ifs.open(file);
@@ -168,7 +164,7 @@ void my_data::read_user()
 void my_data::read_bike_info()
 {
     //	ios::in=>檔案open為輸入模式(istream default)
-    string path = "../../testcases/" + select + "/bike_info.txt";
+    string path = "./testcases/" + select + "/bike_info.txt";
 
     ifstream ifs(path, ios::in);
     string file = "bike_info.txt";
@@ -193,7 +189,7 @@ void my_data::read_bike_info()
 
 bike_MaxHeap **my_data::read_bike()
 {
-    string path = "../../testcases/" + select + "/bike.txt";
+    string path = "./testcases/" + select + "/bike.txt";
     ifstream ifs(path, ios::in);
     string file = "bike.txt";
     ifs.open(file);
