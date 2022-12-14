@@ -203,7 +203,7 @@ void my_data::read_bike()
     else
     {
         //! 把bike station建好
-        bike_MaxHeap **stations_ptr;
+        bike_MaxHeap **stations_ptr = new bike_MaxHeap *[station_num];
         for (int i = 0; i < station_num; i++)
         {
             cout << "station_num: " << station_num << endl;
@@ -231,7 +231,6 @@ void my_data::read_bike()
         // test output
         for (int i = 0; i < station_num; i++)
         {
-
             // cout << "testtest, i: " << i << endl;
             for (int j = 0; j < count_bike_type; j++)
             {
