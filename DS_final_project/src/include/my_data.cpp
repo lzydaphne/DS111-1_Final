@@ -222,7 +222,7 @@ bike_MaxHeap **my_data::read_bike()
 
         for (int i = 0; i < station_num; i++)
         {
-            for (int j = 0; j < count_bike_type; i++)
+            for (int j = 0; j < count_bike_type; j++)
             {
                 int tmp;
                 while ((tmp = stations_ptr[i][j].extractMax().rental_price) > 0)
