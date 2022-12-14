@@ -278,7 +278,7 @@ void my_data::sort_users()
     */
 }
 
-void merge(BMNode *&arr, int p, int q, int r)
+void my_data::merge(BMNode *&arr, int p, int q, int r)
 {
     // Create L ← A[p..q] and M ← A[q+1..r]
     int n1 = q - p + 1;
@@ -321,7 +321,7 @@ void merge(BMNode *&arr, int p, int q, int r)
     delete[] L;
     delete[] M;
 }
-void mergeSort(BMNode *&arr, int l, int r)
+void my_data::mergeSort(BMNode *&arr, int l, int r)
 {
     if (l < r)
     {
