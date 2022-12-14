@@ -76,6 +76,6 @@ public:
     string bike_type;
     int bike_id;
     string station_id;
-    int rental_price;
+    float rental_price;
     int rental_count;
 };
