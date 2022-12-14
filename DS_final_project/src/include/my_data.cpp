@@ -210,9 +210,12 @@ bike_MaxHeap **my_data::read_bike()
             tmp.id = bike_id;
             tmp.rental_price = rental_price;
             tmp.rental_count = rental_count;
+            cout
+                << "num_station_id: " << num_station_id << "num_bike_type: " << num_bike_type << endl;
 
             stations_ptr[num_station_id][num_bike_type].insertKey(tmp);
         }
+
         for (int i = 0; i < station_num; i++)
         {
             for (int j = 0; j < count_bike_type; i++)
