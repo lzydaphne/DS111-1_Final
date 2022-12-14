@@ -92,8 +92,10 @@ int my_data::read_user_num()
     else
     {
         string s;
+        cout << "aa" << endl;
         while (std::getline(ifs, s))
         {
+            cout << "test" << endl;
             user_num++;
             cout << "user_num:" << user_num << endl;
         }
