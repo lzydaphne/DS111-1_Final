@@ -109,16 +109,21 @@ void my_data::read_user()
     }
     else
     {
+        cout << "test0" << endl;
         all_user_list = new UNode[user_num];
+        cout << "test1" << endl;
 
         while (ifs >> user_ID >> AC_bike_type >> start_time >> end_time >> user_start_station >> user_end_station)
         {
+            cout << "test1-1" << endl;
 
             num_user_ID = stoi(user_ID.erase(0, 1));
+            cout << "test1-11" << endl;
             num_user_start_station = stoi(user_start_station.erase(0, 1));
+            cout << "test1-12" << endl;
             num_user_end_station = stoi(user_end_station.erase(0, 1));
 
-            cout << "test" << endl;
+            cout << "test1-2" << endl;
 
             arr_AC_bike_type = new int[count_bike_type];
             stringstream ss;
