@@ -336,7 +336,7 @@ BMNode bike_MaxHeap::extractMax()
         return harr[0];
     }
 
-    // Store the minimum value, and remove it from heap
+    // Store the max value, and remove it from heap
     BMNode root = harr[0];
     /*
         // 檢查returned_time < start_time
@@ -345,6 +345,7 @@ BMNode bike_MaxHeap::extractMax()
     harr[0] = harr[heap_size - 1];
     heap_size--;
     MaxHeapify(0);
+    cout << "root: " << root.rental_price << endl;
 
     // harr[100] = heap_size;
     return root;
