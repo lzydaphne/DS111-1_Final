@@ -118,9 +118,12 @@ void my_data::read_user()
             num_user_start_station = stoi(user_start_station.erase(0, 1));
             num_user_end_station = stoi(user_end_station.erase(0, 1));
 
+            cout << "test" << endl;
+
             arr_AC_bike_type = new int[count_bike_type];
             stringstream ss;
             ss.str(AC_bike_type);
+            cout << "test22" << endl;
             while (ss.good())
             {
                 string substr;
@@ -214,29 +217,28 @@ bike_MaxHeap **my_data::read_bike()
             tmp.id = bike_id;
             tmp.rental_price = rental_price;
             tmp.rental_count = rental_count;
-            cout
-                << "num_station_id: " << num_station_id << "  num_bike_type: " << num_bike_type << endl;
+            /*cout
+                << "num_station_id: " << num_station_id << "  num_bike_type: " << num_bike_type << endl;*/
 
             stations_ptr[num_station_id][num_bike_type].insertKey(tmp);
         }
-
-        for (int i = 0; i < station_num; i++)
-        {
-
-            // cout << "testtest, i: " << i << endl;
-            for (int j = 0; j < count_bike_type; j++)
-            {
-                float tmp = 0;
-
-                while ((tmp = stations_ptr[i][j].extractMax().rental_price) > 0)
+        // test output
+        /*      for (int i = 0; i < station_num; i++)
                 {
-                    cout
-                        << "bike " << tmp << endl;
-                }
-                cout << "final: " << i << " " << j << " " << endl;
-            }
-            // cout << "testtest" << endl;
-        }
+
+                    // cout << "testtest, i: " << i << endl;
+                    for (int j = 0; j < count_bike_type; j++)
+                    {
+                        float tmp = 0;
+
+                        while ((tmp = stations_ptr[i][j].extractMax().rental_price) > 0)
+                        {
+                            cout
+                                << "bike " << tmp << endl;
+                        }
+                        cout << "final: " << i << " " << j << " " << endl;
+                    }
+                }*/
 
         ifs.close();
         return stations_ptr;
