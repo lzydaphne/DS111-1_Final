@@ -95,6 +95,7 @@ int my_data::read_user_num()
         while (std::getline(ifs, s))
         {
             user_num++;
+            cout << "user_num:" << user_num << endl;
         }
     }
     ifs.close();
