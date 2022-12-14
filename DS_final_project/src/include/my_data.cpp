@@ -102,6 +102,7 @@ void my_data::read_user()
 {
     string path = "./testcases/" + select + "/user.txt";
     ifstream ifs(path, ios::in);
+    cout << "test0.5" << endl;
     if (!ifs.is_open())
     {
         cout << "Failed to open user file.\n";
