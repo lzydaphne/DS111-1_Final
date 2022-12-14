@@ -1,4 +1,4 @@
-#include "my_Algo.h"
+#include "my_algo.h"
 
 using namespace std;
 
