@@ -8,7 +8,8 @@ int my_data::get_station_num()
 {
     string path = "../../testcases/" + select + "/map.txt";
     ifstream ifs(path, ios::in);
-    ifs.open(select);
+    string file = "map.txt";
+    ifs.open(file);
     if (!ifs.is_open())
     {
         cout << "Failed to open station file.\n";
@@ -44,10 +45,11 @@ int my_data::get_station_num()
 Graph *my_data::read_map()
 {
     // read station data
-    cout << "select: " << select << endl;
+    // cout << "select: " << select << endl;
     string path = "../../testcases/" + select + "/map.txt";
+    string file = "map.txt";
     ifstream ifs(path, ios::in);
-    ifs.open(select);
+    ifs.open(file);
     if (!ifs.is_open())
     {
         cout << "Failed to open map file.\n";
@@ -80,7 +82,8 @@ int my_data::read_user_num()
     // ifstream ifs("../../testcases/case1/user.txt", ios::in);
     string path = "../../testcases/" + select + "/user.txt";
     ifstream ifs(path, ios::in);
-    ifs.open(select);
+    string file = "user.txt";
+    ifs.open(file);
     if (!ifs.is_open())
     {
         // cout << "gea" << endl;
@@ -103,7 +106,8 @@ void my_data::read_user()
 {
     string path = "../../testcases/" + select + "/user.txt";
     ifstream ifs(path, ios::in);
-    ifs.open(select);
+    string file = "user.txt";
+    ifs.open(file);
     if (!ifs.is_open())
     {
         cout << "Failed to open user file.\n";
@@ -164,7 +168,8 @@ void my_data::read_bike_info()
     string path = "../../testcases/" + select + "/bike_info.txt";
 
     ifstream ifs(path, ios::in);
-    ifs.open(select);
+    string file = "bike_info.txt";
+    ifs.open(file);
     if (!ifs.is_open())
     {
         cout << "Failed to open user file.\n";
@@ -187,7 +192,8 @@ bike_MaxHeap **my_data::read_bike()
 {
     string path = "../../testcases/" + select + "/bike.txt";
     ifstream ifs(path, ios::in);
-    ifs.open(select);
+    string file = "bike.txt";
+    ifs.open(file);
     if (!ifs.is_open())
     {
         cout << "Failed to open station file.\n";
