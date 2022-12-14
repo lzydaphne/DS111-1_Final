@@ -10,6 +10,7 @@ void basic(string selectedCase)
     int basic_revenue = 0;
 
     my_data read_data;
+    read_data.select = selectedCase;
     int user_num = read_data.read_user_num();
     int station_num = read_data.get_station_num();
     read_data.read_bike_info();

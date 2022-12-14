@@ -42,6 +42,8 @@ public:
     int transferring;
 
     // private:
+    //*
+    string select;
     //* for map
     string start_station;
     int num_start_station; // 車站的數字表示法

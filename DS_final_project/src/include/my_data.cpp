@@ -6,7 +6,8 @@
 // 計算站數
 int my_data::get_station_num()
 {
-    ifstream ifs("../../testcases/case1/map.txt", ios::in);
+    string path = "../../testcases/" + select + "/map.txt";
+    ifstream ifs(path, ios::in);
     if (!ifs.is_open())
     {
         cout << "Failed to open station file.\n";
@@ -42,7 +43,8 @@ int my_data::get_station_num()
 Graph *my_data::read_map()
 {
     // read station data
-    ifstream ifs("../../testcases/case1/map.txt", ios::in);
+    string path = "../../testcases/" + select + "/map.txt";
+    ifstream ifs(path, ios::in);
     if (!ifs.is_open())
     {
         cout << "Failed to open map file.\n";
@@ -73,10 +75,11 @@ int my_data::read_user_num()
 {
     //	ios::in=>檔案open為輸入模式(istream default)
     // ifstream ifs("../../testcases/case1/user.txt", ios::in);
-    ifstream ifs("../../testcases/case1/user.txt", ios::in);
+    string path = "../../testcases/" + select + "/user.txt";
+    ifstream ifs(path, ios::in);
     if (!ifs.is_open())
     {
-        cout << "gea" << endl;
+        // cout << "gea" << endl;
         cout << "Failed to open user file.\n";
         return 0;
     }
@@ -94,7 +97,8 @@ int my_data::read_user_num()
 
 void my_data::read_user()
 {
-    ifstream ifs("../../testcases/case1/user.txt", ios::in);
+    string path = "../../testcases/" + select + "/user.txt";
+    ifstream ifs(path, ios::in);
     if (!ifs.is_open())
     {
         cout << "Failed to open user file.\n";
@@ -152,7 +156,9 @@ void my_data::read_user()
 void my_data::read_bike_info()
 {
     //	ios::in=>檔案open為輸入模式(istream default)
-    ifstream ifs("../../testcases/case1/bike_info.txt", ios::in);
+    string path = "../../testcases/" + select + "/bike_info.txt";
+
+    ifstream ifs(path, ios::in);
     if (!ifs.is_open())
     {
         cout << "Failed to open user file.\n";
@@ -173,7 +179,8 @@ void my_data::read_bike_info()
 
 bike_MaxHeap **my_data::read_bike()
 {
-    ifstream ifs("../../testcases/case1/bike.txt", ios::in);
+    string path = "../../testcases/" + select + "/bike.txt";
+    ifstream ifs(path, ios::in);
     if (!ifs.is_open())
     {
         cout << "Failed to open station file.\n";
