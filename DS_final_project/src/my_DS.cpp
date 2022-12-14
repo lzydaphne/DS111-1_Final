@@ -104,7 +104,10 @@ int *&Graph::dijkstra(int src, int dest)
             pCrawl = pCrawl->next;
         }
     }
-    return dist;
+    // todo: warning: reference to local variable dist' returned
+    dist_graph = dist;
+
+    return dist_graph;
 
     // print the calculated shortest distances
     // printArr(dist, V);

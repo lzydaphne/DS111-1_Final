@@ -278,20 +278,6 @@ void my_data::sort_users()
     */
 }
 
-void mergeSort(BMNode *&arr, int l, int r)
-{
-    if (l < r)
-    {
-        // m is the point where the array is divided into two subarrays
-        int m = l + (r - l) / 2;
-
-        mergeSort(arr, l, m);
-        mergeSort(arr, m + 1, r);
-
-        // Merge the sorted subarrays
-        merge(arr, l, m, r);
-    }
-}
 void merge(BMNode *&arr, int p, int q, int r)
 {
     // Create L ← A[p..q] and M ← A[q+1..r]
@@ -335,7 +321,20 @@ void merge(BMNode *&arr, int p, int q, int r)
     delete[] L;
     delete[] M;
 }
+void mergeSort(BMNode *&arr, int l, int r)
+{
+    if (l < r)
+    {
+        // m is the point where the array is divided into two subarrays
+        int m = l + (r - l) / 2;
 
+        mergeSort(arr, l, m);
+        mergeSort(arr, m + 1, r);
+
+        // Merge the sorted subarrays
+        merge(arr, l, m, r);
+    }
+}
 /*
 void my_data::read_fee()
 {

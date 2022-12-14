@@ -31,6 +31,7 @@ class Graph
     // list<node> *adjList;
     int n;
     adjList *bike_graph_List;
+    int *dist_graph;
     // while (!(bike_graph_List[i])->head)
 public:
     Graph()
