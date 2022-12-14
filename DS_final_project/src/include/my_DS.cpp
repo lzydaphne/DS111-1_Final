@@ -296,6 +296,7 @@ void bike_MaxHeap::MaxHeapify(int i)
     int l = left(i);
     int r = right(i);
     int largest = i;
+    cout << l << " " << r << " " << largest << endl;
     if (l < heap_size && harr[l].rental_price > harr[i].rental_price)
         largest = l;
     if (r < heap_size && harr[r].rental_price > harr[largest].rental_price)
@@ -344,8 +345,8 @@ BMNode bike_MaxHeap::extractMax()
 如果該root滿足 returned_time < start_time*/
     harr[0] = harr[heap_size - 1];
     heap_size--;
-    MaxHeapify(0);
     cout << "root: " << root.rental_price << endl;
+    MaxHeapify(0);
 
     // harr[100] = heap_size;
     return root;
