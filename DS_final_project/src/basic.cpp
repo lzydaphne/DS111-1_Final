@@ -217,6 +217,12 @@ void basic(string selectedCase)
         string station_id = "S" + ss.str();
         cout << "here!" << endl;
         station_size = 0;
+        cout << basic_stations[0][0].heap_size << endl;
+        cout << basic_stations[0][1].heap_size << endl;
+        cout << basic_stations[0][2].heap_size << endl;
+        cout << basic_stations[1][0].heap_size << endl;
+        cout << basic_stations[1][1].heap_size << endl;
+        cout << basic_stations[1][2].heap_size << endl;
         for (int j = 0; j < read_data.count_bike_type; j++)
             station_size += basic_stations[i][j].heap_size;
         cout << "station_size: " << station_size << endl;
