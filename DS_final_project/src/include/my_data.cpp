@@ -117,12 +117,10 @@ void my_data::read_user()
             num_user_ID = stoi(user_ID.erase(0, 1));
             num_user_start_station = stoi(user_start_station.erase(0, 1));
             num_user_end_station = stoi(user_end_station.erase(0, 1));
-
+            // todo 陣列大小待優化，不然有很多浪費的空間!
             arr_AC_bike_type = new int[count_bike_type];
             for (int i = 0; i < count_bike_type; i++)
-            {
                 arr_AC_bike_type[i] = -1;
-            }
 
             stringstream ss;
             ss.str(AC_bike_type);
@@ -131,7 +129,6 @@ void my_data::read_user()
                 string substr;
                 getline(ss, substr, ',');
                 arr_AC_bike_type[arr_index++] = stoi(substr.erase(0, 1));
-                cout << "arr_ac " << arr_AC_bike_type[0] << endl;
             }
             // test cout
             cout << "num_user_ID: " << num_user_ID << "\n"
@@ -152,6 +149,7 @@ void my_data::read_user()
             int i = 0;
             newUNode.AC_bike_type = new int[count_bike_type](); // set to 0
 
+            // test output
             while (arr_AC_bike_type[i] != -1)
             {
                 cout
@@ -160,7 +158,6 @@ void my_data::read_user()
             }
 
             memcpy(newUNode.AC_bike_type, arr_AC_bike_type, arr_index + 1);
-            // cout << "test33" << endl;
 
             newUNode.len_AC = arr_index;
             arr_index = 0; // 歸零

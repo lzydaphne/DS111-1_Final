@@ -20,7 +20,6 @@ void basic(string selectedCase)
     Graph basic_graph;
     basic_graph = *(read_data.read_map()); // recieve  object's pointer of graph
     read_data.read_bike();
-    cout << "ttt" << endl;
 
     read_data.read_user();
     //! ----------------------start--basic----------------------------
@@ -61,6 +60,13 @@ void basic(string selectedCase)
         tuser_end_station = read_data.all_user_list[idx].end_time;
         tarrive_time = read_data.all_user_list[idx].arrive_time;
         idx++;
+
+        cout << "tuser_ID: " << tuser_ID << "\n"
+             << "tstart_time: " << tstart_time << "\n"
+             << "tend_time: " << tend_time << "\n"
+             << "tuser_start_station: " << tuser_start_station << "\n"
+             << "tuser_end_station: " << tuser_end_station << "tarrive_time: " << tarrive_time
+             << endl;
 
         BMNode target; // 符合條件的bike_node
         single_revenue = 0;
