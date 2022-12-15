@@ -51,7 +51,7 @@ public:
     node *newAdjListNode(int dest, int weight);
 
     void addEdge(int source, int dest, int weight);
-    void dijkstra(int src, int dest);
+    int *&dijkstra(int src, int dest);
 
     void displayEdges();
     // {
@@ -110,7 +110,7 @@ public:
     int isEmpty();
     // void printArr(int dist[], int n);
     // void printHeapSort(ofstream &ofs);
-    friend void Graph::dijkstra(int src, int dest);
+    friend int *&Graph::dijkstra(int src, int dest);
 };
 
 //! --------------------------bike_MinHeap------------------
