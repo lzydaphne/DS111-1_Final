@@ -105,7 +105,7 @@ int *&Graph::dijkstra(int src, int dest)
 
                 // update distance value in min heap also
                 minHeap.decreaseKey(v, dist[v]);
-                cout << dist[v] << endl;
+                cout << "dist[v]: " << dist[v] << endl;
             }
             pCrawl = pCrawl->next;
         }

@@ -14,14 +14,14 @@ typedef struct AdjListNode
 {
     int dest;
     int weight;
-    struct AdjListNode *next;
+    struct AdjListNode *next = NULL;
 } node;
 
 // A structure to represent an adjacency list
 typedef struct AdjList
 {
     // Pointer to head node of list
-    struct AdjListNode *head;
+    struct AdjListNode *head = NULL;
 } adjList;
 
 class Graph
