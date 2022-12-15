@@ -78,20 +78,19 @@ void basic(string selectedCase)
         // 不同的AC BIKE TYPE
         for (int i = 0; i < tlen_AC; i++)
         {
-            cout << "test" << endl;
+            cout << "test-------------------------------" << endl;
             find = 1;
             target = read_data.basic_stations[tuser_start_station][i].extractMax();
-
-            cout << "target-id " << target.id << "\n"
-                 << "target.rental_price " << target.rental_price << "\ntarget.returned_time " << target.returned_time;
-            cout << "test1" << endl;
 
             if (target.rental_price < 0 || target.rental_count < read_data.rental_limit)
             {
                 find = 0;
+                cout << " no bike / rental limit " << endl;
                 continue;
             }
-            cout << "test2" << endl;
+            cout << "target-id " << target.id << "\n"
+                 << "target.rental_price " << target.rental_price << "\ntarget.returned_time " << target.returned_time;
+            // cout << "test1" << endl;
 
             // cout << "this station doesn't have bike_type" << endl;
 
