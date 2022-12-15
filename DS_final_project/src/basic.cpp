@@ -53,7 +53,8 @@ void basic(string selectedCase)
 
     while (idx < read_data.all_user_list_idx)
     {
-        // read data
+
+                // read data
         tuser_ID = read_data.all_user_list[idx].user_ID;
         tAC_bike_type = read_data.all_user_list[idx].AC_bike_type;
         tlen_AC = read_data.all_user_list[idx].len_AC;
@@ -242,6 +243,8 @@ void basic(string selectedCase)
     cout << "basic_revenue: " << basic_revenue << endl;
 
     delete[] read_data.shortest_record;
+
+    // todo delete all new operation!
 
     /*
 string path = "./testcases/" + selectedCase + "/bike_info.txt";
