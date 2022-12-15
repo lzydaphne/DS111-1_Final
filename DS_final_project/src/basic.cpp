@@ -181,6 +181,8 @@ void basic(string selectedCase)
             }
         }
 
+        cout << "dddddd" << endl;
+
         //! start to output
         stringstream ss;
         ss << tuser_ID;
