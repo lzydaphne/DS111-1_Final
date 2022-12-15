@@ -222,7 +222,7 @@ void basic(string selectedCase)
             station_size += basic_stations[i][j].heap_size;
 
         BMNode *Barr = new BMNode[station_size];
-        // 把單一station的bike都蒐集起來放在Barr
+        //! 把單一station的bike都蒐集起來放在Barr
         for (int k = 0; k < read_data.count_bike_type; k++)
         {
             //* Pointer arithmetic is done in units of the size of the pointer type.
@@ -233,6 +233,7 @@ void basic(string selectedCase)
             {
                 cout << "here!--2222" << endl;
                 Barr[Barr_idx++] = *(ptr);
+                cout << "ptr->id: :" << ptr->id << endl;
                 ptr++;
             }
         }
