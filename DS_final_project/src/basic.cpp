@@ -73,6 +73,8 @@ void basic(string selectedCase)
              << "tuser_end_station: " << tuser_end_station
              << endl;
 
+        cout << "tAC_bike_type: " << tAC_bike_type[0] << endl;
+
         BMNode target; // 符合條件的bike_node
         single_revenue = 0;
         int find; // 有找到符合目標的bike
@@ -87,6 +89,7 @@ void basic(string selectedCase)
             // cout << "tAC_bike_type[i]: " << tAC_bike_type[i] << endl;
             BMNode tmp;
             tmp = basic_stations[tuser_start_station][tAC_bike_type[i]].extractMax();
+
             target.bike_type = tmp.bike_type;
             target.id = tmp.id;
             target.rental_count = tmp.rental_count;
