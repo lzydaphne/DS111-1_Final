@@ -55,6 +55,8 @@ int *&Graph::dijkstra(int src, int dest)
     // minHeap represents set E
     graph_MinHeap minHeap(station_max_num);
 
+    // Initially size of min heap is equal to V
+    minHeap.size = V;
     // cout << "succ " << endl;
 
     // Initialize minheap with all vertices. dist value of all vertices
@@ -71,9 +73,6 @@ int *&Graph::dijkstra(int src, int dest)
     dist[src] = 0;
     minHeap.decreaseKey(src, dist[src]);
 
-    // Initially size of min heap is equal to V
-    minHeap.size = V;
-
     // In the following loop,min heap contains all nodes
     // whose shortest distance is not yet finalized.
     while (!minHeap.isEmpty())
@@ -81,7 +80,7 @@ int *&Graph::dijkstra(int src, int dest)
         // Extract the vertex with
         // minimum distance value
         MNode *minHeapNode = minHeap.extractMin();
-        cout << "minHeapNode:  " << minHeapNode->dist << "  " << minHeapNode->v << endl;
+        cout << "minHeapNode:  " << minHeapNode->v << "  " << minHeapNode->dist << "  " << endl;
 
         // Store the extracted vertex number
         int u = minHeapNode->v;
