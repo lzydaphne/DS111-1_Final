@@ -79,6 +79,9 @@ void basic(string selectedCase)
             cout << "test" << endl;
             find = 1;
             target = read_data.basic_stations[tuser_start_station][i].extractMax();
+
+            cout << "target-id " << target.id << "\n"
+                 << "target.rental_price " << target.rental_price << "target.returned_time " << target.returned_time;
             cout << "test1" << endl;
 
             if (target.rental_price < 0 || target.rental_count < read_data.rental_limit)
