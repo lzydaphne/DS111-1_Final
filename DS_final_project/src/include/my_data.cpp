@@ -131,6 +131,7 @@ void my_data::read_user()
                 arr_AC_bike_type[arr_index++] = stoi(substr.erase(0, 1));
             }
             // test cout
+            /*
             cout << "num_user_ID: " << num_user_ID << "\n"
                  << "station_id: " << station_id << "\n"
                  << "start_time: " << start_time << "\n"
@@ -138,7 +139,7 @@ void my_data::read_user()
                  << "num_user_start_station: " << num_user_start_station << "\n"
                  << "num_user_end_station: " << num_user_end_station
                  << endl;
-
+*/
             UNode newUNode;
             newUNode.user_ID = num_user_ID;
             newUNode.start_time = start_time;
@@ -150,12 +151,13 @@ void my_data::read_user()
             newUNode.AC_bike_type = new int[count_bike_type](); // set to 0
 
             // test output
+            /*
             while (arr_AC_bike_type[i] != -1)
             {
                 cout
                     << "arr_AC_bike_type: " << arr_AC_bike_type[i++] << endl;
-                /* code */
-            }
+        }
+        */
 
             memcpy(newUNode.AC_bike_type, arr_AC_bike_type, arr_index + 1);
 
