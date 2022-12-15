@@ -127,7 +127,7 @@ void my_data::read_user()
                 string substr;
                 getline(ss, substr, ',');
                 arr_AC_bike_type[arr_index++] = stoi(substr.erase(0, 1));
-                cout << "arr_ac " << arr_AC_bike_type[arr_index - 1] << endl;
+                cout << "arr_ac " << arr_AC_bike_type[0] << endl;
             }
             // test cout
             cout << "num_user_ID: " << num_user_ID << "\n"
