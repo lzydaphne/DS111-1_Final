@@ -57,15 +57,15 @@ void basic(string selectedCase)
         tstart_time = read_data.all_user_list[idx].start_time;
         tend_time = read_data.all_user_list[idx].end_time;
         tuser_start_station = read_data.all_user_list[idx].user_start_station;
-        tuser_end_station = read_data.all_user_list[idx].end_time;
-        tarrive_time = read_data.all_user_list[idx].arrive_time;
+        tuser_end_station = read_data.all_user_list[idx].user_end_station;
+        // tarrive_time = read_data.all_user_list[idx].arrive_time;
         idx++;
 
         cout << "tuser_ID: " << tuser_ID << "\n"
              << "tstart_time: " << tstart_time << "\n"
              << "tend_time: " << tend_time << "\n"
              << "tuser_start_station: " << tuser_start_station << "\n"
-             << "tuser_end_station: " << tuser_end_station << "tarrive_time: " << tarrive_time
+             << "tuser_end_station: " << tuser_end_station
              << endl;
 
         BMNode target; // 符合條件的bike_node
@@ -76,14 +76,17 @@ void basic(string selectedCase)
         // 不同的AC BIKE TYPE
         for (int i = 0; i < tlen_AC; i++)
         {
+            cout << "test" << endl;
             find = 1;
             target = read_data.basic_stations[tuser_start_station][i].extractMax();
+            cout << "test1" << endl;
 
             if (target.rental_price < 0 || target.rental_count < read_data.rental_limit)
             {
                 find = 0;
                 continue;
             }
+            cout << "test2" << endl;
 
             // cout << "this station doesn't have bike_type" << endl;
 
@@ -96,6 +99,7 @@ void basic(string selectedCase)
 
                 while (find && target.returned_time > tstart_time)
                 {
+                    cout << "test3" << endl;
                     if (target.rental_price < 0)
                     { // 抽到沒車了
                         find = 0;
@@ -105,6 +109,7 @@ void basic(string selectedCase)
                     target = read_data.basic_stations[tuser_start_station][i].extractMax();
                 }
 
+                cout << "test4" << endl;
                 // 再一一insert回去
                 for (int j = 0; j < tmp_idx; j++)
                     read_data.basic_stations[tuser_start_station][i].insertKey(store_BMNode[j]);
