@@ -229,10 +229,12 @@ void basic(string selectedCase)
             cout << "here!--2" << endl;
             BMNode *ptr;
             ptr = basic_stations[i][k].harr;
+            cout << "ptr: " << ptr << endl;
             while (ptr)
             {
-                cout << "here!--2222" << endl;
+                // cout << "here!--2222" << endl;
                 Barr[Barr_idx++] = *(ptr);
+                cout << "ptr: :" << ptr << endl;
                 cout << "ptr->id: :" << ptr->id << endl;
                 ptr++;
             }
