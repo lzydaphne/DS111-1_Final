@@ -2,6 +2,7 @@
 #include "./include/my_data.h"
 #include <fstream>
 #include <cmath> //round
+using namespace std;
 
 void basic(string selectedCase)
 {
@@ -82,9 +83,9 @@ void basic(string selectedCase)
         // 不同的AC BIKE TYPE
         for (int i = 0; i < tlen_AC; i++)
         {
+            cout << "-----Single station--------------------------" << endl;
             find = 1;
 
-            cout << "-----Single station--------------------------" << endl;
             target = basic_stations[tuser_start_station][tAC_bike_type[i]].extractMax();
 
             //! 這邊才會開始計算bike 的 returned_time
@@ -124,14 +125,14 @@ void basic(string selectedCase)
 
             // cout << "this station doesn't have bike_type" << endl;
 
-            if (target.returned_time > tstart_time)
+            if ((target.returned_time > tstart_time) || (tstart_time + shortest_path > tend_time))
             {
                 // todo 待優化，這邊先以最保守的方式來拿記憶體空間
                 // 目的是，為了要暫時儲存不符合time資格的max node
                 int tmp_idx = 0;
                 BMNode *store_BMNode = new BMNode[bike_max_num];
 
-                while (find && target.returned_time > tstart_time)
+                while (find && (target.returned_time > tstart_time) || (tstart_time + shortest_path > tend_time))
                 {
                     cout << "test3" << endl;
                     if (target.rental_price < 0)
@@ -154,11 +155,11 @@ void basic(string selectedCase)
                     continue;
             }
 
-            if (tstart_time + shortest_path > tend_time)
-            {
-                find = 0;
-                continue;
-            }
+            /* if (tstart_time + shortest_path > tend_time)
+             {
+                 find = 0;
+                 continue;
+             }*/
 
             //* 比較，不同bike_type之間最高的rental_price
 
