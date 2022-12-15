@@ -73,7 +73,6 @@ int *&Graph::dijkstra(int src, int dest)
     dist[src] = 0;
     minHeap.decreaseKey(src, dist[src]);
 
-    cout << "succ -3  " << endl;
     // Initially size of min heap is equal to V
     minHeap.size = V;
 
@@ -81,18 +80,22 @@ int *&Graph::dijkstra(int src, int dest)
     // whose shortest distance is not yet finalized.
     while (!minHeap.isEmpty())
     {
+        cout << "succ -3  " << endl;
         // Extract the vertex with
         // minimum distance value
         MNode *minHeapNode = minHeap.extractMin();
+        cout << "succ -4  " << endl;
 
         // Store the extracted vertex number
         int u = minHeapNode->v;
 
         // Traverse through all adjacent vertices of u (the extracted vertex) and update their distance values
         struct AdjListNode *pCrawl = bike_graph_List[u].head;
+        cout << "succ -5  " << endl;
         // struct AdjListNode *pCrawl = graph->array[u].head;
         while (pCrawl != NULL)
         {
+            cout << "succ -6  " << endl;
             int v = pCrawl->dest;
 
             // If shortest distance to v is not finalized yet, and distance to v
