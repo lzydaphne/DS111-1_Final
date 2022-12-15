@@ -146,7 +146,8 @@ void my_data::read_user()
             // 確保進行deep copy
             int i = 0;
             newUNode.AC_bike_type = new int[count_bike_type](); // set to 0
-            while (arr_AC_bike_type != 0)
+            memset(newUNode.AC_bike_type, -1, count_bike_type);
+            while (arr_AC_bike_type[i] != -1)
             {
                 cout
                     << "arr_AC_bike_type: " << arr_AC_bike_type[i++] << endl;
