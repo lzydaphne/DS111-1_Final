@@ -73,7 +73,7 @@ void basic(string selectedCase)
              << "tuser_end_station: " << tuser_end_station
              << endl;
 
-        cout << "tAC_bike_type: " << tAC_bike_type[0] << endl;
+        // cout << "tAC_bike_type: " << tAC_bike_type[0] << endl;
 
         BMNode target; // 符合條件的bike_node
         single_revenue = 0;
@@ -83,7 +83,7 @@ void basic(string selectedCase)
         // 不同的AC BIKE TYPE
         for (int i = 0; i < tlen_AC; i++)
         {
-            cout << "test-------------------------------" << endl;
+            cout << "-------------------------------" << endl;
             find = 1;
 
             // cout << "tAC_bike_type[i]: " << tAC_bike_type[i] << endl;
@@ -95,6 +95,8 @@ void basic(string selectedCase)
             target.rental_count = tmp.rental_count;
             target.rental_price = tmp.rental_price;
             target.returned_time = tmp.returned_time;
+            cout << "target-id " << target.id << "\n"
+                 << "target.rental_price " << target.rental_price << "\ntarget.returned_time " << target.returned_time;
 
             if (target.rental_price < 0 || target.rental_count < read_data.rental_limit)
             {
@@ -102,8 +104,6 @@ void basic(string selectedCase)
                 cout << " no bike / rental limit " << endl;
                 continue;
             }
-            cout << "target-id " << target.id << "\n"
-                 << "target.rental_price " << target.rental_price << "\ntarget.returned_time " << target.returned_time;
             // cout << "test1" << endl;
 
             // cout << "this station doesn't have bike_type" << endl;
