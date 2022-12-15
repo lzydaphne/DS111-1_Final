@@ -101,11 +101,11 @@ int *&Graph::dijkstra(int src, int dest)
                 dist[u] != INT_MAX &&
                 pCrawl->weight + dist[u] < dist[v])
             {
-                cout << "ger" << endl;
                 dist[v] = dist[u] + pCrawl->weight;
 
                 // update distance value in min heap also
                 minHeap.decreaseKey(v, dist[v]);
+                cout << dist[v] << endl;
             }
             pCrawl = pCrawl->next;
         }
