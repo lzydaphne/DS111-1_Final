@@ -218,7 +218,7 @@ void basic(string selectedCase)
         int station_size = 0;
         int Barr_idx = 0;
 
-        for (int j = 0; j < read_data.count_bike_type; i++)
+        for (int j = 0; j < read_data.count_bike_type; j++)
             station_size += basic_stations[i][j].heap_size;
 
         BMNode *Barr = new BMNode[station_size];
