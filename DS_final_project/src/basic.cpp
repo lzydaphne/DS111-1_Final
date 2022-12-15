@@ -98,7 +98,7 @@ void basic(string selectedCase)
             cout << "target-id " << target.id << "\n"
                  << "target.rental_price " << target.rental_price << "\ntarget.returned_time " << target.returned_time;
 
-            if (target.rental_price < 0 || target.rental_count < read_data.rental_limit)
+            if (target.rental_price < 0 || target.rental_count >= read_data.rental_limit)
             {
                 find = 0;
                 cout << " no bike / rental limit " << endl;
