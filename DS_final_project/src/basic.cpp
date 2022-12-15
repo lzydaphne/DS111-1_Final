@@ -84,7 +84,7 @@ void basic(string selectedCase)
         {
             find = 1;
 
-            cout << "-------------------------------" << endl;
+            cout << "-----Single station--------------------------" << endl;
             target = basic_stations[tuser_start_station][tAC_bike_type[i]].extractMax();
 
             //! 這邊才會開始計算bike 的 returned_time
