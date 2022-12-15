@@ -181,14 +181,13 @@ void basic(string selectedCase)
             }
         }
 
-        cout << "dddddd" << endl;
-
         //! start to output
         stringstream ss;
         ss << tuser_ID;
         string user_id = "U" + ss.str();
         if (find) // 有找到目標車車
         {
+            cout << "find!-------------------------------" << endl;
             // 計算revenue
             single_revenue = floor(shortest_path * target.rental_price);
             basic_revenue += single_revenue;
@@ -203,6 +202,8 @@ void basic(string selectedCase)
         }
         else
         {
+
+            cout << "not find ---------------------" << endl;
             ofs_user
                 << user_id << " " << 0 << " " << 0 << " " << 0 << " " << 0 << " " << 0 << endl;
         }
