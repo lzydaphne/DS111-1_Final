@@ -226,15 +226,16 @@ void basic(string selectedCase)
         for (int k = 0; k < read_data.count_bike_type; k++)
         {
             //* Pointer arithmetic is done in units of the size of the pointer type.
+            cout << "here!--2" << endl;
             BMNode *ptr;
             ptr = basic_stations[i][k].harr;
             while (ptr)
             {
+                cout << "here!--2222" << endl;
                 Barr[Barr_idx++] = *(ptr);
                 ptr++;
             }
         }
-        cout << "here!--2" << endl;
         // 把單一station的bike用ID進行排序小到大
         read_data.mergeSort(Barr, 0, station_size - 1);
         cout << "here!--3" << endl;
