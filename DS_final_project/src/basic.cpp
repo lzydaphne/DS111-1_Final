@@ -86,15 +86,8 @@ void basic(string selectedCase)
             cout << "-------------------------------" << endl;
             find = 1;
 
-            // cout << "tAC_bike_type[i]: " << tAC_bike_type[i] << endl;
-            // BMNode tmp;
-            // tmp = basic_stations[tuser_start_station][tAC_bike_type[i]].extractMax();
             target = basic_stations[tuser_start_station][tAC_bike_type[i]].extractMax();
 
-            // target.bike_type = tmp.bike_type;
-            // target.id = tmp.id;
-            // target.rental_count = tmp.rental_count;
-            // target.rental_price = tmp.rental_price;
             //! 這邊才會開始計算bike 的 returned_time
             // target.returned_time = basic_graph.
 
@@ -112,6 +105,8 @@ void basic(string selectedCase)
                 read_data.shortest_record[tuser_start_station] = basic_graph.dijkstra(tuser_start_station, tuser_end_station);
             }
             shortest_path = read_data.shortest_record[tuser_start_station][tuser_end_station];
+
+            target.returned_time += shortest_path;
 
             cout
                 << "target-id " << target.id << "\n"
