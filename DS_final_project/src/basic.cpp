@@ -213,6 +213,7 @@ void basic(string selectedCase)
     {
         ss << i;
         string station_id = "S" + ss.str();
+        cout << "here!" << endl;
 
         int station_size = 0;
         int Barr_idx = 0;
@@ -233,8 +234,10 @@ void basic(string selectedCase)
                 ptr++;
             }
         }
+        cout << "here!--2" << endl;
         // 把單一station的bike用ID進行排序小到大
         read_data.mergeSort(Barr, 0, station_size - 1);
+        cout << "here!--3" << endl;
 
         for (int q = 0; q < station_size; q++)
         {
