@@ -230,7 +230,7 @@ void basic(string selectedCase)
             BMNode *ptr;
             ptr = basic_stations[i][k].harr;
             cout << "ptr: " << ptr << endl;
-            cout << "size:" << sizeof(ptr) << endl;
+            cout << "size:" << sizeof(BMNode) << endl;
             while (ptr)
             {
                 // cout << "here!--2222" << endl;
