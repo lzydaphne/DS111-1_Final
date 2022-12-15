@@ -19,9 +19,9 @@ void basic(string selectedCase)
 
     Graph basic_graph;
     basic_graph = *(read_data.read_map()); // recieve  object's pointer of graph
-    read_data.read_bike();
+    bike_MaxHeap **basic_stations = read_data.read_bike();
     cout << "-------------------------------test read bike--" << endl;
-    cout << read_data.basic_stations[0][0].extractMax().id << endl;
+    cout << basic_stations[0][0].extractMax().id << endl;
     cout << "-------------------------------test read bike--" << endl;
 
     read_data.read_user();
@@ -83,7 +83,7 @@ void basic(string selectedCase)
         {
             cout << "test-------------------------------" << endl;
             find = 1;
-            target = read_data.basic_stations[tuser_start_station][tAC_bike_type[i]].extractMax();
+            target = basic_stations[tuser_start_station][tAC_bike_type[i]].extractMax();
 
             if (target.rental_price < 0 || target.rental_count < read_data.rental_limit)
             {
@@ -113,13 +113,13 @@ void basic(string selectedCase)
                         break;
                     }
                     store_BMNode[tmp_idx++] = target;
-                    target = read_data.basic_stations[tuser_start_station][i].extractMax();
+                    target = basic_stations[tuser_start_station][i].extractMax();
                 }
 
                 cout << "test4" << endl;
                 // 再一一insert回去
                 for (int j = 0; j < tmp_idx; j++)
-                    read_data.basic_stations[tuser_start_station][i].insertKey(store_BMNode[j]);
+                    basic_stations[tuser_start_station][i].insertKey(store_BMNode[j]);
                 delete[] store_BMNode;
 
                 tmp_idx = 0; // 歸零
@@ -155,7 +155,7 @@ void basic(string selectedCase)
             else if (i != 0 && target.rental_price > compare.rental_price)
             {
                 //* 把前面已經拿到，但發現rental_price比較小的bike放回去
-                read_data.basic_stations[tuser_start_station][i].insertKey(compare);
+                basic_stations[tuser_start_station][i].insertKey(compare);
                 BMNode *ptr = &compare;
                 *ptr = target; // 把compare指向target
             }
@@ -197,7 +197,7 @@ void basic(string selectedCase)
         int Barr_idx = 0;
 
         for (int j = 0; j < read_data.count_bike_type; i++)
-            station_size += read_data.basic_stations[i][j].heap_size;
+            station_size += basic_stations[i][j].heap_size;
 
         BMNode *Barr = new BMNode[station_size];
         // 把單一station的bike都蒐集起來放在Barr
@@ -205,7 +205,7 @@ void basic(string selectedCase)
         {
             //* Pointer arithmetic is done in units of the size of the pointer type.
             BMNode *ptr;
-            ptr = read_data.basic_stations[i][k].harr;
+            ptr = basic_stations[i][k].harr;
             while (ptr)
             {
                 Barr[Barr_idx++] = *(ptr);
