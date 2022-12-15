@@ -235,7 +235,7 @@ void basic(string selectedCase)
             {
                 // cout << "here!--2222" << endl;
                 Barr[Barr_idx++] = *(ptr);
-                ptr++;
+                ptr += sizeof(BMNode);
                 cout << "ptr: :" << ptr << endl;
                 cout << "ptr->id: :" << ptr->id << endl;
             }
