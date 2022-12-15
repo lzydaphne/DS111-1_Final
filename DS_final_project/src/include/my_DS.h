@@ -42,6 +42,7 @@ public:
     Graph(int nodeCount)
     {
         n = nodeCount;
+        cout << "n : " << n << endl;
         // bikeList = new list<node>[n];
         // 指向list head of list
         bike_graph_List = new adjList[n];
