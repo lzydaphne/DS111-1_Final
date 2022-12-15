@@ -87,16 +87,16 @@ void basic(string selectedCase)
             find = 1;
 
             // cout << "tAC_bike_type[i]: " << tAC_bike_type[i] << endl;
-            BMNode tmp;
-            tmp = basic_stations[tuser_start_station][tAC_bike_type[i]].extractMax();
+            // BMNode tmp;
+            // tmp = basic_stations[tuser_start_station][tAC_bike_type[i]].extractMax();
+            target = basic_stations[tuser_start_station][tAC_bike_type[i]].extractMax();
 
-            target.bike_type = tmp.bike_type;
-            target.id = tmp.id;
-            target.rental_count = tmp.rental_count;
-            target.rental_price = tmp.rental_price;
-            target.returned_time = tmp.returned_time;
-            cout << "target-id " << target.id << "\n"
-                 << "target.rental_price " << target.rental_price << "\ntarget.returned_time " << target.returned_time;
+            // target.bike_type = tmp.bike_type;
+            // target.id = tmp.id;
+            // target.rental_count = tmp.rental_count;
+            // target.rental_price = tmp.rental_price;
+            //! 這邊才會開始計算bike 的 returned_time
+            // target.returned_time = basic_graph.
 
             if (target.rental_price < 0 || target.rental_count >= read_data.rental_limit)
             {
@@ -104,6 +104,19 @@ void basic(string selectedCase)
                 cout << " no bike / rental limit " << endl;
                 continue;
             }
+
+            //* 開始計算最短路徑
+            // 已經有紀錄了
+            if (!read_data.shortest_record[tuser_start_station][tuser_end_station])
+            {
+                read_data.shortest_record[tuser_start_station] = basic_graph.dijkstra(tuser_start_station, tuser_end_station);
+            }
+            shortest_path = read_data.shortest_record[tuser_start_station][tuser_end_station];
+
+            cout
+                << "target-id " << target.id << "\n"
+                << "target.rental_price " << target.rental_price << "\ntarget.returned_time " << target.returned_time;
+
             // cout << "test1" << endl;
 
             // cout << "this station doesn't have bike_type" << endl;
@@ -137,14 +150,6 @@ void basic(string selectedCase)
                 if (!find)
                     continue;
             }
-
-            //* 確認上述條件都滿足才計算最短路徑
-            // 已經有紀錄了
-            if (!read_data.shortest_record[tuser_start_station][tuser_end_station])
-            {
-                read_data.shortest_record[tuser_start_station] = basic_graph.dijkstra(tuser_start_station, tuser_end_station);
-            }
-            shortest_path = read_data.shortest_record[tuser_start_station][tuser_end_station];
 
             if (tstart_time + shortest_path > tend_time)
             {
