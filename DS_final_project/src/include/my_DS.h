@@ -110,7 +110,7 @@ public:
     int isEmpty();
     // void printArr(int dist[], int n);
     // void printHeapSort(ofstream &ofs);
-    friend int *&Graph::dijkstra(int src, int dest);
+    friend void Graph::dijkstra(int src, int dest);
 };
 
 //! --------------------------bike_MinHeap------------------
