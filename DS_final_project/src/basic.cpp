@@ -234,10 +234,12 @@ void basic(string selectedCase)
             while (ptr)
             {
                 // cout << "here!--2222" << endl;
-                Barr[Barr_idx++] = *(ptr);
-                ptr++;
                 cout << "ptr: :" << ptr << endl;
                 cout << "ptr->id: :" << ptr->id << endl;
+                Barr[Barr_idx++] = *(ptr);
+                ptr++;
+                // cout << "ptr: :" << ptr << endl;
+                // cout << "ptr->id: :" << ptr->id << endl;
             }
         }
         // 把單一station的bike用ID進行排序小到大
