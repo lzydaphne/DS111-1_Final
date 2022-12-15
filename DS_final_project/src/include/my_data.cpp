@@ -199,7 +199,7 @@ void my_data::read_bike_info()
     return;
 }
 
-void my_data::read_bike()
+bike_MaxHeap **my_data::read_bike()
 {
     string path = "./testcases/" + select + "/bike.txt";
     ifstream ifs(path, ios::in);
@@ -237,6 +237,7 @@ void my_data::read_bike()
             stations_ptr[num_station_id][num_bike_type].insertKey(tmp);
         }
         // test output
+        /*
         for (int i = 0; i < station_num; i++)
         {
             // cout << "testtest, i: " << i << endl;
@@ -251,10 +252,10 @@ void my_data::read_bike()
                 }
                 cout << "final: " << i << " " << j << " " << endl;
             }
-        }
+        }*/
         ifs.close();
-        basic_stations = stations_ptr;
-        //  return stations_ptr;
+        // basic_stations = stations_ptr;
+        return stations_ptr;
     }
 }
 

@@ -22,7 +22,7 @@ class my_data
 public:
     int get_station_num();
     Graph *read_map();
-    void read_bike();
+    bike_MaxHeap **read_bike();
     void read_bike_info();
     int read_user_num();
     void read_user();
@@ -79,5 +79,5 @@ public:
     float rental_price;
     int rental_count;
     //*for bikes
-    bike_MaxHeap **basic_stations;
+    // bike_MaxHeap **basic_stations;
 };
