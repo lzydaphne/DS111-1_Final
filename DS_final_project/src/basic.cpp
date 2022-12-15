@@ -209,17 +209,17 @@ void basic(string selectedCase)
 
     // output final bike inventory
     stringstream ss;
+    int Barr_idx = 0;
+    int station_size = 0;
     for (int i = 0; i < read_data.station_num; i++)
     {
         ss << i;
         string station_id = "S" + ss.str();
         cout << "here!" << endl;
-
-        int station_size = 0;
-        int Barr_idx = 0;
-
+        station_size = 0;
         for (int j = 0; j < read_data.count_bike_type; j++)
             station_size += basic_stations[i][j].heap_size;
+        cout << "station_size: " << station_size << endl;
 
         BMNode *Barr = new BMNode[station_size];
         //! 把單一station的bike都蒐集起來放在Barr
@@ -235,7 +235,7 @@ void basic(string selectedCase)
             {
                 // cout << "here!--2222" << endl;
                 Barr[Barr_idx++] = *(ptr);
-                ptr += sizeof(BMNode);
+                ptr++;
                 cout << "ptr: :" << ptr << endl;
                 cout << "ptr->id: :" << ptr->id << endl;
             }
@@ -251,7 +251,7 @@ void basic(string selectedCase)
 
             ofs_status << station_id << " " << Barr[q].id << " " << Barr[q].bike_type << " " << Barr[q].rental_price << " " << Barr[q].rental_count << endl;
         }
-
+        Barr_idx = 0;
         delete[] Barr;
     }
     // test
