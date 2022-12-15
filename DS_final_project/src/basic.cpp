@@ -82,9 +82,9 @@ void basic(string selectedCase)
         // 不同的AC BIKE TYPE
         for (int i = 0; i < tlen_AC; i++)
         {
-            // cout << "-------------------------------" << endl;
             find = 1;
 
+            cout << "-------------------------------" << endl;
             target = basic_stations[tuser_start_station][tAC_bike_type[i]].extractMax();
 
             //! 這邊才會開始計算bike 的 returned_time
