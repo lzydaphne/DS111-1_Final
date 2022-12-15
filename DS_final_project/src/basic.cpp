@@ -17,7 +17,7 @@ void basic(string selectedCase)
     cout << "station_num: " << station_num << endl;
     read_data.read_bike_info();
 
-    Graph basic_graph;
+    Graph basic_graph(station_num);
     basic_graph = *(read_data.read_map()); // recieve  object's pointer of graph
     bike_MaxHeap **basic_stations = read_data.read_bike();
     // cout << basic_stations[4][1].extractMax().id << endl;
@@ -54,7 +54,7 @@ void basic(string selectedCase)
     while (idx < read_data.all_user_list_idx)
     {
 
-                // read data
+        // read data
         tuser_ID = read_data.all_user_list[idx].user_ID;
         tAC_bike_type = read_data.all_user_list[idx].AC_bike_type;
         tlen_AC = read_data.all_user_list[idx].len_AC;

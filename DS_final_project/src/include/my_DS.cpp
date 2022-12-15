@@ -78,7 +78,6 @@ int *&Graph::dijkstra(int src, int dest)
     // whose shortest distance is not yet finalized.
     while (!minHeap.isEmpty())
     {
-        cout << "succ -3  " << endl;
         // Extract the vertex with
         // minimum distance value
         MNode *minHeapNode = minHeap.extractMin();
