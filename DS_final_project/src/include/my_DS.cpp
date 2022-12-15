@@ -87,7 +87,7 @@ int *&Graph::dijkstra(int src, int dest)
         int u = minHeapNode->v;
 
         // Traverse through all adjacent vertices of u (the extracted vertex) and update their distance values
-        struct AdjListNode *pCrawl = bike_graph_List[u].head;
+        node *pCrawl = bike_graph_List[u].head;
 
         // struct AdjListNode *pCrawl = graph->array[u].head;
         while (pCrawl != NULL)

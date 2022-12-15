@@ -9,8 +9,7 @@
 #define user_max_num 100000
 using namespace std;
 
-// A structure to represent a
-// node in adjacency list
+// A structure to represent a node in adjacency list
 typedef struct AdjListNode
 {
     int dest;
@@ -18,8 +17,7 @@ typedef struct AdjListNode
     struct AdjListNode *next;
 } node;
 
-// A structure to represent
-// an adjacency list
+// A structure to represent an adjacency list
 typedef struct AdjList
 {
     // Pointer to head node of list
@@ -42,7 +40,7 @@ public:
     Graph(int nodeCount)
     {
         n = nodeCount;
-        cout << "n : " << n << endl;
+        // cout << "n : " << n << endl;
         // bikeList = new list<node>[n];
         // 指向list head of list
         bike_graph_List = new adjList[n];
@@ -71,8 +69,8 @@ public:
 // Structure to represent a min heap node
 typedef struct MinHeapNode
 {
-    int v;
-    int dist;
+    int v;    // 站名
+    int dist; // 距離
 } MNode;
 
 //! Structure to represent a min heap, for "graph"

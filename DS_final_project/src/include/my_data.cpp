@@ -168,7 +168,6 @@ void my_data::read_user()
             all_user_list[all_user_list_idx++] = newUNode;
             // cout << "test44" << endl;
             delete[] arr_AC_bike_type;
-            cout << "-------------------------------" << endl;
         }
     }
     ifs.close();
