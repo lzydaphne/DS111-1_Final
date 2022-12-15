@@ -20,9 +20,7 @@ void basic(string selectedCase)
     Graph basic_graph;
     basic_graph = *(read_data.read_map()); // recieve  object's pointer of graph
     bike_MaxHeap **basic_stations = read_data.read_bike();
-    cout << "-------------------------------test read bike--" << endl;
     // cout << basic_stations[4][1].extractMax().id << endl;
-    cout << "-------------------------------test read bike--" << endl;
 
     read_data.read_user();
     read_data.sort_users();
@@ -105,6 +103,7 @@ void basic(string selectedCase)
                 read_data.shortest_record[tuser_start_station] = basic_graph.dijkstra(tuser_start_station, tuser_end_station);
             }
             shortest_path = read_data.shortest_record[tuser_start_station][tuser_end_station];
+            cout << " shortest_path " << shortest_path << endl;
 
             target.returned_time += shortest_path;
 

@@ -44,7 +44,7 @@ void Graph::displayEdges()
 }
 // ! -----------------------------------------------------
 
-int *&Graph::dijkstra(int src, int dest)
+void Graph::dijkstra(int src, int dest)
 {
     // Get the number of vertices in graph
     int V = n;
@@ -107,7 +107,7 @@ int *&Graph::dijkstra(int src, int dest)
     // todo: warning: reference to local variable dist' returned
     dist_graph = dist;
 
-    return dist_graph;
+    // return dist_graph;
 
     // print the calculated shortest distances
     // printArr(dist, V);

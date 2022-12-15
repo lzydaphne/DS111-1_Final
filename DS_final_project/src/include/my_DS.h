@@ -51,7 +51,7 @@ public:
     node *newAdjListNode(int dest, int weight);
 
     void addEdge(int source, int dest, int weight);
-    int *&dijkstra(int src, int dest);
+    void dijkstra(int src, int dest);
 
     void displayEdges();
     // {
