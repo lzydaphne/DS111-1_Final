@@ -83,6 +83,8 @@ void basic(string selectedCase)
         {
             cout << "test-------------------------------" << endl;
             find = 1;
+
+            cout << "tAC_bike_type[i]: " << tAC_bike_type[i] << endl;
             target = basic_stations[tuser_start_station][tAC_bike_type[i]].extractMax();
 
             if (target.rental_price < 0 || target.rental_count < read_data.rental_limit)
