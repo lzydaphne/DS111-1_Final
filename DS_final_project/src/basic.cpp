@@ -119,9 +119,7 @@ void basic(string selectedCase)
 
             cout
                 << "target-id " << target.id << "\n"
-                << "target.rental_price " << target.rental_price << "\ntarget.returned_time " << target.returned_time;
-
-            // cout << "test1" << endl;
+                << "target.rental_price " << target.rental_price << "\ntarget.returned_time " << target.returned_time << endl;
 
             // cout << "this station doesn't have bike_type" << endl;
 
