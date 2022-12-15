@@ -111,6 +111,7 @@ int *&Graph::dijkstra(int src, int dest)
             }
             pCrawl = pCrawl->next;
         }
+        cout << "succ -6  " << endl;
     }
     // todo: warning: reference to local variable dist' returned
     dist_graph = dist;
