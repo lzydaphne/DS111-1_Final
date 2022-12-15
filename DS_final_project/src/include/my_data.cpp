@@ -121,7 +121,6 @@ void my_data::read_user()
             arr_AC_bike_type = new int[count_bike_type];
             stringstream ss;
             ss.str(AC_bike_type);
-            // cout << "test22" << endl;
             while (ss.good())
             {
                 string substr;
@@ -145,16 +144,18 @@ void my_data::read_user()
             newUNode.user_start_station = num_user_start_station;
             newUNode.user_end_station = num_user_end_station;
             // 確保進行deep copy
-            cout << "arr_AC_bike_type: " << arr_AC_bike_type[0];
-            // memcpy(newUNode.AC_bike_type, arr_AC_bike_type, arr_index + 1);
-            cout << "test33" << endl;
+            newUNode.AC_bike_type = new int[count_bike_type];
+            cout
+                << "arr_AC_bike_type: " << arr_AC_bike_type[0];
+            memcpy(newUNode.AC_bike_type, arr_AC_bike_type, arr_index + 1);
+            // cout << "test33" << endl;
 
             newUNode.len_AC = arr_index;
             arr_index = 0; // 歸零
 
             // 把UNode推到list中
             all_user_list[all_user_list_idx++] = newUNode;
-            cout << "test44" << endl;
+            // cout << "test44" << endl;
             delete[] arr_AC_bike_type;
             cout << "test55" << endl;
         }
