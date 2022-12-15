@@ -101,9 +101,15 @@ void basic(string selectedCase)
             // 已經有紀錄了
             if (!read_data.shortest_record[tuser_start_station])
             {
-                cout << "test" << endl;
+                // cout << "test" << endl;
                 read_data.shortest_record[tuser_start_station] = basic_graph.dijkstra(tuser_start_station, tuser_end_station);
-                cout << "test finish" << endl;
+                int idx = 0;
+                while (!read_data.shortest_record[tuser_start_station][idx])
+                {
+                    cout << "dij: " << read_data.shortest_record[tuser_start_station][idx] << endl;
+                    idx++;
+                }
+
                 // read_data.shortest_record[tuser_start_station] = basic_graph.Graph::dist_graph;
             }
             shortest_path = read_data.shortest_record[tuser_start_station][tuser_end_station];
