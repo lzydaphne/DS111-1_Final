@@ -206,7 +206,7 @@ bike_MaxHeap **my_data::read_bike()
     if (!ifs.is_open())
     {
         cout << "Failed to open station file.\n";
-        return;
+        return NULL;
     }
     else
     {
