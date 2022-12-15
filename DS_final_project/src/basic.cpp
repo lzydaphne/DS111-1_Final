@@ -231,7 +231,7 @@ void basic(string selectedCase)
             ptr = basic_stations[i][k].harr;
             cout << "ptr: " << ptr << endl;
             cout << "size:" << sizeof(BMNode) << endl;
-            while (ptr->id < 0)
+            while (ptr->id > 0)
             {
                 // cout << "here!--2222" << endl;
                 cout << "ptr: :" << ptr << endl;
