@@ -83,10 +83,8 @@ void basic(string selectedCase)
         {
             cout << "-------------------------------" << endl;
             find = 1;
-            cout << "--target " << endl;
 
             target = basic_stations[tuser_start_station][tAC_bike_type[i]].extractMax();
-            cout << "--target finish" << endl;
 
             //! 這邊才會開始計算bike 的 returned_time
             // target.returned_time = basic_graph.
@@ -100,7 +98,7 @@ void basic(string selectedCase)
 
             //* 開始計算最短路徑
             // 已經有紀錄了
-            if (!read_data.shortest_record[tuser_start_station][tuser_end_station])
+            if (!read_data.shortest_record[tuser_start_station])
             {
                 cout << "test" << endl;
                 read_data.shortest_record[tuser_start_station] = basic_graph.dijkstra(tuser_start_station, tuser_end_station);
