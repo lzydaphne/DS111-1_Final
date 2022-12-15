@@ -85,7 +85,13 @@ void basic(string selectedCase)
             find = 1;
 
             // cout << "tAC_bike_type[i]: " << tAC_bike_type[i] << endl;
-            target = basic_stations[tuser_start_station][tAC_bike_type[i]].extractMax();
+            BMNode tmp;
+            tmp = basic_stations[tuser_start_station][tAC_bike_type[i]].extractMax();
+            target.bike_type = tmp.bike_type;
+            target.id = tmp.id;
+            target.rental_count = tmp.rental_count;
+            target.rental_price = tmp.rental_price;
+            target.returned_time = tmp.returned_time;
 
             if (target.rental_price < 0 || target.rental_count < read_data.rental_limit)
             {
