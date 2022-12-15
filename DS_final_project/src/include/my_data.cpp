@@ -119,6 +119,7 @@ void my_data::read_user()
             num_user_end_station = stoi(user_end_station.erase(0, 1));
 
             arr_AC_bike_type = new int[count_bike_type];
+            memset(arr_AC_bike_type, -1, count_bike_type);
             stringstream ss;
             ss.str(AC_bike_type);
             while (ss.good())
@@ -146,7 +147,7 @@ void my_data::read_user()
             // 確保進行deep copy
             int i = 0;
             newUNode.AC_bike_type = new int[count_bike_type](); // set to 0
-            memset(newUNode.AC_bike_type, -1, count_bike_type);
+
             while (arr_AC_bike_type[i] != -1)
             {
                 cout
