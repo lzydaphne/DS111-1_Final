@@ -20,9 +20,9 @@ void basic(string selectedCase)
     Graph basic_graph;
     basic_graph = *(read_data.read_map()); // recieve  object's pointer of graph
     bike_MaxHeap **basic_stations = read_data.read_bike();
-    cout << "-------------------------------test read bike--" << endl;
-    cout << basic_stations[0][0].extractMax().id << endl;
-    cout << "-------------------------------test read bike--" << endl;
+    // cout << "-------------------------------test read bike--" << endl;
+    // cout << basic_stations[0][0].extractMax().id << endl;
+    // cout << "-------------------------------test read bike--" << endl;
 
     read_data.read_user();
     read_data.sort_users();
@@ -84,7 +84,7 @@ void basic(string selectedCase)
             cout << "test-------------------------------" << endl;
             find = 1;
 
-            cout << "tAC_bike_type[i]: " << tAC_bike_type[i] << endl;
+            // cout << "tAC_bike_type[i]: " << tAC_bike_type[i] << endl;
             target = basic_stations[tuser_start_station][tAC_bike_type[i]].extractMax();
 
             if (target.rental_price < 0 || target.rental_count < read_data.rental_limit)
