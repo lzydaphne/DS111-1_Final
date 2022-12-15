@@ -117,7 +117,7 @@ public:
 typedef struct BMaxHeapNode
 {
     string bike_type;
-    int id;
+    int id = -1;
     float rental_price;
     int rental_count;
     //*
