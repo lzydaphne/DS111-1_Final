@@ -119,7 +119,11 @@ void my_data::read_user()
             num_user_end_station = stoi(user_end_station.erase(0, 1));
 
             arr_AC_bike_type = new int[count_bike_type];
-            memset(arr_AC_bike_type, -1, count_bike_type);
+            for (int i = 0; i < count_bike_type; i++)
+            {
+                arr_AC_bike_type[i] = -1;
+            }
+
             stringstream ss;
             ss.str(AC_bike_type);
             while (ss.good())
