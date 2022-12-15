@@ -273,7 +273,7 @@ void bike_MaxHeap::insertKey(BMNode &newNode)
 
     // First insert the new key at the end
     this->heap_size++;
-    cout << "heap_size: " << this->heap_size << endl;
+    // cout << "heap_size: " << this->heap_size << endl;
     int i = this->heap_size - 1;
     harr[i].bike_type = newNode.bike_type;
     harr[i].id = newNode.id;
