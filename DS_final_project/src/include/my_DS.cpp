@@ -55,7 +55,7 @@ int *&Graph::dijkstra(int src, int dest)
     // minHeap represents set E
     graph_MinHeap minHeap(station_max_num);
 
-    cout << "succ " << endl;
+    // cout << "succ " << endl;
 
     // Initialize minheap with all vertices. dist value of all vertices
     for (int v = 0; v < V; ++v)
@@ -64,12 +64,10 @@ int *&Graph::dijkstra(int src, int dest)
         minHeap.array[v] = minHeap.newMinHeapNode(v, dist[v]);
         minHeap.pos[v] = v;
     }
-    cout << "succ -1  " << endl;
 
     // Make dist value of src vertex as 0 so that it is extracted first
-    minHeap.array[src] = minHeap.newMinHeapNode(src, dist[src]);
-    cout << "succ -2  " << endl;
-    minHeap.pos[src] = src;
+    // minHeap.array[src] = minHeap.newMinHeapNode(src, dist[src]);
+    // minHeap.pos[src] = src;
     dist[src] = 0;
     minHeap.decreaseKey(src, dist[src]);
 
@@ -84,19 +82,19 @@ int *&Graph::dijkstra(int src, int dest)
         // Extract the vertex with
         // minimum distance value
         MNode *minHeapNode = minHeap.extractMin();
-        cout << "succ -4  " << endl;
+        cout << "minHeapNode:  " << minHeapNode->dist << "  " << minHeapNode->v << endl;
 
         // Store the extracted vertex number
         int u = minHeapNode->v;
 
         // Traverse through all adjacent vertices of u (the extracted vertex) and update their distance values
         struct AdjListNode *pCrawl = bike_graph_List[u].head;
-        cout << "succ -5  " << endl;
+
         // struct AdjListNode *pCrawl = graph->array[u].head;
         while (pCrawl != NULL)
         {
-            cout << "succ -6  " << endl;
             int v = pCrawl->dest;
+            cout << "v:  " << v << endl;
 
             // If shortest distance to v is not finalized yet, and distance to v
             // through u is less than its previously calculated distance
