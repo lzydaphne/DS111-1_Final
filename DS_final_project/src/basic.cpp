@@ -22,8 +22,10 @@ void basic(string selectedCase)
     read_data.read_bike();
 
     read_data.read_user();
+    read_data.sort_users();
     //! ----------------------start--basic----------------------------
-    ofstream ofs_user, ofs_log, ofs_status;
+    ofstream ofs_user,
+        ofs_log, ofs_status;
     ofs_user.open("user_result.txt", ios::out);
     ofs_log.open("transfer_log.txt", ios::out);
     ofs_status.open("station_status.txt", ios::out);
@@ -81,7 +83,7 @@ void basic(string selectedCase)
             target = read_data.basic_stations[tuser_start_station][i].extractMax();
 
             cout << "target-id " << target.id << "\n"
-                 << "target.rental_price " << target.rental_price << "target.returned_time " << target.returned_time;
+                 << "target.rental_price " << target.rental_price << "\ntarget.returned_time " << target.returned_time;
             cout << "test1" << endl;
 
             if (target.rental_price < 0 || target.rental_count < read_data.rental_limit)
