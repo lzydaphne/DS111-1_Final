@@ -144,9 +144,15 @@ void my_data::read_user()
             newUNode.user_start_station = num_user_start_station;
             newUNode.user_end_station = num_user_end_station;
             // 確保進行deep copy
-            newUNode.AC_bike_type = new int[count_bike_type];
-            cout
-                << "arr_AC_bike_type: " << arr_AC_bike_type[0];
+            int i = 0;
+            newUNode.AC_bike_type = new int[count_bike_type](); // set to 0
+            while (arr_AC_bike_type != 0)
+            {
+                cout
+                    << "arr_AC_bike_type: " << arr_AC_bike_type[i++] << endl;
+                /* code */
+            }
+
             memcpy(newUNode.AC_bike_type, arr_AC_bike_type, arr_index + 1);
             // cout << "test33" << endl;
 
