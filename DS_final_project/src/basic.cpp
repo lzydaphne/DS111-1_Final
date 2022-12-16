@@ -78,6 +78,7 @@ void basic(string selectedCase)
         // cout << "tAC_bike_type: " << tAC_bike_type[0] << endl;
 
         BMNode target; // 符合條件的bike_node
+        BMNode compare;
         single_revenue = 0;
         int find; // 有找到符合目標的bike
 
@@ -179,9 +180,7 @@ void basic(string selectedCase)
 
             //* 比較，不同bike_type之間最高的rental_price
 
-            BMNode compare;
-
-            if (tlen_AC > 1 && i == 0)
+                        if (tlen_AC > 1 && i == 0)
             {
                 compare.bike_type = target.bike_type;
                 compare.id = target.id;
