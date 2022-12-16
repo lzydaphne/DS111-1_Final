@@ -130,6 +130,7 @@ void basic(string selectedCase)
             bike_MaxHeap *pick_best_BMNode = new bike_MaxHeap[bike_max_num];
             while (!find) // 代表節點位置為空
             {
+                cout << "target price" << target.rental_price << endl;
                 //* heap已經為空
                 if (target.rental_price < -1)
                 {
