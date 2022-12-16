@@ -219,6 +219,7 @@ void basic(string selectedCase)
         }
 
         //* 把拿出來的bike放到新的end_station中
+        cout << target.bike_type << endl;
         int num_bike_type = stoi(target.bike_type.erase(0, 1));
         basic_stations[tuser_end_station][num_bike_type]
             .insertKey(target);
