@@ -201,9 +201,11 @@ void basic(string selectedCase)
                 restored.rental_price = compare.rental_price;
                 restored.returned_time = compare.returned_time;
 
+                cout << "restored-1 " << restored.id << endl;
                 //* 把前面已經拿到，但發現rental_price比較小的bike放回去
                 basic_stations[tuser_start_station][bike_type_index]
                     .insertKey(restored);
+                cout << "restored-2 " << restored.id << endl;
                 cout << "test insert: " << basic_stations[tuser_start_station][bike_type_index].harr[0].id;
                 bike_type_index = i;
                 BMNode *ptr = &compare;
