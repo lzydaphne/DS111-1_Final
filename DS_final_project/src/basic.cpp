@@ -131,7 +131,7 @@ void basic(string selectedCase)
             while (!find) // 代表節點位置為空
             {
                 //* heap已經為空
-                if (target.rental_price < 0)
+                if (target.rental_price < -1)
                 {
                     bike_case = -1;
                     cout
