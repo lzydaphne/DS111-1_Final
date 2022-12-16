@@ -199,6 +199,7 @@ void basic(string selectedCase)
                 bike_type_index = i;
                 BMNode *ptr = &compare;
                 *ptr = target; // 把原本儲存compare的地址指向target
+                cout << "ptr->id " << ptr->id << endl;
             }
         }
 
