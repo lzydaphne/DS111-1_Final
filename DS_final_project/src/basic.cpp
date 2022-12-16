@@ -163,6 +163,7 @@ void basic(string selectedCase)
 
                 while (find && (target.returned_time > tstart_time))
                 {
+                    cout << "here " << target.id << endl;
                     cout << "test3" << endl;
                     if (target.rental_price < 0)
                     { // 抽到沒車了
@@ -176,6 +177,7 @@ void basic(string selectedCase)
                         // find = 0;
                         continue;
                     }
+
                     store_BMNode[tmp_idx++] = target;
                     target = basic_stations[tuser_start_station][tAC_bike_type[i]].extractMax();
                 }
