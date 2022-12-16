@@ -52,6 +52,11 @@ void basic(string selectedCase)
     for (int i = 0; i < station_num; i++)
         read_data.shortest_record[i] = NULL;
 
+    // 用來放單一station中，每個bike_type的可行代表(target)
+    //  BMNode *store_bikes = new BMNode[read_data.all_user_list[idx].len_AC];
+    //* 用來放all station中，每個bike_type的最佳代表(target)
+    bike_MaxHeap *store_stations = new bike_MaxHeap[station_num];
+
     while (idx < read_data.all_user_list_idx)
     {
 
@@ -87,26 +92,16 @@ void basic(string selectedCase)
 
         //* 記住bike原本的位置
         int bike_type_index;
+
         cout << "-----Single station--------------------------" << endl;
         for (int i = 0; i < tlen_AC; i++)
         {
             cout << "-----diff type--------------------------" << endl;
             cout << "tAC_bike_type[i] " << tAC_bike_type[i] << endl;
-            find = 1;
+            find = 0;
 
+            // 抓出node
             target = basic_stations[tuser_start_station][tAC_bike_type[i]].extractMax();
-
-            //! 這邊才會開始計算bike 的 returned_time
-            // target.returned_time = basic_graph.
-
-            if (target.rental_price < 0 || target.id < 0 || target.rental_count >= read_data.rental_limit)
-            {
-                find = 0;
-                cout << " no bike / rental limit " << endl;
-                //* 這邊抓出來的bike也不用放回去了
-
-                continue;
-            }
 
             //* 開始計算最短路徑
             // 已經有紀錄了
@@ -127,125 +122,90 @@ void basic(string selectedCase)
             shortest_path = read_data.shortest_record[tuser_start_station][tuser_end_station];
             cout << "  shortest_path " << shortest_path << endl;
 
-            // target.returned_time += shortest_path;
-
-            cout << "~~~~~~new~~~~~~~~" << endl;
-            cout << "target.id " << target.id << endl;
-            cout << "target.bike_type " << target.bike_type << endl;
-            cout << "target.rental_count " << target.rental_count << endl;
-            cout << "target.rental_price " << target.rental_price << endl;
-            cout << "target.returned_time " << target.returned_time << endl;
-
-            // cout << "this station doesn't have bike_type" << endl;
-
-            // 直接拒絕
-            if (tstart_time + shortest_path > tend_time)
+            //*開始在同一站中針對特定bike type抓取bike
+            int bike_case = 0;
+            int tmp_idx = 0;
+            int tmp2_idx = 0;
+            BMNode *store_BMNode = new BMNode[bike_max_num];
+            bike_MaxHeap *pick_best_BMNode = new bike_MaxHeap[bike_max_num];
+            while (!find) // 代表節點位置為空
             {
-                find = 0;
-                cout << "(tstart_time + shortest_path > tend_time)" << endl;
-                //* 抓出來的要放回去!
-                basic_stations[tuser_start_station][tAC_bike_type[i]]
-                    .insertKey(target);
-                cout << tuser_start_station << tAC_bike_type[i] << target.id << endl;
-                break;
-            }
-            // v1把不符合條件的都集合起來，直到找出符合兩個條件的target
-            // v2後來發現不行，因為第二個條件跟bike無關，是時間和最短距離的問題
-
-                        if ((target.returned_time > tstart_time))
-            {
-                // todo 待優化，這邊先以最保守的方式來拿記憶體空間
-                // 目的是，為了要暫時儲存不符合time資格的max node
-                int tmp_idx = 0;
-                BMNode *store_BMNode = new BMNode[bike_max_num];
-
-                // cout << "target.returned_time: " << target.returned_time << endl;
-
-                while (find && (target.returned_time > tstart_time))
+                //* heap已經為空
+                if (target.rental_price < 0)
                 {
-                    cout << "here " << target.id << endl;
-                    cout << "test3" << endl;
-                    if (target.rental_price < 0)
-                    { // 抽到沒車了
-                        cout << "test3.5" << endl;
-                        find = 0;
-                        break;
-                    }
-                    else if (target.rental_count >= read_data.rental_limit)
-                    {
-                        cout << "reach rental limit!" << endl;
-                        // find = 0;
-                        continue;
-                    }
-
+                    bike_case = -1;
+                    cout
+                        << " no bike  " << endl;
+                    // continue;
+                }
+                //* 這邊抓出來的bike要放回去
+                else if (target.rental_count >= read_data.rental_limit)
+                {
+                    bike_case = 1;
+                    cout << "target.rental_count >= read_data.rental_limit" << endl;
+                }
+                else if (tstart_time + shortest_path > tend_time)
+                {
+                    bike_case = 1;
+                    cout << "(tstart_time + shortest_path > tend_time)" << endl;
+                }
+                else if (target.returned_time > tstart_time)
+                {
+                    bike_case = 1;
+                    cout
+                        << "target.returned_time > tstart_time" << endl;
+                }
+                else
+                {
+                    cout << "successful! " << endl;
+                    bike_case = 0;
+                }
+                //-------------------------------
+                if (bike_case > 0)
+                {
                     store_BMNode[tmp_idx++] = target;
                     target = basic_stations[tuser_start_station][tAC_bike_type[i]].extractMax();
+                    continue;
                 }
-
-                cout << "test4" << endl;
-                // 再一一insert回去
-                for (int j = 1; j < tmp_idx; j++)
+                else if (bike_case == 0)
                 {
-                    cout << "store_BMNode[j]:" << store_BMNode[j].id << endl;
-
-                    basic_stations[tuser_start_station][tAC_bike_type[i]].insertKey(store_BMNode[j]);
+                    pick_best_BMNode->insertKey(target);
                 }
-                delete[] store_BMNode;
+                else
+                {
+                    find = 1;
+                    target = pick_best_BMNode->extractMax(); // 就算是空的也會return-10
+                    store_stations->insertKey(target);
+                    cout << "~~~~~~new~~~~~~~~" << endl;
+                    cout << "target.id " << target.id << endl;
+                    cout << "target.bike_type " << target.bike_type << endl;
+                    cout << "target.rental_count " << target.rental_count << endl;
+                    cout << "target.rental_price " << target.rental_price << endl;
+                    cout << "target.returned_time " << target.returned_time << endl;
 
-                tmp_idx = 0; // 歸零
+                    // cout<< "store_bikes[i].id " << store_bikes[i].id << endl;
+                    for (int j = 0; j < tmp_idx; j++)
+                    {
+                        cout << "store_BMNode[j]:" << store_BMNode[j].id << endl;
 
-                /*if (!find)
-                    continue;*/
+                        basic_stations[tuser_start_station][tAC_bike_type[i]].insertKey(store_BMNode[j]);
+                    }
+                }
             }
+            tmp_idx = 0;
+            delete[] store_BMNode;
+            delete[] pick_best_BMNode;
 
-            //* 比較，不同bike_type之間最高的rental_price
+            // target.returned_time += shortest_path;
 
-            if (find && tlen_AC > 1 && i == 0)
-            {
-                compare.bike_type = target.bike_type;
-                compare.id = target.id;
-                compare.rental_count = target.rental_count;
-                compare.rental_price = target.rental_price;
-                compare.returned_time = target.returned_time;
-                bike_type_index = i;
-
-                cout << "compare id " << compare.id;
-            }
-            else if (find && i != 0 && target.rental_price > compare.rental_price)
-            {
-                BMNode restored;
-                restored.bike_type = compare.bike_type;
-                restored.id = compare.id;
-                restored.rental_count = compare.rental_count;
-                restored.rental_price = compare.rental_price;
-                restored.returned_time = compare.returned_time;
-
-                cout << "restored-1 " << restored.id << endl;
-                //* 把前面已經拿到，但發現rental_price比較小的bike放回去
-                basic_stations[tuser_start_station][bike_type_index]
-                    .insertKey(restored);
-                cout << "restored-2 " << restored.id << endl;
-                cout << "test insert: " << basic_stations[tuser_start_station][bike_type_index].harr[0].id << endl;
-                bike_type_index = i;
-                BMNode *ptr = &compare;
-                *ptr = target; // 把原本儲存compare的地址指向target
-                cout << "ptr->id " << ptr->id << endl;
-            }
-            else if (!find && i != 0)
-            {
-                target.bike_type = compare.bike_type;
-                target.id = compare.id;
-                target.rental_count = compare.rental_count;
-                target.rental_price = compare.rental_price;
-                target.returned_time = compare.returned_time;
-            }
+            // cout << "this station doesn't have bike_type" << endl;
         }
 
         //! start to output
         stringstream ss;
         ss << tuser_ID;
         string user_id = "U" + ss.str();
-        if (find) // 有找到目標車車
+        if (store_stations->extractMax().rental_price > 0) // 有找到目標車車
         {
             cout << "find!-------------------------------" << endl;
             // 計算revenue
