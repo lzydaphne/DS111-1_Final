@@ -128,7 +128,9 @@ void my_data::read_user()
             {
                 string substr;
                 getline(ss, substr, ',');
-                arr_AC_bike_type[arr_index++] = stoi(substr.erase(0, 1));
+                arr_AC_bike_type[arr_index] = stoi(substr.erase(0, 1));
+                cout << "ac type: " << arr_AC_bike_type[arr_index] << endl;
+                arr_index++;
             }
             // test cout
             /*

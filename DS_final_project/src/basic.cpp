@@ -81,9 +81,10 @@ void basic(string selectedCase)
 
         shortest_path = -1;
         // 不同的AC BIKE TYPE
+        cout << "-----Single station--------------------------" << endl;
         for (int i = 0; i < tlen_AC; i++)
         {
-            cout << "-----Single station--------------------------" << endl;
+            cout << "-----diff type--------------------------" << endl;
             cout << "tAC_bike_type[i] " << tAC_bike_type[i] << endl;
             find = 1;
 
