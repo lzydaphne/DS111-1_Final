@@ -219,18 +219,17 @@ void basic(string selectedCase)
             }
         }
 
-        //* 把拿出來的bike放到新的end_station中
-        cout << "target.id " << target.id << endl;
-        cout << "target.bike_type " << target.bike_type << endl;
-        // int num_bike_type = stoi(target.bike_type);
-        // basic_stations[tuser_end_station][num_bike_type].insertKey(target);
-
         //! start to output
         stringstream ss;
         ss << tuser_ID;
         string user_id = "U" + ss.str();
         if (find) // 有找到目標車車
         {
+            //* 把拿出來的bike放到新的end_station中
+            cout << "target.id " << target.id << endl;
+            cout << "target.bike_type " << target.bike_type << endl;
+            // int num_bike_type = stoi(target.bike_type);
+            // basic_stations[tuser_end_station][num_bike_type].insertKey(target);
             cout << "find!-------------------------------" << endl;
             // 計算revenue
             single_revenue = floor(shortest_path * target.rental_price);
