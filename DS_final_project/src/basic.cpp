@@ -127,7 +127,7 @@ void basic(string selectedCase)
             shortest_path = read_data.shortest_record[tuser_start_station][tuser_end_station];
             cout << "  shortest_path " << shortest_path << endl;
 
-            target.returned_time += shortest_path;
+            // target.returned_time += shortest_path;
 
             cout
                 << "target-id " << target.id << "\n"
@@ -155,6 +155,8 @@ void basic(string selectedCase)
                 // 目的是，為了要暫時儲存不符合time資格的max node
                 int tmp_idx = 0;
                 BMNode *store_BMNode = new BMNode[bike_max_num];
+
+                // cout << "target.returned_time: " << target.returned_time << endl;
 
                 while (find && (target.returned_time > tstart_time))
                 {
