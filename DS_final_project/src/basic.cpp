@@ -194,8 +194,16 @@ void basic(string selectedCase)
             }
             else if (i != 0 && target.rental_price > compare.rental_price)
             {
+                BMNode restored;
+                restored.bike_type = compare.bike_type;
+                restored.id = compare.id;
+                restored.rental_count = compare.rental_count;
+                restored.rental_price = compare.rental_price;
+                restored.returned_time = compare.returned_time;
+
                 //* 把前面已經拿到，但發現rental_price比較小的bike放回去
-                basic_stations[tuser_start_station][bike_type_index].insertKey(compare);
+                basic_stations[tuser_start_station][bike_type_index]
+                    .insertKey(restored);
                 bike_type_index = i;
                 BMNode *ptr = &compare;
                 *ptr = target; // 把原本儲存compare的地址指向target
