@@ -83,6 +83,9 @@ void basic(string selectedCase)
 
         shortest_path = -1;
         // 不同的AC BIKE TYPE
+
+        //* 記住bike原本的位置
+        int bike_type_index;
         cout << "-----Single station--------------------------" << endl;
         for (int i = 0; i < tlen_AC; i++)
         {
@@ -177,6 +180,7 @@ void basic(string selectedCase)
             //* 比較，不同bike_type之間最高的rental_price
 
             BMNode compare;
+
             if (tlen_AC > 1 && i == 0)
             {
                 compare.bike_type = target.bike_type;
@@ -184,11 +188,15 @@ void basic(string selectedCase)
                 compare.rental_count = target.rental_count;
                 compare.rental_price = target.rental_price;
                 compare.returned_time = target.returned_time;
+                bike_type_index = i;
+
+                cout << "compare id " << compare.id;
             }
             else if (i != 0 && target.rental_price > compare.rental_price)
             {
                 //* 把前面已經拿到，但發現rental_price比較小的bike放回去
-                basic_stations[tuser_start_station][tAC_bike_type[i]].insertKey(compare);
+                basic_stations[tuser_start_station][bike_type_index].insertKey(compare);
+                bike_type_index = i;
                 BMNode *ptr = &compare;
                 *ptr = target; // 把原本儲存compare的地址指向target
             }
