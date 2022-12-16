@@ -138,6 +138,7 @@ void basic(string selectedCase)
             if (tstart_time + shortest_path > tend_time)
             {
                 find = 0;
+                cout << "(tstart_time + shortest_path > tend_time)" << endl;
                 //* 抓出來的要放回去!
                 basic_stations[tuser_start_station][tAC_bike_type[i]]
                     .insertKey(target);
