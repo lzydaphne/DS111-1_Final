@@ -226,12 +226,6 @@ void basic(string selectedCase)
         string user_id = "U" + ss.str();
         if (find) // 有找到目標車車
         {
-            //* 把拿出來的bike放到新的end_station中
-            cout << "target.id " << target.id << endl;
-            cout << "target.bike_type " << target.bike_type << endl;
-            int num_bike_type = stoi(target.bike_type);
-            target.rental_price -= read_data.depreciation;
-            basic_stations[tuser_end_station][num_bike_type].insertKey(target);
             cout << "find!-------------------------------" << endl;
             // 計算revenue
             single_revenue = floor(shortest_path * target.rental_price);
@@ -239,6 +233,12 @@ void basic(string selectedCase)
             target.rental_count++;
             target.rental_price -= read_data.depreciation;
             target.returned_time = tstart_time + shortest_path;
+
+            //* 把拿出來的bike放到新的end_station中
+            cout << "target.id " << target.id << endl;
+            cout << "target.bike_type " << target.bike_type << endl;
+            int num_bike_type = stoi(target.bike_type);
+            basic_stations[tuser_end_station][num_bike_type].insertKey(target);
 
             // output to user_result.txt
             ofs_user
