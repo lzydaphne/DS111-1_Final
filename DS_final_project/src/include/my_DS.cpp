@@ -287,6 +287,7 @@ void bike_MaxHeap::insertKey(BMNode &newNode)
     harr[i].id = newNode.id;
     harr[i].rental_count = newNode.rental_count;
     harr[i].rental_price = newNode.rental_price;
+    harr[i].returned_time = newNode.returned_time;
     // MaxHeapify(i);
 
     // Fix the max heap property if it is violated
