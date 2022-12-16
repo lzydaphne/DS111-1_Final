@@ -230,6 +230,7 @@ void basic(string selectedCase)
             cout << "target.id " << target.id << endl;
             cout << "target.bike_type " << target.bike_type << endl;
             int num_bike_type = stoi(target.bike_type);
+            target.rental_price -= read_data.depreciation;
             basic_stations[tuser_end_station][num_bike_type].insertKey(target);
             cout << "find!-------------------------------" << endl;
             // 計算revenue
