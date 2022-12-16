@@ -103,6 +103,9 @@ void basic(string selectedCase)
             {
                 find = 0;
                 cout << " no bike / rental limit " << endl;
+                //* 抓出來的要放回去!
+                basic_stations[tuser_start_station][tAC_bike_type[i]]
+                    .insertKey(target);
                 continue;
             }
 
@@ -180,7 +183,7 @@ void basic(string selectedCase)
 
             //* 比較，不同bike_type之間最高的rental_price
 
-                        if (tlen_AC > 1 && i == 0)
+            if (tlen_AC > 1 && i == 0)
             {
                 compare.bike_type = target.bike_type;
                 compare.id = target.id;
