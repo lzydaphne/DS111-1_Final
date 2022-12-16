@@ -193,7 +193,7 @@ void basic(string selectedCase)
 
             //* 比較，不同bike_type之間最高的rental_price
 
-            if (tlen_AC > 1 && i == 0)
+            if (find && tlen_AC > 1 && i == 0)
             {
                 compare.bike_type = target.bike_type;
                 compare.id = target.id;
@@ -204,7 +204,7 @@ void basic(string selectedCase)
 
                 cout << "compare id " << compare.id;
             }
-            else if (i != 0 && find && target.rental_price > compare.rental_price)
+            else if (i != 0 && target.rental_price > compare.rental_price)
             {
                 BMNode restored;
                 restored.bike_type = compare.bike_type;
