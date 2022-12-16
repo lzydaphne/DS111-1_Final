@@ -187,8 +187,9 @@ void basic(string selectedCase)
                 delete[] store_BMNode;
 
                 tmp_idx = 0; // 歸零
-                if (!find)
-                    continue;
+
+                /*if (!find)
+                    continue;*/
             }
 
             //* 比較，不同bike_type之間最高的rental_price
@@ -204,7 +205,7 @@ void basic(string selectedCase)
 
                 cout << "compare id " << compare.id;
             }
-            else if (i != 0 && target.rental_price > compare.rental_price)
+            else if (find && i != 0 && target.rental_price > compare.rental_price)
             {
                 BMNode restored;
                 restored.bike_type = compare.bike_type;
