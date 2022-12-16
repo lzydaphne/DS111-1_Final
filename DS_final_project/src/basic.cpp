@@ -95,7 +95,7 @@ void basic(string selectedCase)
             //! 這邊才會開始計算bike 的 returned_time
             // target.returned_time = basic_graph.
 
-            if (target.rental_price < 0 || target.rental_count >= read_data.rental_limit)
+            if (target.rental_price < 0 || target.rental_count >= read_data.rental_limit || target.id < 0)
             {
                 find = 0;
                 cout << " no bike / rental limit " << endl;
