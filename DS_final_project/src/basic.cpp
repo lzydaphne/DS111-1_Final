@@ -152,7 +152,7 @@ void basic(string selectedCase)
             // v1把不符合條件的都集合起來，直到找出符合兩個條件的target
             // v2後來發現不行，因為第二個條件跟bike無關，是時間和最短距離的問題
 
-            if ((target.returned_time > tstart_time))
+                        if ((target.returned_time > tstart_time))
             {
                 // todo 待優化，這邊先以最保守的方式來拿記憶體空間
                 // 目的是，為了要暫時儲存不符合time資格的max node
@@ -230,6 +230,14 @@ void basic(string selectedCase)
                 BMNode *ptr = &compare;
                 *ptr = target; // 把原本儲存compare的地址指向target
                 cout << "ptr->id " << ptr->id << endl;
+            }
+            else if (!find && i != 0)
+            {
+                target.bike_type = compare.bike_type;
+                target.id = compare.id;
+                target.rental_count = compare.rental_count;
+                target.rental_price = compare.rental_price;
+                target.returned_time = compare.returned_time;
             }
         }
 
