@@ -185,7 +185,11 @@ void basic(string selectedCase)
                 cout << "test4" << endl;
                 // 再一一insert回去
                 for (int j = 1; j < tmp_idx; j++)
+                {
+                    cout << "store_BMNode[j]:" << store_BMNode[j].id << endl;
+
                     basic_stations[tuser_start_station][tAC_bike_type[i]].insertKey(store_BMNode[j]);
+                }
                 delete[] store_BMNode;
 
                 tmp_idx = 0; // 歸零
