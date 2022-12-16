@@ -290,11 +290,13 @@ void bike_MaxHeap::insertKey(BMNode &newNode)
     // MinHeapify(i);
 
     // Fix the max heap property if it is violated
+    /*
     while (i != 0 && harr[parent(i)].rental_price < harr[i].rental_price)
     {
         BMNode_swap(&harr[i], &harr[parent(i)]);
         i = parent(i);
-    }
+    }*/
+    MaxHeapify(0);
 
     // harr[100] = heap_size;
 };
