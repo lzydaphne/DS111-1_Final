@@ -106,6 +106,7 @@ void basic(string selectedCase)
                 //* 抓出來的要放回去!
                 basic_stations[tuser_start_station][tAC_bike_type[i]]
                     .insertKey(target);
+                cout << tuser_start_station << tAC_bike_type[i] << target.id << endl;
                 continue;
             }
 
