@@ -166,6 +166,7 @@ void basic(string selectedCase)
                     cout << "test3" << endl;
                     if (target.rental_price < 0)
                     { // 抽到沒車了
+                        cout << "test3.5" << endl;
                         find = 0;
                         break;
                     }
@@ -203,7 +204,7 @@ void basic(string selectedCase)
 
                 cout << "compare id " << compare.id;
             }
-            else if (i != 0 && target.rental_price > compare.rental_price)
+            else if (i != 0 && find && target.rental_price > compare.rental_price)
             {
                 BMNode restored;
                 restored.bike_type = compare.bike_type;
