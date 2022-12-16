@@ -148,6 +148,12 @@ void basic(string selectedCase)
                         find = 0;
                         break;
                     }
+                    else if (target.rental_count >= read_data.rental_limit)
+                    {
+                        cout << "reach rental limit!" << endl;
+                        // find = 0;
+                        continue;
+                    }
                     store_BMNode[tmp_idx++] = target;
                     target = basic_stations[tuser_start_station][tAC_bike_type[i]].extractMax();
                 }
