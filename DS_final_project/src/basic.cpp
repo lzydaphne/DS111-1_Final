@@ -103,6 +103,7 @@ void basic(string selectedCase)
             {
                 find = 0;
                 cout << " no bike / rental limit " << endl;
+                //* 這邊抓出來的bike也不用放回去了
 
                 continue;
             }
@@ -211,7 +212,7 @@ void basic(string selectedCase)
                 basic_stations[tuser_start_station][bike_type_index]
                     .insertKey(restored);
                 cout << "restored-2 " << restored.id << endl;
-                cout << "test insert: " << basic_stations[tuser_start_station][bike_type_index].harr[0].id;
+                cout << "test insert: " << basic_stations[tuser_start_station][bike_type_index].harr[0].id << endl;
                 bike_type_index = i;
                 BMNode *ptr = &compare;
                 *ptr = target; // 把原本儲存compare的地址指向target
@@ -228,8 +229,8 @@ void basic(string selectedCase)
             //* 把拿出來的bike放到新的end_station中
             cout << "target.id " << target.id << endl;
             cout << "target.bike_type " << target.bike_type << endl;
-            // int num_bike_type = stoi(target.bike_type);
-            // basic_stations[tuser_end_station][num_bike_type].insertKey(target);
+            int num_bike_type = stoi(target.bike_type);
+            basic_stations[tuser_end_station][num_bike_type].insertKey(target);
             cout << "find!-------------------------------" << endl;
             // 計算revenue
             single_revenue = floor(shortest_path * target.rental_price);
