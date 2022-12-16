@@ -239,6 +239,8 @@ void basic(string selectedCase)
             //* 把拿出來的bike放到新的end_station中
             cout << "target.id " << target.id << endl;
             cout << "target.bike_type " << target.bike_type << endl;
+            cout << "target.rental_count " << target.rental_count << endl;
+            cout << "target.rental_price " << target.rental_price << endl;
             cout << "target.returned_time " << target.returned_time << endl;
             int num_bike_type = stoi(target.bike_type);
             basic_stations[tuser_end_station][num_bike_type].insertKey(target);

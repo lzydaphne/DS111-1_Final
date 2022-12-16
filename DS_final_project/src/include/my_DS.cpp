@@ -271,7 +271,7 @@ void graph_MinHeap::printArr(int dist[], int n)
 
 //! -------------------bike_MaxHeap-------------------
 
-void bike_MaxHeap::insertKey(BMNode newNode)
+void bike_MaxHeap::insertKey(BMNode &newNode)
 {
     if (this->heap_size == capacity)
     {
