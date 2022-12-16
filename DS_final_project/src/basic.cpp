@@ -99,14 +99,11 @@ void basic(string selectedCase)
             //! 這邊才會開始計算bike 的 returned_time
             // target.returned_time = basic_graph.
 
-            if (target.rental_price < 0 || target.rental_count >= read_data.rental_limit || target.id < 0)
+            if (target.rental_price < 0 || target.id < 0 || target.rental_count >= read_data.rental_limit)
             {
                 find = 0;
                 cout << " no bike / rental limit " << endl;
-                //* 抓出來的要放回去!
-                basic_stations[tuser_start_station][tAC_bike_type[i]]
-                    .insertKey(target);
-                cout << tuser_start_station << tAC_bike_type[i] << target.id << endl;
+
                 continue;
             }
 
@@ -141,6 +138,10 @@ void basic(string selectedCase)
             if (tstart_time + shortest_path > tend_time)
             {
                 find = 0;
+                //* 抓出來的要放回去!
+                basic_stations[tuser_start_station][tAC_bike_type[i]]
+                    .insertKey(target);
+                cout << tuser_start_station << tAC_bike_type[i] << target.id << endl;
                 break;
             }
             // v1把不符合條件的都集合起來，直到找出符合兩個條件的target
