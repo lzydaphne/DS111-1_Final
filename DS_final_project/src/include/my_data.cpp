@@ -122,6 +122,7 @@ void my_data::read_user()
             for (int i = 0; i < count_bike_type; i++)
                 arr_AC_bike_type[i] = -1;
 
+            cout << "num_user_ID: " << num_user_ID << endl;
             stringstream ss;
             ss.str(AC_bike_type);
             while (ss.good())
