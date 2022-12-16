@@ -129,9 +129,12 @@ void basic(string selectedCase)
 
             // target.returned_time += shortest_path;
 
-            cout
-                << "target-id " << target.id << "\n"
-                << "target.rental_price " << target.rental_price << "\ntarget.returned_time " << target.returned_time << endl;
+            cout << "~~~~~~new~~~~~~~~" << endl;
+            cout << "target.id " << target.id << endl;
+            cout << "target.bike_type " << target.bike_type << endl;
+            cout << "target.rental_count " << target.rental_count << endl;
+            cout << "target.rental_price " << target.rental_price << endl;
+            cout << "target.returned_time " << target.returned_time << endl;
 
             // cout << "this station doesn't have bike_type" << endl;
 
