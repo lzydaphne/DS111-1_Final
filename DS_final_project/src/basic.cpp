@@ -84,6 +84,7 @@ void basic(string selectedCase)
         for (int i = 0; i < tlen_AC; i++)
         {
             cout << "-----Single station--------------------------" << endl;
+            cout << "tAC_bike_type[i] " << tAC_bike_type[i] << endl;
             find = 1;
 
             target = basic_stations[tuser_start_station][tAC_bike_type[i]].extractMax();
