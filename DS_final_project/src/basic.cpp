@@ -171,6 +171,8 @@ void basic(string selectedCase)
                 else if (bike_case == 0)
                 {
                     pick_best_BMNode->insertKey(target);
+                    target = basic_stations[tuser_start_station][tAC_bike_type[i]].extractMax();
+                    continue;
                 }
                 else
                 {
