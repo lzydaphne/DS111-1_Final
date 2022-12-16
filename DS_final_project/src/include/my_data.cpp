@@ -122,7 +122,7 @@ void my_data::read_user()
             for (int i = 0; i < count_bike_type; i++)
                 arr_AC_bike_type[i] = -1;
 
-            cout << "num_user_ID: " << num_user_ID << endl;
+            // cout << "num_user_ID: " << num_user_ID << endl;
             stringstream ss;
             ss.str(AC_bike_type);
             while (ss.good())
@@ -130,7 +130,7 @@ void my_data::read_user()
                 string substr;
                 getline(ss, substr, ',');
                 arr_AC_bike_type[arr_index] = stoi(substr.erase(0, 1));
-                cout << "ac type: " << arr_AC_bike_type[arr_index] << endl;
+                // cout << "ac type: " << arr_AC_bike_type[arr_index] << endl;
                 arr_index++;
             }
             // test cout
@@ -151,7 +151,9 @@ void my_data::read_user()
             newUNode.user_end_station = num_user_end_station;
             // 確保進行deep copy
             int i = 0;
-            newUNode.AC_bike_type = new int[count_bike_type](); // set to 0
+            // newUNode.AC_bike_type = new int[count_bike_type](); // set to 0
+            newUNode.AC_bike_type = arr_AC_bike_type; // set to 0
+            newUNode.len_AC = arr_index;
 
             // test output
             /*
@@ -162,15 +164,14 @@ void my_data::read_user()
         }
         */
 
-            memcpy(newUNode.AC_bike_type, arr_AC_bike_type, arr_index + 1);
+            // memcpy(newUNode.AC_bike_type, arr_AC_bike_type, arr_index + 1);
 
-            newUNode.len_AC = arr_index;
             arr_index = 0; // 歸零
 
             // 把UNode推到list中
             all_user_list[all_user_list_idx++] = newUNode;
-            // cout << "test44" << endl;
-            delete[] arr_AC_bike_type;
+
+            // delete[] arr_AC_bike_type;
         }
     }
     ifs.close();
