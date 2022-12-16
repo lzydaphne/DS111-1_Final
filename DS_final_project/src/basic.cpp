@@ -204,6 +204,7 @@ void basic(string selectedCase)
                 //* 把前面已經拿到，但發現rental_price比較小的bike放回去
                 basic_stations[tuser_start_station][bike_type_index]
                     .insertKey(restored);
+                cout << "test insert: " << basic_stations[tuser_start_station][bike_type_index].harr[0].id;
                 bike_type_index = i;
                 BMNode *ptr = &compare;
                 *ptr = target; // 把原本儲存compare的地址指向target
