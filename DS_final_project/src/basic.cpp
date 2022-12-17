@@ -138,8 +138,8 @@ void basic(string selectedCase)
 
             while (!find) // 代表節點位置為空
             {
-                cout << "targetID" << target.id << endl;
-                cout << "target price" << target.rental_price << endl;
+                cout << "targetID " << target.id << endl;
+                cout << "target price " << target.rental_price << endl;
                 //* heap已經為空
                 if (target.rental_price < -1)
                 {
@@ -213,10 +213,10 @@ void basic(string selectedCase)
                     // cout<< "store_bikes[i].id " << store_bikes[i].id << endl;
                     for (int j = 0; j < tmp_idx; j++)
                     {
-                        cout << "store_BMNode[j]:" << store_BMNode[j].id << endl;
 
                         if (store_BMNode[j].id == target.id)
                             continue;
+                        cout << "store_BMNode[j]:" << store_BMNode[j].id << endl;
 
                         basic_stations[tuser_start_station][tAC_bike_type[i]].insertKey(store_BMNode[j]);
                     }
