@@ -141,7 +141,7 @@ void basic(string selectedCase)
             {
                 cout << "targetID " << target.id << endl;
                 cout << "target price " << target.rental_price << endl;
-                //* heap已經為空
+                //* heap已經為空，price=-10
                 if (target.rental_price < -1)
                 {
                     bike_case = -1;
@@ -206,7 +206,11 @@ void basic(string selectedCase)
                 {
                     find = 1;
                     target = tmp_target; // 就算是空的也會return-10
-                    store_types_bike[tmp2_idx++] = target;
+                    if (target.rental_price != -1)
+                    {
+                        store_types_bike[tmp2_idx++] = target;
+                        /* code */
+                    }
 
                     // store_stations->insertKey(target);
 
@@ -217,6 +221,8 @@ void basic(string selectedCase)
                     cout << "target.rental_count " << target.rental_count << endl;
                     cout << "target.rental_price " << target.rental_price << endl;
                     cout << "target.returned_time " << target.returned_time << endl;
+                    cout
+                        << "~~~~end extract max~~~~~~~~" << endl;
 
                     // cout<< "store_bikes[i].id " << store_bikes[i].id << endl;
                     for (int j = 0; j < tmp_idx; j++)
