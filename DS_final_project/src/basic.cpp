@@ -333,7 +333,7 @@ void basic(string selectedCase)
     cout << "basic_stations[0][0] " << basic_stations[0][0].harr[1].id << endl;
     cout << "basic_stations[0][1] " << basic_stations[0][1].harr[0].id << endl;
     cout << "basic_stations[0][2] " << basic_stations[0][2].harr[0].id << endl;
-    // cout << "basic_stations[0][2] " << basic_stations[0][2].harr[1].id << endl;
+    cout << "basic_stations[0][2] " << basic_stations[0][2].harr[1].id << endl;
 
     for (int i = 0; i < read_data.station_num; i++)
     {
