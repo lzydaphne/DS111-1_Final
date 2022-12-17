@@ -304,13 +304,13 @@ void bike_MaxHeap::insertKey(BMNode &newNode)
 
 void bike_MaxHeap::MaxHeapify(int i)
 {
-    int l = left(i);
-    int r = right(i);
-    int largest = i;
+    int l = left(i);  // 2i+1
+    int r = right(i); // 2i+2
+    int largest = i;  // i=0
     // cout << " l " << l << " r " << r << "largest " << largest << endl;
     // cout << " harr[l].rental_price: " << harr[l].rental_price << endl;
     // cout << " harr[r].rental_price: " << harr[r].rental_price << endl;
-    if (l < heap_size && harr[l].rental_price > harr[i].rental_price)
+    if (l < heap_size && harr[l].rental_price > harr[largest].rental_price)
         largest = l;
     if (r < heap_size && harr[r].rental_price > harr[largest].rental_price)
         largest = r;
