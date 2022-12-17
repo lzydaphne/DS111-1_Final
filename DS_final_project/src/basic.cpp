@@ -182,6 +182,8 @@ void basic(string selectedCase)
 
                     if ((tmp_target.rental_price == -1) || (target.rental_price > tmp_target.rental_price) || ((target.rental_price == tmp_target.rental_price) && (target.id < tmp_target.id)))
                     {
+                        cout << "stoi(tmp_target.bike_type): " << stoi(tmp_target.bike_type) << endl;
+                        basic_stations[tuser_start_station][stoi(tmp_target.bike_type)].insertKey(tmp_target);
                         tmp_target.bike_type = target.bike_type;
                         tmp_target.id = target.id;
                         tmp_target.rental_count = target.rental_count;
