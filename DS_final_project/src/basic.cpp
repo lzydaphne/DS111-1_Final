@@ -195,7 +195,7 @@ void basic(string selectedCase)
                         tmp_target.rental_price = target.rental_price;
                         tmp_target.returned_time = target.returned_time;
                     }
-                    else
+                    else // 符合基本條件，卻沒有比tmp好，就放回去
                         store_BMNode[tmp_idx++] = target;
 
                     // pick_best_BMNode->insertKey(target);
