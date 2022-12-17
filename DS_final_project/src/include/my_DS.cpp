@@ -310,10 +310,11 @@ void bike_MaxHeap::MaxHeapify(int i)
     if (r < heap_size && harr[r].rental_price > harr[largest].rental_price)
         largest = r;
 
-    // cout << "largest " << largest << endl;AAA5574550628
+    // cout << "largest " << largest << endl;
 
     // 兩邊有相同的rental_price
-    if (harr[l].rental_price != 0 && (harr[l].rental_price == harr[r].rental_price))
+    // if (harr[l].rental_price != 0 && (harr[l].rental_price == harr[r].rental_price))
+    if (l < heap_size && r < heap_size && harr[l].rental_price != 0 && (harr[l].rental_price == harr[r].rental_price))
     {
         if (harr[l].id < harr[r].id)
             largest = l;
