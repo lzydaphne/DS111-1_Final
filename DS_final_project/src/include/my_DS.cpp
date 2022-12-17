@@ -154,8 +154,7 @@ MNode *graph_MinHeap::newMinHeapNode(int v,
 // A utility function to swap two
 // nodes of min heap.
 // Needed for min heapify
-void graph_MinHeap::swapMinHeapNode(MNode **a,
-                                    MNode **b)
+void graph_MinHeap::swapMinHeapNode(MNode **a, MNode **b)
 {
     struct MinHeapNode *t = *a;
     *a = *b;
@@ -211,18 +210,14 @@ void graph_MinHeap::decreaseKey(int v, int dist)
     // Get the node and update its dist value
     this->array[i]->dist = dist;
 
-    // Travel up while the complete
-    // tree is not heapified.
+    // Travel up while the complete tree is not heapified.
     // This is a O(Logn) loop
-    while (i && this->array[i]->dist <
-                    this->array[(i - 1) / 2]->dist)
+    while (i && this->array[i]->dist < this->array[(i - 1) / 2]->dist)
     {
         // Swap this node with its parent
-        this->pos[this->array[i]->v] =
-            (i - 1) / 2;
+        this->pos[this->array[i]->v] = (i - 1) / 2;
         this->pos[this->array[(i - 1) / 2]->v] = i;
-        swapMinHeapNode(&this->array[i],
-                        &this->array[(i - 1) / 2]);
+        swapMinHeapNode(&this->array[i], &this->array[(i - 1) / 2]);
 
         // move to parent index
         i = (i - 1) / 2;
@@ -348,13 +343,13 @@ BMNode bike_MaxHeap::extractMax()
         tmp.returned_time = 1050; // 刻意製造不符合的時間，因為最多1040
         return tmp;
     }
-    if (heap_size == 1)
-    {
-        // cout << "about to empty !!!!!!" << endl;
-        heap_size--;
-        // harr[100] = heap_size; // don't forget to update heap size
-        return harr[0];
-    }
+    // else if (heap_size == 1)
+    // {
+    // cout << "about to empty !!!!!!" << endl;
+    // heap_size--;
+    // harr[100] = heap_size; // don't forget to update heap size
+    // return harr[0];
+    // }
 
     // Store the max value, and remove it from heap
     BMNode root = harr[0];
