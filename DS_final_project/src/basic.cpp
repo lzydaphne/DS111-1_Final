@@ -175,6 +175,8 @@ void basic(string selectedCase)
                 //-------------------------------
                 if (bike_case > 0)
                 {
+                    cout << "bike_case >0: " << target.id << endl;
+
                     store_BMNode[tmp_idx++] = target;
                     target = basic_stations[tuser_start_station][tAC_bike_type[i]].extractMax();
                     continue;
@@ -183,7 +185,7 @@ void basic(string selectedCase)
                 {
                     if ((tmp_target.rental_price == -1) || (target.rental_price > tmp_target.rental_price) || ((target.rental_price == tmp_target.rental_price) && (target.id < tmp_target.id)))
                     {
-                        // 把備胎放回去
+                        //! 把備胎放回去，因為發現更好的
                         if ((tmp_target.rental_price != -1))
                         {
                             cout << "bike_case 0: " << tmp_target.id << endl;
@@ -196,8 +198,12 @@ void basic(string selectedCase)
                         tmp_target.rental_price = target.rental_price;
                         tmp_target.returned_time = target.returned_time;
                     }
-                    else // 符合基本條件，卻沒有比tmp好，就放回去
+                    else
+                    {
+                        cout << "bike_case 0-2 : " << target.id << endl;
+                        // 符合基本條件，卻沒有比tmp好，就放回去
                         store_BMNode[tmp_idx++] = target;
+                    }
 
                     // pick_best_BMNode->insertKey(target);
                     target = basic_stations[tuser_start_station][tAC_bike_type[i]].extractMax();
