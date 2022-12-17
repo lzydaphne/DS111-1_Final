@@ -363,8 +363,19 @@ void basic(string selectedCase)
         log_store = log_output[p];
         ss << log_store.user_ID;
         string uStr = "U" + ss.str();
+        ss.str("");
+        ss.clear();
+        ss << log_store.user_start_station;
+        string start_station = "S" + ss.str();
+        ss.str("");
+        ss.clear();
+        ss << log_store.user_end_station;
+        string end_station = "S" + ss.str();
+        ss.str("");
+        ss.clear();
+
         ofs_log
-            << log_store.bike_ID << " " << tuser_start_station << " " << tuser_end_station << " " << tstart_time << " " << log_store.returned_time << " " << uStr << endl;
+            << log_store.bike_ID << " " << start_station << " " << end_station << " " << log_store.start_time << " " << log_store.returned_time << " " << uStr << endl;
         ss.str("");
         ss.clear();
     }
