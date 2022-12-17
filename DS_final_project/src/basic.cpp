@@ -69,7 +69,7 @@ void basic(string selectedCase)
 
     // 為了儲存transfer log的 LNode
     LNode *log_output = new LNode[read_data.user_num];
-    LNode log_store;
+
     int log_idx = 0;
 
     while (idx < read_data.all_user_list_idx)
@@ -318,7 +318,7 @@ void basic(string selectedCase)
             // output to user_result.txt
             ofs_user
                 << user_id << " " << 1 << " " << target.id << " " << tstart_time << " " << target.returned_time << " " << single_revenue << endl;
-
+            LNode log_store;
             log_store.bike_ID = target.id;
             log_store.user_ID = user_id;
             log_store.returned_time = target.returned_time;
@@ -333,6 +333,7 @@ void basic(string selectedCase)
         else
         {
             cout << "not find ---------------------" << endl;
+            LNode log_store;
             log_store.user_ID = user_id;
             log_store.bike_ID = 0;
             log_store.returned_time = 0;
@@ -341,8 +342,8 @@ void basic(string selectedCase)
             log_store.user_end_station = 0;
             log_output[log_idx++] = log_store;
 
-            /*ofs_user
-                << user_id << " " << 0 << " " << 0 << " " << 0 << " " << 0 << " " << 0 << endl;*/
+            ofs_user
+                << user_id << " " << 0 << " " << 0 << " " << 0 << " " << 0 << " " << 0 << endl;
         }
 
         ss.str("");
