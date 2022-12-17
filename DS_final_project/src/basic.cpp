@@ -304,6 +304,7 @@ void basic(string selectedCase)
             cout << "target.returned_time " << target.returned_time << endl;
             cout << "basic_stations[tuser_end_station][stoi(target.bike_type)]  heapsize" << basic_stations[tuser_end_station][stoi(target.bike_type)].heap_size << endl;
             basic_stations[tuser_end_station][stoi(target.bike_type)].insertKey(target);
+            cout << "real target inserted " << target.id << endl;
 
             // output to user_result.txt
             ofs_user
