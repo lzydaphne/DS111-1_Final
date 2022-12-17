@@ -333,6 +333,7 @@ void basic(string selectedCase)
         else
         {
             cout << "not find ---------------------" << endl;
+            /*
             LNode log_store;
             log_store.user_ID = user_id;
             log_store.bike_ID = 0;
@@ -340,7 +341,7 @@ void basic(string selectedCase)
             log_store.start_time = 0;
             log_store.user_start_station = 0;
             log_store.user_end_station = 0;
-            log_output[log_idx++] = log_store;
+            log_output[log_idx++] = log_store;*/
 
             ofs_user
                 << user_id << " " << 0 << " " << 0 << " " << 0 << " " << 0 << " " << 0 << endl;
