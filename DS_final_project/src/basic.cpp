@@ -54,10 +54,16 @@ void basic(string selectedCase)
 
     // 用來放單一station中，每個bike_type的可行代表(target)
     //  BMNode *store_bikes = new BMNode[read_data.all_user_list[idx].len_AC];
-    //* 用來放all station中，每個bike_type的最佳代表(target)
-    bike_MaxHeap *store_stations = new bike_MaxHeap[station_num];
-    BMNode *store_BMNode = new BMNode[bike_max_num]; //! 儲存備胎bike
-    bike_MaxHeap *pick_best_BMNode = new bike_MaxHeap[bike_max_num];
+
+    //* 儲存單一station單一車種的不符合資格的備胎bike
+    BMNode *store_BMNode = new BMNode[bike_max_num];
+    //* 儲存單一station中，單一車種的符合資格的備胎bike
+    // why? 因為不僅僅是rental price的大小，其實有時候必須要騎price比較小的，因為只有它完全符合條件，但之前的實作，會無法記憶這種已經被迭代掉的bike，因此這次用heap來儲存
+    // 等等，既然你都符合標準了，那變數應該只剩rental price!?
+
+    //------------------------------------------------------
+
+    BMNode *store_types_bike = new BMNode[read_data.count_bike_type];
 
     while (idx < read_data.all_user_list_idx)
     {
@@ -128,6 +134,8 @@ void basic(string selectedCase)
             int bike_case = 0;
             int tmp_idx = 0;
             int tmp2_idx = 0;
+            BMNode tmp_target;
+
             while (!find) // 代表節點位置為空
             {
                 cout << "target price" << target.rental_price << endl;
@@ -170,17 +178,29 @@ void basic(string selectedCase)
                 }
                 else if (bike_case == 0)
                 {
-                    pick_best_BMNode->insertKey(target);
+                    if ((tmp_target.rental_price == -1) || (target.rental_price > tmp_target.rental_price) || ((target.rental_price == tmp_target.rental_price) && (target.id < tmp_target.id)))
+                    {
+                        tmp_target.bike_type = target.bike_type;
+                        tmp_target.id = target.id;
+                        tmp_target.rental_count = target.rental_count;
+                        tmp_target.rental_price = target.rental_price;
+                        tmp_target.returned_time = target.returned_time;
+                    }
+
+                    // pick_best_BMNode->insertKey(target);
                     target = basic_stations[tuser_start_station][tAC_bike_type[i]].extractMax();
                     continue;
                 }
                 else
                 {
                     find = 1;
-                    target = pick_best_BMNode->extractMax(); // 就算是空的也會return-10
+                    target = tmp_target; // 就算是空的也會return-10
+                    store_types_bike[tmp2_idx++] = target;
 
-                    store_stations->insertKey(target);
-                    cout << "~~~~successful extract max~~~~~~~~" << endl;
+                    // store_stations->insertKey(target);
+
+                    cout
+                        << "~~~~successful extract max~~~~~~~~" << endl;
                     cout << "target.id " << target.id << endl;
                     cout << "target.bike_type " << target.bike_type << endl;
                     cout << "target.rental_count " << target.rental_count << endl;
@@ -194,16 +214,17 @@ void basic(string selectedCase)
 
                         basic_stations[tuser_start_station][tAC_bike_type[i]].insertKey(store_BMNode[j]);
                     }
-
-                    while (!pick_best_BMNode->isEmpty())
-                    {
-                        pick_best_BMNode->extractMax();
-                    }
-                    cout << "pick_best_BMNode " << pick_best_BMNode->heap_size << endl;
-                    // pick_best_BMNode->harr
+                    /*
+                                        while (!pick_best_BMNode->isEmpty())
+                                        {
+                                            pick_best_BMNode->extractMax();
+                                        }
+                                        cout << "pick_best_BMNode " << pick_best_BMNode->heap_size << endl;
+                                        // pick_best_BMNode->harr*/
                 }
             }
             tmp_idx = 0;
+            tmp2_idx = 0;
 
             // target.returned_time += shortest_path;
 
@@ -214,7 +235,14 @@ void basic(string selectedCase)
         stringstream ss;
         ss << tuser_ID;
         string user_id = "U" + ss.str();
-        if (store_stations->extractMax().rental_price > 0) // 有找到目標車車
+        BMNode tmp = store_types_bike[0];
+        for (int i = 0; i < read_data.count_bike_type; i++)
+        {
+            if (store_types_bike[i].rental_price > tmp.rental_price)
+                tmp = store_types_bike[i];
+        }
+
+        if (tmp.rental_price > 0) // 有找到目標車車
         {
             cout << "find!-------------------------------" << endl;
             // 計算revenue
@@ -247,7 +275,7 @@ void basic(string selectedCase)
         }
     }
     delete[] store_BMNode;
-    delete[] pick_best_BMNode;
+    delete[] store_types_bike;
 
     // output final bike inventory
     stringstream ss;
