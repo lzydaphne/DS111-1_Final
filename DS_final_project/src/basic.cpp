@@ -248,8 +248,8 @@ void basic(string selectedCase)
             if (store_types_bike[i].rental_price > tmp.rental_price)
             {
                 cout << "tmp.bike_type: " << tmp.bike_type << endl;
-                tmp_bike_type = stoi(tmp.bike_type.erase(0, 1));
-                basic_stations[tuser_start_station][tmp_bike_type].insertKey(tmp);
+                // tmp_bike_type = stoi(tmp.bike_type.erase(0, 1));
+                // basic_stations[tuser_start_station][tmp_bike_type].insertKey(tmp);
                 tmp = store_types_bike[i];
             }
         }
