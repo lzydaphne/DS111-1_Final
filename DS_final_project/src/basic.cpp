@@ -355,9 +355,10 @@ void basic(string selectedCase)
     // output transfer log
     // 把log的bike用userID進行排序小到大
     read_data.mergeSort(log_output, 0, log_idx - 1);
+    LNode log_store;
     for (int p = 0; p < log_idx; p++)
     {
-
+        log_store = log_output[p];
         ofs_log
             << log_store.bike_ID << " " << tuser_start_station << " " << tuser_end_station << " " << tstart_time << " " << log_store.returned_time << " " << log_store.user_ID << endl;
     }
