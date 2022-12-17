@@ -65,6 +65,8 @@ void basic(string selectedCase)
 
     BMNode *store_types_bike = new BMNode[read_data.count_bike_type];
 
+    stringstream ss;
+
     while (idx < read_data.all_user_list_idx)
     {
 
@@ -99,9 +101,6 @@ void basic(string selectedCase)
         // 不同的AC BIKE TYPE
 
         BMNode tmp_target;
-
-        //  記住bike原本的位置
-        // int bike_type_index;
 
         //* 當可以騎多個車型，每種車型都各自建立一個heap來拿到最好的選擇
         cout << "-----Single station--------------------------" << endl;
@@ -186,11 +185,10 @@ void basic(string selectedCase)
                         // 把備胎放回去
                         if ((tmp_target.rental_price != -1))
                         {
-                            cout << "(tmp_target.bike_type): " << tmp_target.bike_type << endl;
+                            // cout << "(tmp_target.bike_type): " << tmp_target.bike_type << endl;
                             basic_stations[tuser_start_station][stoi(tmp_target.bike_type)].insertKey(tmp_target);
                         }
                         tmp_target.bike_type = target.bike_type;
-                        cout << "target bike type " << target.bike_type << endl;
                         tmp_target.id = target.id;
                         tmp_target.rental_count = target.rental_count;
                         tmp_target.rental_price = target.rental_price;
@@ -243,7 +241,7 @@ void basic(string selectedCase)
         }
 
         //! start to output
-        stringstream ss;
+
         ss << tuser_ID;
         string user_id = "U" + ss.str();
 
@@ -274,9 +272,8 @@ void basic(string selectedCase)
             cout << "target.rental_count " << target.rental_count << endl;
             cout << "target.rental_price " << target.rental_price << endl;
             cout << "target.returned_time " << target.returned_time << endl;
-            // int num_bike_type = stoi(target.bike_type);
-            int num_bike_type = stoi(target.bike_type);
-            basic_stations[tuser_end_station][num_bike_type].insertKey(target);
+
+            basic_stations[tuser_end_station][stoi(target.bike_type)].insertKey(target);
 
             // output to user_result.txt
             ofs_user
@@ -290,12 +287,14 @@ void basic(string selectedCase)
             ofs_user
                 << user_id << " " << 0 << " " << 0 << " " << 0 << " " << 0 << " " << 0 << endl;
         }
+        ss.str("");
+        ss.clear();
     }
     delete[] store_BMNode;
     delete[] store_types_bike;
 
     // output final bike inventory
-    stringstream ss;
+
     int Barr_idx = 0;
     int station_size = 0;
     for (int i = 0; i < read_data.station_num; i++)
@@ -342,6 +341,8 @@ void basic(string selectedCase)
         }
         Barr_idx = 0;
         delete[] Barr;
+        ss.str("");
+        ss.clear();
     }
     // test
     cout << "basic_revenue: " << basic_revenue << endl;
