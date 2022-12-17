@@ -270,7 +270,7 @@ void basic(string selectedCase)
             {
                 if ((store_types_bike[i].rental_price > tmp.rental_price) || ((store_types_bike[i].rental_price == tmp.rental_price) && (store_types_bike[i].id < tmp.id)))
                 {
-                    // basic_stations[tuser_start_station][stoi(tmp.bike_type)].insertKey(tmp);
+                    basic_stations[tuser_start_station][stoi(tmp.bike_type)].insertKey(tmp);
                     cout << "store_types_bike: " << tmp.id << endl;
                     tmp = store_types_bike[i];
                     // cout << "tmp.bike_id: --2 " << tmp.id << endl;
