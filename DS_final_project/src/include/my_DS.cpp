@@ -94,7 +94,7 @@ int *&Graph::dijkstra(int src, int dest)
         while (pCrawl != NULL)
         {
             int v = pCrawl->dest;
-            cout << "v:  " << v << endl;
+            // cout << "v:  " << v << endl;
 
             // If shortest distance to v is not finalized yet, and distance to v
             // through u is less than its previously calculated distance
