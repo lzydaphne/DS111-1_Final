@@ -185,7 +185,7 @@ void basic(string selectedCase)
                 {
                     if ((tmp_target.rental_price == -1) || (target.rental_price > tmp_target.rental_price) || ((target.rental_price == tmp_target.rental_price) && (target.id < tmp_target.id)))
                     {
-                        //! 把備胎放回去，因為發現更好的
+                        //! 同一種車種的情況下，把備胎放回去，因為發現更好的
                         if ((tmp_target.rental_price != -1))
                         {
                             cout << "bike_case 0: " << tmp_target.id << endl;
@@ -270,6 +270,7 @@ void basic(string selectedCase)
             {
                 if ((store_types_bike[i].rental_price > tmp.rental_price) || ((store_types_bike[i].rental_price == tmp.rental_price) && (store_types_bike[i].id < tmp.id)))
                 {
+                    //! 不同一種車種的情況下，把備胎放回去
                     basic_stations[tuser_start_station][stoi(tmp.bike_type)].insertKey(tmp);
                     cout << "store_types_bike: " << tmp.id << endl;
                     tmp = store_types_bike[i];
@@ -334,7 +335,10 @@ void basic(string selectedCase)
         cout << "here!" << endl;
         station_heap_size = 0;
         for (int j = 0; j < read_data.count_bike_type; j++)
+        {
+            cout << "heap.size " << basic_stations[i][j].heap_size << endl;
             station_heap_size += basic_stations[i][j].heap_size;
+        }
         cout << "station_heap_size: " << station_heap_size << endl;
 
         BMNode *Barr = new BMNode[station_heap_size];
