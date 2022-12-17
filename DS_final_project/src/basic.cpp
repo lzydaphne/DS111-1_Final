@@ -379,12 +379,14 @@ void basic(string selectedCase)
         read_data.mergeSort(Barr, 0, station_heap_size - 1);
         cout << "here!--3" << endl;
 
+        string bikeB;
         for (int q = 0; q < station_heap_size; q++)
         {
+            bikeB = "B" + Barr[q].bike_type;
+            cout
+                << station_id << " " << Barr[q].id << " " << bikeB << " " << Barr[q].rental_price << " " << Barr[q].rental_count << endl;
 
-            cout << station_id << " " << Barr[q].id << " " << Barr[q].bike_type << " " << Barr[q].rental_price << " " << Barr[q].rental_count << endl;
-
-            ofs_status << station_id << " " << Barr[q].id << " " << Barr[q].bike_type << " " << Barr[q].rental_price << " " << Barr[q].rental_count << endl;
+            ofs_status << station_id << " " << Barr[q].id << " " << bikeB << " " << Barr[q].rental_price << " " << Barr[q].rental_count << endl;
         }
         Barr_idx = 0;
         delete[] Barr;
