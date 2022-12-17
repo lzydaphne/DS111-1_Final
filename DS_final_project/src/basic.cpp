@@ -56,6 +56,8 @@ void basic(string selectedCase)
     //  BMNode *store_bikes = new BMNode[read_data.all_user_list[idx].len_AC];
     //* 用來放all station中，每個bike_type的最佳代表(target)
     bike_MaxHeap *store_stations = new bike_MaxHeap[station_num];
+    BMNode *store_BMNode = new BMNode[bike_max_num]; //! 儲存備胎bike
+    bike_MaxHeap *pick_best_BMNode = new bike_MaxHeap[bike_max_num];
 
     while (idx < read_data.all_user_list_idx)
     {
@@ -92,11 +94,9 @@ void basic(string selectedCase)
 
         //* 記住bike原本的位置
         int bike_type_index;
-        BMNode *store_BMNode = new BMNode[bike_max_num];
-        bike_MaxHeap *pick_best_BMNode = new bike_MaxHeap[bike_max_num];
 
         cout << "-----Single station--------------------------" << endl;
-
+        //* 當可以騎多個車型，每種車型都各自建立一個heap來拿到最好的選擇
         for (int i = 0; i < tlen_AC; i++)
         {
             cout << "-----diff type--------------------------" << endl;
@@ -209,8 +209,6 @@ void basic(string selectedCase)
 
             // cout << "this station doesn't have bike_type" << endl;
         }
-        delete[] store_BMNode;
-        delete[] pick_best_BMNode;
 
         //! start to output
         stringstream ss;
@@ -248,6 +246,8 @@ void basic(string selectedCase)
                 << user_id << " " << 0 << " " << 0 << " " << 0 << " " << 0 << " " << 0 << endl;
         }
     }
+    delete[] store_BMNode;
+    delete[] pick_best_BMNode;
 
     // output final bike inventory
     stringstream ss;
