@@ -206,11 +206,8 @@ void basic(string selectedCase)
                 {
                     find = 1;
                     target = tmp_target; // 就算是空的也會return-10
-                    if (target.rental_price != -1)
-                    {
-                        store_types_bike[tmp2_idx++] = target;
-                        /* code */
-                    }
+
+                    store_types_bike[tmp2_idx++] = target;
 
                     // store_stations->insertKey(target);
 
