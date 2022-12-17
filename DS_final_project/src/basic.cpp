@@ -317,18 +317,19 @@ void basic(string selectedCase)
     // output final bike inventory
 
     int Barr_idx = 0;
-    int station_size = 0;
+    int station_heap_size = 0;
+    // 計算低一station的各種車型的車輛個數
     for (int i = 0; i < read_data.station_num; i++)
     {
         ss << i;
         string station_id = "S" + ss.str();
         cout << "here!" << endl;
-        station_size = 0;
+        station_heap_size = 0;
         for (int j = 0; j < read_data.count_bike_type; j++)
-            station_size += basic_stations[i][j].heap_size;
-        cout << "station_size: " << station_size << endl;
+            station_heap_size += basic_stations[i][j].heap_size;
+        cout << "station_heap_size: " << station_heap_size << endl;
 
-        BMNode *Barr = new BMNode[station_size];
+        BMNode *Barr = new BMNode[station_heap_size];
         //! 把單一station的bike都蒐集起來放在Barr
         for (int k = 0; k < read_data.count_bike_type; k++)
         {
@@ -342,7 +343,8 @@ void basic(string selectedCase)
             {
                 // cout << "here!--2222" << endl;
                 // cout << "ptr new : " << ptr << endl;
-                // cout << "ptr->id: :" << ptr->id << endl;
+                cout << "ptr->id: :" << ptr->id << endl;
+
                 Barr[Barr_idx++] = *(ptr);
                 ptr++;
                 // cout << "ptr: :" << ptr << endl;
@@ -350,10 +352,10 @@ void basic(string selectedCase)
             }
         }
         // 把單一station的bike用ID進行排序小到大
-        read_data.mergeSort(Barr, 0, station_size - 1);
+        read_data.mergeSort(Barr, 0, station_heap_size - 1);
         cout << "here!--3" << endl;
 
-        for (int q = 0; q < station_size; q++)
+        for (int q = 0; q < station_heap_size; q++)
         {
 
             cout << station_id << " " << Barr[q].id << " " << Barr[q].bike_type << " " << Barr[q].rental_price << " " << Barr[q].rental_count << endl;
