@@ -92,14 +92,16 @@ void basic(string selectedCase)
 
         //* 記住bike原本的位置
         int bike_type_index;
+        BMNode *store_BMNode = new BMNode[bike_max_num];
 
         cout << "-----Single station--------------------------" << endl;
+
         for (int i = 0; i < tlen_AC; i++)
         {
+            bike_MaxHeap *pick_best_BMNode = new bike_MaxHeap[bike_max_num];
             cout << "-----diff type--------------------------" << endl;
             cout << "tAC_bike_type[i] " << tAC_bike_type[i] << endl;
             find = 0;
-
             // 抓出node
             target = basic_stations[tuser_start_station][tAC_bike_type[i]].extractMax();
 
@@ -126,8 +128,6 @@ void basic(string selectedCase)
             int bike_case = 0;
             int tmp_idx = 0;
             int tmp2_idx = 0;
-            BMNode *store_BMNode = new BMNode[bike_max_num];
-            bike_MaxHeap *pick_best_BMNode = new bike_MaxHeap[bike_max_num];
             while (!find) // 代表節點位置為空
             {
                 cout << "target price" << target.rental_price << endl;
@@ -158,7 +158,7 @@ void basic(string selectedCase)
                 }
                 else
                 {
-                    cout << "successful! " << endl;
+                    cout << "nice!! " << endl;
                     bike_case = 0;
                 }
                 //-------------------------------
@@ -178,8 +178,9 @@ void basic(string selectedCase)
                 {
                     find = 1;
                     target = pick_best_BMNode->extractMax(); // 就算是空的也會return-10
+
                     store_stations->insertKey(target);
-                    cout << "~~~~~~new~~~~~~~~" << endl;
+                    cout << "~~~~successful extract max~~~~~~~~" << endl;
                     cout << "target.id " << target.id << endl;
                     cout << "target.bike_type " << target.bike_type << endl;
                     cout << "target.rental_count " << target.rental_count << endl;
@@ -193,16 +194,18 @@ void basic(string selectedCase)
 
                         basic_stations[tuser_start_station][tAC_bike_type[i]].insertKey(store_BMNode[j]);
                     }
+
+                    delete[] pick_best_BMNode;
+                    // pick_best_BMNode->harr
                 }
             }
             tmp_idx = 0;
-            delete[] store_BMNode;
-            delete[] pick_best_BMNode;
 
             // target.returned_time += shortest_path;
 
             // cout << "this station doesn't have bike_type" << endl;
         }
+        delete[] store_BMNode;
 
         //! start to output
         stringstream ss;
