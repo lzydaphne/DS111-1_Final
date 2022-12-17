@@ -98,11 +98,13 @@ void basic(string selectedCase)
         shortest_path = -1;
         // 不同的AC BIKE TYPE
 
+        BMNode tmp_target;
+
         //  記住bike原本的位置
         // int bike_type_index;
 
-        cout << "-----Single station--------------------------" << endl;
         //* 當可以騎多個車型，每種車型都各自建立一個heap來拿到最好的選擇
+        cout << "-----Single station--------------------------" << endl;
         for (int i = 0; i < tlen_AC; i++)
         {
             cout << "-----diff type--------------------------" << endl;
@@ -134,7 +136,6 @@ void basic(string selectedCase)
             int bike_case = 0;
             int tmp_idx = 0;
             int tmp2_idx = 0;
-            BMNode tmp_target;
 
             while (!find) // 代表節點位置為空
             {
