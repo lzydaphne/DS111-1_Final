@@ -2,6 +2,17 @@
 
 using namespace std;
 
+typedef struct LogNode
+{
+    string user_ID;
+    int bike_ID;
+    int user_start_station;
+    int user_end_station;
+    int start_time;
+    int returned_time;
+
+} LNode;
+
 typedef struct UserNode
 {
     int user_ID;
@@ -30,8 +41,10 @@ public:
     // void sort_bikes();                             //* merge sort bike by ID
     void mergeSort(UNode *&arr, int l, int r);     //* merge sort user by start_time
     void mergeSort(BMNode *&arr, int l, int r);    //* merge sort bike by ID
+    void mergeSort(LNode *&arr, int l, int r);     //* merge sort bikeLog by ID
     void merge(UNode *&arr, int p, int q, int r);  //* merge sort user by start_time
     void merge(BMNode *&arr, int p, int q, int r); //* merge sort bike by ID
+    void merge(BMNode *&arr, int p, int q, int r); //* merge sort bikeLog by ID
 
     //! for fee
     // int discount[3]; // electric, lady, road

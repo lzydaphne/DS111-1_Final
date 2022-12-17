@@ -67,6 +67,11 @@ void basic(string selectedCase)
 
     stringstream ss;
 
+    // 為了儲存transfer log的 LNode
+    LNode *log_output = new LNode[read_data.user_num];
+    LNode log_store;
+    int log_idx = 0;
+
     while (idx < read_data.all_user_list_idx)
     {
 
@@ -305,7 +310,7 @@ void basic(string selectedCase)
             cout << "tuser_end_station " << tuser_end_station << endl;
             cout << "stoi(target.bike_type) " << stoi(target.bike_type) << endl;
 
-            cout << "basic_stations[tuser_end_station][stoi(target.bike_type)]  heapsize" << basic_stations[tuser_end_station][stoi(target.bike_type)].heap_size << endl;
+            // cout << "basic_stations[tuser_end_station][stoi(target.bike_type)]  heapsize" << basic_stations[tuser_end_station][stoi(target.bike_type)].heap_size << endl;
             cout << basic_stations[tuser_end_station][stoi(target.bike_type)].harr[0].id;
             basic_stations[tuser_end_station][stoi(target.bike_type)].insertKey(target);
             cout << "real target inserted " << target.id << endl;
@@ -313,15 +318,41 @@ void basic(string selectedCase)
             // output to user_result.txt
             ofs_user
                 << user_id << " " << 1 << " " << target.id << " " << tstart_time << " " << target.returned_time << " " << single_revenue << endl;
-            ofs_log << target.id << " " << tuser_start_station << " " << tuser_end_station << " " << tstart_time << " " << target.returned_time << " " << user_id << endl;
+
+            log_store.bike_ID = target.id;
+            log_store.user_ID = user_id;
+            log_store.returned_time = target.returned_time;
+            log_store.start_time = tstart_time;
+            log_store.user_start_station = tuser_start_station;
+            log_store.user_end_station = target.returned_time;
+            log_output[log_idx++] = log_store;
+
+            /*  ofs_log
+                  << target.id << " " << tuser_start_station << " " << tuser_end_station << " " << tstart_time << " " << target.returned_time << " " << user_id << endl;*/
         }
         else
         {
-
             cout << "not find ---------------------" << endl;
-            ofs_user
-                << user_id << " " << 0 << " " << 0 << " " << 0 << " " << 0 << " " << 0 << endl;
+            log_store.user_ID = user_id;
+            log_store.bike_ID = 0;
+            log_store.returned_time = 0;
+            log_store.start_time = 0;
+            log_store.user_start_station = 0;
+            log_store.user_end_station = 0;
+            log_output[log_idx++] = log_store;
+
+            /*ofs_user
+                << user_id << " " << 0 << " " << 0 << " " << 0 << " " << 0 << " " << 0 << endl;*/
         }
+
+        // 把log的bike用userID進行排序小到大
+        read_data.mergeSort(log_output, 0, log_idx - 1);
+        for (int p = 0; p < log_idx; p++)
+        {
+            ofs_log
+                << target.id << " " << tuser_start_station << " " << tuser_end_station << " " << tstart_time << " " << target.returned_time << " " << user_id << endl;
+        }
+
         ss.str("");
         ss.clear();
     }
@@ -333,17 +364,17 @@ void basic(string selectedCase)
     int Barr_idx = 0;
     int station_heap_size = 0;
     // 計算低一station的各種車型的車輛個數
-
-    cout << "basic_stations[0][0] " << basic_stations[0][0].harr[0].id << endl;
-    cout << "basic_stations[0][0] " << basic_stations[0][0].harr[1].id << endl;
-    cout << "basic_stations[0][1] " << basic_stations[0][1].harr[0].id << endl;
-    cout << "basic_stations[0][2] " << basic_stations[0][2].harr[0].id << endl;
-    cout << "basic_stations[0][2] " << basic_stations[0][2].harr[1].id << endl;
-    cout << "basic_stations[0][2] " << basic_stations[0][2].harr[2].id << endl;
-    cout << "basic_stations[0][2] " << basic_stations[0][2].harr[3].id << endl;
-    cout << "basic_stations[0][2] " << basic_stations[0][2].harr[4].id << endl;
-    cout << "basic_stations[0][2] " << basic_stations[0][2].harr[5].id << endl;
-    cout << "basic_stations[0][2] " << basic_stations[0][2].harr[6].id << endl;
+    /*
+        cout << "basic_stations[0][0] " << basic_stations[0][0].harr[0].id << endl;
+        cout << "basic_stations[0][0] " << basic_stations[0][0].harr[1].id << endl;
+        cout << "basic_stations[0][1] " << basic_stations[0][1].harr[0].id << endl;
+        cout << "basic_stations[0][2] " << basic_stations[0][2].harr[0].id << endl;
+        cout << "basic_stations[0][2] " << basic_stations[0][2].harr[1].id << endl;
+        cout << "basic_stations[0][2] " << basic_stations[0][2].harr[2].id << endl;
+        cout << "basic_stations[0][2] " << basic_stations[0][2].harr[3].id << endl;
+        cout << "basic_stations[0][2] " << basic_stations[0][2].harr[4].id << endl;
+        cout << "basic_stations[0][2] " << basic_stations[0][2].harr[5].id << endl;
+        cout << "basic_stations[0][2] " << basic_stations[0][2].harr[6].id << endl;*/
 
     for (int i = 0; i < read_data.station_num; i++)
     {
