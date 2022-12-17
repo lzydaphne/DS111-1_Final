@@ -250,7 +250,7 @@ void basic(string selectedCase)
         BMNode tmp = store_types_bike[0];
 
         cout << "check store_types_bike " << tmp.id << endl;
-        for (int i = 0; i < read_data.count_bike_type; i++)
+        for (int i = 0; i < tlen_AC; i++)
         {
             if (store_types_bike[i].rental_price > tmp.rental_price)
             {
