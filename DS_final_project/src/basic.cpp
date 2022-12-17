@@ -345,20 +345,21 @@ void basic(string selectedCase)
                 << user_id << " " << 0 << " " << 0 << " " << 0 << " " << 0 << " " << 0 << endl;*/
         }
 
-        // 把log的bike用userID進行排序小到大
-        read_data.mergeSort(log_output, 0, log_idx - 1);
-        for (int p = 0; p < log_idx; p++)
-        {
-            ofs_log
-                << target.id << " " << tuser_start_station << " " << tuser_end_station << " " << tstart_time << " " << target.returned_time << " " << user_id << endl;
-        }
-
         ss.str("");
         ss.clear();
     }
     delete[] store_BMNode;
     delete[] store_types_bike;
 
+    // output transfer log
+    // 把log的bike用userID進行排序小到大
+    read_data.mergeSort(log_output, 0, log_idx - 1);
+    for (int p = 0; p < log_idx; p++)
+    {
+
+        ofs_log
+            << log_store.bike_ID << " " << tuser_start_station << " " << tuser_end_station << " " << tstart_time << " " << log_store.returned_time << " " << log_store.user_ID << endl;
+    }
     // output final bike inventory
 
     int Barr_idx = 0;
