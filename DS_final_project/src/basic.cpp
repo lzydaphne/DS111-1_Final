@@ -329,11 +329,11 @@ void basic(string selectedCase)
     int station_heap_size = 0;
     // 計算低一station的各種車型的車輛個數
 
-    cout << "basic_stations[0][0] " << basic_stations[0][0].harr[0] << endl;
-    cout << "basic_stations[0][0] " << basic_stations[0][0].harr[1] << endl;
-    cout << "basic_stations[0][1] " << basic_stations[0][1].harr[0] << endl;
-    cout << "basic_stations[0][2] " << basic_stations[0][2].harr[0] << endl;
-    cout << "basic_stations[0][2] " << basic_stations[0][2].harr[1] << endl;
+    cout << "basic_stations[0][0] " << basic_stations[0][0].harr[0].id << endl;
+    cout << "basic_stations[0][0] " << basic_stations[0][0].harr[1].id << endl;
+    cout << "basic_stations[0][1] " << basic_stations[0][1].harr[0].id << endl;
+    cout << "basic_stations[0][2] " << basic_stations[0][2].harr[0].id << endl;
+    // cout << "basic_stations[0][2] " << basic_stations[0][2].harr[1].id << endl;
 
     for (int i = 0; i < read_data.station_num; i++)
     {
