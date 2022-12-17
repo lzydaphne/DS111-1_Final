@@ -242,7 +242,7 @@ bike_MaxHeap **my_data::read_bike()
             stations_ptr[num_station_id][num_bike_type].insertKey(tmp);
         }
         // test output
-
+        /*
         for (int i = 0; i < station_num; i++)
         {
             // cout << "testtest, i: " << i << endl;
@@ -257,7 +257,7 @@ bike_MaxHeap **my_data::read_bike()
                 }
                 cout << "final: " << i << " " << j << " " << endl;
             }
-        }
+        }*/
         ifs.close();
         // basic_stations = stations_ptr;
         return stations_ptr;
