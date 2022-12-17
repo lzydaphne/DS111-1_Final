@@ -198,6 +198,7 @@ void basic(string selectedCase)
                         tmp_target.rental_count = target.rental_count;
                         tmp_target.rental_price = target.rental_price;
                         tmp_target.returned_time = target.returned_time;
+                        cout << "tmp_target.id-bike0 " << tmp_target.id << endl;
                     }
                     else
                     {
