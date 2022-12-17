@@ -4,7 +4,7 @@ using namespace std;
 
 typedef struct LogNode
 {
-    string user_ID;
+    int user_ID; // 直接換成int
     int bike_ID;
     int user_start_station;
     int user_end_station;
