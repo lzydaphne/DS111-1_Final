@@ -346,7 +346,7 @@ void basic(string selectedCase)
             ofs_user
                 << user_id << " " << 0 << " " << 0 << " " << 0 << " " << 0 << " " << 0 << endl;
         }
-
+        //
         ss.str("");
         ss.clear();
     }
