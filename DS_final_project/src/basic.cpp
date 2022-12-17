@@ -302,6 +302,9 @@ void basic(string selectedCase)
             cout << "target.rental_count " << target.rental_count << endl;
             cout << "target.rental_price " << target.rental_price << endl;
             cout << "target.returned_time " << target.returned_time << endl;
+            cout << "tuser_end_station " << tuser_end_station << endl;
+            cout << "stoi(target.bike_type) " << stoi(target.bike_type) << endl;
+
             cout << "basic_stations[tuser_end_station][stoi(target.bike_type)]  heapsize" << basic_stations[tuser_end_station][stoi(target.bike_type)].heap_size << endl;
             basic_stations[tuser_end_station][stoi(target.bike_type)].insertKey(target);
             cout << "real target inserted " << target.id << endl;
