@@ -108,7 +108,7 @@ void basic(string selectedCase)
             cout << "-----diff type--------------------------" << endl;
             cout << "tAC_bike_type[i] " << tAC_bike_type[i] << endl;
             find = 0;
-            // 抓出node
+            //! 抓出node
             target = basic_stations[tuser_start_station][tAC_bike_type[i]].extractMax();
 
             //* 開始計算最短路徑
@@ -215,7 +215,7 @@ void basic(string selectedCase)
                     {
                         cout << "store_BMNode[j]:" << store_BMNode[j].id << endl;
 
-                        basic_stations[tuser_end_station][tAC_bike_type[i]].insertKey(store_BMNode[j]);
+                        basic_stations[tuser_start_station][tAC_bike_type[i]].insertKey(store_BMNode[j]);
                     }
                     /*
                                         while (!pick_best_BMNode->isEmpty())
@@ -244,8 +244,9 @@ void basic(string selectedCase)
             if (store_types_bike[i].rental_price > tmp.rental_price)
                 tmp = store_types_bike[i];
         }
+        target = tmp;
 
-        if (tmp.rental_price > 0) // 有找到目標車車
+        if (target.rental_price > 0) // 有找到目標車車
         {
             cout << "find!-------------------------------" << endl;
             // 計算revenue
