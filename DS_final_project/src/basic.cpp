@@ -214,12 +214,9 @@ void basic(string selectedCase)
                 else
                 {
                     find = 1;
-                    if (tmp_target.id > 0)
-                    {
-                        target = tmp_target; // 就算是空的也會return-10
-                        store_types_bike[tmp2_idx++] = target;
-                        /* code */
-                    }
+                    target = tmp_target; // 就算是空的也會return-10
+
+                    store_types_bike[tmp2_idx++] = target;
 
                     // store_stations->insertKey(target);
 
