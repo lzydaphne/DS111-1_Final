@@ -362,23 +362,29 @@ void basic(string selectedCase)
         //! 把單一station的bike都蒐集起來放在Barr
         for (int k = 0; k < read_data.count_bike_type; k++)
         {
-            //* Pointer arithmetic is done in units of the size of the pointer type.
+            // Pointer arithmetic is done in units of the size of the pointer type.
             cout << "here!--2" << endl;
             BMNode *ptr;
             ptr = basic_stations[i][k].harr;
             // cout << "ptr: " << ptr << endl;
             // cout << "size:" << sizeof(BMNode) << endl;
-            while (ptr->id > 0)
+            for (int m = 0; m < basic_stations[i][k].heap_size; m++)
             {
-                // cout << "here!--2222" << endl;
-                // cout << "ptr new : " << ptr << endl;
                 cout << "ptr->id: :" << ptr->id << endl;
-
                 Barr[Barr_idx++] = *(ptr);
                 ptr++;
-                // cout << "ptr: :" << ptr << endl;
-                // cout << "ptr->id: :" << ptr->id << endl;
             }
+
+            // while (ptr->id > 0)
+            // {
+            //     // cout << "here!--2222" << endl;
+            //     // cout << "ptr new : " << ptr << endl;
+
+            //     Barr[Barr_idx++] = *(ptr);
+            //     ptr++;
+            //     // cout << "ptr: :" << ptr << endl;
+            //     // cout << "ptr->id: :" << ptr->id << endl;
+            // }
         }
         // 把單一station的bike用ID進行排序小到大
         read_data.mergeSort(Barr, 0, station_heap_size - 1);
