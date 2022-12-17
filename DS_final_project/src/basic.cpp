@@ -93,12 +93,12 @@ void basic(string selectedCase)
         //* 記住bike原本的位置
         int bike_type_index;
         BMNode *store_BMNode = new BMNode[bike_max_num];
+        bike_MaxHeap *pick_best_BMNode = new bike_MaxHeap[bike_max_num];
 
         cout << "-----Single station--------------------------" << endl;
 
         for (int i = 0; i < tlen_AC; i++)
         {
-            bike_MaxHeap *pick_best_BMNode = new bike_MaxHeap[bike_max_num];
             cout << "-----diff type--------------------------" << endl;
             cout << "tAC_bike_type[i] " << tAC_bike_type[i] << endl;
             find = 0;
@@ -195,7 +195,11 @@ void basic(string selectedCase)
                         basic_stations[tuser_start_station][tAC_bike_type[i]].insertKey(store_BMNode[j]);
                     }
 
-                    delete[] pick_best_BMNode;
+                    while (!pick_best_BMNode->isEmpty())
+                    {
+                        pick_best_BMNode->extractMax();
+                    }
+
                     // pick_best_BMNode->harr
                 }
             }
@@ -206,6 +210,7 @@ void basic(string selectedCase)
             // cout << "this station doesn't have bike_type" << endl;
         }
         delete[] store_BMNode;
+        delete[] pick_best_BMNode;
 
         //! start to output
         stringstream ss;
