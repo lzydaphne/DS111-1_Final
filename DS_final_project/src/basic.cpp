@@ -90,16 +90,16 @@ void basic(string selectedCase)
 
         // cout << "tAC_bike_type: " << tAC_bike_type[0] << endl;
 
-        BMNode target; // 符合條件的bike_node
-        BMNode compare;
+        BMNode target; //! 符合條件的bike_node
+        // BMNode compare;
         single_revenue = 0;
         int find; // 有找到符合目標的bike
 
         shortest_path = -1;
         // 不同的AC BIKE TYPE
 
-        //* 記住bike原本的位置
-        int bike_type_index;
+        //  記住bike原本的位置
+        // int bike_type_index;
 
         cout << "-----Single station--------------------------" << endl;
         //* 當可以騎多個車型，每種車型都各自建立一個heap來拿到最好的選擇
@@ -138,6 +138,7 @@ void basic(string selectedCase)
 
             while (!find) // 代表節點位置為空
             {
+                cout << "targetID" << target.id << endl;
                 cout << "target price" << target.rental_price << endl;
                 //* heap已經為空
                 if (target.rental_price < -1)
@@ -178,6 +179,8 @@ void basic(string selectedCase)
                 }
                 else if (bike_case == 0)
                 {
+                    store_BMNode[tmp_idx++] = target;
+
                     if ((tmp_target.rental_price == -1) || (target.rental_price > tmp_target.rental_price) || ((target.rental_price == tmp_target.rental_price) && (target.id < tmp_target.id)))
                     {
                         tmp_target.bike_type = target.bike_type;
