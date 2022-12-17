@@ -179,7 +179,6 @@ void basic(string selectedCase)
                 }
                 else if (bike_case == 0)
                 {
-                    store_BMNode[tmp_idx++] = target;
 
                     if ((tmp_target.rental_price == -1) || (target.rental_price > tmp_target.rental_price) || ((target.rental_price == tmp_target.rental_price) && (target.id < tmp_target.id)))
                     {
@@ -189,6 +188,8 @@ void basic(string selectedCase)
                         tmp_target.rental_price = target.rental_price;
                         tmp_target.returned_time = target.returned_time;
                     }
+                    else
+                        store_BMNode[tmp_idx++] = target;
 
                     // pick_best_BMNode->insertKey(target);
                     target = basic_stations[tuser_start_station][tAC_bike_type[i]].extractMax();
@@ -214,8 +215,8 @@ void basic(string selectedCase)
                     for (int j = 0; j < tmp_idx; j++)
                     {
 
-                        if (store_BMNode[j].id == target.id)
-                            continue;
+                        // if (store_BMNode[j].id == target.id)
+                        // continue;
                         cout << "store_BMNode[j]:" << store_BMNode[j].id << endl;
 
                         basic_stations[tuser_start_station][tAC_bike_type[i]].insertKey(store_BMNode[j]);
