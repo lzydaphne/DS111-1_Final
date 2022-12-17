@@ -214,8 +214,8 @@ void basic(string selectedCase)
                     for (int j = 0; j < tmp_idx; j++)
                     {
 
-                        if (store_BMNode[j].id == target.id)
-                            continue;
+                        // if (store_BMNode[j].id == target.id)
+                        // continue;
                         cout << "store_BMNode[j]:" << store_BMNode[j].id << endl;
 
                         basic_stations[tuser_start_station][tAC_bike_type[i]].insertKey(store_BMNode[j]);
@@ -242,10 +242,15 @@ void basic(string selectedCase)
         ss << tuser_ID;
         string user_id = "U" + ss.str();
         BMNode tmp = store_types_bike[0];
+        int tmp_bike_type = 0;
         for (int i = 0; i < read_data.count_bike_type; i++)
         {
             if (store_types_bike[i].rental_price > tmp.rental_price)
+            {
+                tmp_bike_type = stoi(tmp.bike_type.erase(0, 1));
+                basic_stations[tuser_start_station][tmp_bike_type].insertKey(tmp);
                 tmp = store_types_bike[i];
+            }
         }
         target = tmp;
 
@@ -265,7 +270,8 @@ void basic(string selectedCase)
             cout << "target.rental_count " << target.rental_count << endl;
             cout << "target.rental_price " << target.rental_price << endl;
             cout << "target.returned_time " << target.returned_time << endl;
-            int num_bike_type = stoi(target.bike_type);
+            // int num_bike_type = stoi(target.bike_type);
+            int num_bike_type = stoi(target.bike_type.erase(0, 1));
             basic_stations[tuser_end_station][num_bike_type].insertKey(target);
 
             // output to user_result.txt
