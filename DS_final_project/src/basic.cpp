@@ -335,6 +335,10 @@ void basic(string selectedCase)
     cout << "basic_stations[0][2] " << basic_stations[0][2].harr[0].id << endl;
     cout << "basic_stations[0][2] " << basic_stations[0][2].harr[1].id << endl;
     cout << "basic_stations[0][2] " << basic_stations[0][2].harr[2].id << endl;
+    cout << "basic_stations[0][2] " << basic_stations[0][2].harr[3].id << endl;
+    cout << "basic_stations[0][2] " << basic_stations[0][2].harr[4].id << endl;
+    cout << "basic_stations[0][2] " << basic_stations[0][2].harr[5].id << endl;
+    cout << "basic_stations[0][2] " << basic_stations[0][2].harr[6].id << endl;
 
     for (int i = 0; i < read_data.station_num; i++)
     {
