@@ -199,7 +199,7 @@ void basic(string selectedCase)
                     {
                         pick_best_BMNode->extractMax();
                     }
-
+                    cout << "pick_best_BMNode " << pick_best_BMNode->heap_size << endl;
                     // pick_best_BMNode->harr
                 }
             }
