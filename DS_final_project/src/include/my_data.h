@@ -44,7 +44,7 @@ public:
     void mergeSort(LNode *&arr, int l, int r);     //* merge sort bikeLog by ID
     void merge(UNode *&arr, int p, int q, int r);  //* merge sort user by start_time
     void merge(BMNode *&arr, int p, int q, int r); //* merge sort bike by ID
-    void merge(BMNode *&arr, int p, int q, int r); //* merge sort bikeLog by ID
+    void merge(LNode *&arr, int p, int q, int r);  //* merge sort bikeLog by ID
 
     //! for fee
     // int discount[3]; // electric, lady, road
