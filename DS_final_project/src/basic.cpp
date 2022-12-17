@@ -186,7 +186,8 @@ void basic(string selectedCase)
                         // 把備胎放回去
                         if ((tmp_target.rental_price != -1))
                         {
-                            // cout << "(tmp_target.bike_type): " << tmp_target.bike_type << endl;
+                            cout << "bike_case 0: " << tmp_target.id << endl;
+
                             basic_stations[tuser_start_station][stoi(tmp_target.bike_type)].insertKey(tmp_target);
                         }
                         tmp_target.bike_type = target.bike_type;
