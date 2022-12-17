@@ -214,8 +214,8 @@ void basic(string selectedCase)
                     for (int j = 0; j < tmp_idx; j++)
                     {
 
-                        // if (store_BMNode[j].id == target.id)
-                        // continue;
+                        if (store_BMNode[j].id == target.id)
+                            continue;
                         cout << "store_BMNode[j]:" << store_BMNode[j].id << endl;
 
                         basic_stations[tuser_start_station][tAC_bike_type[i]].insertKey(store_BMNode[j]);
