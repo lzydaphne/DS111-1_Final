@@ -306,6 +306,7 @@ void basic(string selectedCase)
             cout << "stoi(target.bike_type) " << stoi(target.bike_type) << endl;
 
             cout << "basic_stations[tuser_end_station][stoi(target.bike_type)]  heapsize" << basic_stations[tuser_end_station][stoi(target.bike_type)].heap_size << endl;
+            cout << basic_stations[tuser_end_station][stoi(target.bike_type)].harr[0].id;
             basic_stations[tuser_end_station][stoi(target.bike_type)].insertKey(target);
             cout << "real target inserted " << target.id << endl;
 
