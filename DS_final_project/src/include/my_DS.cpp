@@ -343,6 +343,7 @@ BMNode bike_MaxHeap::extractMax()
     if (heap_size <= 0)
     {
         BMNode tmp;
+        tmp.id = -10;
         tmp.rental_price = -10;
         tmp.returned_time = 1050; // 刻意製造不符合的時間，因為最多1040
         return tmp;
