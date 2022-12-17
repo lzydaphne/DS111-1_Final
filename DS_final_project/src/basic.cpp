@@ -254,17 +254,19 @@ void basic(string selectedCase)
         BMNode tmp = store_types_bike[0];
 
         cout << "check store_types_bike " << tmp.id << endl;
-        for (int i = 1; i < tlen_AC; i++)
+        for (int i = 0; i < tlen_AC; i++)
         {
-            if (store_types_bike[i].rental_price > tmp.rental_price)
+            if ((store_types_bike[i].rental_price > tmp.rental_price) || ((store_types_bike[i].rental_price == tmp.rental_price) && (store_types_bike[i].id < tmp.id)))
             {
                 basic_stations[tuser_start_station][stoi(tmp.bike_type)].insertKey(tmp);
                 tmp = store_types_bike[i];
                 // cout << "tmp.bike_id: " << tmp.id << endl;
                 // cout << "tmp.bike_id: --2 " << tmp.id << endl;
             }
-            else
+            else if ((store_types_bike[i].rental_price < tmp.rental_price))
+            {
                 basic_stations[tuser_start_station][stoi(tmp.bike_type)].insertKey(store_types_bike[i]);
+            }
         }
         cout << "check store_types_bike--2: " << tmp.id << endl;
         target = tmp;
