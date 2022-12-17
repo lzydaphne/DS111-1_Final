@@ -150,6 +150,7 @@ void basic(string selectedCase)
                     // continue;
                 }
                 //* 這邊抓出來的bike要放回去
+                // todo 最後要優化，把這些條件放在一起檢查
                 else if (target.rental_count >= read_data.rental_limit)
                 {
                     bike_case = 1;
@@ -182,6 +183,7 @@ void basic(string selectedCase)
                 {
                     if ((tmp_target.rental_price == -1) || (target.rental_price > tmp_target.rental_price) || ((target.rental_price == tmp_target.rental_price) && (target.id < tmp_target.id)))
                     {
+                        // 把備胎放回去
                         if ((tmp_target.rental_price != -1))
                         {
                             cout << "(tmp_target.bike_type): " << tmp_target.bike_type << endl;
@@ -237,10 +239,6 @@ void basic(string selectedCase)
             }
             tmp_idx = 0;
             tmp2_idx = 0;
-
-            // target.returned_time += shortest_path;
-
-            // cout << "this station doesn't have bike_type" << endl;
         }
 
         //! start to output
@@ -254,8 +252,6 @@ void basic(string selectedCase)
             if (store_types_bike[i].rental_price > tmp.rental_price)
             {
                 cout << "tmp.bike_type: " << tmp.bike_type << endl;
-                // tmp_bike_type = stoi(tmp.bike_type.erase(0, 1));
-                // basic_stations[tuser_start_station][tmp_bike_type].insertKey(tmp);
                 tmp = store_types_bike[i];
             }
         }
@@ -307,12 +303,6 @@ void basic(string selectedCase)
         string station_id = "S" + ss.str();
         cout << "here!" << endl;
         station_size = 0;
-        cout << basic_stations[0][0].heap_size << endl;
-        cout << basic_stations[0][1].heap_size << endl;
-        cout << basic_stations[0][2].heap_size << endl;
-        cout << basic_stations[1][0].heap_size << endl;
-        cout << basic_stations[1][1].heap_size << endl;
-        cout << basic_stations[1][2].heap_size << endl;
         for (int j = 0; j < read_data.count_bike_type; j++)
             station_size += basic_stations[i][j].heap_size;
         cout << "station_size: " << station_size << endl;
@@ -325,13 +315,13 @@ void basic(string selectedCase)
             cout << "here!--2" << endl;
             BMNode *ptr;
             ptr = basic_stations[i][k].harr;
-            cout << "ptr: " << ptr << endl;
+            // cout << "ptr: " << ptr << endl;
             // cout << "size:" << sizeof(BMNode) << endl;
             while (ptr->id > 0)
             {
                 // cout << "here!--2222" << endl;
-                cout << "ptr new : " << ptr << endl;
-                cout << "ptr->id: :" << ptr->id << endl;
+                // cout << "ptr new : " << ptr << endl;
+                // cout << "ptr->id: :" << ptr->id << endl;
                 Barr[Barr_idx++] = *(ptr);
                 ptr++;
                 // cout << "ptr: :" << ptr << endl;
