@@ -256,7 +256,7 @@ void basic(string selectedCase)
                 tmp = store_types_bike[i];
             }
         }
-        cout << "check store_types_bike--2" << tmp.id << endl;
+        cout << "check store_types_bike--2: " << tmp.id << endl;
         target = tmp;
 
         if (target.rental_price > 0) // 有找到目標車車
