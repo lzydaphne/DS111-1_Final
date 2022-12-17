@@ -100,7 +100,6 @@ void basic(string selectedCase)
         shortest_path = -1;
         // 不同的AC BIKE TYPE
 
-        BMNode tmp_target;
         int tmp_idx = 0;
         int tmp2_idx = 0;
 
@@ -108,6 +107,7 @@ void basic(string selectedCase)
         cout << "-----Single station--------------------------" << endl;
         for (int i = 0; i < tlen_AC; i++)
         {
+            BMNode tmp_target;
             cout << "-----diff type--------------------------" << endl;
             cout << "tAC_bike_type[i] " << tAC_bike_type[i] << endl;
             find = 0;
@@ -189,6 +189,7 @@ void basic(string selectedCase)
                         if ((tmp_target.rental_price != -1))
                         {
                             cout << "bike_case 0: " << tmp_target.id << endl;
+                            cout << tmp_target.rental_price << endl;
 
                             basic_stations[tuser_start_station][stoi(tmp_target.bike_type)].insertKey(tmp_target);
                         }
