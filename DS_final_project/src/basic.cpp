@@ -246,6 +246,8 @@ void basic(string selectedCase)
         string user_id = "U" + ss.str();
 
         BMNode tmp = store_types_bike[0];
+
+        cout << "check store_types_bike " << tmp.id << endl;
         for (int i = 0; i < read_data.count_bike_type; i++)
         {
             if (store_types_bike[i].rental_price > tmp.rental_price)
@@ -254,6 +256,7 @@ void basic(string selectedCase)
                 tmp = store_types_bike[i];
             }
         }
+        cout << "check store_types_bike--2" << tmp.id << endl;
         target = tmp;
 
         if (target.rental_price > 0) // 有找到目標車車
