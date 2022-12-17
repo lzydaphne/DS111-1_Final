@@ -101,6 +101,8 @@ void basic(string selectedCase)
         // 不同的AC BIKE TYPE
 
         BMNode tmp_target;
+        int tmp_idx = 0;
+        int tmp2_idx = 0;
 
         //* 當可以騎多個車型，每種車型都各自建立一個heap來拿到最好的選擇
         cout << "-----Single station--------------------------" << endl;
@@ -133,8 +135,7 @@ void basic(string selectedCase)
 
             //*開始在同一站中針對特定bike type抓取bike
             int bike_case = 0;
-            int tmp_idx = 0;
-            int tmp2_idx = 0;
+            tmp_idx = 0;
 
             while (!find) // 代表節點位置為空
             {
@@ -237,8 +238,9 @@ void basic(string selectedCase)
                 }
             }
             tmp_idx = 0;
-            tmp2_idx = 0;
+            // tmp2_idx = 0;
         }
+        tmp2_idx = 0;
 
         //! start to output
 
