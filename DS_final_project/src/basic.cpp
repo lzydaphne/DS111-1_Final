@@ -365,6 +365,8 @@ void basic(string selectedCase)
         string uStr = "U" + ss.str();
         ofs_log
             << log_store.bike_ID << " " << tuser_start_station << " " << tuser_end_station << " " << tstart_time << " " << log_store.returned_time << " " << uStr << endl;
+        ss.str("");
+        ss.clear();
     }
     // output final bike inventory
 
