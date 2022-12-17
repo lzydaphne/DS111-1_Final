@@ -374,17 +374,6 @@ void basic(string selectedCase)
                 Barr[Barr_idx++] = *(ptr);
                 ptr++;
             }
-
-            // while (ptr->id > 0)
-            // {
-            //     // cout << "here!--2222" << endl;
-            //     // cout << "ptr new : " << ptr << endl;
-
-            //     Barr[Barr_idx++] = *(ptr);
-            //     ptr++;
-            //     // cout << "ptr: :" << ptr << endl;
-            //     // cout << "ptr->id: :" << ptr->id << endl;
-            // }
         }
         // 把單一station的bike用ID進行排序小到大
         read_data.mergeSort(Barr, 0, station_heap_size - 1);
