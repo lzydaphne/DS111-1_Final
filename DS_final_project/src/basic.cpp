@@ -324,7 +324,7 @@ void basic(string selectedCase)
             log_store.returned_time = target.returned_time;
             log_store.start_time = tstart_time;
             log_store.user_start_station = tuser_start_station;
-            log_store.user_end_station = target.returned_time;
+            log_store.user_end_station = tuser_end_station;
             log_output[log_idx++] = log_store;
 
             /*  ofs_log
