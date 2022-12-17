@@ -272,7 +272,7 @@ void basic(string selectedCase)
             cout << "target.rental_price " << target.rental_price << endl;
             cout << "target.returned_time " << target.returned_time << endl;
             // int num_bike_type = stoi(target.bike_type);
-            int num_bike_type = stoi(target.bike_type.erase(0, 1));
+            int num_bike_type = stoi(target.bike_type);
             basic_stations[tuser_end_station][num_bike_type].insertKey(target);
 
             // output to user_result.txt
