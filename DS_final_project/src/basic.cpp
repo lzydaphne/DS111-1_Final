@@ -71,6 +71,8 @@ void basic(string selectedCase)
 
     stringstream ss;
 
+    cout << "user total num: " << read_data.user_num << endl;
+
     // 為了check user_result的 LNode
     cUNode *check_user_output = new cUNode[read_data.user_num];
     int check_user_idx = 0;
