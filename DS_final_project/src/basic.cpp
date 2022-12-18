@@ -417,7 +417,7 @@ void basic(string selectedCase)
     // 把log的bike用userID進行排序小到大
     read_data.mergeSort(log_output, 0, log_idx - 1);
     LNode log_store;
-    string uStr;
+    // string uStr;
     for (int p = 0; p < log_idx; p++)
     {
         log_store = log_output[p];
