@@ -287,7 +287,7 @@ void basic(string selectedCase)
         BMNode tmp = store_types_bike[0];
 
         cout << "check store_types_bike " << tmp.id << endl;
-        if (tmp.id > 0)
+        if (tmp.id >= 0)
         {
             for (int i = 0; i < tlen_AC; i++)
             {
