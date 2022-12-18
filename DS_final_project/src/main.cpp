@@ -15,7 +15,7 @@ int main(int argc, char **argv)
          << "\n";
     cout << "-------------------------------------------" << endl;
 
-    if (version == "advance")
+    if (version == "advanced")
         advanced(selectedCase);
     else
         basic(selectedCase);
