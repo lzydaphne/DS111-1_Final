@@ -1,5 +1,5 @@
 #include "./nthu_bike.h"
-#include "./include/my_data.h"
+#include "./my_data.h"
 #include <fstream>
 #include <cmath> //round
 using namespace std;
