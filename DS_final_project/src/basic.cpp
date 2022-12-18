@@ -32,9 +32,9 @@ void basic(string selectedCase)
     ofs_log.open("transfer_log.txt", ios::out);
     ofs_status.open("station_status.txt", ios::out);
 
-    check_ofs_user.open("user_result.txt", ios::out);
-    check_ofs_log.open("transfer_log.txt", ios::out);
-    check_ofs_status.open("station_status.txt", ios::out);
+    check_ofs_user.open("check_user_result.txt", ios::out);
+    check_ofs_log.open("check_transfer_log.txt", ios::out);
+    check_ofs_status.open("check_station_status.txt", ios::out);
     int idx = 0;
 
     // temp variable
