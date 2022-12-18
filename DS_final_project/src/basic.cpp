@@ -165,8 +165,7 @@ void basic(string selectedCase)
                 if (target.rental_price < -1)
                 {
                     bike_case = -1;
-                    cout
-                        << " no bike  " << endl;
+                    cout << " no bike  " << endl;
                     // continue;
                 }
                 //* 這邊抓出來的bike要放回去
