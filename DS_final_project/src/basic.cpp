@@ -107,6 +107,12 @@ void basic(string selectedCase)
         int tmp_idx = 0;
         int tmp2_idx = 0;
 
+        for (int i = 0; i < read_data.count_bike_type; i++)
+        {
+            store_types_bike[i].id = -1;
+            store_types_bike[i].rental_price = -1;
+        }
+
         //* 當可以騎多個車型，每種車型都各自建立一個heap來拿到最好的選擇
         cout << "-----Single station--------------------------" << endl;
         for (int i = 0; i < tlen_AC; i++)
