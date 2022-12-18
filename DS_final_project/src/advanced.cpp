@@ -119,7 +119,7 @@ void advanced(string selectedCase)
         idx++;
 
         //!--------
-        demend_compare[idx] = tuser_start_station / read_data.station_num;
+        demend_compare[idx] = float(tuser_start_station / read_data.station_num);
         cout << "demend_compare[idx]: " << demend_compare[idx] << endl;
         //!--------
 
@@ -393,6 +393,7 @@ void advanced(string selectedCase)
             cout << "first not find ---------------------" << endl;
 
             //! --------test algo-----------
+            /*
             int *single_station = read_data.shortest_record[tuser_start_station];
             // 大小:station_num
             // qsort(single_station, station_num, sizeof(int), compare);
@@ -412,49 +413,50 @@ void advanced(string selectedCase)
                     first = single_station[q];
                 }
 
-                /* If arr[i] is in between first and second */
-                else if (single_station[q] > second)
-                {
-                    second_idx = q;
-                    third_idx = second_idx;
-                    third = second;
-                    second = single_station[q];
-                }
-
-                else if (single_station[q] > third)
-                {
-                    third_idx = q;
-                    third = single_station[q];
-                }
-            }
-            //* 拿到最近的三個station的idx
-            transfer_list[0] = first_idx;
-            transfer_list[1] = second_idx;
-            transfer_list[2] = third_idx;
-
-            int highest = -1; // 最大的heapsize的station
-            for (int k = 0; k < 3; k++)
+                /* If arr[i] is in between first and second
+            else if (single_station[q] > second)
             {
-                // 確保至少轉運起點有兩台車
-                int h = basic_stations[transfer_list[k]][num_target_bike_type].heap_size;
-                if (h > 2 && h > highest)
-                {
-                    highest = transfer_list[k];
-                }
+                second_idx = q;
+                third_idx = second_idx;
+                third = second;
+                second = single_station[q];
             }
-            // todo 如果把三個station增加為更多個，可以嘗試看看效果會不會比較好
-            if (highest == -1) // 代表那三個station的車都不夠用，那就先不動
-                cout << "not enough transfer bike!" << endl;
-            else
+
+            else if (single_station[q] > third)
             {
-                //! 開始轉運，把最小rental price的車送到轉運終點
-                //* 先送兩顆過去
-                //! 又覺得做法不太好，因為可能可以有很多種車種，不一定要被選租來的這一種
-                BMNode transfered1_node = basic_stations[highest][num_target_bike_type].extractMin();
-                BMNode transfered2_node = basic_stations[highest][num_target_bike_type].extractMin();
-                basic_stations[tuser_start_station][num_target_bike_type].insertKey(transfered1_node);
-                basic_stations[tuser_start_station][num_target_bike_type].insertKey(transfered2_node);
+                third_idx = q;
+                third = single_station[q];
             }
+        }
+        // 拿到最近的三個station的idx
+        transfer_list[0] = first_idx;
+        transfer_list[1] = second_idx;
+        transfer_list[2] = third_idx;
+
+        int highest = -1; // 最大的heapsize的station
+        for (int k = 0; k < 3; k++)
+        {
+            // 確保至少轉運起點有兩台車
+            int h = basic_stations[transfer_list[k]][num_target_bike_type].heap_size;
+            if (h > 2 && h > highest)
+            {
+                highest = transfer_list[k];
+            }
+        }
+        // todo 如果把三個station增加為更多個，可以嘗試看看效果會不會比較好
+        if (highest == -1) // 代表那三個station的車都不夠用，那就先不動
+            cout << "not enough transfer bike!" << endl;
+        else
+        {
+            //! 開始轉運，把最小rental price的車送到轉運終點
+            // 先送兩顆過去
+            //! 又覺得做法不太好，因為可能可以有很多種車種，不一定要被選租來的這一種
+            BMNode transfered1_node = basic_stations[highest][num_target_bike_type].extractMin();
+            BMNode transfered2_node = basic_stations[highest][num_target_bike_type].extractMin();
+            basic_stations[tuser_start_station][num_target_bike_type].insertKey(transfered1_node);
+            basic_stations[tuser_start_station][num_target_bike_type].insertKey(transfered2_node);
+        }
+        */
 
             //-------------------
 
@@ -613,18 +615,18 @@ void advanced(string selectedCase)
     delete[] read_data.all_user_list;
 
     /*
-string path = "./testcases/" + selectedCase + "/bike_info.txt";
-string line;
-ifstream myfile(path);
-if (myfile.is_open())
-{
+    string path = "./testcases/" + selectedCase + "/bike_info.txt";
+    string line;
+    ifstream myfile(path);
+    if (myfile.is_open())
+    {
 
     while (getline(myfile, line))
     {
         cout << line << endl;
     }
     myfile.close();
-}
-else
+    }
+    else
     cout << "not open";*/
 }
