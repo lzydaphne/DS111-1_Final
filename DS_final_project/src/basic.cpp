@@ -347,9 +347,6 @@ void basic(string selectedCase)
             log_store.user_start_station = tuser_start_station;
             log_store.user_end_station = tuser_end_station;
             log_output[log_idx++] = log_store;
-
-            /*  ofs_log
-                  << target.id << " " << tuser_start_station << " " << tuser_end_station << " " << tstart_time << " " << target.returned_time << " " << user_id << endl;*/
         }
         else
         {
