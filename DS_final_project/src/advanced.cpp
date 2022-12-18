@@ -213,8 +213,8 @@ void advanced(string selectedCase)
                     countB++;
                     cout << "(tstart_time + shortest_path > tend_time)" << endl;
                 }
-                else if (target.returned_time > tstart_time)
-                // else if (target.returned_time + shortest_path >= tend_time)
+                // else if (target.returned_time > tstart_time)
+                else if (target.returned_time + shortest_path >= tend_time)
                 //* 優化轉運的重點，可以wait for b
                 {
                     bike_case = 1;
