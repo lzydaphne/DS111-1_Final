@@ -477,8 +477,8 @@ void advanced(string selectedCase)
         ss.str("");
         ss.clear();
     }
-    delete[] store_BMNode;
-    delete[] store_types_bike;
+    // delete[] store_BMNode;
+    // delete[] store_types_bike;
 
     // todo 這是為了檢查方便，務必改回依據user request順序的答案形式
     //*otuput sorted user_request
