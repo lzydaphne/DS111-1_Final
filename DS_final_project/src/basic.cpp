@@ -336,9 +336,9 @@ void basic(string selectedCase)
             cout << "real target inserted " << target.id << endl;
 
             // output to user_result.txt
-            /*
+
             ofs_user
-                << user_id << " " << 1 << " " << target.id << " " << tstart_time << " " << target.returned_time << " " << single_revenue << endl;*/
+                << user_id << " " << 1 << " " << target.id << " " << tstart_time << " " << target.returned_time << " " << single_revenue << endl;
             cUNode user_sort;
             user_sort.user_ID = tuser_ID; // num
             user_sort.AC = 1;
@@ -358,7 +358,7 @@ void basic(string selectedCase)
             log_output[log_idx++] = log_store;
 
             /*  ofs_log
-                  << target.id << " " << tuser_start_station << " " << tuser_end_station << " " << tstart_time << " " << target.returned_time << " " << user_id << endl;*/
+                  << target.id << " " << tuser_start_station << " " << tuser_end_station << " " << tstart_time << " " << target.returned_time << " " << user_id << endl;
         }
         else
         {
@@ -381,9 +381,9 @@ void basic(string selectedCase)
             user_sort.bike_end_time = 0;
             user_sort.revenue = 0;
             check_user_output[check_user_idx++] = user_sort;
-            /*
+
             ofs_user
-                << user_id << " " << 0 << " " << 0 << " " << 0 << " " << 0 << " " << 0 << endl;*/
+                << user_id << " " << 0 << " " << 0 << " " << 0 << " " << 0 << " " << 0 << endl;
         }
         //
         ss.str("");
