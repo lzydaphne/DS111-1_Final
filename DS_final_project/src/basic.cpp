@@ -235,7 +235,7 @@ void basic(string selectedCase)
                 {
                     find = 1;
                     target = tmp_target; // 就算是空的也會return-10
-                    if (target.id > 0)
+                    if (target.id >= 0)
                     {
                         store_types_bike[tmp2_idx++] = target;
 
