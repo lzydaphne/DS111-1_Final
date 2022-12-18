@@ -219,11 +219,7 @@ bike_MaxHeap **my_data::read_bike()
         bike_MaxHeap **stations_ptr = new bike_MaxHeap *[station_num];
         for (int i = 0; i < station_num; i++)
         {
-            // cout << "station_num: " << station_num << endl;
-            // bike_MaxHeap *station_ptr;
-            // stations_ptr[i] = station_ptr;
             stations_ptr[i] = new bike_MaxHeap[count_bike_type];
-            // station_ptr = new bike_MaxHeap[count_bike_type];
         };
 
         while (ifs >> bike_type >> bike_id >> station_id >> rental_price >> rental_count)

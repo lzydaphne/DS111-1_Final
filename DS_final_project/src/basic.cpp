@@ -147,8 +147,6 @@ void basic(string selectedCase)
                     cout << "dij: " << read_data.shortest_record[tuser_start_station][idx] << endl;
                     idx++;
                 }
-
-                // read_data.shortest_record[tuser_start_station] = basic_graph.Graph::dist_graph;
             }
             shortest_path = read_data.shortest_record[tuser_start_station][tuser_end_station];
             cout << "  shortest_path " << shortest_path << endl;
@@ -408,6 +406,7 @@ void basic(string selectedCase)
         ss.str("");
         ss.clear();
     }
+    delete[] check_user_output;
 
     // output transfer log
     // 把log的bike用userID進行排序小到大
@@ -435,6 +434,7 @@ void basic(string selectedCase)
         ss.str("");
         ss.clear();
     }
+    delete[] log_output;
     // output final bike inventory
 
     int Barr_idx = 0;
@@ -503,9 +503,17 @@ void basic(string selectedCase)
     // test
     cout << "basic_revenue: " << basic_revenue << endl;
 
-    delete[] read_data.shortest_record;
-
     // todo delete all new operation!
+    for (int i = 0; i < station_num; i++)
+    {
+        delete[] read_data.shortest_record[i];
+        for (int j = 0; j < read_data.count_bike_type; j++)
+            delete[] basic_stations[i][j].harr;
+    }
+    for (int i = 0; i < station_num; i++)
+        delete[] basic_stations[i];
+    delete[] basic_graph.bike_graph_List;
+    delete[] read_data.all_user_list;
 
     /*
 string path = "./testcases/" + selectedCase + "/bike_info.txt";
