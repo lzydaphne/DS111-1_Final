@@ -313,7 +313,7 @@ void basic(string selectedCase)
         BMNode target;
         target = tmp;
 
-        if (target.rental_price > 0) // 有找到目標車車
+        if ((target.rental_price > 0) && (target.returned_time <= 1040)) // 有找到目標車車
         {
             cout << "find!-------------------------------" << endl;
             // 計算revenue
