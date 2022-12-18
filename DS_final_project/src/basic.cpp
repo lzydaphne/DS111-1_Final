@@ -81,6 +81,7 @@ void basic(string selectedCase)
     LNode *log_output = new LNode[read_data.user_num];
     int log_idx = 0;
 
+    int countZ = 0;
     int countA = 0;
     int countB = 0;
     int countC = 0;
@@ -166,6 +167,7 @@ void basic(string selectedCase)
                 //* heap已經為空，price=-10
                 if (target.rental_price < -1)
                 {
+                    countZ++;
                     bike_case = -1;
                     cout << " no bike  " << endl;
                     // continue;
@@ -505,6 +507,8 @@ void basic(string selectedCase)
     }
     // test
     cout << "basic_revenue: " << basic_revenue << endl;
+
+    cout << "countZ: " << countZ << endl;
     cout << "countA: " << countA << endl;
     cout << "countB: " << countB << endl;
     cout << "countC: " << countC << endl;
