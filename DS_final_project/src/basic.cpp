@@ -400,7 +400,7 @@ void basic(string selectedCase)
     read_data.mergeSort(check_user_output, 0, check_user_idx - 1);
     cUNode user_store;
     string uStr;
-    for (int p = 0; p < log_idx; p++)
+    for (int p = 0; p < check_user_idx; p++)
     {
         user_store = check_user_output[p];
         ss << user_store.user_ID;
