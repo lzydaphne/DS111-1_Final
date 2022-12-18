@@ -220,20 +220,23 @@ void basic(string selectedCase)
                 {
                     find = 1;
                     target = tmp_target; // 就算是空的也會return-10
+                    if (target.id > 0)
+                    {
+                        store_types_bike[tmp2_idx++] = target;
 
-                    store_types_bike[tmp2_idx++] = target;
+                        // store_stations->insertKey(target);
 
-                    // store_stations->insertKey(target);
-
-                    cout
-                        << "~~~~successful extract max~~~~~~~~" << endl;
-                    cout << "target.id " << target.id << endl;
-                    cout << "target.bike_type " << target.bike_type << endl;
-                    cout << "target.rental_count " << target.rental_count << endl;
-                    cout << "target.rental_price " << target.rental_price << endl;
-                    cout << "target.returned_time " << target.returned_time << endl;
-                    cout
-                        << "~~~~end extract max~~~~~~~~" << endl;
+                        cout
+                            << "~~~~successful extract max~~~~~~~~" << endl;
+                        cout << "target.id " << target.id << endl;
+                        cout << "target.bike_type " << target.bike_type << endl;
+                        cout << "target.rental_count " << target.rental_count << endl;
+                        cout << "target.rental_price " << target.rental_price << endl;
+                        cout << "target.returned_time " << target.returned_time << endl;
+                        cout
+                            << "~~~~end extract max~~~~~~~~" << endl;
+                        /* code */
+                    }
 
                     // cout<< "store_bikes[i].id " << store_bikes[i].id << endl;
                     for (int j = 0; j < tmp_idx; j++)
