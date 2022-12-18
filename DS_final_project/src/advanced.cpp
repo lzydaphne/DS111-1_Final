@@ -603,6 +603,8 @@ void advanced(string selectedCase)
     cout << "countC: " << countC << endl;
 
     // todo delete all new operation!
+
+    /*
     for (int i = 0; i < station_num; i++)
     {
         delete[] read_data.shortest_record[i];
@@ -612,21 +614,6 @@ void advanced(string selectedCase)
     for (int i = 0; i < station_num; i++)
         delete[] basic_stations[i];
     delete[] basic_graph.bike_graph_List;
-    delete[] read_data.all_user_list;
 
-    /*
-    string path = "./testcases/" + selectedCase + "/bike_info.txt";
-    string line;
-    ifstream myfile(path);
-    if (myfile.is_open())
-    {
-
-    while (getline(myfile, line))
-    {
-        cout << line << endl;
-    }
-    myfile.close();
-    }
-    else
-    cout << "not open";*/
+    */
 }
