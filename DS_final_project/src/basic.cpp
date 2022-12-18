@@ -373,6 +373,9 @@ void basic(string selectedCase)
             user_sort.revenue = 0;
             check_user_output[check_user_idx++] = user_sort;
             // todo 記得把正確的形式改回來
+            /* todo
+                        ofs_user
+                            << user_id << " " << 0 << " " << 0 << " " << tstart_time << " " << 0 << " " << 0 << endl;*/
             ofs_user
                 << user_id << " " << 0 << " " << 0 << " " << tstart_time << " " << 0 << " " << 0 << endl;
         }
