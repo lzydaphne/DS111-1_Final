@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # specify the case you want to test here!
-case=case3
+case=case1
 version=basic
 # Build and run your final project!
 #! warning! 最後面的make有多一行用來compile include folder裡面的東西
