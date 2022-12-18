@@ -291,7 +291,7 @@ void basic(string selectedCase)
         {
             for (int i = 0; i < tlen_AC; i++)
             {
-                if (store_types_bike[i].id > 0)
+                if (store_types_bike[i].id >= 0)
                 {
                     if ((store_types_bike[i].rental_price > tmp.rental_price) || ((store_types_bike[i].rental_price == tmp.rental_price) && (store_types_bike[i].id < tmp.id)))
                     {
