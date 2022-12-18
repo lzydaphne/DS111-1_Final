@@ -300,7 +300,7 @@ void basic(string selectedCase)
                         tmp = store_types_bike[i];
                         // cout << "tmp.bike_id: --2 " << tmp.id << endl;
                     }
-                    else if ((store_types_bike[i].id != tmp.id) && (store_types_bike[i].rental_price < tmp.rental_price))
+                    else if ((store_types_bike[i].id != tmp.id) && (store_types_bike[i].rental_price <= tmp.rental_price))
                     {
                         cout << "store_types_bike inserted-2: " << store_types_bike[i].id << endl;
                         basic_stations[tuser_start_station][stoi(store_types_bike[i].bike_type)].insertKey(store_types_bike[i]);
