@@ -13,6 +13,17 @@ typedef struct LogNode
 
 } LNode;
 
+typedef struct checkUserNode
+{
+    int user_ID; // 直接換成int
+    int AC;
+    int bike_ID;
+    int bike_start_time;
+    int bike_end_time;
+    int revenue;
+
+} cUNode;
+
 typedef struct UserNode
 {
     int user_ID;
@@ -42,9 +53,11 @@ public:
     void mergeSort(UNode *&arr, int l, int r);     //* merge sort user by start_time
     void mergeSort(BMNode *&arr, int l, int r);    //* merge sort bike by ID
     void mergeSort(LNode *&arr, int l, int r);     //* merge sort bikeLog by ID
+    void mergeSort(cUNode *&arr, int l, int r);    //* merge sort user_result by ID
     void merge(UNode *&arr, int p, int q, int r);  //* merge sort user by start_time
     void merge(BMNode *&arr, int p, int q, int r); //* merge sort bike by ID
     void merge(LNode *&arr, int p, int q, int r);  //* merge sort bikeLog by ID
+    void merge(cUNode *&arr, int p, int q, int r); //* merge sort user_result by ID
 
     //! for fee
     // int discount[3]; // electric, lady, road

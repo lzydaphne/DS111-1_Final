@@ -26,11 +26,15 @@ void basic(string selectedCase)
     read_data.read_user();
     read_data.sort_users();
     //! ----------------------start--basic----------------------------
-    ofstream ofs_user,
-        ofs_log, ofs_status;
+    ofstream ofs_user, ofs_log, ofs_status;
+    ofstream check_ofs_user, check_ofs_log, check_ofs_status;
     ofs_user.open("user_result.txt", ios::out);
     ofs_log.open("transfer_log.txt", ios::out);
     ofs_status.open("station_status.txt", ios::out);
+
+    check_ofs_user.open("user_result.txt", ios::out);
+    check_ofs_log.open("transfer_log.txt", ios::out);
+    check_ofs_status.open("station_status.txt", ios::out);
     int idx = 0;
 
     // temp variable
@@ -67,9 +71,12 @@ void basic(string selectedCase)
 
     stringstream ss;
 
+    // 為了check user_result的 LNode
+    cUNode *check_user_output = new cUNode[read_data.user_num];
+    int check_user_idx = 0;
+
     // 為了儲存transfer log的 LNode
     LNode *log_output = new LNode[read_data.user_num];
-
     int log_idx = 0;
 
     while (idx < read_data.all_user_list_idx)
@@ -329,8 +336,18 @@ void basic(string selectedCase)
             cout << "real target inserted " << target.id << endl;
 
             // output to user_result.txt
+            /*
             ofs_user
-                << user_id << " " << 1 << " " << target.id << " " << tstart_time << " " << target.returned_time << " " << single_revenue << endl;
+                << user_id << " " << 1 << " " << target.id << " " << tstart_time << " " << target.returned_time << " " << single_revenue << endl;*/
+            cUNode user_sort;
+            user_sort.user_ID = tuser_ID; // num
+            user_sort.AC = 1;
+            user_sort.bike_ID = target.id;
+            user_sort.bike_start_time = tstart_time;
+            user_sort.bike_end_time = target.returned_time;
+            user_sort.revenue = single_revenue;
+            check_user_output[check_user_idx++] = user_sort;
+
             LNode log_store;
             log_store.bike_ID = target.id;
             log_store.user_ID = stoi(user_id.erase(0, 1));
@@ -356,8 +373,17 @@ void basic(string selectedCase)
             log_store.user_end_station = 0;
             log_output[log_idx++] = log_store;*/
 
+            cUNode user_sort;
+            user_sort.user_ID = tuser_ID; // num
+            user_sort.AC = 0;
+            user_sort.bike_ID = 0;
+            user_sort.bike_start_time = 0;
+            user_sort.bike_end_time = 0;
+            user_sort.revenue = 0;
+            check_user_output[check_user_idx++] = user_sort;
+            /*
             ofs_user
-                << user_id << " " << 0 << " " << 0 << " " << 0 << " " << 0 << " " << 0 << endl;
+                << user_id << " " << 0 << " " << 0 << " " << 0 << " " << 0 << " " << 0 << endl;*/
         }
         //
         ss.str("");
@@ -365,6 +391,27 @@ void basic(string selectedCase)
     }
     delete[] store_BMNode;
     delete[] store_types_bike;
+
+    // todo 這是為了檢查方便，務必改回依據user request順序的答案形式
+    //*otuput sorted user_request
+
+    read_data.mergeSort(check_user_output, 0, check_user_idx - 1);
+    cUNode user_store;
+    string uStr;
+    for (int p = 0; p < log_idx; p++)
+    {
+        user_store = check_user_output[p];
+        ss << user_store.user_ID;
+        string uStr = "U" + ss.str();
+        ss.str("");
+        ss.clear();
+
+        check_ofs_user << uStr << " " << user_store.AC << " "
+                       << user_store.bike_ID << " "
+                       << user_store.bike_start_time << " " << user_store.bike_end_time << " " << user_store.revenue << endl;
+        ss.str("");
+        ss.clear();
+    }
 
     // output transfer log
     // 把log的bike用userID進行排序小到大
