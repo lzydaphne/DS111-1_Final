@@ -4,6 +4,7 @@
 #include <string>
 #include <cstring>
 #include <climits>
+#include <stdlib.h>
 #define station_max_num 1000 // 暫時設定的，不然要把整個map都跑過一次才知道 = =
 #define bike_max_num 10000
 #define user_max_num 100000
@@ -123,7 +124,6 @@ typedef struct BMaxHeapNode
     //*
     int returned_time = 0;
 } BMNode;
-
 class bike_MaxHeap
 {
 public:
@@ -153,7 +153,9 @@ public:
 
     // to heapify a subtree with the root at given index
     void MaxHeapify(int i);
-    BMNode extractMax(); // 回傳最大rental_price的BMNod
+    void MinHeapify(int i); //! algo
+    BMNode extractMax();    // 回傳最大rental_price的BMNod
+    BMNode extractMin();    // ! algo
 
     bool isEmpty();
     void printHeapSort(ofstream &ofs);

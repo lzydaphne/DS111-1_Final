@@ -331,6 +331,37 @@ void bike_MaxHeap::MaxHeapify(int i)
     // harr[100] = heap_size;
 }
 
+void bike_MaxHeap::MinHeapify(int i)
+{
+    int l = left(i);
+    int r = right(i);
+    int smallest = i;
+    // cout << " l " << l << " r " << r << "largest " << largest << endl;
+    // cout << " harr[l].rental_price: " << harr[l].rental_price << endl;
+    // cout << " harr[r].rental_price: " << harr[r].rental_price << endl;
+    if (l < heap_size && harr[l].rental_price < harr[i].rental_price)
+        smallest = l;
+    if (r < heap_size && harr[r].rental_price < harr[smallest].rental_price)
+        smallest = r;
+
+    // cout << "largest " << largest << endl;
+
+    // 兩邊有相同的rental_price
+    // if (harr[l].rental_price != 0 && (harr[l].rental_price == harr[r].rental_price))
+    if (l < heap_size && r < heap_size && harr[l].rental_price != 0 && (harr[l].rental_price == harr[r].rental_price) && harr[l].rental_price > harr[i].rental_price)
+    {
+        if (harr[l].id < harr[r].id)
+            smallest = l;
+        else
+            smallest = r;
+    }
+
+    if (smallest != i)
+    {
+        BMNode_swap(&harr[i], &harr[smallest]);
+        MaxHeapify(smallest);
+    }
+}
 // Method to remove minimum element (or root) from min heap
 BMNode bike_MaxHeap::extractMax()
 {
@@ -363,6 +394,38 @@ BMNode bike_MaxHeap::extractMax()
     // cout << "root: " << root.rental_price << endl;
     // cout << "harr[0]: " << harr[0].rental_price << endl;
     MaxHeapify(0);
+
+    // harr[100] = heap_size;
+    return root;
+}
+
+BMNode bike_MaxHeap::extractMin()
+{
+
+    // 如果沒有想要的車:
+    if (heap_size <= 0)
+    {
+        BMNode tmp;
+        tmp.id = -10;
+        tmp.rental_price = -10;
+        tmp.returned_time = 1050; // 刻意製造不符合的時間，因為最多1040
+        return tmp;
+    }
+    // else if (heap_size == 1)
+    // {
+    // cout << "about to empty !!!!!!" << endl;
+    // heap_size--;
+    // harr[100] = heap_size; // don't forget to update heap size
+    // return harr[0];
+    // }
+
+    // Store the max value, and remove it from heap
+    BMNode root = harr[0];
+    harr[0] = harr[heap_size - 1];
+    heap_size--;
+    // cout << "root: " << root.rental_price << endl;
+    // cout << "harr[0]: " << harr[0].rental_price << endl;
+    MinHeapify(0);
 
     // harr[100] = heap_size;
     return root;
