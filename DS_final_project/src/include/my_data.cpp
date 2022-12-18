@@ -100,6 +100,10 @@ int my_data::read_user_num()
 
 void my_data::read_user()
 {
+    // demend_compare = {0};
+    for (int i = 0; i < station_num; i++)
+        demend_compare[i] = 0;
+
     string path = "./testcases/" + select + "/user.txt";
     ifstream ifs(path, ios::in);
     if (!ifs.is_open())
@@ -113,7 +117,6 @@ void my_data::read_user()
 
         while (ifs >> user_ID >> AC_bike_type >> start_time >> end_time >> user_start_station >> user_end_station)
         {
-
             num_user_ID = stoi(user_ID.erase(0, 1));
             num_user_start_station = stoi(user_start_station.erase(0, 1));
             num_user_end_station = stoi(user_end_station.erase(0, 1));
@@ -121,6 +124,10 @@ void my_data::read_user()
             arr_AC_bike_type = new int[count_bike_type];
             for (int i = 0; i < count_bike_type; i++)
                 arr_AC_bike_type[i] = -1;
+
+            //-------------------------------
+            demend_compare[num_user_start_station]++;
+            //-------------------------------
 
             // cout << "num_user_ID: " << num_user_ID << endl;
             stringstream ss;
@@ -172,6 +179,11 @@ void my_data::read_user()
             all_user_list[all_user_list_idx++] = newUNode;
 
             // delete[] arr_AC_bike_type;
+        }
+        for (int i = 0; i < station_num; i++)
+        {
+            demend_compare[i] = demend_compare[i] / station_num;
+            cout << "demend_compare[i]: " << demend_compare[i] << endl;
         }
     }
     ifs.close();

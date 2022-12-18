@@ -25,11 +25,6 @@ void advanced(string selectedCase)
     int basic_revenue = 0;
     my_data read_data;
 
-    //--------------------------
-    //! number of demand
-    float *demend_compare = new float[read_data.station_num];
-
-    //--------------------------
     read_data.select = selectedCase;
     int user_num = read_data.read_user_num();
     cout << "user_num: " << user_num << endl;
@@ -104,7 +99,10 @@ void advanced(string selectedCase)
     int countA = 0;
     int countB = 0;
     int countC = 0;
-
+    /*
+    demend_compare[idx] = float(tuser_start_station / read_data.station_num);
+    cout << "demend_compare[idx]: " << demend_compare[idx] << endl;
+    */
     while (idx < read_data.all_user_list_idx)
     {
         // read data
@@ -117,11 +115,6 @@ void advanced(string selectedCase)
         tuser_end_station = read_data.all_user_list[idx].user_end_station;
         // tarrive_time = read_data.all_user_list[idx].arrive_time;
         idx++;
-
-        //!--------
-        demend_compare[idx] = float(tuser_start_station / read_data.station_num);
-        cout << "demend_compare[idx]: " << demend_compare[idx] << endl;
-        //!--------
 
         cout
             << "--------------new user----------------------" << endl;
@@ -477,8 +470,8 @@ void advanced(string selectedCase)
         ss.str("");
         ss.clear();
     }
-    // delete[] store_BMNode;
-    // delete[] store_types_bike;
+    delete[] store_BMNode;
+    delete[] store_types_bike;
 
     // todo 這是為了檢查方便，務必改回依據user request順序的答案形式
     //*otuput sorted user_request
