@@ -30,7 +30,7 @@ void basic(string selectedCase)
     ofstream check_ofs_user, check_ofs_log, check_ofs_status;
 
     string path(getenv("HOME"));
-    path += "/桌面/Final/DS111-1_Final";
+    path += "/Desktop/Final/DS111-1_Final";
 
     // ofs_user.open(".././result/case1/user_result.txt", ios::out);
     ofs_user.open(path, ios::out);
