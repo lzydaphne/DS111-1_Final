@@ -95,7 +95,7 @@ void basic(string selectedCase)
         // tarrive_time = read_data.all_user_list[idx].arrive_time;
         idx++;
 
-        cout << "new user--------------------------------" << endl;
+        cout << "--------------new user----------------------" << endl;
 
         cout << "tuser_ID: " << tuser_ID << "\n"
              << "tstart_time: " << tstart_time << "\n"
