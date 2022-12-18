@@ -81,6 +81,10 @@ void basic(string selectedCase)
     LNode *log_output = new LNode[read_data.user_num];
     int log_idx = 0;
 
+    int countA = 0;
+    int countB = 0;
+    int countC = 0;
+
     while (idx < read_data.all_user_list_idx)
     {
 
@@ -171,16 +175,20 @@ void basic(string selectedCase)
                 else if (target.rental_count >= read_data.rental_limit)
                 {
                     bike_case = 1;
-                    cout << "target.rental_count >= read_data.rental_limit" << endl;
+                    countA++;
+                    cout
+                        << "target.rental_count >= read_data.rental_limit" << endl;
                 }
                 else if (tstart_time + shortest_path >= tend_time)
                 {
                     bike_case = 1;
+                    countB++;
                     cout << "(tstart_time + shortest_path > tend_time)" << endl;
                 }
                 else if (target.returned_time > tstart_time)
                 {
                     bike_case = 1;
+                    countC++;
                     cout
                         << "target.returned_time > tstart_time" << endl;
                 }
@@ -497,6 +505,9 @@ void basic(string selectedCase)
     }
     // test
     cout << "basic_revenue: " << basic_revenue << endl;
+    cout << "countA: " << countA << endl;
+    cout << "countB: " << countB << endl;
+    cout << "countC: " << countC << endl;
 
     // todo delete all new operation!
     for (int i = 0; i < station_num; i++)
