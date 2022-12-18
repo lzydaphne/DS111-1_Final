@@ -97,7 +97,6 @@ void basic(string selectedCase)
 
         // cout << "tAC_bike_type: " << tAC_bike_type[0] << endl;
 
-        BMNode target; //! 符合條件的bike_node
         // BMNode compare;
         single_revenue = 0;
         int find; // 有找到符合目標的bike
@@ -112,6 +111,7 @@ void basic(string selectedCase)
         cout << "-----Single station--------------------------" << endl;
         for (int i = 0; i < tlen_AC; i++)
         {
+            BMNode target; //! 符合條件的bike_node
             BMNode tmp_target;
             cout << "-----diff type--------------------------" << endl;
             cout << "tAC_bike_type[i] " << tAC_bike_type[i] << endl;
