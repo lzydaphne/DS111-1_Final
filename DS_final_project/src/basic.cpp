@@ -176,7 +176,7 @@ void basic(string selectedCase)
                     bike_case = 1;
                     cout << "target.rental_count >= read_data.rental_limit" << endl;
                 }
-                else if (tstart_time + shortest_path > tend_time)
+                else if (tstart_time + shortest_path >= tend_time)
                 {
                     bike_case = 1;
                     cout << "(tstart_time + shortest_path > tend_time)" << endl;
