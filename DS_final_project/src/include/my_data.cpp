@@ -101,6 +101,7 @@ int my_data::read_user_num()
 void my_data::read_user()
 {
     // demend_compare = {0};
+    demend_compare = new float[station_num];
     for (int i = 0; i < station_num; i++)
         demend_compare[i] = 0;
 
