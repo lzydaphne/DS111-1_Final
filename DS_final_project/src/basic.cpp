@@ -28,11 +28,11 @@ void basic(string selectedCase)
     //! ----------------------start--basic----------------------------
     ofstream ofs_user, ofs_log, ofs_status;
     ofstream check_ofs_user, check_ofs_log, check_ofs_status;
-    ofs_user.open("../result/user_result.txt", ios::out);
-    ofs_log.open("../result/transfer_log.txt", ios::out);
-    ofs_status.open("../result/station_status.txt", ios::out);
+    ofs_user.open(".././result/user_result.txt", ios::out);
+    ofs_log.open(".././result/transfer_log.txt", ios::out);
+    ofs_status.open(".././result/station_status.txt", ios::out);
 
-    check_ofs_user.open("../result/check_user_result.txt", ios::out);
+    check_ofs_user.open("check_user_result.txt", ios::out);
     // check_ofs_log.open("check_transfer_log.txt", ios::out);
     // check_ofs_status.open("check_station_status.txt", ios::out);
     int idx = 0;
