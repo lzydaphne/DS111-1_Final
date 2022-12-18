@@ -292,6 +292,7 @@ void basic(string selectedCase)
             }
         }
         cout << "check store_types_bike--2: " << tmp.id << endl;
+        BMNode target;
         target = tmp;
 
         if (target.rental_price > 0) // 有找到目標車車
