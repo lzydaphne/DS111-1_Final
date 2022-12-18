@@ -7,7 +7,7 @@ using namespace std;
 void basic(string selectedCase)
 {
     cout << "start your basic version of data structure final from here!" << endl;
-
+    //
     int basic_revenue = 0;
 
     my_data read_data;
