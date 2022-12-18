@@ -528,3 +528,4 @@ void basic(string selectedCase)
     else
         cout << "not open";*/
     }
+}
