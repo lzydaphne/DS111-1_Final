@@ -29,13 +29,9 @@ void basic(string selectedCase)
     ofstream ofs_user, ofs_log, ofs_status;
     ofstream check_ofs_user, check_ofs_log, check_ofs_status;
 
-    string path(getenv("HOME"));
-    path += "/Desktop/Final/DS111-1_Final";
-
-    // ofs_user.open(".././result/case1/user_result.txt", ios::out);
-    ofs_user.open(path, ios::out);
-    ofs_log.open(".././result/case1/transfer_log.txt", ios::out);
-    ofs_status.open(".././result/case1/station_status.txt", ios::out);
+    ofs_user.open("user_result.txt", ios::out);
+    ofs_log.open("transfer_log.txt", ios::out);
+    ofs_status.open("station_status.txt", ios::out);
 
     check_ofs_user.open("check_user_result.txt", ios::out);
     // check_ofs_log.open("check_transfer_log.txt", ios::out);
