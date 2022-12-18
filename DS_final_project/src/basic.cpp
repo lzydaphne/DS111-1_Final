@@ -282,18 +282,21 @@ void basic(string selectedCase)
         {
             for (int i = 0; i < tlen_AC; i++)
             {
-                if ((store_types_bike[i].rental_price > tmp.rental_price) || ((store_types_bike[i].rental_price == tmp.rental_price) && (store_types_bike[i].id < tmp.id)))
+                if (store_types_bike[i].id > 0)
                 {
-                    //! 不同一種車種的情況下，把備胎放回去
-                    basic_stations[tuser_start_station][stoi(tmp.bike_type)].insertKey(tmp);
-                    cout << "store_types_bike: " << tmp.id << endl;
-                    tmp = store_types_bike[i];
-                    // cout << "tmp.bike_id: --2 " << tmp.id << endl;
-                }
-                else if ((store_types_bike[i].rental_price < tmp.rental_price))
-                {
-                    cout << "store_types_bike inserted-2: " << store_types_bike[i].id << endl;
-                    basic_stations[tuser_start_station][stoi(store_types_bike[i].bike_type)].insertKey(store_types_bike[i]);
+                    if ((store_types_bike[i].rental_price > tmp.rental_price) || ((store_types_bike[i].rental_price == tmp.rental_price) && (store_types_bike[i].id < tmp.id)))
+                    {
+                        //! 不同一種車種的情況下，把備胎放回去
+                        basic_stations[tuser_start_station][stoi(tmp.bike_type)].insertKey(tmp);
+                        cout << "store_types_bike: " << tmp.id << endl;
+                        tmp = store_types_bike[i];
+                        // cout << "tmp.bike_id: --2 " << tmp.id << endl;
+                    }
+                    else if ((store_types_bike[i].rental_price < tmp.rental_price))
+                    {
+                        cout << "store_types_bike inserted-2: " << store_types_bike[i].id << endl;
+                        basic_stations[tuser_start_station][stoi(store_types_bike[i].bike_type)].insertKey(store_types_bike[i]);
+                    }
                 }
             }
         }
