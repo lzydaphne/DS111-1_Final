@@ -124,6 +124,7 @@ typedef struct BMaxHeapNode
     //*
     int returned_time = 0;
 } BMNode;
+
 class bike_MaxHeap
 {
 public:

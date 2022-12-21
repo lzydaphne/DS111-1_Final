@@ -7,6 +7,7 @@ public:
     {
         my_bike_heap = input_heap;
     }
+    void wait_bike();
     void change_bike(int station, int type);
     void transfer_leave(int src, int des, int type, int num, int time);
     void transfer_arrive(int src, int des, int type, int num, int time);
