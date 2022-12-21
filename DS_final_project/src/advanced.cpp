@@ -191,12 +191,12 @@ void advanced(string selectedCase)
                     countB++;
                     cout << "(tstart_time + shortest_path > tend_time)" << endl;
                 }
-                else if (target.returned_time + shortest_path > tstart_time)
+                else if (target.returned_time + shortest_path > tend_time)
                 {
                     bike_case = 1;
                     countC++;
                     cout
-                        << "(target.returned_time + shortest_path > tstart_time)" << endl;
+                        << "(target.returned_time + shortest_path > tend_time)" << endl;
                 }
                 else
                 {
