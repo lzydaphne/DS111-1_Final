@@ -219,7 +219,7 @@ void advanced(string selectedCase)
                 {
                     if (target.returned_time > tstart_time) // 代表user wait for bike
                     {
-                        tstart_time = target.returned_time + shortest_path;
+                        tstart_time = target.returned_time;
                     }
 
                     cout << "nice!! " << endl;
