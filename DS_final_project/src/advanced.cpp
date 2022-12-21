@@ -223,8 +223,12 @@ void advanced(string selectedCase)
                 {
                     if (target.returned_time > tstart_time) // 代表user wait for bike
                     {
+<<<<<<< HEAD
                         wait_list.insertKey(target);
                         // tstart_time = target.returned_time;
+                        == == == =
+                                     tstart_time = target.returned_time + shortest_path;
+>>>>>>> parent of 5f8ed42 (Update advanced.cpp)
                     }
 
                     cout << "nice!! " << endl;
