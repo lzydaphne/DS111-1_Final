@@ -217,6 +217,11 @@ void advanced(string selectedCase)
                 }
                 else
                 {
+                    if (target.returned_time > tstart_time) // 代表user wait for bike
+                    {
+                        tstart_time = target.returned_time + shortest_path;
+                    }
+
                     cout << "nice!! " << endl;
                     bike_case = 0;
                 }
@@ -363,6 +368,7 @@ void advanced(string selectedCase)
 
             ofs_user
                 << user_id << " " << 1 << " " << target.id << " " << tstart_time << " " << target.returned_time << " " << single_revenue << endl;
+
             cUNode user_sort;
             user_sort.user_ID = tuser_ID; // num
             user_sort.AC = 1;
