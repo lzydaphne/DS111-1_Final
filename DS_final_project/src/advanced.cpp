@@ -205,6 +205,7 @@ void advanced(string selectedCase)
                         // tstart_time = target.returned_time;
                         wait_list.insertKey(target);
                         cout << "put into wait-list" << endl;
+                        target = basic_stations[tuser_start_station][tAC_bike_type[i]].extractMax();
                         continue;
                     }
 
