@@ -405,6 +405,8 @@ void advanced(string selectedCase)
                 goto CHECK;
             }
 
+            cout << " truly not find! " << endl;
+
             //! transfer
             /*
                         LNode log_store;
