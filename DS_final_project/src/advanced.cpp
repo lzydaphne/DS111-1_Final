@@ -386,6 +386,11 @@ void advanced(string selectedCase)
                 cout << "tstart_time : " << tstart_time << endl;
                 cout << "tend_time : " << tend_time << endl;
                 target = wait;
+
+                // 清空wait-list
+                while (!wait_list.isEmpty())
+                    wait_list.extractMax();
+
                 goto CHECK;
             }
 
