@@ -202,8 +202,19 @@ void advanced(string selectedCase)
                 {
                     if (target.returned_time > tstart_time)
                     {
+                        BMNode tmp;
                         // tstart_time = target.returned_time;
-                        wait_list.insertKey(target);
+                        if (!wait_list.isEmpty())
+                        {
+                            tmp = wait_list.extractMax();
+                            if (target.rental_price > tmp.rental_price)
+                                wait_list.insertKey(target);
+                            else
+                                wait_list.insertKey(tmp);
+                        }
+                        else
+                            wait_list.insertKey(target);
+
                         cout << "put into wait-list" << endl;
                         target = basic_stations[tuser_start_station][tAC_bike_type[i]].extractMax();
                         continue;
