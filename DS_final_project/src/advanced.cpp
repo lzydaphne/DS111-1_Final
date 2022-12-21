@@ -4,9 +4,9 @@
 #include <cmath> //round
 using namespace std;
 
-void basic(string selectedCase)
+void advanced(string selectedCase)
 {
-    cout << "start your basic version of data structure final from here!" << endl;
+    cout << "start your advanced version of data structure final from here!" << endl;
     //
     int basic_revenue = 0;
 
