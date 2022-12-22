@@ -161,12 +161,12 @@ void advanced(string selectedCase)
         //! Free bike transfer
         //! 選出最近的三個站點(station)
         int nearest_stations[3];
-        int *pick_station = new int[tuser_start_station];
+        int *pick_station = new int[read_data.station_num];
         pick_station = read_data.shortest_record[tuser_start_station];
         //* pick first three nearest station
         int first = pick_station[0], second = INT_MIN, third = INT_MIN;
         int first_idx = 0, second_idx = -1, third_idx = -1;
-        for (int q = 1; q < tuser_start_station; q++)
+        for (int q = 1; q < read_data.station_num; q++)
         {
             if (pick_station[q] > first)
             {
