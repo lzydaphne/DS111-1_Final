@@ -393,6 +393,7 @@ void advanced(string selectedCase)
         {
             if (flag_FBT)
             {
+
                 cout << "---Truly not find -----------------" << endl;
 
                 cUNode user_sort;
@@ -417,9 +418,15 @@ void advanced(string selectedCase)
                 //! 選出最近的三個站點(station)
                 int nearest_stations[3];
                 int *pick_station = new int[read_data.station_num];
-                pick_station = read_data.shortest_record[tuser_start_station];
+
+                // deep copy
+                memcpy(pick_station, read_data.shortest_record[tuser_start_station], read_data.station_num);
+
+                // shallow copy!
+                //  pick_station = read_data.shortest_record[tuser_start_station];
                 //* pick first three nearest station
-                int first = pick_station[0], second = INT_MIN, third = INT_MIN;
+                int first = pick_station[0],
+                    second = INT_MIN, third = INT_MIN;
                 int first_idx = 0, second_idx = -1, third_idx = -1;
                 for (int q = 1; q < read_data.station_num; q++)
                 {
@@ -484,9 +491,16 @@ void advanced(string selectedCase)
                         // cout << "pass 2 " << endl;
                     }
                 }
-                delete[] pick_station;
-                flag_FBT = 1;
-                goto CHECK;
+                for (int i = 0; i < 3; i++)
+                {
+                    if (max_heap[i] > 0)
+                    {
+                        flag_FBT = 1;
+                        delete[] pick_station;
+                        goto CHECK;
+                        /* code */
+                    }
+                }
             }
         }
         //
