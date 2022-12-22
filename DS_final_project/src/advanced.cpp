@@ -150,8 +150,8 @@ void advanced(string selectedCase)
         {
             // 回傳single source 的dist array
             read_data.shortest_record[tuser_start_station] = basic_graph.dijkstra(tuser_start_station, tuser_end_station);
-            int idx = 0;
 
+            int idx = 0;
             while (read_data.shortest_record[tuser_start_station][idx])
             {
                 cout << "dij: " << read_data.shortest_record[tuser_start_station][idx] << endl;
@@ -178,6 +178,14 @@ void advanced(string selectedCase)
 
             shortest_path = read_data.shortest_record[tuser_start_station][tuser_end_station];
             cout << "  shortest_path " << shortest_path << endl;
+            cout << "  tuser_start_station " << tuser_start_station << endl;
+            cout << "  tuser_end_station " << tuser_end_station << endl;
+            int idx = 0;
+            while (read_data.shortest_record[tuser_start_station][idx])
+            {
+                cout << "dij: " << read_data.shortest_record[tuser_start_station][idx] << endl;
+                idx++;
+            }
 
             //*開始在同一站中針對特定bike type抓取bike
             int bike_case = 0;
