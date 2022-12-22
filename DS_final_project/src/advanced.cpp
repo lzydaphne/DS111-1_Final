@@ -163,10 +163,37 @@ void advanced(string selectedCase)
         int nearest_stations[3];
         int *pick_station = new int[tuser_start_station];
         pick_station = read_data.shortest_record[tuser_start_station];
-        qsort(pick_station, station_num, sizeof(int), compare);
-        nearest_stations[0] = pick_station[0];
-        nearest_stations[1] = pick_station[1];
-        nearest_stations[2] = pick_station[2];
+        //* pick first three nearest station
+        int first = pick_station[0], second = INT_MIN, third = INT_MIN;
+        int first_idx = 0, second_idx = -1, third_idx = -1;
+        for (int q = 1; q < tuser_start_station; q++)
+        {
+            if (pick_station[q] > first)
+            {
+                first_idx = q;
+                second_idx = first_idx;
+                third_idx = second_idx;
+                third = second;
+                second = first;
+                first = pick_station[q];
+            }
+            else if (pick_station[q] > second)
+            {
+                second_idx = q;
+                third_idx = second_idx;
+                third = second;
+                second = pick_station[q];
+            }
+            else if (pick_station[q] > third)
+            {
+                third_idx = q;
+                third = pick_station[q];
+            }
+        }
+
+        nearest_stations[0] = first_idx;
+        nearest_stations[1] = second_idx;
+        nearest_stations[2] = third_idx;
         //-------------------------------
         int max_heap[3] = {0}; // 用來儲存「每個station中，有最大heap size的車種type」
         for (int i = 0; i < 3; i++)
