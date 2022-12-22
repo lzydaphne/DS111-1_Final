@@ -201,6 +201,7 @@ void advanced(string selectedCase)
                 else
                 {
                     if (target.returned_time > tstart_time)
+                    //* WAIT
                     {
                         BMNode tmp;
                         // tstart_time = target.returned_time;
@@ -208,7 +209,10 @@ void advanced(string selectedCase)
                         {
                             tmp = wait_list.extractMax();
                             if (target.rental_price > tmp.rental_price)
+                            {
+                                basic_stations[tuser_start_station][stoi(tmp.bike_type)].insertKey(tmp);
                                 wait_list.insertKey(target);
+                            }
                             else
                                 wait_list.insertKey(tmp);
                         }
@@ -239,7 +243,7 @@ void advanced(string selectedCase)
                         //! 同一種車種的情況下，把備胎放回去，因為發現更好的
                         if ((tmp_target.rental_price != -1))
                         {
-                            cout << "bike_case 0: " << tmp_target.id << endl;
+                            cout << "original target: " << tmp_target.id << endl;
                             cout << tmp_target.rental_price << endl;
 
                             basic_stations[tuser_start_station][stoi(tmp_target.bike_type)].insertKey(tmp_target);
@@ -249,11 +253,11 @@ void advanced(string selectedCase)
                         tmp_target.rental_count = target.rental_count;
                         tmp_target.rental_price = target.rental_price;
                         tmp_target.returned_time = target.returned_time;
-                        cout << "tmp_target.id-bike0 " << tmp_target.id << endl;
+                        cout << "find better target: " << tmp_target.id << endl;
                     }
                     else
                     {
-                        cout << "bike_case 0-2 : " << target.id << endl;
+                        cout << "worser target: " << target.id << endl;
                         // 符合基本條件，卻沒有比tmp好，就放回去
                         store_BMNode[tmp_idx++] = target;
                     }
