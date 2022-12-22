@@ -159,13 +159,90 @@ void advanced(string selectedCase)
             }
         }
 
+        //! Free bike transfer
+        //! 選出最近的三個站點(station)
+        int nearest_stations[3];
+        int *pick_station = new int[read_data.station_num];
+
+        // deep copy
+        memcpy(pick_station, read_data.shortest_record[tuser_start_station], read_data.station_num);
+
+        // shallow copy!
+        //  pick_station = read_data.shortest_record[tuser_start_station];
+        //* pick first three nearest station
+        int first = pick_station[0],
+            second = INT_MIN, third = INT_MIN;
+        int first_idx = 0, second_idx = -1, third_idx = -1;
+        for (int q = 1; q < read_data.station_num; q++)
+        {
+            if (pick_station[q] > first)
+            {
+                first_idx = q;
+                second_idx = first_idx;
+                third_idx = second_idx;
+                third = second;
+                second = first;
+                first = pick_station[q];
+            }
+            else if (pick_station[q] > second)
+            {
+                second_idx = q;
+                third_idx = second_idx;
+                third = second;
+                second = pick_station[q];
+            }
+            else if (pick_station[q] > third)
+            {
+                third_idx = q;
+                third = pick_station[q];
+            }
+        }
+
+        nearest_stations[0] = first_idx;
+        nearest_stations[1] = second_idx;
+        nearest_stations[2] = third_idx;
+        //-------------------------------
+        int max_heap[3] = {0}; // 用來儲存「每個station中，有最大heap size的車種type」
+        for (int i = 0; i < 3; i++)
+        {
+            int max = 0;
+            int max_station = -1; // 紀錄是哪一個bike_type
+            for (int j = 0; j < read_data.count_bike_type; j++)
+            {
+                if (basic_stations[nearest_stations[i]][j].heap_size > max)
+                {
+                    max = basic_stations[nearest_stations[i]][j].heap_size;
+                    max_station = j;
+                    // 紀錄是哪一個bike_type
+                }
+            }
+            if (max == 0) // 這個station完全沒有足夠的bike了
+            {
+                cout << " this station has not enough bike! " << endl;
+                // todo 應該要把下一個鄰近的拿進來繼續抓剩餘的車，但是先不用
+                // 如果三個都沒車?????
+                // todo 應該說，有車再implement，沒車就算了
+            }
+            max_heap[i] = max_station; // 如果是-1，代表沒車
+            cout << "  max_heap[i]: " << max_heap[i] << endl;
+            // 開始放入 user start station
+            if (max_heap[i] > 0)
+            {
+                // todo 可以看看extractMax的效果
+                // cout << "pass 0 " << endl;
+                BMNode tmp = basic_stations[tuser_start_station][max_heap[i]].extractMax();
+                // cout << "pass 1 " << endl;
+                basic_stations[tuser_start_station][max_heap[i]].insertKey(tmp);
+                // cout << "pass 2 " << endl;
+            }
+        }
+        delete[] pick_station;
+
         //-------------------------------
 
         //* 當可以騎多個車型，每種車型都各自建立一個heap來拿到最好的選擇
         cout
             << "-----Single station--------------------------" << endl;
-        int flag_FBT = 0;
-    CHECK:
         for (int i = 0; i < tlen_AC; i++)
         {
             BMNode target; //! 符合條件的bike_node
@@ -391,271 +468,176 @@ void advanced(string selectedCase)
         }
         else
         {
-            if (flag_FBT)
-            {
+            cout << "--------------First not find -----------------" << endl;
 
-                cout << "---Truly not find -----------------" << endl;
+            cUNode user_sort;
+            user_sort.user_ID = tuser_ID; // num
+            user_sort.AC = 0;
+            user_sort.bike_ID = 0;
+            user_sort.bike_start_time = 0;
+            user_sort.bike_end_time = 0;
+            user_sort.revenue = 0;
+            check_user_output[check_user_idx++] = user_sort;
+            // todo 記得把正確的形式改回來
 
-                cUNode user_sort;
-                user_sort.user_ID = tuser_ID; // num
-                user_sort.AC = 0;
-                user_sort.bike_ID = 0;
-                user_sort.bike_start_time = 0;
-                user_sort.bike_end_time = 0;
-                user_sort.revenue = 0;
-                check_user_output[check_user_idx++] = user_sort;
-                // todo 記得把正確的形式改回來
-
-                ofs_user
-                    << user_id << " " << 0 << " " << 0 << " " << 0 << " " << 0 << " " << 0 << endl;
-            }
-            else
-            {
-
-                cout << "--------------First not find -----------------" << endl;
-
-                //! Free bike transfer
-                //! 選出最近的三個站點(station)
-                int nearest_stations[3];
-                int *pick_station = new int[read_data.station_num];
-
-                // deep copy
-                memcpy(pick_station, read_data.shortest_record[tuser_start_station], read_data.station_num);
-
-                // shallow copy!
-                //  pick_station = read_data.shortest_record[tuser_start_station];
-                //* pick first three nearest station
-                int first = pick_station[0],
-                    second = INT_MIN, third = INT_MIN;
-                int first_idx = 0, second_idx = -1, third_idx = -1;
-                for (int q = 1; q < read_data.station_num; q++)
-                {
-                    if (pick_station[q] > first)
-                    {
-                        first_idx = q;
-                        second_idx = first_idx;
-                        third_idx = second_idx;
-                        third = second;
-                        second = first;
-                        first = pick_station[q];
-                    }
-                    else if (pick_station[q] > second)
-                    {
-                        second_idx = q;
-                        third_idx = second_idx;
-                        third = second;
-                        second = pick_station[q];
-                    }
-                    else if (pick_station[q] > third)
-                    {
-                        third_idx = q;
-                        third = pick_station[q];
-                    }
-                }
-
-                nearest_stations[0] = first_idx;
-                nearest_stations[1] = second_idx;
-                nearest_stations[2] = third_idx;
-                //-------------------------------
-                int max_heap[3] = {0}; // 用來儲存「每個station中，有最大heap size的車種type」
-                for (int i = 0; i < 3; i++)
-                {
-                    int max = 0;
-                    int max_station = -1; // 紀錄是哪一個bike_type
-                    for (int j = 0; j < read_data.count_bike_type; j++)
-                    {
-                        if (basic_stations[nearest_stations[i]][j].heap_size > max)
-                        {
-                            max = basic_stations[nearest_stations[i]][j].heap_size;
-                            max_station = j;
-                            // 紀錄是哪一個bike_type
-                        }
-                    }
-                    if (max == 0) // 這個station完全沒有足夠的bike了
-                    {
-                        cout << " this station has not enough bike! " << endl;
-                        // todo 應該要把下一個鄰近的拿進來繼續抓剩餘的車，但是先不用
-                        // 如果三個都沒車?????
-                        // todo 應該說，有車再implement，沒車就算了
-                    }
-                    max_heap[i] = max_station; // 如果是-1，代表沒車
-                    cout << "  max_heap[i]: " << max_heap[i] << endl;
-                    // 開始放入 user start station
-                    if (max_heap[i] > 0)
-                    {
-                        // todo 可以看看extractMax的效果
-                        // cout << "pass 0 " << endl;
-                        BMNode tmp = basic_stations[tuser_start_station][max_heap[i]].extractMax();
-                        // cout << "pass 1 " << endl;
-                        basic_stations[tuser_start_station][max_heap[i]].insertKey(tmp);
-                        // cout << "pass 2 " << endl;
-                    }
-                }
-                for (int i = 0; i < 3; i++)
-                {
-                    if (max_heap[i] > 0)
-                    {
-                        flag_FBT = 1;
-                        delete[] pick_station;
-                        goto CHECK;
-                    }
-                }
-            }
+            ofs_user
+                << user_id << " " << 0 << " " << 0 << " " << 0 << " " << 0 << " " << 0 << endl;
         }
-        //
-        ss.str("");
-        ss.clear();
     }
-    delete[] store_BMNode;
-    delete[] store_types_bike;
+    //
+    ss.str("");
+    ss.clear();
+}
+delete[] store_BMNode;
+delete[] store_types_bike;
 
-    // todo 這是為了檢查方便，務必改回依據user request順序的答案形式
-    //*otuput sorted user_request
+// todo 這是為了檢查方便，務必改回依據user request順序的答案形式
+//*otuput sorted user_request
 
-    read_data.mergeSort(check_user_output, 0, check_user_idx - 1);
-    cUNode user_store;
-    string uStr;
-    for (int p = 0; p < check_user_idx; p++)
+read_data.mergeSort(check_user_output, 0, check_user_idx - 1);
+cUNode user_store;
+string uStr;
+for (int p = 0; p < check_user_idx; p++)
+{
+    user_store = check_user_output[p];
+    ss << user_store.user_ID;
+    string uStr = "U" + ss.str();
+    ss.str("");
+    ss.clear();
+
+    check_ofs_user << uStr << " " << user_store.AC << " "
+                   << user_store.bike_ID << " "
+                   << user_store.bike_start_time << " " << user_store.bike_end_time << " " << user_store.revenue << endl;
+    ss.str("");
+    ss.clear();
+}
+delete[] check_user_output;
+
+// output transfer log
+// 把log的bike用userID進行排序小到大
+read_data.mergeSort(log_output, 0, log_idx - 1);
+LNode log_store;
+// string uStr;
+for (int p = 0; p < log_idx; p++)
+{
+    log_store = log_output[p];
+    ss << log_store.user_ID;
+    string uStr = "U" + ss.str();
+    ss.str("");
+    ss.clear();
+    ss << log_store.user_start_station;
+    string start_station = "S" + ss.str();
+    ss.str("");
+    ss.clear();
+    ss << log_store.user_end_station;
+    string end_station = "S" + ss.str();
+    ss.str("");
+    ss.clear();
+
+    ofs_log
+        << log_store.bike_ID << " " << start_station << " " << end_station << " " << log_store.start_time << " " << log_store.returned_time << " " << uStr << endl;
+    ss.str("");
+    ss.clear();
+}
+delete[] log_output;
+// output final bike inventory
+
+int Barr_idx = 0;
+int station_heap_size = 0;
+// 計算低一station的各種車型的車輛個數
+/*
+    cout << "basic_stations[0][0] " << basic_stations[0][0].harr[0].id << endl;
+    cout << "basic_stations[0][0] " << basic_stations[0][0].harr[1].id << endl;
+    cout << "basic_stations[0][1] " << basic_stations[0][1].harr[0].id << endl;
+    cout << "basic_stations[0][2] " << basic_stations[0][2].harr[0].id << endl;
+    cout << "basic_stations[0][2] " << basic_stations[0][2].harr[1].id << endl;
+    cout << "basic_stations[0][2] " << basic_stations[0][2].harr[2].id << endl;
+    cout << "basic_stations[0][2] " << basic_stations[0][2].harr[3].id << endl;
+    cout << "basic_stations[0][2] " << basic_stations[0][2].harr[4].id << endl;
+    cout << "basic_stations[0][2] " << basic_stations[0][2].harr[5].id << endl;
+    cout << "basic_stations[0][2] " << basic_stations[0][2].harr[6].id << endl;*/
+
+for (int i = 0; i < read_data.station_num; i++)
+{
+    ss << i;
+    string station_id = "S" + ss.str();
+    cout << "here!" << endl;
+    station_heap_size = 0;
+    for (int j = 0; j < read_data.count_bike_type; j++)
     {
-        user_store = check_user_output[p];
-        ss << user_store.user_ID;
-        string uStr = "U" + ss.str();
-        ss.str("");
-        ss.clear();
-
-        check_ofs_user << uStr << " " << user_store.AC << " "
-                       << user_store.bike_ID << " "
-                       << user_store.bike_start_time << " " << user_store.bike_end_time << " " << user_store.revenue << endl;
-        ss.str("");
-        ss.clear();
+        cout << "heap.size " << basic_stations[i][j].heap_size << endl;
+        station_heap_size += basic_stations[i][j].heap_size;
     }
-    delete[] check_user_output;
+    cout << "station_heap_size: " << station_heap_size << endl;
 
-    // output transfer log
-    // 把log的bike用userID進行排序小到大
-    read_data.mergeSort(log_output, 0, log_idx - 1);
-    LNode log_store;
-    // string uStr;
-    for (int p = 0; p < log_idx; p++)
+    BMNode *Barr = new BMNode[station_heap_size];
+    //! 把單一station的bike都蒐集起來放在Barr
+    for (int k = 0; k < read_data.count_bike_type; k++)
     {
-        log_store = log_output[p];
-        ss << log_store.user_ID;
-        string uStr = "U" + ss.str();
-        ss.str("");
-        ss.clear();
-        ss << log_store.user_start_station;
-        string start_station = "S" + ss.str();
-        ss.str("");
-        ss.clear();
-        ss << log_store.user_end_station;
-        string end_station = "S" + ss.str();
-        ss.str("");
-        ss.clear();
-
-        ofs_log
-            << log_store.bike_ID << " " << start_station << " " << end_station << " " << log_store.start_time << " " << log_store.returned_time << " " << uStr << endl;
-        ss.str("");
-        ss.clear();
-    }
-    delete[] log_output;
-    // output final bike inventory
-
-    int Barr_idx = 0;
-    int station_heap_size = 0;
-    // 計算低一station的各種車型的車輛個數
-    /*
-        cout << "basic_stations[0][0] " << basic_stations[0][0].harr[0].id << endl;
-        cout << "basic_stations[0][0] " << basic_stations[0][0].harr[1].id << endl;
-        cout << "basic_stations[0][1] " << basic_stations[0][1].harr[0].id << endl;
-        cout << "basic_stations[0][2] " << basic_stations[0][2].harr[0].id << endl;
-        cout << "basic_stations[0][2] " << basic_stations[0][2].harr[1].id << endl;
-        cout << "basic_stations[0][2] " << basic_stations[0][2].harr[2].id << endl;
-        cout << "basic_stations[0][2] " << basic_stations[0][2].harr[3].id << endl;
-        cout << "basic_stations[0][2] " << basic_stations[0][2].harr[4].id << endl;
-        cout << "basic_stations[0][2] " << basic_stations[0][2].harr[5].id << endl;
-        cout << "basic_stations[0][2] " << basic_stations[0][2].harr[6].id << endl;*/
-
-    for (int i = 0; i < read_data.station_num; i++)
-    {
-        ss << i;
-        string station_id = "S" + ss.str();
-        cout << "here!" << endl;
-        station_heap_size = 0;
-        for (int j = 0; j < read_data.count_bike_type; j++)
+        // Pointer arithmetic is done in units of the size of the pointer type.
+        cout << "here!--2" << endl;
+        BMNode *ptr;
+        ptr = basic_stations[i][k].harr;
+        // cout << "ptr: " << ptr << endl;
+        // cout << "size:" << sizeof(BMNode) << endl;
+        for (int m = 0; m < basic_stations[i][k].heap_size; m++)
         {
-            cout << "heap.size " << basic_stations[i][j].heap_size << endl;
-            station_heap_size += basic_stations[i][j].heap_size;
+            cout << "ptr->id: :" << ptr->id << endl;
+            Barr[Barr_idx++] = *(ptr);
+            ptr++;
         }
-        cout << "station_heap_size: " << station_heap_size << endl;
-
-        BMNode *Barr = new BMNode[station_heap_size];
-        //! 把單一station的bike都蒐集起來放在Barr
-        for (int k = 0; k < read_data.count_bike_type; k++)
-        {
-            // Pointer arithmetic is done in units of the size of the pointer type.
-            cout << "here!--2" << endl;
-            BMNode *ptr;
-            ptr = basic_stations[i][k].harr;
-            // cout << "ptr: " << ptr << endl;
-            // cout << "size:" << sizeof(BMNode) << endl;
-            for (int m = 0; m < basic_stations[i][k].heap_size; m++)
-            {
-                cout << "ptr->id: :" << ptr->id << endl;
-                Barr[Barr_idx++] = *(ptr);
-                ptr++;
-            }
-        }
-        // 把單一station的bike用ID進行排序小到大
-        read_data.mergeSort(Barr, 0, station_heap_size - 1);
-        cout << "here!--3" << endl;
-
-        string bikeB;
-        for (int q = 0; q < station_heap_size; q++)
-        {
-            bikeB = "B" + Barr[q].bike_type;
-            cout
-                << station_id << " " << Barr[q].id << " " << bikeB << " " << Barr[q].rental_price << " " << Barr[q].rental_count << endl;
-
-            ofs_status << station_id << " " << Barr[q].id << " " << bikeB << " " << Barr[q].rental_price << " " << Barr[q].rental_count << endl;
-        }
-        Barr_idx = 0;
-        delete[] Barr;
-        ss.str("");
-        ss.clear();
     }
-    // test
-    cout << "basic_revenue: " << basic_revenue << endl;
+    // 把單一station的bike用ID進行排序小到大
+    read_data.mergeSort(Barr, 0, station_heap_size - 1);
+    cout << "here!--3" << endl;
 
-    cout << "countZ: " << countZ << endl;
-    cout << "countA: " << countA << endl;
-    cout << "countB: " << countB << endl;
-    cout << "countC: " << countC << endl;
-
-    // todo delete all new operation!
-    for (int i = 0; i < station_num; i++)
+    string bikeB;
+    for (int q = 0; q < station_heap_size; q++)
     {
-        delete[] read_data.shortest_record[i];
-        for (int j = 0; j < read_data.count_bike_type; j++)
-            delete[] basic_stations[i][j].harr;
-    }
-    for (int i = 0; i < station_num; i++)
-        delete[] basic_stations[i];
-    delete[] basic_graph.bike_graph_List;
-    delete[] read_data.all_user_list;
+        bikeB = "B" + Barr[q].bike_type;
+        cout
+            << station_id << " " << Barr[q].id << " " << bikeB << " " << Barr[q].rental_price << " " << Barr[q].rental_count << endl;
 
-    /*
+        ofs_status << station_id << " " << Barr[q].id << " " << bikeB << " " << Barr[q].rental_price << " " << Barr[q].rental_count << endl;
+    }
+    Barr_idx = 0;
+    delete[] Barr;
+    ss.str("");
+    ss.clear();
+}
+// test
+cout << "basic_revenue: " << basic_revenue << endl;
+
+cout << "countZ: " << countZ << endl;
+cout << "countA: " << countA << endl;
+cout << "countB: " << countB << endl;
+cout << "countC: " << countC << endl;
+
+// todo delete all new operation!
+for (int i = 0; i < station_num; i++)
+{
+    delete[] read_data.shortest_record[i];
+    for (int j = 0; j < read_data.count_bike_type; j++)
+        delete[] basic_stations[i][j].harr;
+}
+for (int i = 0; i < station_num; i++)
+    delete[] basic_stations[i];
+delete[] basic_graph.bike_graph_List;
+delete[] read_data.all_user_list;
+
+/*
 string path = "./testcases/" + selectedCase + "/bike_info.txt";
 string line;
 ifstream myfile(path);
 if (myfile.is_open())
 {
 
-    while (getline(myfile, line))
-    {
-        cout << line << endl;
-    }
-    myfile.close();
+while (getline(myfile, line))
+{
+    cout << line << endl;
+}
+myfile.close();
 }
 else
-    cout << "not open";*/
+cout << "not open";*/
 }
