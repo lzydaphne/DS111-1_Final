@@ -222,8 +222,11 @@ void advanced(string selectedCase)
             if (max_heap[i] > 0)
             {
                 // todo 可以看看extractMax的效果
+                cout << "pass 0 " << endl;
                 BMNode tmp = basic_stations[tuser_start_station][max_heap[i]].extractMin();
+                cout << "pass 1 " << endl;
                 basic_stations[tuser_start_station][max_heap[i]].insertKey(tmp);
+                cout << "pass 2 " << endl;
             }
         }
         delete[] pick_station;
