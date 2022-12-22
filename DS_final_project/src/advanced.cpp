@@ -498,7 +498,6 @@ void advanced(string selectedCase)
                         flag_FBT = 1;
                         delete[] pick_station;
                         goto CHECK;
-                        /* code */
                     }
                 }
             }
