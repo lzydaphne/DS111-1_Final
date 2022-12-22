@@ -82,9 +82,6 @@ void advanced(string selectedCase)
     LNode *log_output = new LNode[read_data.user_num];
     int log_idx = 0;
 
-    //* wait_list
-    bike_MaxHeap wait_list;
-
     int countZ = 0;
     int countA = 0;
     int countB = 0;
@@ -191,39 +188,15 @@ void advanced(string selectedCase)
                     countB++;
                     cout << "(tstart_time + shortest_path > tend_time)" << endl;
                 }
-                else if (target.returned_time + shortest_path > tend_time)
+                else if (target.returned_time > tstart_time)
                 {
                     bike_case = 1;
                     countC++;
                     cout
-                        << "(target.returned_time + shortest_path > tend_time)" << endl;
+                        << "target.returned_time > tstart_time" << endl;
                 }
                 else
                 {
-                    if (target.returned_time > tstart_time)
-                    //* WAIT
-                    {
-                        BMNode tmp;
-                        // tstart_time = target.returned_time;
-                        if (!wait_list.isEmpty())
-                        {
-                            tmp = wait_list.extractMax();
-                            if (target.rental_price > tmp.rental_price)
-                            {
-                                basic_stations[tuser_start_station][stoi(tmp.bike_type)].insertKey(tmp);
-                                wait_list.insertKey(target);
-                            }
-                            else
-                                wait_list.insertKey(tmp);
-                        }
-                        else
-                            wait_list.insertKey(target);
-
-                        cout << "put into wait-list" << endl;
-                        target = basic_stations[tuser_start_station][tAC_bike_type[i]].extractMax();
-                        continue;
-                    }
-
                     cout << "nice!! " << endl;
                     bike_case = 0;
                 }
@@ -243,7 +216,7 @@ void advanced(string selectedCase)
                         //! 同一種車種的情況下，把備胎放回去，因為發現更好的
                         if ((tmp_target.rental_price != -1))
                         {
-                            cout << "original target: " << tmp_target.id << endl;
+                            cout << "bike_case 0: " << tmp_target.id << endl;
                             cout << tmp_target.rental_price << endl;
 
                             basic_stations[tuser_start_station][stoi(tmp_target.bike_type)].insertKey(tmp_target);
@@ -253,11 +226,11 @@ void advanced(string selectedCase)
                         tmp_target.rental_count = target.rental_count;
                         tmp_target.rental_price = target.rental_price;
                         tmp_target.returned_time = target.returned_time;
-                        cout << "find better target: " << tmp_target.id << endl;
+                        cout << "tmp_target.id-bike0 " << tmp_target.id << endl;
                     }
                     else
                     {
-                        cout << "worser target: " << target.id << endl;
+                        cout << "bike_case 0-2 : " << target.id << endl;
                         // 符合基本條件，卻沒有比tmp好，就放回去
                         store_BMNode[tmp_idx++] = target;
                     }
@@ -341,7 +314,6 @@ void advanced(string selectedCase)
 
         if ((target.rental_price > 0) && (target.returned_time <= 1440)) // 有找到目標車車
         {
-        CHECK:
             cout << "find!-------------------------------" << endl;
             // 計算revenue
             single_revenue = floor(shortest_path * target.rental_price);
@@ -389,38 +361,16 @@ void advanced(string selectedCase)
         }
         else
         {
-            cout << " first not find ---------------------" << endl;
-
-            //! wait bike
-            if (!wait_list.isEmpty())
-            {
-                BMNode wait = wait_list.extractMax();
-                tstart_time = wait.returned_time;
-                tend_time = tstart_time + shortest_path;
-                cout << "wait id : " << wait.id << endl;
-                cout << "tstart_time : " << tstart_time << endl;
-                cout << "tend_time : " << tend_time << endl;
-                target = wait;
-
-                // 清空wait-list
-                while (!wait_list.isEmpty())
-                    wait_list.extractMax();
-
-                goto CHECK;
-            }
-
-            cout << " truly not find! " << endl;
-
-            //! transfer
+            cout << "not find ---------------------" << endl;
             /*
-                        LNode log_store;
-                        log_store.user_ID = tuser_id;
-                        log_store.bike_ID = 0;
-                        log_store.returned_time = 0;
-                        log_store.start_time = 0;
-                        log_store.user_start_station = 0;
-                        log_store.user_end_station = 0;
-                        log_output[log_idx++] = log_store;*/
+            LNode log_store;
+            log_store.user_ID = user_id;
+            log_store.bike_ID = 0;
+            log_store.returned_time = 0;
+            log_store.start_time = 0;
+            log_store.user_start_station = 0;
+            log_store.user_end_station = 0;
+            log_output[log_idx++] = log_store;*/
 
             cUNode user_sort;
             user_sort.user_ID = tuser_ID; // num
