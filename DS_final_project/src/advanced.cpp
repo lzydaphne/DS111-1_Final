@@ -158,84 +158,14 @@ void advanced(string selectedCase)
                 idx++;
             }
         }
-        //! Free bike transfer
-        //! 選出最近的三個站點(station)
-        int nearest_stations[3];
-        int *pick_station = new int[read_data.station_num];
-        pick_station = read_data.shortest_record[tuser_start_station];
-        //* pick first three nearest station
-        int first = pick_station[0], second = INT_MIN, third = INT_MIN;
-        int first_idx = 0, second_idx = -1, third_idx = -1;
-        for (int q = 1; q < read_data.station_num; q++)
-        {
-            if (pick_station[q] > first)
-            {
-                first_idx = q;
-                second_idx = first_idx;
-                third_idx = second_idx;
-                third = second;
-                second = first;
-                first = pick_station[q];
-            }
-            else if (pick_station[q] > second)
-            {
-                second_idx = q;
-                third_idx = second_idx;
-                third = second;
-                second = pick_station[q];
-            }
-            else if (pick_station[q] > third)
-            {
-                third_idx = q;
-                third = pick_station[q];
-            }
-        }
-
-        nearest_stations[0] = first_idx;
-        nearest_stations[1] = second_idx;
-        nearest_stations[2] = third_idx;
-        //-------------------------------
-        int max_heap[3] = {0}; // 用來儲存「每個station中，有最大heap size的車種type」
-        for (int i = 0; i < 3; i++)
-        {
-            int max = 0;
-            int max_station = -1; // 紀錄是哪一個bike_type
-            for (int j = 0; j < read_data.count_bike_type; j++)
-            {
-                if (basic_stations[nearest_stations[i]][j].heap_size > max)
-                {
-                    max = basic_stations[nearest_stations[i]][j].heap_size;
-                    max_station = j;
-                    // 紀錄是哪一個bike_type
-                }
-            }
-            if (max == 0) // 這個station完全沒有足夠的bike了
-            {
-                cout << " this station has not enough bike! " << endl;
-                // todo 應該要把下一個鄰近的拿進來繼續抓剩餘的車，但是先不用
-                // 如果三個都沒車?????
-                // todo 應該說，有車再implement，沒車就算了
-            }
-            max_heap[i] = max_station; // 如果是-1，代表沒車
-            cout << "  max_heap[i]: " << max_heap[i] << endl;
-            // 開始放入 user start station
-            if (max_heap[i] > 0)
-            {
-                // todo 可以看看extractMax的效果
-                cout << "pass 0 " << endl;
-                BMNode tmp = basic_stations[tuser_start_station][max_heap[i]].extractMin();
-                cout << "pass 1 " << endl;
-                basic_stations[tuser_start_station][max_heap[i]].insertKey(tmp);
-                cout << "pass 2 " << endl;
-            }
-        }
-        delete[] pick_station;
 
         //-------------------------------
 
         //* 當可以騎多個車型，每種車型都各自建立一個heap來拿到最好的選擇
         cout
             << "-----Single station--------------------------" << endl;
+        int flag_FBT = 0;
+    CHECK:
         for (int i = 0; i < tlen_AC; i++)
         {
             BMNode target; //! 符合條件的bike_node
@@ -453,29 +383,103 @@ void advanced(string selectedCase)
         }
         else
         {
-            cout << "not find ---------------------" << endl;
-            /*
-            LNode log_store;
-            log_store.user_ID = user_id;
-            log_store.bike_ID = 0;
-            log_store.returned_time = 0;
-            log_store.start_time = 0;
-            log_store.user_start_station = 0;
-            log_store.user_end_station = 0;
-            log_output[log_idx++] = log_store;*/
+            if (flag_FBT)
+            {
+                cout << "---Truly not find -----------------" << endl;
 
-            cUNode user_sort;
-            user_sort.user_ID = tuser_ID; // num
-            user_sort.AC = 0;
-            user_sort.bike_ID = 0;
-            user_sort.bike_start_time = 0;
-            user_sort.bike_end_time = 0;
-            user_sort.revenue = 0;
-            check_user_output[check_user_idx++] = user_sort;
-            // todo 記得把正確的形式改回來
+                cUNode user_sort;
+                user_sort.user_ID = tuser_ID; // num
+                user_sort.AC = 0;
+                user_sort.bike_ID = 0;
+                user_sort.bike_start_time = 0;
+                user_sort.bike_end_time = 0;
+                user_sort.revenue = 0;
+                check_user_output[check_user_idx++] = user_sort;
+                // todo 記得把正確的形式改回來
 
-            ofs_user
-                << user_id << " " << 0 << " " << 0 << " " << 0 << " " << 0 << " " << 0 << endl;
+                ofs_user
+                    << user_id << " " << 0 << " " << 0 << " " << 0 << " " << 0 << " " << 0 << endl;
+            }
+            else
+            {
+
+                cout << "--------------First not find -----------------" << endl;
+
+                //! Free bike transfer
+                //! 選出最近的三個站點(station)
+                int nearest_stations[3];
+                int *pick_station = new int[read_data.station_num];
+                pick_station = read_data.shortest_record[tuser_start_station];
+                //* pick first three nearest station
+                int first = pick_station[0], second = INT_MIN, third = INT_MIN;
+                int first_idx = 0, second_idx = -1, third_idx = -1;
+                for (int q = 1; q < read_data.station_num; q++)
+                {
+                    if (pick_station[q] > first)
+                    {
+                        first_idx = q;
+                        second_idx = first_idx;
+                        third_idx = second_idx;
+                        third = second;
+                        second = first;
+                        first = pick_station[q];
+                    }
+                    else if (pick_station[q] > second)
+                    {
+                        second_idx = q;
+                        third_idx = second_idx;
+                        third = second;
+                        second = pick_station[q];
+                    }
+                    else if (pick_station[q] > third)
+                    {
+                        third_idx = q;
+                        third = pick_station[q];
+                    }
+                }
+
+                nearest_stations[0] = first_idx;
+                nearest_stations[1] = second_idx;
+                nearest_stations[2] = third_idx;
+                //-------------------------------
+                int max_heap[3] = {0}; // 用來儲存「每個station中，有最大heap size的車種type」
+                for (int i = 0; i < 3; i++)
+                {
+                    int max = 0;
+                    int max_station = -1; // 紀錄是哪一個bike_type
+                    for (int j = 0; j < read_data.count_bike_type; j++)
+                    {
+                        if (basic_stations[nearest_stations[i]][j].heap_size > max)
+                        {
+                            max = basic_stations[nearest_stations[i]][j].heap_size;
+                            max_station = j;
+                            // 紀錄是哪一個bike_type
+                        }
+                    }
+                    if (max == 0) // 這個station完全沒有足夠的bike了
+                    {
+                        cout << " this station has not enough bike! " << endl;
+                        // todo 應該要把下一個鄰近的拿進來繼續抓剩餘的車，但是先不用
+                        // 如果三個都沒車?????
+                        // todo 應該說，有車再implement，沒車就算了
+                    }
+                    max_heap[i] = max_station; // 如果是-1，代表沒車
+                    cout << "  max_heap[i]: " << max_heap[i] << endl;
+                    // 開始放入 user start station
+                    if (max_heap[i] > 0)
+                    {
+                        // todo 可以看看extractMax的效果
+                        // cout << "pass 0 " << endl;
+                        BMNode tmp = basic_stations[tuser_start_station][max_heap[i]].extractMin();
+                        // cout << "pass 1 " << endl;
+                        basic_stations[tuser_start_station][max_heap[i]].insertKey(tmp);
+                        // cout << "pass 2 " << endl;
+                    }
+                }
+                delete[] pick_station;
+                flag_FBT = 1;
+                goto CHECK;
+            }
         }
         //
         ss.str("");
