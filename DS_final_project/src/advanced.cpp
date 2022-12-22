@@ -199,11 +199,13 @@ void advanced(string selectedCase)
                 basic_stations[tuser_start_station][max_heap[i]].insertKey(tmp);
             }
         }
+        delete[] pick_station;
 
         //-------------------------------
 
         //* 當可以騎多個車型，每種車型都各自建立一個heap來拿到最好的選擇
-        cout << "-----Single station--------------------------" << endl;
+        cout
+            << "-----Single station--------------------------" << endl;
         for (int i = 0; i < tlen_AC; i++)
         {
             BMNode target; //! 符合條件的bike_node
