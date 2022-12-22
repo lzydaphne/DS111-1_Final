@@ -4,6 +4,22 @@
 #include <cmath> //round
 using namespace std;
 
+int compare(const void *a, const void *b) // 這函式是 qsort 所需的比較函式
+{
+    int c = *(int *)a;
+    int d = *(int *)b;
+    if (c < d)
+    {
+        return -1;
+    } // 傳回 -1 代表 a < b
+    else if (c == d)
+    {
+        return 0;
+    } // 傳回   0 代表 a = b
+    else
+        return 1; // 傳回  1 代表 a>b
+};
+
 void advanced(string selectedCase)
 {
     cout << "start your advanced version of data structure final from here!" << endl;
@@ -128,6 +144,64 @@ void advanced(string selectedCase)
             store_types_bike[i].rental_price = -1;
         }
 
+        //* 開始計算最短路徑
+        // 已經有紀錄了
+        if (!read_data.shortest_record[tuser_start_station])
+        {
+            // 回傳single source 的dist array
+            read_data.shortest_record[tuser_start_station] = basic_graph.dijkstra(tuser_start_station, tuser_end_station);
+            int idx = 0;
+
+            while (read_data.shortest_record[tuser_start_station][idx])
+            {
+                cout << "dij: " << read_data.shortest_record[tuser_start_station][idx] << endl;
+                idx++;
+            }
+        }
+        //! Free bike transfer
+        //! 選出最近的三個站點(station)
+        int nearest_stations[3];
+        int *pick_station = new int[tuser_start_station];
+        pick_station = read_data.shortest_record[tuser_start_station];
+        qsort(pick_station, station_num, sizeof(int), compare);
+        nearest_stations[0] = pick_station[0];
+        nearest_stations[1] = pick_station[1];
+        nearest_stations[2] = pick_station[2];
+        //-------------------------------
+        int max_heap[3] = {0}; // 用來儲存「每個station中，有最大heap size的車種type」
+        for (int i = 0; i < 3; i++)
+        {
+            int max = 0;
+            int max_station = -1; // 紀錄是哪一個bike_type
+            for (int j = 0; j < read_data.count_bike_type; j++)
+            {
+                if (basic_stations[nearest_stations[i]][j].heap_size > max)
+                {
+                    max = basic_stations[nearest_stations[i]][j].heap_size;
+                    max_station = j;
+                    // 紀錄是哪一個bike_type
+                }
+            }
+            if (max == 0) // 這個station完全沒有足夠的bike了
+            {
+                cout << " this station has not enough bike! " << endl;
+                // todo 應該要把下一個鄰近的拿進來繼續抓剩餘的車，但是先不用
+                // 如果三個都沒車?????
+                // todo 應該說，有車再implement，沒車就算了
+            }
+            max_heap[i] = max_station; // 如果是-1，代表沒車
+            cout << "  max_heap[i]: " << max_heap[i] << endl;
+            // 開始放入 user start station
+            if (max_heap[i] > 0)
+            {
+                // todo 可以看看extractMax的效果
+                BMNode tmp = basic_stations[tuser_start_station][max_heap[i]].extractMin();
+                basic_stations[tuser_start_station][max_heap[i]].insertKey(tmp);
+            }
+        }
+
+        //-------------------------------
+
         //* 當可以騎多個車型，每種車型都各自建立一個heap來拿到最好的選擇
         cout << "-----Single station--------------------------" << endl;
         for (int i = 0; i < tlen_AC; i++)
@@ -140,20 +214,6 @@ void advanced(string selectedCase)
             //! 抓出node
             target = basic_stations[tuser_start_station][tAC_bike_type[i]].extractMax();
 
-            //* 開始計算最短路徑
-            // 已經有紀錄了
-            if (!read_data.shortest_record[tuser_start_station])
-            {
-                // 回傳single source 的dist array
-                read_data.shortest_record[tuser_start_station] = basic_graph.dijkstra(tuser_start_station, tuser_end_station);
-                int idx = 0;
-
-                while (read_data.shortest_record[tuser_start_station][idx])
-                {
-                    cout << "dij: " << read_data.shortest_record[tuser_start_station][idx] << endl;
-                    idx++;
-                }
-            }
             shortest_path = read_data.shortest_record[tuser_start_station][tuser_end_station];
             cout << "  shortest_path " << shortest_path << endl;
 
