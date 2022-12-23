@@ -219,17 +219,10 @@ void advanced(string selectedCase)
                 if (!read_data.shortest_record[nearest_stations[i]])
                 {
                     // 回傳single source 的dist array
-                    read_data.shortest_record[nearest_stations[i]] = basic_graph.dijkstra(nearest_stations[i], tuser_end_station);
-                    /*
-                                        int idx = 0;
-                                        while (read_data.shortest_record[tuser_start_station][idx])
-                                        {
-                                            cout << "dij: " << read_data.shortest_record[tuser_start_station][idx] << endl;
-                                            idx++;
-                                        }*/
+                    read_data.shortest_record[nearest_stations[i]] = basic_graph.dijkstra(nearest_stations[i], tuser_start_station);
                 }
-                cout << "path: " << read_data.shortest_record[nearest_stations[i]][tuser_end_station] << endl;
-                tmp.returned_time += read_data.shortest_record[nearest_stations[i]][tuser_end_station];
+                cout << "path: " << read_data.shortest_record[nearest_stations[i]][tuser_start_station] << endl;
+                tmp.returned_time += read_data.shortest_record[nearest_stations[i]][tuser_start_station];
                 basic_stations[tuser_start_station][max_heap[i]].insertKey(tmp);
                 // cout << "pass 2 " << endl;
             }
