@@ -94,10 +94,7 @@ void basic(string selectedCase)
         {
             for (int j = 0; j < read_data.count_bike_type; j++)
             {
-                cout << "-------------------------------" << endl;
-                cout << "i: " << i << " j: " << j << endl;
-                cout << "size: " << basic_stations[i][j].heap_size << endl;
-                cout << "-------------------------------" << endl;
+                cout << "i: " << i << " j: " << j << " size: " << basic_stations[i][j].heap_size << endl;
             }
         }
 
