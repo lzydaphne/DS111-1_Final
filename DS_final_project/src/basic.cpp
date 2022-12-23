@@ -90,6 +90,17 @@ void basic(string selectedCase)
     while (idx < read_data.all_user_list_idx)
     {
 
+        for (int i = 0; i < read_data.station_num; i++)
+        {
+            for (int j = 0; j < read_data.count_bike_type; j++)
+            {
+                cout << "-------------------------------" << endl;
+                cout << "i: " << i << " j: " << j << endl;
+                cout << "size: " << basic_stations[i][j].heap_size << endl;
+                cout << "-------------------------------" << endl;
+            }
+        }
+
         // read data
         tuser_ID = read_data.all_user_list[idx].user_ID;
         tAC_bike_type = read_data.all_user_list[idx].AC_bike_type;
