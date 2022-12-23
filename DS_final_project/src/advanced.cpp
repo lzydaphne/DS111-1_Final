@@ -82,6 +82,9 @@ void advanced(string selectedCase)
     LNode *log_output = new LNode[read_data.user_num];
     int log_idx = 0;
 
+    //* wait_list
+    bike_MaxHeap wait_list;
+
     int countZ = 0;
     int countA = 0;
     int countB = 0;
@@ -219,10 +222,14 @@ void advanced(string selectedCase)
                 if (!read_data.shortest_record[nearest_stations[i]])
                 {
                     // 回傳single source 的dist array
-                    read_data.shortest_record[nearest_stations[i]] = basic_graph.dijkstra(nearest_stations[i], tuser_end_station);
+                    read_data.shortest_record[nearest_stations[i]] = basic_graph.dijkstra(nearest_stations[i], tuser_start_station);
                 }
-                cout << "path: " << read_data.shortest_record[nearest_stations[i]][tuser_end_station] << endl;
-                tmp.returned_time += read_data.shortest_record[nearest_stations[i]][tuser_end_station];
+                cout << "path: " << read_data.shortest_record[nearest_stations[i]][tuser_start_station] << endl;
+                //* 把bike的returned time加上轉運時間
+                // 所以下面抓target的時候，FBT的bike已經會在start station，而returned time已經加上轉運時間
+                // 剩下user的start time要處理
+                //! 這些FBT的BIKE，要修改的只有RETURN TIME，且會被插入到START STATION
+                tmp.returned_time += read_data.shortest_record[nearest_stations[i]][tuser_start_station];
                 basic_stations[tuser_start_station][max_heap[i]].insertKey(tmp);
                 // cout << "pass 2 " << endl;
             }
@@ -292,13 +299,41 @@ void advanced(string selectedCase)
                     bike_case = 1;
                     countC++;
                     cout
-                        << "target.returned_time + shortest_path > tstart_time" << endl;
+                        << "target.returned_time + shortest_path > tend_time" << endl;
                 }
                 else
                 {
                     if (target.returned_time > tstart_time)
                     {
+                        //! user wait for bike when no bike is available
+                        // todo 要wait 哪一些bike?
+                        // 目前是等rental price最多的那一台
+                        tstart_time = target.returned_time;
                         cout << "user wait for bike" << endl;
+                        //* WAIT
+                        {
+                            BMNode tmp;
+                            // tstart_time = target.returned_time;
+                            if (!wait_list.isEmpty())
+                            {
+                                tmp = wait_list.extractMax();
+                                if (target.rental_price > tmp.rental_price)
+                                {
+                                    // 把tmp放回去，不等tmp
+                                    basic_stations[tuser_start_station][stoi(tmp.bike_type)].insertKey(tmp);
+                                    // 等target
+                                    wait_list.insertKey(target);
+                                }
+                                else
+                                    wait_list.insertKey(tmp);
+                            }
+                            else
+                                wait_list.insertKey(target);
+
+                            cout << "put into wait-list" << endl;
+                            target = basic_stations[tuser_start_station][tAC_bike_type[i]].extractMax();
+                            continue;
+                        }
                     }
 
                     cout << "nice!! " << endl;
@@ -402,7 +437,6 @@ void advanced(string selectedCase)
                         basic_stations[tuser_start_station][stoi(tmp.bike_type)].insertKey(tmp);
                         cout << "store_types_bike: " << tmp.id << endl;
                         tmp = store_types_bike[i];
-                        // cout << "tmp.bike_id: --2 " << tmp.id << endl;
                     }
                     else if ((store_types_bike[i].id != tmp.id) && (store_types_bike[i].rental_price <= tmp.rental_price))
                     {
@@ -412,10 +446,10 @@ void advanced(string selectedCase)
                 }
             }
         }
-        cout << "check store_types_bike--2: " << tmp.id << endl;
+        cout << "final bike choice: " << tmp.id << endl;
         BMNode target;
         target = tmp;
-
+    FIND:
         if ((target.rental_price > 0) && (target.returned_time <= 1440)) // 有找到目標車車
         {
             cout << "find!-------------------------------" << endl;
@@ -436,13 +470,12 @@ void advanced(string selectedCase)
             cout << "stoi(target.bike_type) " << stoi(target.bike_type) << endl;
 
             // cout << "basic_stations[tuser_end_station][stoi(target.bike_type)]  heapsize" << basic_stations[tuser_end_station][stoi(target.bike_type)].heap_size << endl;
-            cout << basic_stations[tuser_end_station][stoi(target.bike_type)].harr[0].id << endl;
+            // cout << basic_stations[tuser_end_station][stoi(target.bike_type)].harr[0].id << endl;
 
             basic_stations[tuser_end_station][stoi(target.bike_type)].insertKey(target);
-            cout << "real target inserted " << target.id << endl;
+            cout << "real target insert in end station" << target.id << endl;
 
             // output to user_result.txt
-
             ofs_user
                 << user_id << " " << 1 << " " << target.id << " " << tstart_time << " " << target.returned_time << " " << single_revenue << endl;
 
@@ -467,6 +500,22 @@ void advanced(string selectedCase)
         else
         {
             cout << "--------------First not find -----------------" << endl;
+
+            //! implement wait
+            // todo 如果沒車可以等? 一定每次都要等嗎? 何時要等何時不用等?
+            // 目前的做法: 找不到就等
+            BMNode waited_bike;
+            waited_bike = wait_list.extractMax();
+            // int bike_start_time = 0;
+            if (waited_bike.id != -10) // 不是空的
+            {
+                tstart_time = waited_bike.returned_time;
+                // waited_bike.returned_time = tstart_time + shortest_path;
+                target = waited_bike;
+                goto FIND;
+            }
+
+            cout << "--------------Truly not find -----------------" << endl;
 
             cUNode user_sort;
             user_sort.user_ID = tuser_ID; // num
@@ -604,6 +653,7 @@ void advanced(string selectedCase)
     }
     // test
     cout << "basic_revenue: " << basic_revenue << endl;
+    cout << "Increased by " << (float)(basic_revenue / 26425651) << " %" << endl;
 
     cout << "countZ: " << countZ << endl;
     cout << "countA: " << countA << endl;
