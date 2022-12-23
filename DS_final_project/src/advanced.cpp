@@ -210,11 +210,11 @@ void advanced(string selectedCase)
             max_heap[i] = max_station; // 如果是-1，代表沒車
             cout << "  max_heap[i]: " << max_heap[i] << endl;
             // 開始放入 user start station
-            if (max_heap[i] > 1)
+            if (max_heap[i] > 1) // 多於一台車再FBT
             {
                 // todo 可以看看extractMax的效果
                 // cout << "pass 0 " << endl;
-                BMNode tmp = basic_stations[tuser_start_station][max_heap[i]].extractMax();
+                BMNode tmp = basic_stations[nearest_stations[i]][max_heap[i]].extractMax();
                 cout << "transfered id: " << tmp.id << endl;
                 // cout << "pass 1 " << endl;
                 basic_stations[tuser_start_station][max_heap[i]].insertKey(tmp);
