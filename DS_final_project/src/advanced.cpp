@@ -448,6 +448,7 @@ void advanced(string selectedCase)
 
             ofs_user
                 << user_id << " " << 1 << " " << target.id << " " << tstart_time << " " << target.returned_time << " " << single_revenue << endl;
+
             cUNode user_sort;
             user_sort.user_ID = tuser_ID; // num
             user_sort.AC = 1;
@@ -483,10 +484,10 @@ void advanced(string selectedCase)
             ofs_user
                 << user_id << " " << 0 << " " << 0 << " " << 0 << " " << 0 << " " << 0 << endl;
         }
+        ss.str("");
+        ss.clear();
     }
     //
-    ss.str("");
-    ss.clear();
     delete[] store_BMNode;
     delete[] store_types_bike;
 
