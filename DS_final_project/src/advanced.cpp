@@ -208,7 +208,7 @@ void advanced(string selectedCase)
             max_heap[i] = max_station; // 如果是-1，代表沒車
             cout << "  max_heap[i]: " << max_heap[i] << endl;
             // 開始放入 user start station
-            if (max_heap[i] > 2) // todo  實驗看看，多於幾台車再FBT會比較好
+            if (max_heap[i] > 1) // todo  實驗看看，多於幾台車再FBT會比較好
             {
                 // todo 可以看看extractMax的效果
                 // 用min，是想要降低運送時間的機會成本
