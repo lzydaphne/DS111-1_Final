@@ -215,6 +215,7 @@ void advanced(string selectedCase)
                 // todo 可以看看extractMax的效果
                 BMNode tmp = basic_stations[nearest_stations[i]][max_heap[i]].extractMin();
                 cout << "transfered id: " << tmp.id << endl;
+                cout << "nearest_stations[i] : " << nearest_stations[i] << endl;
                 // 求出nearest_stations[i]站點的距離
                 if (!read_data.shortest_record[nearest_stations[i]])
                 {
@@ -228,6 +229,7 @@ void advanced(string selectedCase)
                                             idx++;
                                         }*/
                 }
+                cout << "path: " << read_data.shortest_record[nearest_stations[i]][tuser_end_station] << endl;
                 tmp.returned_time += read_data.shortest_record[nearest_stations[i]][tuser_end_station];
                 basic_stations[tuser_start_station][max_heap[i]].insertKey(tmp);
                 // cout << "pass 2 " << endl;
