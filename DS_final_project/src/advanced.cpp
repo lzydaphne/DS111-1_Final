@@ -224,7 +224,7 @@ void advanced(string selectedCase)
                 }
                 int transfer_path = read_data.shortest_record[nearest_stations[i]][tuser_start_station];
                 cout << "path: " << transfer_path << endl;
-                if (tmp.returned_time + transfer_path < tstart_time) //! 這才是有用的transfer
+                if (tmp.returned_time + transfer_path <= tstart_time) //! 這才是有用的transfer
                 {
                     tmp.returned_time += transfer_path;
                     basic_stations[tuser_start_station][max_heap[i]].insertKey(tmp);
