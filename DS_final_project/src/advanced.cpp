@@ -4,22 +4,6 @@
 #include <cmath> //round
 using namespace std;
 
-int compare(const void *a, const void *b) // 這函式是 qsort 所需的比較函式
-{
-    int c = *(int *)a;
-    int d = *(int *)b;
-    if (c < d)
-    {
-        return -1;
-    } // 傳回 -1 代表 a < b
-    else if (c == d)
-    {
-        return 0;
-    } // 傳回   0 代表 a = b
-    else
-        return 1; // 傳回  1 代表 a>b
-};
-
 void advanced(string selectedCase)
 {
     cout << "start your advanced version of data structure final from here!" << endl;
@@ -226,11 +210,12 @@ void advanced(string selectedCase)
             max_heap[i] = max_station; // 如果是-1，代表沒車
             cout << "  max_heap[i]: " << max_heap[i] << endl;
             // 開始放入 user start station
-            if (max_heap[i] > 0)
+            if (max_heap[i] > 1)
             {
                 // todo 可以看看extractMax的效果
                 // cout << "pass 0 " << endl;
                 BMNode tmp = basic_stations[tuser_start_station][max_heap[i]].extractMax();
+                cout << "transfered id: " << tmp.id << endl;
                 // cout << "pass 1 " << endl;
                 basic_stations[tuser_start_station][max_heap[i]].insertKey(tmp);
                 // cout << "pass 2 " << endl;
