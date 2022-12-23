@@ -231,7 +231,6 @@ void advanced(string selectedCase)
                 //! 這些FBT的BIKE，要修改的只有RETURN TIME，且會被插入到START STATION
                 tmp.returned_time += read_data.shortest_record[nearest_stations[i]][tuser_start_station];
                 basic_stations[tuser_start_station][max_heap[i]].insertKey(tmp);
-                // cout << "pass 2 " << endl;
             }
         }
         delete[] pick_station;
