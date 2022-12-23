@@ -214,7 +214,7 @@ void advanced(string selectedCase)
             {
                 // todo 可以看看extractMax的效果
                 // cout << "pass 0 " << endl;
-                BMNode tmp = basic_stations[nearest_stations[i]][max_heap[i]].extractMax();
+                BMNode tmp = basic_stations[nearest_stations[i]][max_heap[i]].extractMin();
                 cout << "transfered id: " << tmp.id << endl;
                 // cout << "pass 1 " << endl;
                 basic_stations[tuser_start_station][max_heap[i]].insertKey(tmp);
