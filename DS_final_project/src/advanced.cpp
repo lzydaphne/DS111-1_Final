@@ -219,10 +219,10 @@ void advanced(string selectedCase)
                 if (!read_data.shortest_record[nearest_stations[i]])
                 {
                     // 回傳single source 的dist array
-                    read_data.shortest_record[nearest_stations[i]] = basic_graph.dijkstra(nearest_stations[i], tuser_end_station);
+                    read_data.shortest_record[nearest_stations[i]] = basic_graph.dijkstra(nearest_stations[i], tuser_start_station);
                 }
-                cout << "path: " << read_data.shortest_record[nearest_stations[i]][tuser_end_station] << endl;
-                tmp.returned_time += read_data.shortest_record[nearest_stations[i]][tuser_end_station];
+                cout << "path: " << read_data.shortest_record[nearest_stations[i]][tuser_start_station] << endl;
+                tmp.returned_time += read_data.shortest_record[nearest_stations[i]][tuser_start_station];
                 basic_stations[tuser_start_station][max_heap[i]].insertKey(tmp);
                 // cout << "pass 2 " << endl;
             }
@@ -238,7 +238,7 @@ void advanced(string selectedCase)
         {
             BMNode target; //! 符合條件的bike_node
             BMNode tmp_target;
-            cout << "-----diff type--------------------------" << endl;
+            cout << "-----------diff type-----------------" << endl;
             cout << "tAC_bike_type[i] " << tAC_bike_type[i] << endl;
             find = 0;
             //! 抓出node
