@@ -220,13 +220,6 @@ void advanced(string selectedCase)
                 {
                     // 回傳single source 的dist array
                     read_data.shortest_record[nearest_stations[i]] = basic_graph.dijkstra(nearest_stations[i], tuser_end_station);
-                    /*
-                                        int idx = 0;
-                                        while (read_data.shortest_record[tuser_start_station][idx])
-                                        {
-                                            cout << "dij: " << read_data.shortest_record[tuser_start_station][idx] << endl;
-                                            idx++;
-                                        }*/
                 }
                 cout << "path: " << read_data.shortest_record[nearest_stations[i]][tuser_end_station] << endl;
                 tmp.returned_time += read_data.shortest_record[nearest_stations[i]][tuser_end_station];
@@ -293,15 +286,21 @@ void advanced(string selectedCase)
                     countB++;
                     cout << "(tstart_time + shortest_path > tend_time)" << endl;
                 }
-                else if (target.returned_time > tstart_time)
+                // else if (target.returned_time > tstart_time)
+                else if (target.returned_time + shortest_path >= tend_time)
                 {
                     bike_case = 1;
                     countC++;
                     cout
-                        << "target.returned_time > tstart_time" << endl;
+                        << "target.returned_time + shortest_path > tstart_time" << endl;
                 }
                 else
                 {
+                    if (target.returned_time > tstart_time)
+                    {
+                        cout << "user wait for bike" << endl;
+                    }
+
                     cout << "nice!! " << endl;
                     bike_case = 0;
                 }
