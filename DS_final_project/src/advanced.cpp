@@ -212,7 +212,7 @@ void advanced(string selectedCase)
             if (max_heap[i] > 1) // 多於一台車再FBT
             {
                 // todo 可以看看extractMax的效果
-                BMNode tmp = basic_stations[nearest_stations[i]][max_heap[i]].extractMin();
+                BMNode tmp = basic_stations[nearest_stations[i]][max_heap[i]].extractMax();
                 cout << "transfered id: " << tmp.id << endl;
                 cout << "nearest_stations[i] : " << nearest_stations[i] << endl;
                 // 求出nearest_stations[i]站點的距離
