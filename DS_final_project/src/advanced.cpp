@@ -216,6 +216,7 @@ void advanced(string selectedCase)
                 // cout << "pass 0 " << endl;
                 BMNode tmp = basic_stations[nearest_stations[i]][max_heap[i]].extractMin();
                 cout << "transfered id: " << tmp.id << endl;
+                tmp.returned_time += read_data.shortest_record[nearest_stations[i]][tuser_end_station];
                 // cout << "pass 1 " << endl;
                 basic_stations[tuser_start_station][max_heap[i]].insertKey(tmp);
                 // cout << "pass 2 " << endl;
