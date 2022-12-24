@@ -248,8 +248,8 @@ void advanced(string selectedCase)
                 // 這才是有用的transfer
                 // if (tmp.returned_time + transfer_path <= tstart_time)
                 // {
-                cout << "transfered_bike-id: " << tmp.id << endl;
                 tmp.returned_time += transfer_path;
+                cout << "transfered_bike-id: " << tmp.id << "transfered_bike returned time:" << tmp.returned_time << endl;
                 basic_stations[tuser_start_station][max_bike_type[i]].insertKey(tmp);
                 // }
             }
