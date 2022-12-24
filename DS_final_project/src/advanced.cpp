@@ -251,6 +251,7 @@ void advanced(string selectedCase)
                 // //! reach rental limit
                 if (tmp.rental_count >= read_data.rental_limit)
                 {
+                    basic_stations[nearest_stations[i]][max_bike_type[i]].insertKey(tmp);
                     continue;
                 }
 
