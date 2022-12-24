@@ -118,7 +118,7 @@ int *&Graph::dijkstra(int src)
     cout << "src: " << src << endl;
     for (int i = 0; i < V; i++)
     {
-        cout << "i: " << i << " dist: " << dist_graph[i] << " ";
+        cout << "i: " << i << " dist: " << dist_graph[i] << endl;
     }
 
     return dist_graph;
