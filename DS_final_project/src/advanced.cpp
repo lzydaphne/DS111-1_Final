@@ -89,6 +89,7 @@ void advanced(string selectedCase)
     int countA = 0;
     int countB = 0;
     int countC = 0;
+    int countD = 0;
 
     while (idx < read_data.all_user_list_idx)
     {
@@ -188,7 +189,7 @@ void advanced(string selectedCase)
         nearest_stations[1] = second_idx;
         nearest_stations[2] = third_idx;
         //-------------------------------
-        int max_heap[3] = {0}; // 用來儲存「每個station中，有最大heap size的車種type」
+        int max_type[3] = {0}; // 用來儲存「每個station中，有最大heap size的車種type」
         for (int i = 0; i < 3; i++)
         {
             int max = 0;
@@ -209,13 +210,13 @@ void advanced(string selectedCase)
                 // 如果三個都沒車?????
                 // todo 應該說，有車再implement，沒車就算了
             }
-            max_heap[i] = max_station; // 如果是-1，代表沒車
-            cout << "  max_heap[i]: " << max_heap[i] << endl;
+            max_type[i] = max_station; // 如果是-1，代表沒車
+            cout << "  max_heap[i]: " << max_type[i] << endl;
             // 開始放入 user start station
-            if (max_heap[i] >= 3) // 多於一台車再FBT
+            if (max_type[i] >= 3) // 多於一台車再FBT
             {
                 // todo 可以看看extractMax的效果
-                BMNode tmp = basic_stations[nearest_stations[i]][max_heap[i]].extractMin();
+                BMNode tmp = basic_stations[nearest_stations[i]][max_type[i]].extractMin();
                 cout << "transfered id: " << tmp.id << endl;
                 cout << "nearest_stations[i] : " << nearest_stations[i] << endl;
                 // 求出nearest_stations[i]站點的距離
@@ -235,7 +236,7 @@ void advanced(string selectedCase)
                 // if (tmp.returned_time + transfer_path <= tstart_time)
                 // {
                 tmp.returned_time += transfer_path;
-                basic_stations[tuser_start_station][max_heap[i]].insertKey(tmp);
+                basic_stations[tuser_start_station][max_type[i]].insertKey(tmp);
                 // }
             }
         }
@@ -310,11 +311,12 @@ void advanced(string selectedCase)
                 {
                     if (target.returned_time > tstart_time)
                     {
+                        countD++;
                         //! user wait for bike when no bike is available
                         // todo 要wait 哪一些bike?
                         // 目前是等rental price最多的那一台
-                        tstart_time = target.returned_time;
                         cout << "user wait for bike" << endl;
+                        tstart_time = target.returned_time;
                         //* WAIT
                         {
                             BMNode tmp;
@@ -667,6 +669,7 @@ void advanced(string selectedCase)
     cout << "countA: " << countA << endl;
     cout << "countB: " << countB << endl;
     cout << "countC: " << countC << endl;
+    cout << "countD: " << countD << endl;
 
     // todo delete all new operation!
     for (int i = 0; i < station_num; i++)
