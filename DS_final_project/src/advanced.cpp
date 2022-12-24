@@ -217,7 +217,7 @@ void advanced(string selectedCase)
             cout << "  max_bike_type[i]: " << max_bike_type[i] << endl;
             cout << "  max_type_size[i]: " << max_type_size[i] << endl;
             // 開始放入 user start station
-            if (max_type_size[i] > 2) // 多於一台車再FBT
+            if (max_type_size[i] > 3) // 多於一台車再FBT
             {
                 // todo 可以看看extractMax的效果
                 BMNode tmp =
