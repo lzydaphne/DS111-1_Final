@@ -227,6 +227,7 @@ void advanced(string selectedCase)
                 // todo 可以看看extractMax的效果
                 BMNode tmp = basic_stations[nearest_stations[i]][max_bike_type[i]].extractMax();
                 // check extract
+                cout << "after extract " << endl;
                 for (int q = 0; q < basic_stations[nearest_stations[i]][max_bike_type[i]].heap_size; q++)
                 {
                     cout << " id: " << basic_stations[nearest_stations[i]][max_bike_type[i]].harr[q].id << " price: " << basic_stations[nearest_stations[i]][max_bike_type[i]].harr[q].rental_price << endl;
