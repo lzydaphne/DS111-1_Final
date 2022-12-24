@@ -11,7 +11,7 @@ void advanced(string selectedCase)
     int basic_revenue = 0;
 
     my_data read_data;
-    cout << "selectedCase " << selectedCase << endl;
+    // cout << "selectedCase " << selectedCase << endl;
     read_data.select = selectedCase;
     int user_num = read_data.read_user_num();
     cout << "user_num: " << user_num << endl;
@@ -760,11 +760,12 @@ void advanced(string selectedCase)
         ss.clear();
     }
     // test
-    ss << selectedCase;
-    int tc;
-    ss >> tc;
-    ss.str("");
-    ss.clear();
+    cout << "selectedCase " << selectedCase << endl;
+    // ss << selectedCase;
+    int tc = stoi(selectedCase);
+    // ss >> tc;
+    // ss.str("");
+    // ss.clear();
     cout << tc << endl;
     switch (tc)
     {
