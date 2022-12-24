@@ -260,7 +260,7 @@ void advanced(string selectedCase)
                 if (transfer_start_time == tmp.returned_time)
                 {
                     cout << "dont transfer to the same station" << endl;
-                    continue;
+                    // continue;
                 }
 
                 basic_stations[tuser_start_station][max_bike_type[i]].insertKey(tmp);
