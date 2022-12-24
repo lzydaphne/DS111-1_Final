@@ -44,7 +44,7 @@ void Graph::displayEdges()
 }
 // ! -----------------------------------------------------
 
-int *&Graph::dijkstra(int src, int dest)
+int *&Graph::dijkstra(int src)
 {
     // Get the number of vertices in graph
     int V = n;
@@ -57,8 +57,6 @@ int *&Graph::dijkstra(int src, int dest)
 
     // Initially size of min heap is equal to V
     minHeap.size = V;
-    // cout << "succ " << endl;
-
     // Initialize minheap with all vertices. dist value of all vertices
     for (int v = 0; v < V; ++v)
     {
@@ -116,6 +114,12 @@ int *&Graph::dijkstra(int src, int dest)
     }
     // todo: warning: reference to local variable dist' returned
     dist_graph = dist;
+
+    cout << "src: " << src << endl;
+    for (int i = 0; i < V; i++)
+    {
+        cout << "i: " << i << " dist: " << dist_graph[i] << " ";
+    }
 
     return dist_graph;
 

@@ -153,7 +153,7 @@ void basic(string selectedCase)
             if (!read_data.shortest_record[tuser_start_station])
             {
                 // 回傳single source 的dist array
-                read_data.shortest_record[tuser_start_station] = basic_graph.dijkstra(tuser_start_station, tuser_end_station);
+                read_data.shortest_record[tuser_start_station] = basic_graph.dijkstra(tuser_start_station);
                 int idx = 0;
 
                 while (read_data.shortest_record[tuser_start_station][idx])

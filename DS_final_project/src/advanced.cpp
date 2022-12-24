@@ -136,7 +136,7 @@ void advanced(string selectedCase)
         if (!read_data.shortest_record[tuser_start_station])
         {
             // 回傳single source 的dist array
-            read_data.shortest_record[tuser_start_station] = basic_graph.dijkstra(tuser_start_station, tuser_end_station);
+            read_data.shortest_record[tuser_start_station] = basic_graph.dijkstra(tuser_start_station);
 
             int idx = 0;
             /*
@@ -158,13 +158,13 @@ void advanced(string selectedCase)
         // shallow copy!
         //  pick_station = read_data.shortest_record[tuser_start_station];
         //* pick first three nearest station
-        int idx = 0;
-        while (idx != read_data.station_num)
-        {
-            cout << pick_station[idx] << " ";
-            idx++;
-        }
-        cout << endl;
+        // int idx = 0;
+        // while (idx != read_data.station_num)
+        // {
+        //     cout << pick_station[idx] << " ";
+        //     idx++;
+        // }
+        // cout << endl;
 
         pick_station[tuser_start_station] = INT_MAX;
         int first = INT_MAX,
@@ -254,7 +254,7 @@ void advanced(string selectedCase)
                 if (!read_data.shortest_record[nearest_stations[i]])
                 {
                     // 回傳single source 的dist array
-                    read_data.shortest_record[nearest_stations[i]] = basic_graph.dijkstra(nearest_stations[i], tuser_start_station);
+                    read_data.shortest_record[nearest_stations[i]] = basic_graph.dijkstra(nearest_stations[i]);
                 }
 
                 int transfer_path = read_data.shortest_record[nearest_stations[i]][tuser_start_station];
