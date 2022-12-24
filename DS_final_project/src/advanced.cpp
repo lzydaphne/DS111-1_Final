@@ -212,7 +212,7 @@ void advanced(string selectedCase)
             max_heap[i] = max_station; // 如果是-1，代表沒車
             cout << "  max_heap[i]: " << max_heap[i] << endl;
             // 開始放入 user start station
-            if (max_heap[i] > 1) // 多於一台車再FBT
+            if (max_heap[i] >= 3) // 多於一台車再FBT
             {
                 // todo 可以看看extractMax的效果
                 BMNode tmp = basic_stations[nearest_stations[i]][max_heap[i]].extractMin();
@@ -224,13 +224,19 @@ void advanced(string selectedCase)
                     // 回傳single source 的dist array
                     read_data.shortest_record[nearest_stations[i]] = basic_graph.dijkstra(nearest_stations[i], tuser_start_station);
                 }
-                cout << "path: " << read_data.shortest_record[nearest_stations[i]][tuser_start_station] << endl;
+
+                int transfer_path = read_data.shortest_record[nearest_stations[i]][tuser_start_station];
+                cout << "path: " << transfer_path << endl;
                 //* 把bike的returned time加上轉運時間
                 // 所以下面抓target的時候，FBT的bike已經會在start station，而returned time已經加上轉運時間
                 // 剩下user的start time要處理
                 //! 這些FBT的BIKE，要修改的只有RETURN TIME，且會被插入到START STATION
-                tmp.returned_time += read_data.shortest_record[nearest_stations[i]][tuser_start_station];
+                // 這才是有用的transfer
+                // if (tmp.returned_time + transfer_path <= tstart_time)
+                // {
+                tmp.returned_time += transfer_path;
                 basic_stations[tuser_start_station][max_heap[i]].insertKey(tmp);
+                // }
             }
         }
         delete[] pick_station;
@@ -316,7 +322,8 @@ void advanced(string selectedCase)
                             if (!wait_list.isEmpty())
                             {
                                 tmp = wait_list.extractMax();
-                                if (target.rental_price > tmp.rental_price)
+                                //! 改變標準: 轉運車越早到越好
+                                if (target.returned_time < tmp.returned_time)
                                 {
                                     // 把tmp放回去，不等tmp
                                     basic_stations[tuser_start_station][stoi(tmp.bike_type)].insertKey(tmp);
