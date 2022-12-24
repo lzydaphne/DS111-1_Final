@@ -225,8 +225,8 @@ void advanced(string selectedCase)
                     cout << " id: " << basic_stations[nearest_stations[i]][max_bike_type[i]].harr[q].id << " price: " << basic_stations[nearest_stations[i]][max_bike_type[i]].harr[q].rental_price << endl;
                 }
                 // todo 可以看看extractMax的效果
-                BMNode tmp =
-                    findMinimumElement(basic_stations[nearest_stations[i]][max_bike_type[i]], basic_stations[nearest_stations[i]][max_bike_type[i]].heap_size);
+                BMNode tmp = basic_stations[nearest_stations[i]][max_bike_type[i]].extractMax();
+                // BMNode tmp = findMinimumElement(basic_stations[nearest_stations[i]][max_bike_type[i]], basic_stations[nearest_stations[i]][max_bike_type[i]].heap_size);
                 // BMNode tmp = basic_stations[nearest_stations[i]][max_type[i]].extractMin();
 
                 cout
