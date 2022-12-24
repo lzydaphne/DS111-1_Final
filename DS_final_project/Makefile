@@ -2,7 +2,7 @@
 
 # specify the case you want to test here!
 case=case2
-version=advanced
+version=basic
 # version=advanced
 # Build and run your final project!
 #! warning! 最後面的make有多一行用來compile include folder裡面的東西
