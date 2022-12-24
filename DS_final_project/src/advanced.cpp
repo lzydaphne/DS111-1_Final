@@ -349,7 +349,8 @@ void advanced(string selectedCase)
                                 else
                                 {
                                     cout << "original waited bike tmp-id: " << tmp.id << endl;
-                                    basic_stations[tuser_start_station][stoi(target.bike_type)].insertKey(target);
+                                    // basic_stations[tuser_start_station][stoi(target.bike_type)].insertKey(target);
+                                    store_BMNode[tmp_idx++] = target;
                                     wait_list.insertKey(tmp);
                                 }
                             }
