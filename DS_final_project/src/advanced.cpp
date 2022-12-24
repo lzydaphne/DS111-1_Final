@@ -475,6 +475,14 @@ void advanced(string selectedCase)
         if ((target.rental_price > 0) && (target.returned_time <= 1440)) // 有找到目標車車
         {
             cout << "find!-------------------------------" << endl;
+
+            //! FBT-----------
+            while (!wait_list.isEmpty())
+            {
+                BMNode tmp = wait_list.extractMax();
+                basic_stations[tuser_start_station][stoi(tmp.bike_type)].insertKey(tmp);
+            }
+            //--------------
             // 計算revenue
             single_revenue = floor(shortest_path * target.rental_price);
             basic_revenue += single_revenue;
