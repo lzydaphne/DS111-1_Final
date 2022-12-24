@@ -189,6 +189,7 @@ void advanced(string selectedCase)
         nearest_stations[1] = second_idx;
         nearest_stations[2] = third_idx;
         //-------------------------------
+        cout << first_idx << " " << second_idx << " " << third_idx << endl;
         int max_bike_type[3] = {0}; // 用來儲存「每個station中，有最大heap size的車種type」
         int max_type_size[3] = {0}; // 用來儲存「每個station中，有最大heap size的車種type的size」
         for (int i = 0; i < 3; i++)
