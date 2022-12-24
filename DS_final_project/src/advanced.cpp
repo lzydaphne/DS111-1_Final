@@ -164,6 +164,7 @@ void advanced(string selectedCase)
             cout << pick_station[idx] << " ";
             idx++;
         }
+        cout << endl;
 
         pick_station[tuser_start_station] = INT_MAX;
         int first = INT_MAX,

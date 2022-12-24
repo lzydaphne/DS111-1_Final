@@ -106,8 +106,4 @@ public:
     int rental_count;
     //*for bikes
     // bike_MaxHeap **basic_stations;
-
-    //-------------------------------
-    float *demend_compare;
-    // 1. 在void my_data::read_user()讀到總和
 };
