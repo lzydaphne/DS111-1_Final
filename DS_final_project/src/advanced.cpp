@@ -22,7 +22,9 @@ void advanced(string selectedCase)
     Graph basic_graph(station_num);
     basic_graph = *(read_data.read_map()); // recieve  object's pointer of graph
     bike_MaxHeap **basic_stations = read_data.read_bike();
-    // cout << basic_stations[4][1].extractMax().id << endl;
+
+    //! decide FBT magic number
+    int FBT_magic_number = 3 * (read_data.bike_total_num / 2000);
 
     read_data.read_user();
     read_data.sort_users();
@@ -239,7 +241,8 @@ void advanced(string selectedCase)
             cout << "  max_bike_type[i]: " << max_bike_type[i] << endl;
             cout << "  max_type_size[i]: " << max_type_size[i] << endl;
             // 開始放入 user start station
-            if (max_type_size[i] > 7) // 多於一台車再FBT
+            // if (max_type_size[i] > FBT_magic_number) // 多於一台車再FBT
+            if (max_type_size[i] > 4) // 多於一台車再FBT
             {
                 // // check min
                 // for (int q = 0; q < basic_stations[nearest_stations[i]][max_bike_type[i]].heap_size; q++)
