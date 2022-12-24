@@ -189,7 +189,8 @@ void advanced(string selectedCase)
         nearest_stations[1] = second_idx;
         nearest_stations[2] = third_idx;
         //-------------------------------
-        int max_type[3] = {0}; // 用來儲存「每個station中，有最大heap size的車種type」
+        int max_bike_type[3] = {0}; // 用來儲存「每個station中，有最大heap size的車種type」
+        int max_type_size[3] = {0}; // 用來儲存「每個station中，有最大heap size的車種type的size」
         for (int i = 0; i < 3; i++)
         {
             int max = 0;
@@ -210,14 +211,17 @@ void advanced(string selectedCase)
                 // 如果三個都沒車?????
                 // todo 應該說，有車再implement，沒車就算了
             }
-            max_type[i] = max_station; // 如果是-1，代表沒車
-            cout << "  max_heap[i]: " << max_type[i] << endl;
+
+            max_bike_type[i] = max_station; // 如果是-1，代表沒車
+            max_type_size[i] = max;
+            cout << "  max_bike_type[i]: " << max_bike_type[i] << endl;
+            cout << "  max_type_size[i]: " << max_type_size[i] << endl;
             // 開始放入 user start station
-            if (max_type[i] > 2) // 多於一台車再FBT
+            if (max_type_size[i] > 2) // 多於一台車再FBT
             {
                 // todo 可以看看extractMax的效果
                 BMNode tmp =
-                    findMinimumElement(basic_stations[nearest_stations[i]][max_type[i]], basic_stations[nearest_stations[i]][max_type[i]].heap_size);
+                    findMinimumElement(basic_stations[nearest_stations[i]][max_bike_type[i]], basic_stations[nearest_stations[i]][max_bike_type[i]].heap_size);
                 // BMNode tmp = basic_stations[nearest_stations[i]][max_type[i]].extractMin();
                 cout
                     << "transfered id: " << tmp.id << endl;
@@ -240,7 +244,7 @@ void advanced(string selectedCase)
                 // {
                 cout << "transfered_bike-id: " << tmp.id << endl;
                 tmp.returned_time += transfer_path;
-                basic_stations[tuser_start_station][max_type[i]].insertKey(tmp);
+                basic_stations[tuser_start_station][max_bike_type[i]].insertKey(tmp);
                 // }
             }
         }
