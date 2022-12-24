@@ -480,7 +480,7 @@ void advanced(string selectedCase)
             while (!wait_list.isEmpty())
             {
                 BMNode tmp = wait_list.extractMax();
-                cout << "put back wait node id" << tmp.id << endl;
+                cout << "put back wait node id: " << tmp.id << endl;
                 basic_stations[tuser_start_station][stoi(tmp.bike_type)].insertKey(tmp);
             }
             //--------------
