@@ -760,12 +760,8 @@ void advanced(string selectedCase)
         ss.clear();
     }
     // test
-    cout << "selectedCase " << selectedCase << endl;
-    // ss << selectedCase;
+    selectedCase.erase(0, 4);
     int tc = stoi(selectedCase);
-    // ss >> tc;
-    // ss.str("");
-    // ss.clear();
     cout << tc << endl;
     switch (tc)
     {
