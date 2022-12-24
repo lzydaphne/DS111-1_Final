@@ -181,14 +181,14 @@ void advanced(string selectedCase)
                 second = first;
                 first = pick_station[q];
             }
-            else if (pick_station[q] < second)
+            else if (pick_station[q] < second && pick_station[q] != first)
             {
                 second_idx = q;
                 third_idx = second_idx;
                 third = second;
                 second = pick_station[q];
             }
-            else if (pick_station[q] < third)
+            else if (pick_station[q] < third && pick_station[q] != second)
             {
                 third_idx = q;
                 third = pick_station[q];
