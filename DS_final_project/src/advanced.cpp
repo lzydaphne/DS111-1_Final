@@ -91,6 +91,10 @@ void advanced(string selectedCase)
     int countC = 0;
     int countD = 0;
 
+    // retiring bike
+    BMNode *retiring_bikes = new BMNode[read_data.bike_total_num];
+    int retiring_bikes_idx = 0;
+
     while (idx < read_data.all_user_list_idx)
     {
         // read data
@@ -242,7 +246,19 @@ void advanced(string selectedCase)
                     cout << " id: " << basic_stations[nearest_stations[i]][max_bike_type[i]].harr[q].id << " price: " << basic_stations[nearest_stations[i]][max_bike_type[i]].harr[q].rental_price << endl;
                 }
                 // todo 可以看看extractMax的效果
+
                 BMNode tmp = basic_stations[nearest_stations[i]][max_bike_type[i]].extractMax();
+                //! reach rental limit
+                while (tmp.rental_count >= read_data.rental_limit && tmp.id != -10)
+                {
+                    retiring_bikes[retiring_bikes_idx++] = tmp;
+                    tmp = basic_stations[nearest_stations[i]][max_bike_type[i]].extractMax();
+                }
+                while (retiring_bikes_idx--)
+                {
+                    basic_stations[nearest_stations[i]][max_bike_type[i]].insertKey(retiring_bikes[retiring_bikes_idx]);
+                }
+
                 // check extract
                 cout << "after extract " << endl;
                 for (int q = 0; q < basic_stations[nearest_stations[i]][max_bike_type[i]].heap_size; q++)
@@ -274,11 +290,12 @@ void advanced(string selectedCase)
                 int transfer_start_time = tmp.returned_time;
                 tmp.returned_time += transfer_path;
                 cout << "transfered_bike-id: " << tmp.id << "  transfered_bike returned time:" << tmp.returned_time << endl;
-                if (transfer_start_time == tmp.returned_time)
-                {
-                    cout << "dont transfer to the same station" << endl;
-                    // continue;
-                }
+                // todo 要做出extractmin
+                //  if (transfer_start_time == tmp.returned_time)
+                //  {
+                //      cout << "dont transfer to the same station" << endl;
+                //      // continue;
+                //  }
 
                 basic_stations[tuser_start_station][max_bike_type[i]].insertKey(tmp);
                 //-output to transfer log------------

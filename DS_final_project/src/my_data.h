@@ -99,6 +99,7 @@ public:
     int rental_limit;
     int count_bike_type = 0;
     //* for bike
+    int bike_total_num = 0;
     string bike_type;
     int bike_id;
     string station_id;

@@ -224,6 +224,7 @@ bike_MaxHeap **my_data::read_bike()
 
         while (ifs >> bike_type >> bike_id >> station_id >> rental_price >> rental_count)
         {
+            bike_total_num++;
             int num_bike_type = stoi(bike_type.erase(0, 1));
             int num_station_id = stoi(station_id.erase(0, 1));
 
