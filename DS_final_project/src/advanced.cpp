@@ -157,12 +157,13 @@ void advanced(string selectedCase)
         // shallow copy!
         //  pick_station = read_data.shortest_record[tuser_start_station];
         //* pick first three nearest station
-        int first = pick_station[0],
-            second = INT_MIN, third = INT_MIN;
-        int first_idx = 0, second_idx = -1, third_idx = -1;
-        for (int q = 1; q < read_data.station_num; q++)
+        pick_station[tuser_start_station] = INT_MAX;
+        int first = INT_MAX,
+            second = INT_MAX, third = INT_MAX;
+        int first_idx = -1, second_idx = -1, third_idx = -1;
+        for (int q = 0; q < read_data.station_num; q++)
         {
-            if (pick_station[q] > first)
+            if (pick_station[q] < first)
             {
                 first_idx = q;
                 second_idx = first_idx;
@@ -171,14 +172,14 @@ void advanced(string selectedCase)
                 second = first;
                 first = pick_station[q];
             }
-            else if (pick_station[q] > second)
+            else if (pick_station[q] < second)
             {
                 second_idx = q;
                 third_idx = second_idx;
                 third = second;
                 second = pick_station[q];
             }
-            else if (pick_station[q] > third)
+            else if (pick_station[q] < third)
             {
                 third_idx = q;
                 third = pick_station[q];
@@ -188,8 +189,8 @@ void advanced(string selectedCase)
         nearest_stations[0] = first_idx;
         nearest_stations[1] = second_idx;
         nearest_stations[2] = third_idx;
-        //-------------------------------
         cout << first_idx << " " << second_idx << " " << third_idx << endl;
+        //-------------------------------
         int max_bike_type[3] = {0}; // 用來儲存「每個station中，有最大heap size的車種type」
         int max_type_size[3] = {0}; // 用來儲存「每個station中，有最大heap size的車種type的size」
         for (int i = 0; i < 3; i++)
