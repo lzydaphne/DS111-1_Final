@@ -737,9 +737,9 @@ void advanced(string selectedCase)
     }
     // test
     cout << "basic_revenue: " << basic_revenue << endl;
-    // cout << "Increased by " << (basic_revenue - 47437.0) / 47437.0 << " %" << endl;
-    cout << "Increased by " << (basic_revenue - 926832.0) / 926832.0 << " %" << endl;
-    // cout << "Increased by " << (basic_revenue / 26425651) << " %" << endl;
+    // cout << "Increased by " << (basic_revenue - 47437.0) / 47437.0 *100<< " %" << endl;
+    // cout << "Increased by " << (basic_revenue - 926832.0) / 926832.0*100 << " %" << endl;
+    cout << "Increased by " << (basic_revenue - 26425651 / 26425651) * 100 << " %" << endl;
 
     cout << "countZ: " << countZ << endl;
     cout << "countA: " << countA << endl;
