@@ -340,13 +340,18 @@ void advanced(string selectedCase)
                                 //! 改變標準: 轉運車越早到越好
                                 if (target.returned_time < tmp.returned_time)
                                 {
+                                    cout << "new waited bike target-id: " << target.id << endl;
                                     // 把tmp放回去，不等tmp
                                     basic_stations[tuser_start_station][stoi(tmp.bike_type)].insertKey(tmp);
                                     // 等target
                                     wait_list.insertKey(target);
                                 }
                                 else
+                                {
+                                    cout << "original waited bike tmp-id: " << tmp.id << endl;
+                                    basic_stations[tuser_start_station][stoi(target.bike_type)].insertKey(target);
                                     wait_list.insertKey(tmp);
+                                }
                             }
                             else
                                 wait_list.insertKey(target);
@@ -476,7 +481,7 @@ void advanced(string selectedCase)
         {
             cout << "find!-------------------------------" << endl;
 
-            //! FBT-----------
+            //! FBT---when wait not use--------
             while (!wait_list.isEmpty())
             {
                 BMNode tmp = wait_list.extractMax();
@@ -540,6 +545,8 @@ void advanced(string selectedCase)
             // int bike_start_time = 0;
             if (waited_bike.id != -10) // 不是空的
             {
+                cout << "*****waited bike*****"
+                     << "id: " << waited_bike.id << endl;
                 tstart_time = waited_bike.returned_time;
                 // waited_bike.returned_time = tstart_time + shortest_path;
                 target = waited_bike;
