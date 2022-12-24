@@ -266,6 +266,25 @@ void graph_MinHeap::printArr(int dist[], int n)
 
 //! -------------------bike_MaxHeap-------------------
 
+BMNode MinNode(BMNode &node1, BMNode &node2)
+{
+    if (node1.rental_price <= node2.rental_price)
+        return node1;
+    else
+        return node2;
+}
+
+BMNode findMinimumElement(bike_MaxHeap &heap, int n)
+{
+    BMNode minimumElement = heap.harr[n / 2];
+
+    for (int i = 1 + n / 2; i < n; ++i)
+        minimumElement = MinNode(minimumElement, heap.harr[i]);
+
+    return minimumElement;
+}
+
+//----------------------------------------
 void bike_MaxHeap::insertKey(BMNode &newNode)
 {
     if (this->heap_size == capacity)
@@ -297,6 +316,33 @@ void bike_MaxHeap::insertKey(BMNode &newNode)
     // harr[100] = heap_size;
 };
 
+void bike_MaxHeap::MINinsertKey(BMNode &newNode)
+{
+    if (this->heap_size == capacity)
+    {
+        cout << "\nOverflow: Could not insertKey\n";
+        return;
+    }
+
+    // First insert the new key at the end
+    this->heap_size++;
+    // cout << "heap_size: " << this->heap_size << endl;
+    int i = this->heap_size - 1;
+    harr[i].bike_type = newNode.bike_type;
+    harr[i].id = newNode.id;
+    harr[i].rental_count = newNode.rental_count;
+    harr[i].rental_price = newNode.rental_price;
+    harr[i].returned_time = newNode.returned_time;
+    // MaxHeapify(i);
+
+    // Fix the max heap property if it is violated
+
+    while (i != 0 && harr[parent(i)].rental_price > harr[i].rental_price)
+    {
+        BMNode_swap(&harr[i], &harr[parent(i)]);
+        i = parent(i);
+    }
+};
 void bike_MaxHeap::MaxHeapify(int i)
 {
     int l = left(i);

@@ -151,7 +151,7 @@ public:
 
     //* Inserts a new node "把整個bike_node都丟到heap中，方便比較rental_price和id"
     void insertKey(BMNode &newNode);
-
+    void MINinsertKey(BMNode &newNode);
     // to heapify a subtree with the root at given index
     void MaxHeapify(int i);
     void MinHeapify(int i); //! algo
@@ -172,3 +172,6 @@ public:
 
 //
 //! -------------------user-------------------------------------
+
+BMNode MinNode(BMNode &node1, BMNode &node2);
+BMNode findMinimumElement(bike_MaxHeap &heap, int n);
