@@ -254,6 +254,7 @@ void advanced(string selectedCase)
                 // 這才是有用的transfer
                 // if (tmp.returned_time + transfer_path <= tstart_time)
                 // {
+                int transfer_start_time = tmp.returned_time;
                 tmp.returned_time += transfer_path;
                 cout << "transfered_bike-id: " << tmp.id << "  transfered_bike returned time:" << tmp.returned_time << endl;
 
@@ -268,7 +269,7 @@ void advanced(string selectedCase)
                 ss.str("");
                 ss.clear();
                 ofs_log
-                    << tmp.id << " " << start_station << " " << end_station << " " << tstart_time << " " << tmp.returned_time << " " << -1 << endl;
+                    << tmp.id << " " << start_station << " " << end_station << " " << transfer_start_time << " " << tmp.returned_time << " " << -1 << endl;
                 // }
             }
         }
