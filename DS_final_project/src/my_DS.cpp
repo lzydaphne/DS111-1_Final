@@ -289,11 +289,14 @@ BMNode findMinimumElement(bike_MaxHeap &heap, int n)
     }
 
     // 這邊手動把min拉出來
+    cout << "heap.harr[hIdx]: " << heap.harr[hIdx].id << endl;
+
     heap.harr[hIdx] = heap.harr[heap.heap_size - 1];
     heap.heap_size--;
     // cout << "root: " << root.rental_price << endl;
     // cout << "harr[0]: " << harr[0].rental_price << endl;
-    heap.MaxHeapify(hIdx);
+    // heap.MaxHeapify(hIdx);
+    heap.MaxHeapify(0);
 
     return minimumElement;
 }
