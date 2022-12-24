@@ -24,7 +24,25 @@ void advanced(string selectedCase)
     bike_MaxHeap **basic_stations = read_data.read_bike();
 
     //! decide FBT magic number
-    int FBT_magic_number = 3 * (read_data.bike_total_num / 2000);
+    int FBT_magic_number;
+    if ((0 <= read_data.bike_total_num) && (read_data.bike_total_num <= 30))
+        FBT_magic_number = 1;
+    else if ((30 < read_data.bike_total_num) && (read_data.bike_total_num <= 60))
+        FBT_magic_number = 2;
+    else if ((60 < read_data.bike_total_num) && (read_data.bike_total_num <= 90))
+        FBT_magic_number = 3;
+    else if ((90 < read_data.bike_total_num) && (read_data.bike_total_num <= 1500))
+        FBT_magic_number = 5;
+    else if ((1500 < read_data.bike_total_num) && (read_data.bike_total_num <= 3000))
+        FBT_magic_number = 6;
+    else if ((3000 < read_data.bike_total_num) && (read_data.bike_total_num <= 5000))
+        FBT_magic_number = 7;
+    else if ((5000 < read_data.bike_total_num) && (read_data.bike_total_num <= 7000))
+        FBT_magic_number = 8;
+    else if ((7000 < read_data.bike_total_num) && (read_data.bike_total_num <= 9000))
+        FBT_magic_number = 9;
+    else if ((9000 < read_data.bike_total_num) && (read_data.bike_total_num <= 10000))
+        FBT_magic_number = 10;
 
     read_data.read_user();
     read_data.sort_users();
@@ -242,7 +260,7 @@ void advanced(string selectedCase)
             cout << "  max_type_size[i]: " << max_type_size[i] << endl;
             // 開始放入 user start station
             // if (max_type_size[i] > FBT_magic_number) // 多於一台車再FBT
-            if (max_type_size[i] > 0) // 多於一台車再FBT
+            if (max_type_size[i] > FBT_magic_number) // 多於FBT_magic_number車再FBT
             {
                 // // check min
                 // for (int q = 0; q < basic_stations[nearest_stations[i]][max_bike_type[i]].heap_size; q++)
