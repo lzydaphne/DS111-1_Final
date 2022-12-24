@@ -139,11 +139,12 @@ void advanced(string selectedCase)
             read_data.shortest_record[tuser_start_station] = basic_graph.dijkstra(tuser_start_station, tuser_end_station);
 
             int idx = 0;
+            /*
             while (read_data.shortest_record[tuser_start_station][idx])
             {
                 cout << "dij: " << read_data.shortest_record[tuser_start_station][idx] << endl;
                 idx++;
-            }
+            }*/
         }
 
         //! Free bike transfer
@@ -157,6 +158,13 @@ void advanced(string selectedCase)
         // shallow copy!
         //  pick_station = read_data.shortest_record[tuser_start_station];
         //* pick first three nearest station
+        int idx = 0;
+        while (idx != read_data.station_num)
+        {
+            cout << pick_station[idx] << " ";
+            idx++;
+        }
+
         pick_station[tuser_start_station] = INT_MAX;
         int first = INT_MAX,
             second = INT_MAX, third = INT_MAX;
