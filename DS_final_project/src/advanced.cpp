@@ -11,6 +11,7 @@ void advanced(string selectedCase)
     int basic_revenue = 0;
 
     my_data read_data;
+    cout << "selectedCase " << selectedCase << endl;
     read_data.select = selectedCase;
     int user_num = read_data.read_user_num();
     cout << "user_num: " << user_num << endl;
