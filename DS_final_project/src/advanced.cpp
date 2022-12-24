@@ -763,7 +763,6 @@ void advanced(string selectedCase)
     cout << "basic_revenue: " << basic_revenue << endl;
     selectedCase.erase(0, 4);
     int tc = stoi(selectedCase);
-    cout << tc << endl;
     switch (tc)
     {
     case 1:
