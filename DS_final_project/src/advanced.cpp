@@ -253,8 +253,16 @@ void advanced(string selectedCase)
 
                 basic_stations[tuser_start_station][max_bike_type[i]].insertKey(tmp);
                 //-output to transfer log------------
+                ss << nearest_stations[i];
+                string start_station = "S" + ss.str();
+                ss.str("");
+                ss.clear();
+                ss << tuser_start_station;
+                string end_station = "S" + ss.str();
+                ss.str("");
+                ss.clear();
                 ofs_log
-                    << tmp.id << " " << nearest_stations[i] << " " << tuser_start_station << " " << tstart_time << " " << tmp.returned_time << " " << -1 << endl;
+                    << tmp.id << " " << start_station << " " << end_station << " " << tstart_time << " " << tmp.returned_time << " " << -1 << endl;
                 // }
             }
         }
