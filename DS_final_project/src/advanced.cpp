@@ -764,6 +764,7 @@ void advanced(string selectedCase)
     ss >> tc;
     ss.str("");
     ss.clear();
+    cout << tc << endl;
     switch (tc)
     {
     case 1:
