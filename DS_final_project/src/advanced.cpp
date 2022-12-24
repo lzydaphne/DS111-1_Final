@@ -235,6 +235,7 @@ void advanced(string selectedCase)
                 // 這才是有用的transfer
                 // if (tmp.returned_time + transfer_path <= tstart_time)
                 // {
+                cout << "transfered_bike-id: " << tmp.id << endl;
                 tmp.returned_time += transfer_path;
                 basic_stations[tuser_start_station][max_type[i]].insertKey(tmp);
                 // }
@@ -337,7 +338,7 @@ void advanced(string selectedCase)
                             else
                                 wait_list.insertKey(target);
 
-                            cout << "put into wait-list" << endl;
+                            cout << "~~~~~put into wait-list~~~~~" << endl;
                             target = basic_stations[tuser_start_station][tAC_bike_type[i]].extractMax();
                             continue;
                         }
@@ -383,6 +384,7 @@ void advanced(string selectedCase)
 
                     // pick_best_BMNode->insertKey(target);
                     target = basic_stations[tuser_start_station][tAC_bike_type[i]].extractMax();
+                    cout << "--------------------------" << endl;
                     continue;
                 }
                 else
