@@ -759,10 +759,19 @@ void advanced(string selectedCase)
         ss.clear();
     }
     // test
-    cout << "basic_revenue: " << basic_revenue << endl;
-    // cout << "Increased by " << (basic_revenue - 47437.0) / 47437.0 *100<< " %" << endl;
-    cout << "Increased by " << (basic_revenue - 926832.0) / 926832.0 * 100 << " %" << endl;
-    // cout << "Increased by " << (basic_revenue - 26425651.0) / 26425651.0 * 100.0 << " %" << endl;
+    int tc = stoi(read_data.select);
+    switch (tc)
+    {
+    case 1:
+        cout << "basic_revenue: " << basic_revenue << endl;
+        break;
+    case 2:
+        cout << "Increased by " << (basic_revenue - 926832.0) / 926832.0 * 100 << " %" << endl;
+        break;
+    case 3:
+        cout << "Increased by " << (basic_revenue - 26425651.0) / 26425651.0 * 100.0 << " %" << endl;
+        break;
+    }
 
     cout << "countZ: " << countZ << endl;
     cout << "countA: " << countA << endl;
