@@ -766,7 +766,7 @@ void advanced(string selectedCase)
     switch (tc)
     {
     case 1:
-        cout << "basic_revenue: " << basic_revenue << endl;
+        cout << "basic_revenue: " << (basic_revenue - 47437.0) / 47437.0 * 100 << " %" << endl;
         break;
     case 2:
         cout << "Increased by " << (basic_revenue - 926832.0) / 926832.0 * 100 << " %" << endl;
