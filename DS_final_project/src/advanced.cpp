@@ -316,7 +316,6 @@ void advanced(string selectedCase)
                         // todo 要wait 哪一些bike?
                         // 目前是等rental price最多的那一台
                         cout << "user wait for bike" << endl;
-                        tstart_time = target.returned_time;
                         //* WAIT
                         {
                             BMNode tmp;
@@ -520,6 +519,7 @@ void advanced(string selectedCase)
                 tstart_time = waited_bike.returned_time;
                 // waited_bike.returned_time = tstart_time + shortest_path;
                 target = waited_bike;
+
                 goto FIND;
             }
 
