@@ -760,13 +760,14 @@ void advanced(string selectedCase)
         ss.clear();
     }
     // test
+    cout << "basic_revenue: " << basic_revenue << endl;
     selectedCase.erase(0, 4);
     int tc = stoi(selectedCase);
     cout << tc << endl;
     switch (tc)
     {
     case 1:
-        cout << "basic_revenue: " << (basic_revenue - 47437.0) / 47437.0 * 100 << " %" << endl;
+        cout << "Increased by: " << (basic_revenue - 47437.0) / 47437.0 * 100 << " %" << endl;
         break;
     case 2:
         cout << "Increased by " << (basic_revenue - 926832.0) / 926832.0 * 100 << " %" << endl;
@@ -774,13 +775,15 @@ void advanced(string selectedCase)
     case 3:
         cout << "Increased by " << (basic_revenue - 26425651.0) / 26425651.0 * 100.0 << " %" << endl;
         break;
+    default:
+        break;
     }
 
-    cout << "countZ: " << countZ << endl;
-    cout << "countA: " << countA << endl;
-    cout << "countB: " << countB << endl;
-    cout << "countC: " << countC << endl;
-    cout << "countD: " << countD << endl;
+    // cout << "countZ: " << countZ << endl;
+    // cout << "countA: " << countA << endl;
+    // cout << "countB: " << countB << endl;
+    // cout << "countC: " << countC << endl;
+    // cout << "countD: " << countD << endl;
 
     // todo delete all new operation!
     for (int i = 0; i < station_num; i++)
