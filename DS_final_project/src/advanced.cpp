@@ -167,13 +167,13 @@ void advanced(string selectedCase)
         // shallow copy!
         //  pick_station = read_data.shortest_record[tuser_start_station];
         //* pick first three nearest station
-        int idx = 0;
-        while (idx != read_data.station_num)
-        {
-            cout << pick_station[idx] << " ";
-            idx++;
-        }
-        cout << endl;
+        // int idx = 0;
+        // while (idx != read_data.station_num)
+        // {
+        //     cout << pick_station[idx] << " ";
+        //     idx++;
+        // }
+        // cout << endl;
 
         pick_station[tuser_start_station] = INT_MAX;
         int first = INT_MAX,

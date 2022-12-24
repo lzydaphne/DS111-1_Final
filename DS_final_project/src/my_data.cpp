@@ -238,6 +238,7 @@ bike_MaxHeap **my_data::read_bike()
 
             stations_ptr[num_station_id][num_bike_type].insertKey(tmp);
         }
+        cout << "bike_total_num " << bike_total_num << endl;
         // test output
         /*
         for (int i = 0; i < station_num; i++)

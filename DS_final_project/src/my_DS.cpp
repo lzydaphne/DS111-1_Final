@@ -115,11 +115,11 @@ int *&Graph::dijkstra(int src)
     // todo: warning: reference to local variable dist' returned
     dist_graph = dist;
 
-    cout << "src: " << src << endl;
-    for (int i = 0; i < V; i++)
-    {
-        cout << "i: " << i << " dist: " << dist_graph[i] << endl;
-    }
+    // cout << "src: " << src << endl;
+    // for (int i = 0; i < V; i++)
+    // {
+    //     cout << "i: " << i << " dist: " << dist_graph[i] << endl;
+    // }
 
     return dist_graph;
 
