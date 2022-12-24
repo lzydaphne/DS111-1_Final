@@ -538,6 +538,9 @@ void advanced(string selectedCase)
             ofs_user
                 << user_id << " " << 0 << " " << 0 << " " << 0 << " " << 0 << " " << 0 << endl;
         }
+        while (!wait_list.isEmpty()) // 清空
+            wait_list.extractMax();
+
         ss.str("");
         ss.clear();
     }
