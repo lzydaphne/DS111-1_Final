@@ -219,16 +219,15 @@ void advanced(string selectedCase)
             // 開始放入 user start station
             if (max_type_size[i] > 3) // 多於一台車再FBT
             {
+                // check min
+                for (int q = 0; q < basic_stations[nearest_stations[i]][max_bike_type[i]].heap_size; q++)
+                {
+                    cout << " id: " << basic_stations[nearest_stations[i]][max_bike_type[i]].harr[q].id << " price: " << basic_stations[nearest_stations[i]][max_bike_type[i]].harr[q].rental_price << endl;
+                }
                 // todo 可以看看extractMax的效果
                 BMNode tmp =
                     findMinimumElement(basic_stations[nearest_stations[i]][max_bike_type[i]], basic_stations[nearest_stations[i]][max_bike_type[i]].heap_size);
                 // BMNode tmp = basic_stations[nearest_stations[i]][max_type[i]].extractMin();
-
-                // check min
-                for (int q = 0; q < basic_stations[nearest_stations[i]][max_bike_type[i]].heap_size; q++)
-                {
-                    cout << " id: " << basic_stations[nearest_stations[i]][max_bike_type[i]].harr[q].id << " price: " << basic_stations[nearest_stations[i]][max_bike_type[i]].harr[q].rental_price;
-                }
 
                 cout
                     << "transfered id: " << tmp.id << endl;
