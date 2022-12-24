@@ -428,7 +428,7 @@ void my_data::merge(LNode *&arr, int p, int q, int r)
     while (i < n1 && j < n2)
     {
         //* sort by bike_id
-        if (L[i].user_ID < M[j].user_ID)
+        if (L[i].bike_ID < M[j].bike_ID)
             arr[k] = L[i++];
         else
             arr[k] = M[j++];
