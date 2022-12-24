@@ -153,7 +153,12 @@ void advanced(string selectedCase)
         int *pick_station = new int[read_data.station_num];
 
         // deep copy
-        memcpy(&pick_station, &read_data.shortest_record[tuser_start_station], read_data.station_num);
+        for (int i = 0; i < read_data.station_num; i++)
+        {
+            pick_station[i] = read_data.shortest_record[tuser_start_station][i];
+        }
+
+        // memcpy(&pick_station, &read_data.shortest_record[tuser_start_station], read_data.station_num);
 
         // shallow copy!
         //  pick_station = read_data.shortest_record[tuser_start_station];
