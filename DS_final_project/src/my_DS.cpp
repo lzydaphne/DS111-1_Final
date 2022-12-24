@@ -277,9 +277,21 @@ BMNode MinNode(BMNode &node1, BMNode &node2)
 BMNode findMinimumElement(bike_MaxHeap &heap, int n)
 {
     BMNode minimumElement = heap.harr[n / 2];
+    int hIdx = n / 2;
 
     for (int i = 1 + n / 2; i < n; ++i)
+    {
         minimumElement = MinNode(minimumElement, heap.harr[i]);
+        if (minimumElement.id == heap.harr[i].id)
+            hIdx = i;
+    }
+
+    // 這邊手動把min拉出來
+    heap.harr[hIdx] = heap.harr[heap.heap_size - 1];
+    heap.heap_size--;
+    // cout << "root: " << root.rental_price << endl;
+    // cout << "harr[0]: " << harr[0].rental_price << endl;
+    heap.MaxHeapify(hIdx);
 
     return minimumElement;
 }
