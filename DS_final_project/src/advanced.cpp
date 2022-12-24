@@ -11,7 +11,7 @@ void advanced(string selectedCase)
     int basic_revenue = 0;
 
     my_data read_data;
-    read_data.select = selectedCase;
+    read_data.select = stoi(selectedCase);
     int user_num = read_data.read_user_num();
     cout << "user_num: " << user_num << endl;
     int station_num = read_data.get_station_num();
@@ -759,8 +759,7 @@ void advanced(string selectedCase)
         ss.clear();
     }
     // test
-    int tc = stoi(read_data.select);
-    switch (tc)
+    switch (read_data.select)
     {
     case 1:
         cout << "basic_revenue: " << basic_revenue << endl;

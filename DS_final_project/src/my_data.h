@@ -69,7 +69,7 @@ public:
 
     // private:
     //*
-    string select;
+    int select;
     //* for map
     string start_station;
     int num_start_station; // 車站的數字表示法
