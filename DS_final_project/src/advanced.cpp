@@ -257,6 +257,11 @@ void advanced(string selectedCase)
                 int transfer_start_time = tmp.returned_time;
                 tmp.returned_time += transfer_path;
                 cout << "transfered_bike-id: " << tmp.id << "  transfered_bike returned time:" << tmp.returned_time << endl;
+                if (transfer_start_time == tmp.returned_time)
+                {
+                    cout << "dont transfer to the same station" << endl;
+                    continue;
+                }
 
                 basic_stations[tuser_start_station][max_bike_type[i]].insertKey(tmp);
                 //-output to transfer log------------
