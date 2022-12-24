@@ -80,9 +80,10 @@ int *&Graph::dijkstra(int src, int dest)
         // Extract the vertex with
         // minimum distance value
         MNode *minHeapNode = minHeap.extractMin();
+        /*
         cout << "minHeapNode:  "
              << "station: " << minHeapNode->v << "  "
-             << "dist: " << minHeapNode->dist << "  " << endl;
+             << "dist: " << minHeapNode->dist << "  " << endl;*/
 
         // Store the extracted vertex number
         int u = minHeapNode->v;
@@ -106,7 +107,8 @@ int *&Graph::dijkstra(int src, int dest)
 
                 // update distance value in min heap also
                 minHeap.decreaseKey(v, dist[v]);
-                cout << "v:  " << v << "  dist[v]: " << dist[v] << endl;
+                /*
+                cout << "v:  " << v << "  dist[v]: " << dist[v] << endl;*/
             }
             pCrawl = pCrawl->next;
         }
