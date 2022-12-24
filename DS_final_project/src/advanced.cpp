@@ -759,7 +759,11 @@ void advanced(string selectedCase)
         ss.clear();
     }
     // test
-    int tc = stoi(selectedCase);
+    ss << selectedCase;
+    int tc;
+    ss >> tc;
+    ss.str("");
+    ss.clear();
     switch (tc)
     {
     case 1:
