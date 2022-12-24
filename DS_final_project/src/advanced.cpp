@@ -242,7 +242,7 @@ void advanced(string selectedCase)
             cout << "  max_type_size[i]: " << max_type_size[i] << endl;
             // 開始放入 user start station
             // if (max_type_size[i] > FBT_magic_number) // 多於一台車再FBT
-            if (max_type_size[i] > 5) // 多於一台車再FBT
+            if (max_type_size[i] > 6) // 多於一台車再FBT
             {
                 // // check min
                 // for (int q = 0; q < basic_stations[nearest_stations[i]][max_bike_type[i]].heap_size; q++)
