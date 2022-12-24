@@ -213,7 +213,7 @@ void advanced(string selectedCase)
             max_type[i] = max_station; // 如果是-1，代表沒車
             cout << "  max_heap[i]: " << max_type[i] << endl;
             // 開始放入 user start station
-            if (max_type[i] >= 3) // 多於一台車再FBT
+            if (max_type[i] >= 2) // 多於一台車再FBT
             {
                 // todo 可以看看extractMax的效果
                 BMNode tmp = basic_stations[nearest_stations[i]][max_type[i]].extractMin();

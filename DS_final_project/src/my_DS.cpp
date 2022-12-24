@@ -348,7 +348,7 @@ void bike_MaxHeap::MinHeapify(int i)
 
     // 兩邊有相同的rental_price
     // if (harr[l].rental_price != 0 && (harr[l].rental_price == harr[r].rental_price))
-    if (l < heap_size && r < heap_size && harr[l].rental_price != 0 && (harr[l].rental_price == harr[r].rental_price) && harr[l].rental_price > harr[i].rental_price)
+    if (l < heap_size && r < heap_size && harr[l].rental_price != 0 && (harr[l].rental_price == harr[r].rental_price) && harr[l].rental_price < harr[i].rental_price)
     {
         if (harr[l].id < harr[r].id)
             smallest = l;
@@ -359,7 +359,7 @@ void bike_MaxHeap::MinHeapify(int i)
     if (smallest != i)
     {
         BMNode_swap(&harr[i], &harr[smallest]);
-        MaxHeapify(smallest);
+        MinHeapify(smallest);
     }
 }
 // Method to remove minimum element (or root) from min heap
