@@ -106,9 +106,7 @@ void advanced(string selectedCase)
     //* wait_list
     bike_MaxHeap wait_list;
 
-    // retiring bike
-    BMNode *retiring_bikes = new BMNode[read_data.bike_total_num];
-    int retiring_bikes_idx = 0;
+    int *pick_station = new int[read_data.station_num];
 
     while (idx < read_data.all_user_list_idx)
     {
@@ -169,7 +167,7 @@ void advanced(string selectedCase)
         //! Free bike transfer
         //! 選出最近的三個站點(station)
         int nearest_stations[3];
-        int *pick_station = new int[read_data.station_num];
+        // int *pick_station = new int[read_data.station_num];
 
         // deep copy
         for (int i = 0; i < read_data.station_num; i++)
@@ -216,7 +214,8 @@ void advanced(string selectedCase)
         nearest_stations[1] = second_idx;
         nearest_stations[2] = third_idx;
         cout << first_idx << " " << second_idx << " " << third_idx << endl;
-        delete[] pick_station;
+        //    delete[] pick_station;
+
         //-------------------------------
         int max_bike_type[3] = {0}; // 用來儲存「每個station中，有最大heap size的車種type」
         int max_type_size[3] = {0}; // 用來儲存「每個station中，有最大heap size的車種type的size」
@@ -633,6 +632,7 @@ void advanced(string selectedCase)
         ss.clear();
     }
     //
+    delete[] pick_station;
     delete[] store_BMNode;
     delete[] store_types_bike;
 
