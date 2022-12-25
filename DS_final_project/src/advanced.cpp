@@ -773,6 +773,10 @@ void advanced(string selectedCase)
     }
     for (int i = 0; i < station_num; i++)
         delete[] basic_stations[i];
+    delete[] basic_stations;
+    delete &basic_graph;
+    delete[] minHeap;
     delete[] basic_graph.bike_graph_List;
     delete[] read_data.all_user_list;
+    delete[] read_data.arr_AC_bike_type;
 }

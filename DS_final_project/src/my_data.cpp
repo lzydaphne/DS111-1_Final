@@ -296,6 +296,8 @@ void my_data::merge(UNode *&arr, int p, int q, int r)
 
     while (j < n2)
         arr[k++] = M[j++];
+    delete[] L;
+    delete[] M;
 }
 void my_data::mergeSort(UNode *&arr, int l, int r)
 {

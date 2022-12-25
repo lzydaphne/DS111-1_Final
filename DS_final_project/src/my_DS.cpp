@@ -88,9 +88,12 @@ int *&Graph::dijkstra(int src)
             pCrawl = pCrawl->next;
         }
     }
+
     // todo: warning: reference to local variable dist' returned
     dist_graph = dist;
 
+    delete[] minHeap.array;
+    delete[] minHeap.pos;
     // cout << "src: " << src << endl;
     // for (int i = 0; i < V; i++)
     // {
