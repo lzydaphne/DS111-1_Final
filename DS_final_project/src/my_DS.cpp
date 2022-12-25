@@ -27,23 +27,6 @@ void Graph::addEdge(int source, int dest, int weight)
     bike_graph_List[dest].head = newNode;
 }
 
-void Graph::displayEdges()
-{
-    // struct AdjListNode *ptr = MyGraph->array->head;
-    node *ptr = bike_graph_List->head;
-
-    for (int i = 0; i < n; i++)
-    {
-        while (!(bike_graph_List[i]).head)
-        // while (!MyGraph->array[i].head)
-        {
-            cout << ptr->weight << " ";
-            ptr = ptr->next;
-        }
-    }
-}
-// ! -----------------------------------------------------
-
 int *&Graph::dijkstra(int src)
 {
     // Get the number of vertices in graph
@@ -66,17 +49,12 @@ int *&Graph::dijkstra(int src)
     }
 
     // Make dist value of src vertex as 0 so that it is extracted first
-    // minHeap.array[src] = minHeap.newMinHeapNode(src, dist[src]);
-    // minHeap.pos[src] = src;
     dist[src] = 0;
     minHeap.decreaseKey(src, dist[src]);
 
-    // In the following loop,min heap contains all nodes
-    // whose shortest distance is not yet finalized.
+    // In the following loop,min heap contains all nodes whose shortest distance is not yet finalized.
     while (!minHeap.isEmpty())
     {
-        // Extract the vertex with
-        // minimum distance value
         MNode *minHeapNode = minHeap.extractMin();
         /*
         cout << "minHeapNode:  "
@@ -94,7 +72,6 @@ int *&Graph::dijkstra(int src)
         {
             int v = pCrawl->dest;
             // cout << "v:  " << v << endl;
-
             // If shortest distance to v is not finalized yet, and distance to v
             // through u is less than its previously calculated distance
             if (minHeap.isInMinHeap(v) &&
@@ -110,7 +87,6 @@ int *&Graph::dijkstra(int src)
             }
             pCrawl = pCrawl->next;
         }
-        // cout << "succ -7  " << endl;
     }
     // todo: warning: reference to local variable dist' returned
     dist_graph = dist;
@@ -120,11 +96,7 @@ int *&Graph::dijkstra(int src)
     // {
     //     cout << "i: " << i << " dist: " << dist_graph[i] << endl;
     // }
-
     return dist_graph;
-
-    // print the calculated shortest distances
-    // printArr(dist, V);
 }
 
 //! -------------------graph_MinHeap-------------------
@@ -261,14 +233,6 @@ bool graph_MinHeap::isInMinHeap(int v)
         return true;
     return false;
 }
-/*
-// A utility function used to print the solution
-void graph_MinHeap::printArr(int dist[], int n)
-{
-    printf("Vertex Distance from Source\n");
-    for (int i = 0; i < n; ++i)
-        printf("%d \t\t %d\n", i, dist[i]);
-}*/
 
 //! -------------------bike_MaxHeap-------------------
 
@@ -398,6 +362,7 @@ void bike_MaxHeap::MaxHeapify(int i)
     // harr[100] = heap_size;
 }
 
+/*
 void bike_MaxHeap::MinHeapify(int i)
 {
     int l = left(i);
@@ -428,7 +393,7 @@ void bike_MaxHeap::MinHeapify(int i)
         BMNode_swap(&harr[i], &harr[smallest]);
         MinHeapify(smallest);
     }
-}
+}*/
 // Method to remove minimum element (or root) from min heap
 BMNode bike_MaxHeap::extractMax()
 {
@@ -465,8 +430,7 @@ BMNode bike_MaxHeap::extractMax()
     // harr[100] = heap_size;
     return root;
 }
-
-BMNode bike_MaxHeap::extractMin()
+/*BMNode bike_MaxHeap::extractMin()
 {
 
     // 如果沒有想要的車:
@@ -497,7 +461,7 @@ BMNode bike_MaxHeap::extractMin()
     // harr[100] = heap_size;
     return root;
 }
-
+*/
 bool bike_MaxHeap::isEmpty()
 {
     // cout << "heap size: " << heap_size << endl;
@@ -505,21 +469,6 @@ bool bike_MaxHeap::isEmpty()
         return true;
     else
         return false;
-}
-
-void bike_MaxHeap::printHeapSort(ofstream &ofs_)
-{ // use reference to write the same output file in main
-    // cout << "heap size: " << heap_size << endl;
-    // int max;
-    BMNode max;
-    while (heap_size != 0)
-    {
-        max = extractMax();
-        cout << max.rental_price << " ";
-        ofs_ << max.rental_price << " ";
-    }
-    cout << endl;
-    ofs_ << endl;
 }
 
 //! -------------------user-------------------

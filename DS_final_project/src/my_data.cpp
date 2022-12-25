@@ -88,11 +88,7 @@ int my_data::read_user_num()
     {
         string s;
         while (std::getline(ifs, s))
-        {
-            // cout << "test" << endl;
             user_num++;
-            // cout << "user_num:" << user_num << endl;
-        }
     }
     ifs.close();
     return user_num;
@@ -111,7 +107,6 @@ void my_data::read_user()
     else
     {
         all_user_list = new UNode[user_num];
-
         while (ifs >> user_ID >> AC_bike_type >> start_time >> end_time >> user_start_station >> user_end_station)
         {
             num_user_ID = stoi(user_ID.erase(0, 1));
@@ -121,8 +116,6 @@ void my_data::read_user()
             arr_AC_bike_type = new int[count_bike_type];
             for (int i = 0; i < count_bike_type; i++)
                 arr_AC_bike_type[i] = -1;
-
-            // cout << "num_user_ID: " << num_user_ID << endl;
             stringstream ss;
             ss.str(AC_bike_type);
             while (ss.good())
@@ -130,10 +123,8 @@ void my_data::read_user()
                 string substr;
                 getline(ss, substr, ',');
                 arr_AC_bike_type[arr_index] = stoi(substr.erase(0, 1));
-                // cout << "ac type: " << arr_AC_bike_type[arr_index] << endl;
                 arr_index++;
             }
-            // test cout
             /*
             cout << "num_user_ID: " << num_user_ID << "\n"
                  << "station_id: " << station_id << "\n"
@@ -154,7 +145,10 @@ void my_data::read_user()
             // newUNode.AC_bike_type = new int[count_bike_type](); // set to 0
             newUNode.AC_bike_type = arr_AC_bike_type; // set to 0
             newUNode.len_AC = arr_index;
-
+            // 歸零
+            arr_index = 0;
+            // 把UNode推到list中
+            all_user_list[all_user_list_idx++] = newUNode;
             // test output
             /*
             while (arr_AC_bike_type[i] != -1)
@@ -165,13 +159,6 @@ void my_data::read_user()
         */
 
             // memcpy(newUNode.AC_bike_type, arr_AC_bike_type, arr_index + 1);
-
-            arr_index = 0; // 歸零
-
-            // 把UNode推到list中
-            all_user_list[all_user_list_idx++] = newUNode;
-
-            // delete[] arr_AC_bike_type;
         }
     }
     ifs.close();

@@ -106,12 +106,6 @@ void advanced(string selectedCase)
     //* wait_list
     bike_MaxHeap wait_list;
 
-    int countZ = 0;
-    int countA = 0;
-    int countB = 0;
-    int countC = 0;
-    int countD = 0;
-
     // retiring bike
     BMNode *retiring_bikes = new BMNode[read_data.bike_total_num];
     int retiring_bikes_idx = 0;
@@ -188,13 +182,6 @@ void advanced(string selectedCase)
         // shallow copy!
         //  pick_station = read_data.shortest_record[tuser_start_station];
         //* pick first three nearest station
-        // int idx = 0;
-        // while (idx != read_data.station_num)
-        // {
-        //     cout << pick_station[idx] << " ";
-        //     idx++;
-        // }
-        // cout << endl;
 
         pick_station[tuser_start_station] = INT_MAX;
         int first = INT_MAX,
@@ -276,7 +263,6 @@ void advanced(string selectedCase)
                     basic_stations[nearest_stations[i]][max_bike_type[i]].insertKey(tmp);
                     continue;
                 }
-
                 // while (tmp.rental_count >= read_data.rental_limit && tmp.id != -10)
                 // {
                 //     retiring_bikes[retiring_bikes_idx++] = tmp;
@@ -286,7 +272,6 @@ void advanced(string selectedCase)
                 // {
                 //     basic_stations[nearest_stations[i]][max_bike_type[i]].insertKey(retiring_bikes[retiring_bikes_idx]);
                 // }
-
                 // check extract
                 // cout << "after extract " << endl;
                 // for (int q = 0; q < basic_stations[nearest_stations[i]][max_bike_type[i]].heap_size; q++)
@@ -305,25 +290,21 @@ void advanced(string selectedCase)
                     // 回傳single source 的dist array
                     read_data.shortest_record[nearest_stations[i]] = basic_graph.dijkstra(nearest_stations[i]);
                 }
-
                 int transfer_path = read_data.shortest_record[nearest_stations[i]][tuser_start_station];
                 cout << "path: " << transfer_path << endl;
                 //* 把bike的returned time加上轉運時間
                 // 所以下面抓target的時候，FBT的bike已經會在start station，而returned time已經加上轉運時間
                 // 剩下user的start time要處理
                 //! 這些FBT的BIKE，要修改的只有RETURN TIME，且會被插入到START STATION
-                // 這才是有用的transfer
-                // if (tmp.returned_time + transfer_path <= tstart_time)
-                // {
                 int transfer_start_time = tmp.returned_time;
                 tmp.returned_time += transfer_path;
                 cout << "transfered_bike-id: " << tmp.id << "  transfered_bike returned time:" << tmp.returned_time << endl;
-                // todo 要做出extractmin
+                /* todo 要做出extractmin
                 //  if (transfer_start_time == tmp.returned_time)
                 //  {
                 //      cout << "dont transfer to the same station" << endl;
                 //      // continue;
-                //  }
+                //  }*/
 
                 basic_stations[tuser_start_station][max_bike_type[i]].insertKey(tmp);
                 //-output to transfer log------------
@@ -379,7 +360,6 @@ void advanced(string selectedCase)
                 //* heap已經為空，price=-10
                 if (target.rental_price < -1)
                 {
-                    countZ++;
                     bike_case = -1;
                     cout << " no bike  " << endl;
                     // continue;
@@ -389,21 +369,18 @@ void advanced(string selectedCase)
                 else if (target.rental_count >= read_data.rental_limit)
                 {
                     bike_case = 1;
-                    countA++;
                     cout
                         << "target.rental_count >= read_data.rental_limit" << endl;
                 }
                 else if (tstart_time + shortest_path >= tend_time)
                 {
                     bike_case = 1;
-                    countB++;
                     cout << "(tstart_time + shortest_path > tend_time)" << endl;
                 }
                 // else if (target.returned_time > tstart_time)
                 else if (target.returned_time + shortest_path >= tend_time)
                 {
                     bike_case = 1;
-                    countC++;
                     cout
                         << "target.returned_time + shortest_path > tend_time" << endl;
                 }
@@ -411,7 +388,6 @@ void advanced(string selectedCase)
                 {
                     if (target.returned_time > tstart_time)
                     {
-                        countD++;
                         //! user wait for bike when no bike is available
                         // todo 要wait 哪一些bike?
                         // 目前是等rental price最多的那一台
@@ -720,17 +696,6 @@ void advanced(string selectedCase)
     int Barr_idx = 0;
     int station_heap_size = 0;
     // 計算低一station的各種車型的車輛個數
-    /*
-        cout << "basic_stations[0][0] " << basic_stations[0][0].harr[0].id << endl;
-        cout << "basic_stations[0][0] " << basic_stations[0][0].harr[1].id << endl;
-        cout << "basic_stations[0][1] " << basic_stations[0][1].harr[0].id << endl;
-        cout << "basic_stations[0][2] " << basic_stations[0][2].harr[0].id << endl;
-        cout << "basic_stations[0][2] " << basic_stations[0][2].harr[1].id << endl;
-        cout << "basic_stations[0][2] " << basic_stations[0][2].harr[2].id << endl;
-        cout << "basic_stations[0][2] " << basic_stations[0][2].harr[3].id << endl;
-        cout << "basic_stations[0][2] " << basic_stations[0][2].harr[4].id << endl;
-        cout << "basic_stations[0][2] " << basic_stations[0][2].harr[5].id << endl;
-        cout << "basic_stations[0][2] " << basic_stations[0][2].harr[6].id << endl;*/
 
     for (int i = 0; i < read_data.station_num; i++)
     {

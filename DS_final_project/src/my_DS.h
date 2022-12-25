@@ -5,7 +5,7 @@
 #include <cstring>
 #include <climits>
 #include <stdlib.h>
-#define station_max_num 1000 // 暫時設定的，不然要把整個map都跑過一次才知道 = =
+#define station_max_num 1000
 #define bike_max_num 10000
 #define user_max_num 100000
 using namespace std;
@@ -27,7 +27,6 @@ typedef struct AdjList
 
 class Graph
 {
-    // list<node> *adjList;
     int n;
 
 public:
@@ -41,26 +40,13 @@ public:
     Graph(int nodeCount)
     {
         n = nodeCount;
-        // cout << "n : " << n << endl;
-        // bikeList = new list<node>[n];
-        // 指向list head of list
         bike_graph_List = new adjList[n];
-        // bike_graph_List = (adjList *)malloc(n * sizeof(adjList));
     }
 
     node *newAdjListNode(int dest, int weight);
 
     void addEdge(int source, int dest, int weight);
     int *&dijkstra(int src);
-
-    void displayEdges();
-    // {
-    //     for (int i = 0; i < n; i++)
-    //     {
-    //         list<node> tempList = adjList[i];
-    //         showList(i, tempList);
-    //     }
-    // }
 
     // friend void dijkstra(Graph &Dgraph, int src);
     // friend class my_MinHeap;
@@ -133,9 +119,6 @@ public:
     BMNode *harr = new BMNode[bike_max_num]; // pointer to array of elements in heap
     // int *pos = new int[capacity];            // 紀錄每個node的index
 
-    //! 不太需要constructor
-    // my_MinHeap(MNode *bike_type, int my_heap_size)
-
     int parent(int i) { return (i - 1) / 2; }
     int left(int i) { return (2 * i + 1); }  // to get index of left child of node at index i
     int right(int i) { return (2 * i + 2); } // to get index of right child of node at index i
@@ -147,30 +130,19 @@ public:
         *x = *y;
         *y = temp;
     }
-    //!
 
     //* Inserts a new node "把整個bike_node都丟到heap中，方便比較rental_price和id"
     void insertKey(BMNode &newNode);
     void MINinsertKey(BMNode &newNode);
     // to heapify a subtree with the root at given index
     void MaxHeapify(int i);
-    void MinHeapify(int i); //! algo
-    BMNode extractMax();    // 回傳最大rental_price的BMNod
-    BMNode extractMin();    // ! algo
-
+    BMNode extractMax(); // 回傳最大rental_price的BMNod
+    // void MinHeapify(int i);
+    // BMNode extractMin();    //  algo
     bool isEmpty();
-    void printHeapSort(ofstream &ofs);
+    // void printHeapSort(ofstream &ofs);
 };
 
-//! -----------my_station-----------------
-class my_station //! 每個station可能有多少種type的車?
-// 只能從bike_info中得知
-{
-public:
-    bike_MaxHeap *MHeap_ptr;
-};
-
-//
 //! -------------------user-------------------------------------
 
 BMNode MinNode(BMNode &node1, BMNode &node2);

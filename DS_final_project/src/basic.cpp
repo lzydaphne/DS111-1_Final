@@ -7,7 +7,6 @@ using namespace std;
 void basic(string selectedCase)
 {
     cout << "start your basic version of data structure final from here!" << endl;
-    //
     int basic_revenue = 0;
 
     my_data read_data;
@@ -24,7 +23,7 @@ void basic(string selectedCase)
     // cout << basic_stations[4][1].extractMax().id << endl;
 
     read_data.read_user();
-    read_data.sort_users();
+    read_data.sort_users(); // sort user by start_time
     //! ----------------------start--basic----------------------------
     ofstream ofs_user, ofs_log, ofs_status;
     ofstream check_ofs_user, check_ofs_log, check_ofs_status;
@@ -82,22 +81,13 @@ void basic(string selectedCase)
     LNode *log_output = new LNode[read_data.user_num];
     int log_idx = 0;
 
-    int countZ = 0;
-    int countA = 0;
-    int countB = 0;
-    int countC = 0;
+    // int countZ = 0;
+    // int countA = 0;
+    // int countB = 0;
+    // int countC = 0;
 
     while (idx < read_data.all_user_list_idx)
     {
-
-        for (int i = 0; i < read_data.station_num; i++)
-        {
-            for (int j = 0; j < read_data.count_bike_type; j++)
-            {
-                cout << "i: " << i << " j: " << j << " size: " << basic_stations[i][j].heap_size << endl;
-            }
-        }
-
         // read data
         tuser_ID = read_data.all_user_list[idx].user_ID;
         tAC_bike_type = read_data.all_user_list[idx].AC_bike_type;
@@ -156,11 +146,11 @@ void basic(string selectedCase)
                 read_data.shortest_record[tuser_start_station] = basic_graph.dijkstra(tuser_start_station);
                 int idx = 0;
 
-                while (read_data.shortest_record[tuser_start_station][idx])
+                /*while (read_data.shortest_record[tuser_start_station][idx])
                 {
                     cout << "dij: " << read_data.shortest_record[tuser_start_station][idx] << endl;
                     idx++;
-                }
+                }*/
             }
             shortest_path = read_data.shortest_record[tuser_start_station][tuser_end_station];
             cout << "  shortest_path " << shortest_path << endl;
@@ -176,33 +166,17 @@ void basic(string selectedCase)
                 //* heap已經為空，price=-10
                 if (target.rental_price < -1)
                 {
-                    countZ++;
                     bike_case = -1;
                     cout << " no bike  " << endl;
-                    // continue;
                 }
                 //* 這邊抓出來的bike要放回去
                 // todo 最後要優化，把這些條件放在一起檢查
-                else if (target.rental_count >= read_data.rental_limit)
+                else if ((target.rental_count >= read_data.rental_limit) || (tstart_time + shortest_path >= tend_time) || (target.returned_time > tstart_time))
                 {
+                    cout << "not okay" << endl;
                     bike_case = 1;
-                    countA++;
-                    cout
-                        << "target.rental_count >= read_data.rental_limit" << endl;
                 }
-                else if (tstart_time + shortest_path >= tend_time)
-                {
-                    bike_case = 1;
-                    countB++;
-                    cout << "(tstart_time + shortest_path > tend_time)" << endl;
-                }
-                else if (target.returned_time > tstart_time)
-                {
-                    bike_case = 1;
-                    countC++;
-                    cout
-                        << "target.returned_time > tstart_time" << endl;
-                }
+
                 else
                 {
                     cout << "nice!! " << endl;
@@ -302,7 +276,7 @@ void basic(string selectedCase)
                 {
                     if ((store_types_bike[i].rental_price > tmp.rental_price) || ((store_types_bike[i].rental_price == tmp.rental_price) && (store_types_bike[i].id < tmp.id)))
                     {
-                        //! 不同一種車種的情況下，把備胎放回去
+                        //! 不同種車種的情況下，把備胎放回去
                         basic_stations[tuser_start_station][stoi(tmp.bike_type)].insertKey(tmp);
                         cout << "store_types_bike: " << tmp.id << endl;
                         tmp = store_types_bike[i];
@@ -454,23 +428,12 @@ void basic(string selectedCase)
     int Barr_idx = 0;
     int station_heap_size = 0;
     // 計算低一station的各種車型的車輛個數
-    /*
-        cout << "basic_stations[0][0] " << basic_stations[0][0].harr[0].id << endl;
-        cout << "basic_stations[0][0] " << basic_stations[0][0].harr[1].id << endl;
-        cout << "basic_stations[0][1] " << basic_stations[0][1].harr[0].id << endl;
-        cout << "basic_stations[0][2] " << basic_stations[0][2].harr[0].id << endl;
-        cout << "basic_stations[0][2] " << basic_stations[0][2].harr[1].id << endl;
-        cout << "basic_stations[0][2] " << basic_stations[0][2].harr[2].id << endl;
-        cout << "basic_stations[0][2] " << basic_stations[0][2].harr[3].id << endl;
-        cout << "basic_stations[0][2] " << basic_stations[0][2].harr[4].id << endl;
-        cout << "basic_stations[0][2] " << basic_stations[0][2].harr[5].id << endl;
-        cout << "basic_stations[0][2] " << basic_stations[0][2].harr[6].id << endl;*/
 
     for (int i = 0; i < read_data.station_num; i++)
     {
         ss << i;
         string station_id = "S" + ss.str();
-        cout << "here!" << endl;
+        // cout << "here!" << endl;
         station_heap_size = 0;
         for (int j = 0; j < read_data.count_bike_type; j++)
         {
@@ -484,21 +447,18 @@ void basic(string selectedCase)
         for (int k = 0; k < read_data.count_bike_type; k++)
         {
             // Pointer arithmetic is done in units of the size of the pointer type.
-            cout << "here!--2" << endl;
             BMNode *ptr;
             ptr = basic_stations[i][k].harr;
-            // cout << "ptr: " << ptr << endl;
-            // cout << "size:" << sizeof(BMNode) << endl;
-            for (int m = 0; m < basic_stations[i][k].heap_size; m++)
+            /* for (int m = 0; m < basic_stations[i][k].heap_size; m++)
             {
                 cout << "ptr->id: :" << ptr->id << endl;
                 Barr[Barr_idx++] = *(ptr);
                 ptr++;
-            }
+            }*/
         }
         // 把單一station的bike用ID進行排序小到大
         read_data.mergeSort(Barr, 0, station_heap_size - 1);
-        cout << "here!--3" << endl;
+        // cout << "here!--3" << endl;
 
         string bikeB;
         for (int q = 0; q < station_heap_size; q++)
@@ -517,12 +477,13 @@ void basic(string selectedCase)
     // test
     cout << "basic_revenue: " << basic_revenue << endl;
 
-    cout << "countZ: " << countZ << endl;
-    cout << "countA: " << countA << endl;
-    cout << "countB: " << countB << endl;
-    cout << "countC: " << countC << endl;
+    // cout << "countZ: " << countZ << endl;
+    // cout << "countA: " << countA << endl;
+    // cout << "countB: " << countB << endl;
+    // cout << "countC: " << countC << endl;
 
     // todo delete all new operation!
+
     for (int i = 0; i < station_num; i++)
     {
         delete[] read_data.shortest_record[i];

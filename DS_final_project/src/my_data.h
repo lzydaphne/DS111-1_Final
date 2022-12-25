@@ -1,4 +1,4 @@
-#include "my_algo.h"
+#include "my_DS.h"
 
 using namespace std;
 
@@ -59,17 +59,9 @@ public:
     void merge(LNode *&arr, int p, int q, int r);  //* merge sort bikeLog by ID
     void merge(cUNode *&arr, int p, int q, int r); //* merge sort user_result by ID
 
-    //! for fee
-    // int discount[3]; // electric, lady, road
-    // int regular[3];
-
-    int waiting;
-    float switching; // bug: if switching is "int", eof will always be 0 (false), need to be float
-    int transferring;
-
     // private:
     //*
-    string select;
+    string select; // case?
     //* for map
     string start_station;
     int num_start_station; // 車站的數字表示法
@@ -85,26 +77,25 @@ public:
     int user_num = 0;          // user總數
     string user_ID;
     int num_user_ID;
-    string AC_bike_type; // 方便識別","相隔的bike_type
-    int *arr_AC_bike_type;
-    int arr_index = 0;
+    string AC_bike_type;   // 方便識別","相隔的bike_type
+    int *arr_AC_bike_type; // 用陣列儲存可用得bike type
+    int arr_index = 0;     // arr_AC_bike_type的index
     int start_time;
     int end_time;
     string user_start_station;
-    int num_user_start_station;
+    int num_user_start_station; // user_start_station的數字表示
     string user_end_station;
-    int num_user_end_station;
+    int num_user_end_station; // user_end_station的數字表示
     //* for bike info
     float depreciation;
     int rental_limit;
     int count_bike_type = 0;
     //* for bike
-    int bike_total_num = 0;
+    int bike_total_num = 0; // bike總數
+    // 接收input
     string bike_type;
     int bike_id;
     string station_id;
     float rental_price;
     int rental_count;
-    //*for bikes
-    // bike_MaxHeap **basic_stations;
 };
