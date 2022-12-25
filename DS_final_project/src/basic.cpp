@@ -145,12 +145,6 @@ void basic(string selectedCase)
                 // 回傳single source 的dist array
                 read_data.shortest_record[tuser_start_station] = basic_graph.dijkstra(tuser_start_station);
                 int idx = 0;
-
-                /*while (read_data.shortest_record[tuser_start_station][idx])
-                {
-                    cout << "dij: " << read_data.shortest_record[tuser_start_station][idx] << endl;
-                    idx++;
-                }*/
             }
             shortest_path = read_data.shortest_record[tuser_start_station][tuser_end_station];
             cout << "  shortest_path " << shortest_path << endl;
@@ -374,31 +368,31 @@ void basic(string selectedCase)
     delete[] store_BMNode;
     delete[] store_types_bike;
 
-    // todo 這是為了檢查方便，務必改回依據user request順序的答案形式
-    //*otuput sorted user_request
+    // // todo 這是為了檢查方便，務必改回依據user request順序的答案形式
+    // //*otuput sorted user_request
 
-    read_data.mergeSort(check_user_output, 0, check_user_idx - 1);
-    cUNode user_store;
-    string uStr;
-    for (int p = 0; p < check_user_idx; p++)
-    {
-        user_store = check_user_output[p];
-        ss << user_store.user_ID;
-        string uStr = "U" + ss.str();
-        ss.str("");
-        ss.clear();
+    // read_data.mergeSort(check_user_output, 0, check_user_idx - 1);
+    // cUNode user_store;
+    // string uStr;
+    // for (int p = 0; p < check_user_idx; p++)
+    // {
+    //     user_store = check_user_output[p];
+    //     ss << user_store.user_ID;
+    //     string uStr = "U" + ss.str();
+    //     ss.str("");
+    //     ss.clear();
 
-        check_ofs_user << uStr << " " << user_store.AC << " "
-                       << user_store.bike_ID << " "
-                       << user_store.bike_start_time << " " << user_store.bike_end_time << " " << user_store.revenue << endl;
-        ss.str("");
-        ss.clear();
-    }
-    delete[] check_user_output;
+    //     check_ofs_user << uStr << " " << user_store.AC << " "
+    //                    << user_store.bike_ID << " "
+    //                    << user_store.bike_start_time << " " << user_store.bike_end_time << " " << user_store.revenue << endl;
+    //     ss.str("");
+    //     ss.clear();
+    // }
+    // delete[] check_user_output;
 
     // output transfer log
     // 把log的bike用userID進行排序小到大
-    read_data.mergeSort(log_output, 0, log_idx - 1);
+    // read_data.mergeSort(log_output, 0, log_idx - 1);
     LNode log_store;
     // string uStr;
     for (int p = 0; p < log_idx; p++)

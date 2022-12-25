@@ -342,12 +342,6 @@ void advanced(string selectedCase)
             cout << "  tuser_start_station " << tuser_start_station << endl;
             cout << "  tuser_end_station " << tuser_end_station << endl;
             int idx = 0;
-            /*
-            while (read_data.shortest_record[tuser_start_station][idx])
-            {
-                cout << "dij: " << read_data.shortest_record[tuser_start_station][idx] << endl;
-                idx++;
-            }*/
 
             //*開始在同一站中針對特定bike type抓取bike
             int bike_case = 0;
@@ -642,31 +636,31 @@ void advanced(string selectedCase)
     delete[] store_BMNode;
     delete[] store_types_bike;
 
-    // todo 這是為了檢查方便，務必改回依據user request順序的答案形式
-    //*otuput sorted user_request
+    // // todo 這是為了檢查方便，務必改回依據user request順序的答案形式
+    // //*otuput sorted user_request
 
-    read_data.mergeSort(check_user_output, 0, check_user_idx - 1);
-    cUNode user_store;
-    string uStr;
-    for (int p = 0; p < check_user_idx; p++)
-    {
-        user_store = check_user_output[p];
-        ss << user_store.user_ID;
-        string uStr = "U" + ss.str();
-        ss.str("");
-        ss.clear();
+    // read_data.mergeSort(check_user_output, 0, check_user_idx - 1);
+    // cUNode user_store;
+    // string uStr;
+    // for (int p = 0; p < check_user_idx; p++)
+    // {
+    //     user_store = check_user_output[p];
+    //     ss << user_store.user_ID;
+    //     string uStr = "U" + ss.str();
+    //     ss.str("");
+    //     ss.clear();
 
-        check_ofs_user << uStr << " " << user_store.AC << " "
-                       << user_store.bike_ID << " "
-                       << user_store.bike_start_time << " " << user_store.bike_end_time << " " << user_store.revenue << endl;
-        ss.str("");
-        ss.clear();
-    }
-    delete[] check_user_output;
+    //     check_ofs_user << uStr << " " << user_store.AC << " "
+    //                    << user_store.bike_ID << " "
+    //                    << user_store.bike_start_time << " " << user_store.bike_end_time << " " << user_store.revenue << endl;
+    //     ss.str("");
+    //     ss.clear();
+    // }
+    // delete[] check_user_output;
 
     // output transfer log
     // 把log的bike用userID進行排序小到大
-    read_data.mergeSort(log_output, 0, log_idx - 1);
+    // read_data.mergeSort(log_output, 0, log_idx - 1);
     LNode log_store;
     // string uStr;
     for (int p = 0; p < log_idx; p++)
@@ -746,7 +740,7 @@ void advanced(string selectedCase)
         ss.clear();
     }
     // test
-    cout << "basic_revenue: " << basic_revenue << endl;
+    cout << "advanced_revenue: " << basic_revenue << endl;
     selectedCase.erase(0, 4);
     int tc = stoi(selectedCase);
     switch (tc)
