@@ -449,12 +449,12 @@ void basic(string selectedCase)
             // Pointer arithmetic is done in units of the size of the pointer type.
             BMNode *ptr;
             ptr = basic_stations[i][k].harr;
-            /* for (int m = 0; m < basic_stations[i][k].heap_size; m++)
+            for (int m = 0; m < basic_stations[i][k].heap_size; m++)
             {
-                cout << "ptr->id: :" << ptr->id << endl;
+                // cout << "ptr->id: :" << ptr->id << endl;
                 Barr[Barr_idx++] = *(ptr);
                 ptr++;
-            }*/
+            }
         }
         // 把單一station的bike用ID進行排序小到大
         read_data.mergeSort(Barr, 0, station_heap_size - 1);
