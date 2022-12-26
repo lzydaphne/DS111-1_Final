@@ -635,6 +635,7 @@ void advanced(string selectedCase)
         ss.clear();
     }
     //
+    ofs_user.flush();
     ofs_user.close();
     delete[] pick_station;
     delete[] store_BMNode;
@@ -688,6 +689,7 @@ void advanced(string selectedCase)
         ss.str("");
         ss.clear();
     }
+    ofs_log.flush();
     ofs_log.close();
     delete[] log_output;
     // output final bike inventory
@@ -741,6 +743,7 @@ void advanced(string selectedCase)
         }
         Barr_idx = 0;
         delete[] Barr;
+        ofs_status.flush();
         ofs_status.close();
         ss.str("");
         ss.clear();
@@ -770,7 +773,7 @@ void advanced(string selectedCase)
     // cout << "countC: " << countC << endl;
     // cout << "countD: " << countD << endl;
 
-        // todo delete all new operation!
+    // todo delete all new operation!
     for (int i = 0; i < station_num; i++)
     {
         delete[] read_data.shortest_record[i];
