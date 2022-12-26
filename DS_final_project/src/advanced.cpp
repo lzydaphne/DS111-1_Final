@@ -48,7 +48,7 @@ void advanced(string selectedCase)
     read_data.sort_users();
     //! ----------------------start--basic----------------------------
     ofstream ofs_user, ofs_log, ofs_status;
-    ofstream check_ofs_user, check_ofs_log, check_ofs_status;
+    // ofstream check_ofs_user, check_ofs_log, check_ofs_status;
 
     // ofs_user.open("user_result.txt", ios::out);
     ofs_user.open("../result/" + selectedCase + "/user_result.txt", ios::out);
@@ -766,6 +766,9 @@ void advanced(string selectedCase)
     // cout << "countB: " << countB << endl;
     // cout << "countC: " << countC << endl;
     // cout << "countD: " << countD << endl;
+    ofs_user.close();
+    ofs_log.close();
+    ofs_status.close();
 
     // todo delete all new operation!
     for (int i = 0; i < station_num; i++)
