@@ -635,8 +635,8 @@ void advanced(string selectedCase)
         ss.clear();
     }
     //
-    ofs_user.flush();
-    ofs_user.close();
+    // ofs_user.flush();
+    // ofs_user.close();
     delete[] pick_station;
     delete[] store_BMNode;
     delete[] store_types_bike;
@@ -689,8 +689,8 @@ void advanced(string selectedCase)
         ss.str("");
         ss.clear();
     }
-    ofs_log.flush();
-    ofs_log.close();
+    // ofs_log.flush();
+    // ofs_log.close();
     delete[] log_output;
     // output final bike inventory
 
@@ -743,8 +743,8 @@ void advanced(string selectedCase)
         }
         Barr_idx = 0;
         delete[] Barr;
-        ofs_status.flush();
-        ofs_status.close();
+        // ofs_status.flush();
+        // ofs_status.close();
         ss.str("");
         ss.clear();
     }
