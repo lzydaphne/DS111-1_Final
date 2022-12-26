@@ -53,9 +53,9 @@ void advanced(string selectedCase)
     // ofs_user.open("user_result.txt", ios::out);
     ofs_user.open("./result/" + selectedCase + "/user_result.txt", ios::out);
     // ofs_log.open("transfer_log.txt", ios::out);
-    ofs_user.open("./result/" + selectedCase + "/transfer_log.txt", ios::out);
+    ofs_log.open("./result/" + selectedCase + "/transfer_log.txt", ios::out);
     // ofs_status.open("station_status.txt", ios::out);
-    ofs_user.open("./result/" + selectedCase + "/station_status.txt", ios::out);
+    ofs_status.open("./result/" + selectedCase + "/station_status.txt", ios::out);
 
     // check_ofs_user.open("check_user_result.txt", ios::out);
     // check_ofs_log.open("check_transfer_log.txt", ios::out);
