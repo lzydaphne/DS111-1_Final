@@ -33,8 +33,6 @@ void basic(string selectedCase)
     ofs_status.open("station_status.txt", ios::out);
 
     check_ofs_user.open("check_user_result.txt", ios::out);
-    // check_ofs_log.open("check_transfer_log.txt", ios::out);
-    // check_ofs_status.open("check_station_status.txt", ios::out);
     int idx = 0;
 
     // temp variable
@@ -307,7 +305,6 @@ void basic(string selectedCase)
             cout << "tuser_end_station " << tuser_end_station << endl;
             cout << "stoi(target.bike_type) " << stoi(target.bike_type) << endl;
 
-            // cout << "basic_stations[tuser_end_station][stoi(target.bike_type)]  heapsize" << basic_stations[tuser_end_station][stoi(target.bike_type)].heap_size << endl;
             cout << basic_stations[tuser_end_station][stoi(target.bike_type)].harr[0].id << endl;
 
             basic_stations[tuser_end_station][stoi(target.bike_type)].insertKey(target);
@@ -368,31 +365,6 @@ void basic(string selectedCase)
     delete[] store_BMNode;
     delete[] store_types_bike;
 
-    // // todo 這是為了檢查方便，務必改回依據user request順序的答案形式
-    // //*otuput sorted user_request
-
-    // read_data.mergeSort(check_user_output, 0, check_user_idx - 1);
-    // cUNode user_store;
-    // string uStr;
-    // for (int p = 0; p < check_user_idx; p++)
-    // {
-    //     user_store = check_user_output[p];
-    //     ss << user_store.user_ID;
-    //     string uStr = "U" + ss.str();
-    //     ss.str("");
-    //     ss.clear();
-
-    //     check_ofs_user << uStr << " " << user_store.AC << " "
-    //                    << user_store.bike_ID << " "
-    //                    << user_store.bike_start_time << " " << user_store.bike_end_time << " " << user_store.revenue << endl;
-    //     ss.str("");
-    //     ss.clear();
-    // }
-    // delete[] check_user_output;
-
-    // output transfer log
-    // 把log的bike用userID進行排序小到大
-    // read_data.mergeSort(log_output, 0, log_idx - 1);
     LNode log_store;
     // string uStr;
     for (int p = 0; p < log_idx; p++)
@@ -471,11 +443,6 @@ void basic(string selectedCase)
     // test
     cout << "basic_revenue: " << basic_revenue << endl;
 
-    // cout << "countZ: " << countZ << endl;
-    // cout << "countA: " << countA << endl;
-    // cout << "countB: " << countB << endl;
-    // cout << "countC: " << countC << endl;
-
     // todo delete all new operation!
 
     for (int i = 0; i < station_num; i++)
@@ -488,20 +455,4 @@ void basic(string selectedCase)
         delete[] basic_stations[i];
     delete[] basic_graph.bike_graph_List;
     delete[] read_data.all_user_list;
-
-    /*
-string path = "./testcases/" + selectedCase + "/bike_info.txt";
-string line;
-ifstream myfile(path);
-if (myfile.is_open())
-{
-
-    while (getline(myfile, line))
-    {
-        cout << line << endl;
-    }
-    myfile.close();
-}
-else
-    cout << "not open";*/
 }

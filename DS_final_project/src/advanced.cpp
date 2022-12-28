@@ -57,9 +57,6 @@ void advanced(string selectedCase)
     // ofs_status.open("station_status.txt", ios::out);
     ofs_status.open("./result/" + selectedCase + "/station_status.txt", ios::out);
 
-    // check_ofs_user.open("check_user_result.txt", ios::out);
-    // check_ofs_log.open("check_transfer_log.txt", ios::out);
-    // check_ofs_status.open("check_station_status.txt", ios::out);
     int idx = 0;
 
     // temp variable
@@ -86,9 +83,6 @@ void advanced(string selectedCase)
 
     //* 儲存單一station單一車種的不符合資格的備胎bike
     BMNode *store_BMNode = new BMNode[bike_max_num];
-    //* 儲存單一station中，單一車種的符合資格的備胎bike
-    // why? 因為不僅僅是rental price的大小，其實有時候必須要騎price比較小的，因為只有它完全符合條件，但之前的實作，會無法記憶這種已經被迭代掉的bike，因此這次用heap來儲存
-    // 等等，既然你都符合標準了，那變數應該只剩rental price!?
 
     //------------------------------------------------------
 
@@ -133,8 +127,6 @@ void advanced(string selectedCase)
              << "tuser_end_station: " << tuser_end_station
              << endl;
 
-        // cout << "tAC_bike_type: " << tAC_bike_type[0] << endl;
-
         // BMNode compare;
         single_revenue = 0;
         int find; // 有找到符合目標的bike
@@ -174,14 +166,8 @@ void advanced(string selectedCase)
 
         // deep copy
         for (int i = 0; i < read_data.station_num; i++)
-        {
             pick_station[i] = read_data.shortest_record[tuser_start_station][i];
-        }
 
-        // memcpy(&pick_station, &read_data.shortest_record[tuser_start_station], read_data.station_num);
-
-        // shallow copy!
-        //  pick_station = read_data.shortest_record[tuser_start_station];
         //* pick first three nearest station
 
         pick_station[tuser_start_station] = INT_MAX;
@@ -217,7 +203,6 @@ void advanced(string selectedCase)
         nearest_stations[1] = second_idx;
         nearest_stations[2] = third_idx;
         cout << first_idx << " " << second_idx << " " << third_idx << endl;
-        //    delete[] pick_station;
 
         //-------------------------------
         int max_bike_type[3] = {0}; // 用來儲存「每個station中，有最大heap size的車種type」
@@ -265,23 +250,6 @@ void advanced(string selectedCase)
                     basic_stations[nearest_stations[i]][max_bike_type[i]].insertKey(tmp);
                     continue;
                 }
-                // while (tmp.rental_count >= read_data.rental_limit && tmp.id != -10)
-                // {
-                //     retiring_bikes[retiring_bikes_idx++] = tmp;
-                //     tmp = basic_stations[nearest_stations[i]][max_bike_type[i]].extractMax();
-                // }
-                // while (retiring_bikes_idx--)
-                // {
-                //     basic_stations[nearest_stations[i]][max_bike_type[i]].insertKey(retiring_bikes[retiring_bikes_idx]);
-                // }
-                // check extract
-                // cout << "after extract " << endl;
-                // for (int q = 0; q < basic_stations[nearest_stations[i]][max_bike_type[i]].heap_size; q++)
-                // {
-                //     cout << " id: " << basic_stations[nearest_stations[i]][max_bike_type[i]].harr[q].id << " price: " << basic_stations[nearest_stations[i]][max_bike_type[i]].harr[q].rental_price << endl;
-                // }
-                // BMNode tmp = findMinimumElement(basic_stations[nearest_stations[i]][max_bike_type[i]], basic_stations[nearest_stations[i]][max_bike_type[i]].heap_size);
-                // BMNode tmp = basic_stations[nearest_stations[i]][max_type[i]].extractMin();
 
                 cout
                     << "transfered id: " << tmp.id << endl;
@@ -385,7 +353,6 @@ void advanced(string selectedCase)
                     if (target.returned_time > tstart_time)
                     {
                         //! user wait for bike when no bike is available
-                        // todo 要wait 哪一些bike?
                         // 目前是等rental price最多的那一台
                         cout << "user wait for bike" << endl;
                         //* WAIT
@@ -564,9 +531,6 @@ void advanced(string selectedCase)
             cout << "tuser_end_station " << tuser_end_station << endl;
             cout << "stoi(target.bike_type) " << stoi(target.bike_type) << endl;
 
-            // cout << "basic_stations[tuser_end_station][stoi(target.bike_type)]  heapsize" << basic_stations[tuser_end_station][stoi(target.bike_type)].heap_size << endl;
-            // cout << basic_stations[tuser_end_station][stoi(target.bike_type)].harr[0].id << endl;
-
             basic_stations[tuser_end_station][stoi(target.bike_type)].insertKey(target);
             cout << "real target insert in end station" << target.id << endl;
 
@@ -634,38 +598,10 @@ void advanced(string selectedCase)
         ss.str("");
         ss.clear();
     }
-    //
-    // ofs_user.flush();
-    // ofs_user.close();
     delete[] pick_station;
     delete[] store_BMNode;
     delete[] store_types_bike;
 
-    // // todo 這是為了檢查方便，務必改回依據user request順序的答案形式
-    // //*otuput sorted user_request
-
-    // read_data.mergeSort(check_user_output, 0, check_user_idx - 1);
-    // cUNode user_store;
-    // string uStr;
-    // for (int p = 0; p < check_user_idx; p++)
-    // {
-    //     user_store = check_user_output[p];
-    //     ss << user_store.user_ID;
-    //     string uStr = "U" + ss.str();
-    //     ss.str("");
-    //     ss.clear();
-
-    //     check_ofs_user << uStr << " " << user_store.AC << " "
-    //                    << user_store.bike_ID << " "
-    //                    << user_store.bike_start_time << " " << user_store.bike_end_time << " " << user_store.revenue << endl;
-    //     ss.str("");
-    //     ss.clear();
-    // }
-    // delete[] check_user_output;
-
-    // output transfer log
-    // 把log的bike用userID進行排序小到大
-    // read_data.mergeSort(log_output, 0, log_idx - 1);
     LNode log_store;
     // string uStr;
     for (int p = 0; p < log_idx; p++)
@@ -766,12 +702,6 @@ void advanced(string selectedCase)
     default:
         break;
     }
-
-    // cout << "countZ: " << countZ << endl;
-    // cout << "countA: " << countA << endl;
-    // cout << "countB: " << countB << endl;
-    // cout << "countC: " << countC << endl;
-    // cout << "countD: " << countD << endl;
 
     // todo delete all new operation!
     for (int i = 0; i < station_num; i++)
