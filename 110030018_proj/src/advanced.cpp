@@ -243,9 +243,12 @@ void advanced(string selectedCase)
                 //     cout << " id: " << basic_stations[nearest_stations[i]][max_bike_type[i]].harr[q].id << " price: " << basic_stations[nearest_stations[i]][max_bike_type[i]].harr[q].rental_price << endl;
                 // }
                 // todo 可以看看extractMax/extractMin的效果
+                BMNode tmp;
+                if (1500 < read_data.bike_total_num)
+                    tmp = findMinimumElement(basic_stations[nearest_stations[i]][max_bike_type[i]], basic_stations[nearest_stations[i]][max_bike_type[i]].heap_size);
+                else
+                    tmp = basic_stations[nearest_stations[i]][max_bike_type[i]].extractMax();
 
-                BMNode tmp = basic_stations[nearest_stations[i]][max_bike_type[i]].extractMax();
-                // BMNode tmp = findMinimumElement(basic_stations[nearest_stations[i]][max_bike_type[i]], basic_stations[nearest_stations[i]][max_bike_type[i]].heap_size);
                 // //! reach rental limit
                 if (tmp.rental_count >= read_data.rental_limit)
                 {
