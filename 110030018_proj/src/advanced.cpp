@@ -35,7 +35,7 @@ void advanced(string selectedCase)
     else if ((90 < read_data.bike_total_num) && (read_data.bike_total_num <= 1500))
         FBT_magic_number = 5;
     else if ((1500 < read_data.bike_total_num) && (read_data.bike_total_num <= 3000))
-        FBT_magic_number = 8;
+        FBT_magic_number = 9;
     else if ((3000 < read_data.bike_total_num) && (read_data.bike_total_num <= 5000))
         FBT_magic_number = 7;
     else if ((5000 < read_data.bike_total_num) && (read_data.bike_total_num <= 7000))
