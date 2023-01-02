@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # specify the case you want to test here!
-case=case3
+case=case2
 version=advanced
 # version=advanced
 # Build and run your final project!

@@ -6,7 +6,7 @@ using namespace std;
 
 void advanced(string selectedCase)
 {
-    cout << "change" << endl;
+    // cout << "change" << endl;
     cout << "start your advanced version of data structure final from here!" << endl;
     //
     int basic_revenue = 0;
