@@ -12,9 +12,9 @@ void basic(string selectedCase)
     my_data read_data;
     read_data.select = selectedCase;
     int user_num = read_data.read_user_num();
-    cout << "user_num: " << user_num << endl;
+    // cout << "user_num: " << user_num << endl;
     int station_num = read_data.get_station_num();
-    cout << "station_num: " << station_num << endl;
+    // cout << "station_num: " << station_num << endl;
     read_data.read_bike_info();
 
     Graph basic_graph(station_num);
