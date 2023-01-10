@@ -2,7 +2,7 @@
 
 # specify the case you want to test here!
 case=case1
-version=basic
+version=advanced
 # version=advanced
 # Build and run your final project!
 NTHU_bike:
