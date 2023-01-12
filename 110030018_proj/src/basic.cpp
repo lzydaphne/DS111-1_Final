@@ -6,15 +6,15 @@ using namespace std;
 
 void basic(string selectedCase)
 {
-    cout << "start your basic version of data structure final from here!" << endl;
+    // cout << "start your basic version of data structure final from here!" << endl;
     int basic_revenue = 0;
 
     my_data read_data;
     read_data.select = selectedCase;
     int user_num = read_data.read_user_num();
-    cout << "user_num: " << user_num << endl;
+    // cout << "user_num: " << user_num << endl;
     int station_num = read_data.get_station_num();
-    cout << "station_num: " << station_num << endl;
+    // cout << "station_num: " << station_num << endl;
     read_data.read_bike_info();
 
     Graph basic_graph(station_num);
@@ -26,15 +26,16 @@ void basic(string selectedCase)
     read_data.sort_users(); // sort user by start_time
     //! ----------------------start--basic----------------------------
     ofstream ofs_user, ofs_log, ofs_status;
-    ofstream check_ofs_user, check_ofs_log, check_ofs_status;
+    // ofstream check_ofs_user, check_ofs_log, check_ofs_status;
 
-    ofs_user.open("user_result.txt", ios::out);
-    ofs_log.open("transfer_log.txt", ios::out);
-    ofs_status.open("station_status.txt", ios::out);
+    // ofs_user.open("user_result.txt", ios::out);
+    ofs_user.open("./result/" + selectedCase + "/user_result.txt", ios::out);
+    // ofs_log.open("transfer_log.txt", ios::out);
+    ofs_log.open("./result/" + selectedCase + "/transfer_log.txt", ios::out);
+    // ofs_status.open("station_status.txt", ios::out);
+    ofs_status.open("./result/" + selectedCase + "/station_status.txt", ios::out);
 
-    check_ofs_user.open("check_user_result.txt", ios::out);
-    // check_ofs_log.open("check_transfer_log.txt", ios::out);
-    // check_ofs_status.open("check_station_status.txt", ios::out);
+    // check_ofs_user.open("check_user_result.txt", ios::out);
     int idx = 0;
 
     // temp variable
@@ -71,11 +72,11 @@ void basic(string selectedCase)
 
     stringstream ss;
 
-    cout << "user total num: " << read_data.user_num << endl;
+    // cout << "user total num: " << read_data.user_num << endl;
 
     // 為了check user_result的 LNode
-    cUNode *check_user_output = new cUNode[read_data.user_num];
-    int check_user_idx = 0;
+    // cUNode *check_user_output = new cUNode[read_data.user_num];
+    // int check_user_idx = 0;
 
     // 為了儲存transfer log的 LNode
     LNode *log_output = new LNode[read_data.user_num];
@@ -99,14 +100,14 @@ void basic(string selectedCase)
         // tarrive_time = read_data.all_user_list[idx].arrive_time;
         idx++;
 
-        cout << "--------------new user----------------------" << endl;
-
-        cout << "tuser_ID: " << tuser_ID << "\n"
-             << "tstart_time: " << tstart_time << "\n"
-             << "tend_time: " << tend_time << "\n"
-             << "tuser_start_station: " << tuser_start_station << "\n"
-             << "tuser_end_station: " << tuser_end_station
-             << endl;
+        // cout << "--------------new user----------------------" << endl;
+        /*
+                cout << "tuser_ID: " << tuser_ID << "\n"
+                     << "tstart_time: " << tstart_time << "\n"
+                     << "tend_time: " << tend_time << "\n"
+                     << "tuser_start_station: " << tuser_start_station << "\n"
+                     << "tuser_end_station: " << tuser_end_station
+                     << endl;*/
 
         // cout << "tAC_bike_type: " << tAC_bike_type[0] << endl;
 
@@ -127,13 +128,13 @@ void basic(string selectedCase)
         }
 
         //* 當可以騎多個車型，每種車型都各自建立一個heap來拿到最好的選擇
-        cout << "-----Single station--------------------------" << endl;
+        // cout << "-----Single station--------------------------" << endl;
         for (int i = 0; i < tlen_AC; i++)
         {
             BMNode target; //! 符合條件的bike_node
             BMNode tmp_target;
-            cout << "-----diff type--------------------------" << endl;
-            cout << "tAC_bike_type[i] " << tAC_bike_type[i] << endl;
+            // cout << "-----diff type--------------------------" << endl;
+            // cout << "tAC_bike_type[i] " << tAC_bike_type[i] << endl;
             find = 0;
             //! 抓出node
             target = basic_stations[tuser_start_station][tAC_bike_type[i]].extractMax();
@@ -145,15 +146,9 @@ void basic(string selectedCase)
                 // 回傳single source 的dist array
                 read_data.shortest_record[tuser_start_station] = basic_graph.dijkstra(tuser_start_station);
                 int idx = 0;
-
-                /*while (read_data.shortest_record[tuser_start_station][idx])
-                {
-                    cout << "dij: " << read_data.shortest_record[tuser_start_station][idx] << endl;
-                    idx++;
-                }*/
             }
             shortest_path = read_data.shortest_record[tuser_start_station][tuser_end_station];
-            cout << "  shortest_path " << shortest_path << endl;
+            // cout << "  shortest_path " << shortest_path << endl;
 
             //*開始在同一站中針對特定bike type抓取bike
             int bike_case = 0;
@@ -161,31 +156,31 @@ void basic(string selectedCase)
 
             while (!find) // 代表節點位置為空
             {
-                cout << "targetID " << target.id << endl;
-                cout << "target price " << target.rental_price << endl;
+                // cout << "targetID " << target.id << endl;
+                // cout << "target price " << target.rental_price << endl;
                 //* heap已經為空，price=-10
                 if (target.rental_price < -1)
                 {
                     bike_case = -1;
-                    cout << " no bike  " << endl;
+                    // cout << " no bike  " << endl;
                 }
                 //* 這邊抓出來的bike要放回去
                 // todo 最後要優化，把這些條件放在一起檢查
                 else if ((target.rental_count >= read_data.rental_limit) || (tstart_time + shortest_path >= tend_time) || (target.returned_time > tstart_time))
                 {
-                    cout << "not okay" << endl;
+                    // cout << "not okay" << endl;
                     bike_case = 1;
                 }
 
                 else
                 {
-                    cout << "nice!! " << endl;
+                    // cout << "nice!! " << endl;
                     bike_case = 0;
                 }
                 //-------------------------------
                 if (bike_case > 0)
                 {
-                    cout << "bike_case >0: " << target.id << endl;
+                    // cout << "bike_case >0: " << target.id << endl;
 
                     store_BMNode[tmp_idx++] = target;
                     target = basic_stations[tuser_start_station][tAC_bike_type[i]].extractMax();
@@ -198,8 +193,8 @@ void basic(string selectedCase)
                         //! 同一種車種的情況下，把備胎放回去，因為發現更好的
                         if ((tmp_target.rental_price != -1))
                         {
-                            cout << "bike_case 0: " << tmp_target.id << endl;
-                            cout << tmp_target.rental_price << endl;
+                            // cout << "bike_case 0: " << tmp_target.id << endl;
+                            // cout << tmp_target.rental_price << endl;
 
                             basic_stations[tuser_start_station][stoi(tmp_target.bike_type)].insertKey(tmp_target);
                         }
@@ -208,11 +203,11 @@ void basic(string selectedCase)
                         tmp_target.rental_count = target.rental_count;
                         tmp_target.rental_price = target.rental_price;
                         tmp_target.returned_time = target.returned_time;
-                        cout << "tmp_target.id-bike0 " << tmp_target.id << endl;
+                        // cout << "tmp_target.id-bike0 " << tmp_target.id << endl;
                     }
                     else
                     {
-                        cout << "bike_case 0-2 : " << target.id << endl;
+                        // cout << "bike_case 0-2 : " << target.id << endl;
                         // 符合基本條件，卻沒有比tmp好，就放回去
                         store_BMNode[tmp_idx++] = target;
                     }
@@ -231,6 +226,8 @@ void basic(string selectedCase)
 
                         // store_stations->insertKey(target);
 
+                        /*
+
                         cout
                             << "~~~~successful extract max~~~~~~~~" << endl;
                         cout << "target.id " << target.id << endl;
@@ -239,15 +236,14 @@ void basic(string selectedCase)
                         cout << "target.rental_price " << target.rental_price << endl;
                         cout << "target.returned_time " << target.returned_time << endl;
                         cout
-                            << "~~~~end extract max~~~~~~~~" << endl;
-                        /* code */
+                            << "~~~~end extract max~~~~~~~~" << endl;*/
                     }
 
                     // cout<< "store_bikes[i].id " << store_bikes[i].id << endl;
                     for (int j = 0; j < tmp_idx; j++)
                     {
 
-                        cout << "store_BMNode[j]:" << store_BMNode[j].id << endl;
+                        // cout << "store_BMNode[j]:" << store_BMNode[j].id << endl;
                         if (store_BMNode[j].id < 0)
                             continue;
 
@@ -267,7 +263,7 @@ void basic(string selectedCase)
 
         BMNode tmp = store_types_bike[0];
 
-        cout << "check store_types_bike " << tmp.id << endl;
+        // cout << "check store_types_bike " << tmp.id << endl;
         if (tmp.id >= 0)
         {
             for (int i = 0; i < tlen_AC; i++)
@@ -278,25 +274,25 @@ void basic(string selectedCase)
                     {
                         //! 不同種車種的情況下，把備胎放回去
                         basic_stations[tuser_start_station][stoi(tmp.bike_type)].insertKey(tmp);
-                        cout << "store_types_bike: " << tmp.id << endl;
+                        // cout << "store_types_bike: " << tmp.id << endl;
                         tmp = store_types_bike[i];
                         // cout << "tmp.bike_id: --2 " << tmp.id << endl;
                     }
                     else if ((store_types_bike[i].id != tmp.id) && (store_types_bike[i].rental_price <= tmp.rental_price))
                     {
-                        cout << "store_types_bike inserted-2: " << store_types_bike[i].id << endl;
+                        // cout << "store_types_bike inserted-2: " << store_types_bike[i].id << endl;
                         basic_stations[tuser_start_station][stoi(store_types_bike[i].bike_type)].insertKey(store_types_bike[i]);
                     }
                 }
             }
         }
-        cout << "check store_types_bike--2: " << tmp.id << endl;
+        // cout << "check store_types_bike--2: " << tmp.id << endl;
         BMNode target;
         target = tmp;
 
         if ((target.rental_price > 0) && (target.returned_time <= 1440)) // 有找到目標車車
         {
-            cout << "find!-------------------------------" << endl;
+            // cout << "find!-------------------------------" << endl;
             // 計算revenue
             single_revenue = floor(shortest_path * target.rental_price);
             basic_revenue += single_revenue;
@@ -305,7 +301,7 @@ void basic(string selectedCase)
             target.returned_time = tstart_time + shortest_path;
 
             //* 把拿出來的bike放到新的end_station中
-            cout << "target.id " << target.id << endl;
+            /*cout << "target.id " << target.id << endl;
             cout << "target.bike_type " << target.bike_type << endl;
             cout << "target.rental_count " << target.rental_count << endl;
             cout << "target.rental_price " << target.rental_price << endl;
@@ -313,24 +309,23 @@ void basic(string selectedCase)
             cout << "tuser_end_station " << tuser_end_station << endl;
             cout << "stoi(target.bike_type) " << stoi(target.bike_type) << endl;
 
-            // cout << "basic_stations[tuser_end_station][stoi(target.bike_type)]  heapsize" << basic_stations[tuser_end_station][stoi(target.bike_type)].heap_size << endl;
             cout << basic_stations[tuser_end_station][stoi(target.bike_type)].harr[0].id << endl;
-
+*/
             basic_stations[tuser_end_station][stoi(target.bike_type)].insertKey(target);
-            cout << "real target inserted " << target.id << endl;
+            // cout << "real target inserted " << target.id << endl;
 
             // output to user_result.txt
 
             ofs_user
                 << user_id << " " << 1 << " " << target.id << " " << tstart_time << " " << target.returned_time << " " << single_revenue << endl;
-            cUNode user_sort;
+            /*cUNode user_sort;
             user_sort.user_ID = tuser_ID; // num
             user_sort.AC = 1;
             user_sort.bike_ID = target.id;
             user_sort.bike_start_time = tstart_time;
             user_sort.bike_end_time = target.returned_time;
             user_sort.revenue = single_revenue;
-            check_user_output[check_user_idx++] = user_sort;
+            check_user_output[check_user_idx++] = user_sort;*/
 
             LNode log_store;
             log_store.bike_ID = target.id;
@@ -343,7 +338,7 @@ void basic(string selectedCase)
         }
         else
         {
-            cout << "not find ---------------------" << endl;
+            // cout << "not find ---------------------" << endl;
             /*
             LNode log_store;
             log_store.user_ID = user_id;
@@ -353,15 +348,15 @@ void basic(string selectedCase)
             log_store.user_start_station = 0;
             log_store.user_end_station = 0;
             log_output[log_idx++] = log_store;*/
-
-            cUNode user_sort;
-            user_sort.user_ID = tuser_ID; // num
-            user_sort.AC = 0;
-            user_sort.bike_ID = 0;
-            user_sort.bike_start_time = 0;
-            user_sort.bike_end_time = 0;
-            user_sort.revenue = 0;
-            check_user_output[check_user_idx++] = user_sort;
+            /*
+                        cUNode user_sort;
+                        user_sort.user_ID = tuser_ID; // num
+                        user_sort.AC = 0;
+                        user_sort.bike_ID = 0;
+                        user_sort.bike_start_time = 0;
+                        user_sort.bike_end_time = 0;
+                        user_sort.revenue = 0;
+                        check_user_output[check_user_idx++] = user_sort;*/
             // todo 記得把正確的形式改回來
 
             ofs_user
@@ -374,31 +369,6 @@ void basic(string selectedCase)
     delete[] store_BMNode;
     delete[] store_types_bike;
 
-    // todo 這是為了檢查方便，務必改回依據user request順序的答案形式
-    //*otuput sorted user_request
-
-    read_data.mergeSort(check_user_output, 0, check_user_idx - 1);
-    cUNode user_store;
-    string uStr;
-    for (int p = 0; p < check_user_idx; p++)
-    {
-        user_store = check_user_output[p];
-        ss << user_store.user_ID;
-        string uStr = "U" + ss.str();
-        ss.str("");
-        ss.clear();
-
-        check_ofs_user << uStr << " " << user_store.AC << " "
-                       << user_store.bike_ID << " "
-                       << user_store.bike_start_time << " " << user_store.bike_end_time << " " << user_store.revenue << endl;
-        ss.str("");
-        ss.clear();
-    }
-    delete[] check_user_output;
-
-    // output transfer log
-    // 把log的bike用userID進行排序小到大
-    read_data.mergeSort(log_output, 0, log_idx - 1);
     LNode log_store;
     // string uStr;
     for (int p = 0; p < log_idx; p++)
@@ -437,10 +407,10 @@ void basic(string selectedCase)
         station_heap_size = 0;
         for (int j = 0; j < read_data.count_bike_type; j++)
         {
-            cout << "heap.size " << basic_stations[i][j].heap_size << endl;
+            // cout << "heap.size " << basic_stations[i][j].heap_size << endl;
             station_heap_size += basic_stations[i][j].heap_size;
         }
-        cout << "station_heap_size: " << station_heap_size << endl;
+        // cout << "station_heap_size: " << station_heap_size << endl;
 
         BMNode *Barr = new BMNode[station_heap_size];
         //! 把單一station的bike都蒐集起來放在Barr
@@ -464,8 +434,7 @@ void basic(string selectedCase)
         for (int q = 0; q < station_heap_size; q++)
         {
             bikeB = "B" + Barr[q].bike_type;
-            cout
-                << station_id << " " << Barr[q].id << " " << bikeB << " " << Barr[q].rental_price << " " << Barr[q].rental_count << endl;
+            // cout << station_id << " " << Barr[q].id << " " << bikeB << " " << Barr[q].rental_price << " " << Barr[q].rental_count << endl;
 
             ofs_status << station_id << " " << Barr[q].id << " " << bikeB << " " << Barr[q].rental_price << " " << Barr[q].rental_count << endl;
         }
@@ -476,11 +445,6 @@ void basic(string selectedCase)
     }
     // test
     cout << "basic_revenue: " << basic_revenue << endl;
-
-    // cout << "countZ: " << countZ << endl;
-    // cout << "countA: " << countA << endl;
-    // cout << "countB: " << countB << endl;
-    // cout << "countC: " << countC << endl;
 
     // todo delete all new operation!
 
@@ -494,20 +458,4 @@ void basic(string selectedCase)
         delete[] basic_stations[i];
     delete[] basic_graph.bike_graph_List;
     delete[] read_data.all_user_list;
-
-    /*
-string path = "./testcases/" + selectedCase + "/bike_info.txt";
-string line;
-ifstream myfile(path);
-if (myfile.is_open())
-{
-
-    while (getline(myfile, line))
-    {
-        cout << line << endl;
-    }
-    myfile.close();
-}
-else
-    cout << "not open";*/
 }

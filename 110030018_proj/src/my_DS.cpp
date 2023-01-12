@@ -88,9 +88,12 @@ int *&Graph::dijkstra(int src)
             pCrawl = pCrawl->next;
         }
     }
+
     // todo: warning: reference to local variable dist' returned
     dist_graph = dist;
 
+    delete[] minHeap.array;
+    delete[] minHeap.pos;
     // cout << "src: " << src << endl;
     // for (int i = 0; i < V; i++)
     // {
@@ -257,7 +260,7 @@ BMNode findMinimumElement(bike_MaxHeap &heap, int n)
     }
 
     // 這邊手動把min拉出來
-    cout << "heap.harr[hIdx]: " << heap.harr[hIdx].id << endl;
+    // cout << "heap.harr[hIdx]: " << heap.harr[hIdx].id << endl;
 
     heap.harr[hIdx] = heap.harr[heap.heap_size - 1];
     heap.heap_size--;
@@ -274,7 +277,7 @@ void bike_MaxHeap::insertKey(BMNode &newNode)
 {
     if (this->heap_size == capacity)
     {
-        cout << "\nOverflow: Could not insertKey\n";
+        // cout << "\nOverflow: Could not insertKey\n";
         return;
     }
 
@@ -305,7 +308,7 @@ void bike_MaxHeap::MINinsertKey(BMNode &newNode)
 {
     if (this->heap_size == capacity)
     {
-        cout << "\nOverflow: Could not insertKey\n";
+        // cout << "\nOverflow: Could not insertKey\n";
         return;
     }
 
@@ -472,3 +475,4 @@ bool bike_MaxHeap::isEmpty()
 }
 
 //! -------------------user-------------------
+

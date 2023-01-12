@@ -7,7 +7,7 @@
 int my_data::get_station_num()
 {
     string path = "./testcases/" + select + "/map.txt";
-    cout << "path: " << path;
+    // cout << "path: " << path;
     ifstream ifs(path, ios::in);
     if (!ifs.is_open())
     {
@@ -64,7 +64,7 @@ Graph *my_data::read_map()
 
             graph_ptr->addEdge(num_start_station, num_end_station, distance); // station id start from 0
 
-            cout << "start: " << num_start_station << " end: " << num_end_station << " distance: " << distance << "\n";
+            // cout << "start: " << num_start_station << " end: " << num_end_station << " distance: " << distance << "\n";
         }
         // graph_ptr->print_graph();
         // cout << "min distance: " << graph_ptr->dijkstra(0, 5) << endl;
@@ -186,7 +186,7 @@ void my_data::read_bike_info()
         }
         count_bike_type--;
     }
-    cout << "count_bike_type: " << count_bike_type << endl;
+    // cout << "count_bike_type: " << count_bike_type << endl;
     ifs.close();
     return;
 }
@@ -225,7 +225,7 @@ bike_MaxHeap **my_data::read_bike()
 
             stations_ptr[num_station_id][num_bike_type].insertKey(tmp);
         }
-        cout << "bike_total_num " << bike_total_num << endl;
+        // cout << "bike_total_num " << bike_total_num << endl;
         // test output
         /*
         for (int i = 0; i < station_num; i++)
@@ -296,6 +296,8 @@ void my_data::merge(UNode *&arr, int p, int q, int r)
 
     while (j < n2)
         arr[k++] = M[j++];
+    delete[] L;
+    delete[] M;
 }
 void my_data::mergeSort(UNode *&arr, int l, int r)
 {
@@ -494,3 +496,4 @@ void my_data::mergeSort(cUNode *&arr, int l, int r)
         merge(arr, l, m, r);
     }
 }
+
